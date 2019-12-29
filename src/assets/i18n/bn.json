@@ -1,0 +1,77 @@
+{
+  "NEXT":"পরবর্তী",
+  "OKAY": "ঠিক আছে",
+  "RESEND_OTP":"পুনরায় OTP পাঠান",
+  "TERMS":"আমি চুক্তি ও শর্তাবলীর সাথে সম্মত",
+  "VERIFY":"যাচাই করুন",
+  "LANDING_PAGE":{
+    "TAG_LINE" : "Zataakse...",
+    "REGISTRATION_TITLE" : "নিবন্ধন",
+    "AGREEMENT_TEXT" : "",
+    "FIRST_NAME":"নাম",
+    "LAST_NAME":"পদবী",
+    "EMAIL":"ইমেল",
+    "PHONE":"ফোন নম্বর",
+    "EMAIL_TOOLTIP":"আপনি এখানে অফার এবং উপহার পাবেন",
+    "MOBILE_TOOLTIP" :"আপনি এই মোবাইল নম্বরটিতে OTP পাবেন",
+    "TOP_TEXT" : "সফল নিবন্ধনে পান ₹200 পর্যন্ত",
+    "REFERAL_CODE":"রেফারেল কোড (ঐচ্ছিক)",
+    "TOOLTIP_COMPLETE_ALL_FIELDS":"সমস্ত প্রয়োজনীয় ক্ষেত্র সম্পূর্ণ করুন"
+  },
+  "MAIN_PAGE":{
+    "CAROUSAL_MSG_1": "<br><b>প্রতিদিন</b> <h5>ট্রাফিকে আটকে থাকেন?</h5><br><h4>আপনার জন্য এসে গেছে - </h4> <h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><br><h5><strong>খাবার</strong> এবং <strong>পানীয়</strong> order করুন এবং <strong>ডেলিভারি পেয়ে যান</strong> আপনার নির্ধারিত রুটের কোন <strong>pit-stop এ</strong></h5>",
+    "CAROUSAL_MSG_2": "<br><h5>যদি আপনি <b>প্রতিদিন এই অবস্থায় থাকেন</b><br><br>আপনার জন্য এসে গেলো<br><h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse...</strong></h1><br><h5> যেই লোভনীয় <strong>খাবার  আপনার পছন্দ,</strong> সেটাই অর্ডার দিন</h5>",
+    "CAROUSAL_MSG_3": "<br><h5>আপনার <b>রুটে</b> পরবর্তী <b>১০-১৫ মিনিটের</b> মধ্যে একটি</h5><br><h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><h4>পিট স্টপে </h4><br><h5>ডেলিভারি পেয়ে যান আর <b>রওনা দিন</b> আপনার <b>গন্তব্য স্থানে</b></h5>",
+    "CAROUSAL_MSG_4": "<br><h5>সেই <b>জলখাবারের দোকানের</b> পাশ দিয়ে আপনি </b>প্রতিদিন যাতায়াত করেন? </h5><br><h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><h4>তে </h4><br><h5>তারা এখন আপনার <b>গাড়িতে</b> খাবার পৌঁছে দিচ্ছে</h5>",
+    "EXCITING_LAUNCH_OFFER":"আকর্ষণীয় অফার",
+    "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
+    "OFFER_NEAR_ME":"আপনার কাছাকাছি অফার সন্ধান করতে আপনার অবস্থান প্রয়োজন",
+    "TERMS": "চুক্তি ও শর্তাবলী"
+  },
+  "SNACK_PAGE":{
+    "QUESTION_1":{
+      "LABEL":"আপনি কিভাবে যাতায়াত করেন ?",
+      "LABEL_A":"প্রতিদিন যাতায়াত করতে হয় না",
+      "LABEL_B":"হাঁটা / দৌড়ে",
+      "LABEL_C":"বাস / ট্রেন",
+      "LABEL_D":"রিক্সা / সাইকেল / বাইক",
+      "LABEL_E":"ট্যাক্সি / গাড়ি"
+    },
+    "QUESTION_2":{
+      "LABEL":"আপনি প্রতিদিন যাতায়াতের জন্য কতটুকু সময় ব্যয় করেন ?",
+      "LABEL_A":"০ - যাতায়াত করি না",
+      "LABEL_B":"৩০ মিনিট",
+      "LABEL_C":"৬০ মিনিট",
+      "LABEL_D":"৯০ মিনিট",
+      "LABEL_E":"২ ঘণ্টারও বেশী ।।"
+    },
+    "QUESTION_3":{
+      "LABEL":"প্রিয় জলখাবার ?",
+      "LABEL_A":"চাট / সেবপুরি",
+      "LABEL_B":"বড়া / সিঙ্গারা",
+      "LABEL_C":"ইডলি / দোসা",
+      "LABEL_D":"স্যান্ডউইচ / বার্গার",
+      "LABEL_E":"ফল / সালাদ"
+    },
+    "QUESTION_4":{
+      "LABEL":"আপনি কি সকালের খাবার খান না ?",
+      "LABEL_A":"বলতে চাই না",
+      "LABEL_B":"কখনোই না",
+      "LABEL_C":"প্রতি সপ্তাহে ১/২ দিন",
+      "LABEL_D":"প্রতি সপ্তাহে ৩/৪ দিন",
+      "LABEL_E":"রোজ"
+    },
+    "QUESTION_5":{
+      "LABEL":"সবশেষে, প্রিয় খাবার ?",
+      "LABEL_A":"ঘরের খাবার",
+      "LABEL_B":"কন্টিনেন্টাল",
+      "LABEL_C":"চাইনিজ",
+      "LABEL_D":"মুগলাই",
+      "LABEL_E":"রাস্তার/লোকাল খাবার"
+    },
+    "PLEASE_ENTER_OTP":"{{userMobileNumber}} এ প্রাপ্ত OTP এখানে লিখুন",
+    "CONGRATS_REGISTRATION":"অভিনন্দন!! রেজিস্ট্রেশন সফল হয়েছে",
+    "EMAILED_COUPAN_CODE": "50/- টাকার কুপন কোড আপনার ইমেইল আইডিতে পাঠানো হয়েছে"
+
+  }
+}

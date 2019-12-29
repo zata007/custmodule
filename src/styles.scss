@@ -1,1 +1,33 @@
+@import './assets/styles/variable';
+@import './assets/styles/themes';
+@import './assets/styles/mixins';
+
 /* You can add global styles to this file, and also import other style files */
+*{
+  padding: 0;
+  margin: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  font-size: $html-font-size-lg;
+  line-height: 23px;
+
+  @include pc {
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+    font-size: $html-font-size-md;
+  }
+
+  @include tablet {
+    font-size: $html-font-size-sm;
+  }
+
+  @include xs-phone {
+    font-size: $html-font-size-xs;
+  }
+
+}
