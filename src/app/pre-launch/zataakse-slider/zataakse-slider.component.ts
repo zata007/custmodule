@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatBottomSheet } from '@angular/material';
+import { MatSnackBar, MatBottomSheet, MatDialog } from '@angular/material';
 import { CookieService } from 'src/app/shared/service/cookie.service';
 import { PrelaunchService } from '../prelaunch.service';
 import { LocationPopupComponent } from '../../location-popup/location-popup.component';
