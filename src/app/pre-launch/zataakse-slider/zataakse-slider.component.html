@@ -1,0 +1,63 @@
+<div [ngStyle]="{ visibility: canShowSplashScreen ? 'hidden' : 'visible', position: canShowSplashScreen ? 'absolute' : 'fixed' }" class="zataakse-slider-container">
+    <div class="skip">
+      <button mat-icon-button (click)="onSubmitButtonClick()">
+        <h5>Order Now</h5>
+        <mat-icon mat-icon-button color="primary">arrow_forward</mat-icon>
+      </button>
+    </div>
+    <mat-card matRipple class="slider-content-container mat-elevation-z8" (swipe)="onSwipe($event)">
+      <div  class="img-container" [ngClass]="{ selected: 0 == selectedIndex }">
+        <img [src]="data[0].img" alt="{{ data[0].alt }}" />
+        <div class="text-content">
+          <div [innerHTML]="data[0].text | translate"></div>
+        </div>
+      </div>
+      <div  class="img-container" [ngClass]="{ selected: 1 == selectedIndex }">
+        <img [src]="data[1].img" alt="{{ data[1].alt }}" />
+        <div class="text-content">
+          <div [innerHTML]="data[1].text | translate"></div>
+        </div>
+      </div>
+      <div  class="img-container" [ngClass]="{ selected: 2 == selectedIndex }">
+        <img [src]="data[2].img" alt="{{ data[2].alt }}" />
+        <div class="text-content">
+          <div [innerHTML]="data[2].text | translate"></div>
+        </div>
+      </div>
+      <div  class="img-container" [ngClass]="{ selected: 3 == selectedIndex }">
+        <img class="gift" [src]="'assets/img/core/gift.png'" alt="{{ data[3].alt }}" />
+        <div class="text-content">
+          <div class="default-text" [innerHTML]="data[3].text | translate"></div>
+          <!-- <div class="aditional-txt" [innerHTML]="'MAIN_PAGE.CAROUSAL_MSG_3' | translate"></div> -->
+        </div>
+      </div>
+    </mat-card>
+    <div *ngIf="selectedIndex === 3" class="slide-action-btn">
+      <button mat-raised-button color="primary" class="action-btn-started" (click)="onSubmitButtonClick()" aria-label="Goto">
+        <span>Order Now</span>
+        <mat-icon mat-icon-button>arrow_forward</mat-icon>
+      </button>
+    </div>
+  
+    <div class="slider">
+      <div class="slide-button-parent-container" *ngFor="let i of data; let x = index" (click)="selected(x)"
+        (keypress)="keySelected(x)">
+        <div class="select-box">
+          <div class="slide-button" [ngClass]="{ 'slide-button-select': x == selectedIndex }"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="canShowSplashScreen" class="splash-screen">
+    <div class="content">
+      <div class="logo">
+        <img width="230px" height="230px" src="assets/img/core/logo.png" alt="Zataakse" />
+      </div>
+      <div>
+        <!-- <p style="font-size: 3vh;">Order ahead</p><br> -->
+        <p style="font-size: 2vh;">{{ 'MAIN_PAGE.PRE_ORDER_TAKEAWAY' | translate }}</p>
+        <!-- <p style="font-size: 3vh;">takeaway</p> -->
+      </div>
+    </div>
+  </div>
