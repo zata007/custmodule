@@ -14,10 +14,6 @@
       h5{
         display: inline;
       }
-      mat-icon{
-        font-size: 20px;
-        line-height: 25px
-      }
     }
   }
   .slider-content-container {
@@ -63,26 +59,10 @@
           position: absolute;
           bottom: 0;;
         }
-        .default-text{
-          font-family: 'Open Sans', sans-serif !important;
-          h4, h5{
-            display: inline;
-            font-size: 16px;
-            line-height: 24px;
-            font-weight: 400;
-          }
-          h1{
-            font-size: 32px;
-            font-weight: 400;
-            margin-top: 10px;
-            display: inline-block;
-            margin-right: 5px;
-          }
 
-        }
         h1, h3 {
           color:#FF3823!important;
-          font-size: 2em;
+          // font-size: 2em;
         }
       }
       img{
