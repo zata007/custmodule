@@ -7,13 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SharedComponentsModule } from './shared/shared-components/shared-components.module';
-import { MaterialModule } from './shared/module/material.module';
+import { MaterialModule } from './shared/material-module/material.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { ZataakseSliderComponent } from './pre-launch/zataakse-slider/zataakse-slider.component';
-import { LocationPopupComponent } from './location-popup/location-popup.component';
-import { LocationDialogComponent } from './location-dialog/location-dialog.component';
 
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
@@ -22,10 +19,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ZataakseSliderComponent,
-    LocationPopupComponent,
-    LocationDialogComponent
+    AppComponent
   ],
   imports: [
     MaterialModule,
