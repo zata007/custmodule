@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 // import { PrelaunchService } from '../prelaunch.service';
 // import { CookieService } from 'src/app/shared/services/cookie.service';
 import { MatSnackBar, MatBottomSheet, MatDialog } from '@angular/material';
-import { LocationPopupComponent } from '../location-popup/location-popup.component';
+import { LocationPopupComponent } from '../shared/shared-components/location-popup/location-popup.component';
 // import { LocationPopupComponent } from '../location-popup/location-popup.component';
 
 @Component({

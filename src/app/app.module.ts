@@ -11,6 +11,7 @@ import { MaterialModule } from './shared/material-module/material.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
@@ -19,7 +20,8 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LandingPageComponent
   ],
   imports: [
     MaterialModule,
