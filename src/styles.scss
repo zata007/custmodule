@@ -19,15 +19,111 @@ body {
     max-width: 600px;
     display: block;
     margin: 0 auto;
-    font-size: $html-font-size-md;
+    .title {
+      font-size: 16px;
+    }
+    .head1 {
+      font-size: 24px;
+    }
+    .head2 {
+      font-size: 22px;
+    }
+    .head3 {
+      font-size: 20px;
+    }
+    .para {
+      font-size: 16px;
+    }
+    .list-item {
+      font-size: 18px;
+    }
+    .secondary-text, .caption, .helping {
+      font-size: 16px;
+    }
+    button {
+      font-size: 16px;
+    }
   }
 
   @include tablet {
-    font-size: $html-font-size-sm;
+    .title {
+      font-size: 14px;
+    }
+    .head1 {
+      font-size: 24px;
+    }
+    .head2 {
+      font-size: 22px;
+    }
+    .head3 {
+      font-size: 20px;
+    }
+    .para {
+      font-size: 14px;
+    }
+    .list-item {
+      font-size: 16px;
+    }
+    .secondary-text, .caption, .helping {
+      font-size: 14px;
+    }
+    button {
+      font-size: 14px;
+    }
+  }
+
+  @include phone {
+    .title {
+      font-size: 14px;
+    }
+    .head1 {
+      font-size: 22px;
+    }
+    .head2 {
+      font-size: 20px;
+    }
+    .head3 {
+      font-size: 18px;
+    }
+    .para {
+      font-size: 14px;
+    }
+    .list-item {
+      font-size: 16px;
+    }
+    .secondary-text, .caption, .helping {
+      font-size: 14px;
+    }
+    button {
+      font-size: 14px;
+    }
   }
 
   @include xs-phone {
-    font-size: $html-font-size-xs;
+    .title {
+      font-size: 13px;
+    }
+    .head1 {
+      font-size: 20px;
+    }
+    .head2 {
+      font-size: 18px;
+    }
+    .head3 {
+      font-size: 16px;
+    }
+    .para {
+      font-size: 13px;
+    }
+    .list-item {
+      font-size: 15px;
+    }
+    .secondary-text, .caption, .helping {
+      font-size: 13px;
+    }
+    button {
+      font-size: 13px;
+    }
   }
 
 }
