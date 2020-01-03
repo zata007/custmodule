@@ -12,9 +12,5 @@ export class AppComponent {
     translationService.addLangs(['en', 'bn']);
     translationService.getTranslation('bn').subscribe();
     translationService.getTranslation('en').subscribe();
-    // const browserLang = this.cookieService.getAppLanguage();
-    // setTimeout(() => {
-    //   translationService.use(browserLang.match(/en|bn/) ? browserLang : 'en');
-    // }, 100);
   }
 }

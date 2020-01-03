@@ -48,3 +48,17 @@
     </div>
   </div>
 </div>
+
+
+<div *ngIf="canShowLanguagePanel" class="language-container">
+<div class="language-content" fxLayout="column" fxLayoutAlign="space-between none">
+  <h3>Choose your language</h3>
+  <mat-select appearance="standard" placeholder="Select Language" (selectionChange)="onLanguageChange($event.value)">
+    <mat-option value="en">English</mat-option>
+    <mat-option value="hi">Hindi</mat-option>
+    <mat-option value="bn">Bengali</mat-option>
+  </mat-select>
+  <button mat-raised-button (click)="canShowLanguagePanel = false">Get Started</button>
+</div>
+
+</div>

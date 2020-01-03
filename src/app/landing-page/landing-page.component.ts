@@ -35,6 +35,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   transform: number;
   selectedIndex = 0;
   sliderIntervalRef: any;
+  canShowLanguagePanel = true;
 
   constructor(
     public translate: TranslateService,
@@ -61,6 +62,11 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   selected(x) {
     this.selectedIndex = this.selectedIndex > this.data.length ? 0 : x;
     this.transform = 100 - x * 50;
+  }
+
+  onLanguageChange(val: string) {
+    this.translate.setDefaultLang(val);
+    this.translate.use(val);
   }
 
   keySelected(x) {
