@@ -1,7 +1,7 @@
 <div class="zataakse-slider-container">
   <div class="skip">
-    <button mat-icon-button aria-label="skip" (click)="onSubmitButtonClick()">
-      <h5>Order Now</h5>
+    <button class="head4" mat-icon-button aria-label="skip" (click)="onSubmitButtonClick()">
+      Order Now
       <mat-icon mat-icon-button color="primary">arrow_forward</mat-icon>
     </button>
   </div>
@@ -9,25 +9,25 @@
     <div  class="img-container" [ngClass]="{ selected: 0 == selectedIndex }">
       <img [src]="data[0].img" alt="{{ data[0].alt }}" />
       <div class="text-content">
-        <div [innerHTML]="data[0].text | translate"></div>
+        <div class="head4" [innerHTML]="data[0].text | translate"></div>
       </div>
     </div>
     <div  class="img-container" [ngClass]="{ selected: 1 == selectedIndex }">
       <img [src]="data[1].img" alt="{{ data[1].alt }}" />
       <div class="text-content">
-        <div [innerHTML]="data[1].text | translate"></div>
+        <div class="head4" [innerHTML]="data[1].text | translate"></div>
       </div>
     </div>
     <div  class="img-container" [ngClass]="{ selected: 2 == selectedIndex }">
       <img [src]="data[2].img" alt="{{ data[2].alt }}" />
       <div class="text-content">
-        <div [innerHTML]="data[2].text | translate"></div>
+        <div class="head4" [innerHTML]="data[2].text | translate"></div>
       </div>
     </div>
     <div  class="img-container" [ngClass]="{ selected: 3 == selectedIndex }">
       <img class="gift" [src]="'assets/img/core/gift.png'" alt="{{ data[3].alt }}" />
       <div class="text-content">
-        <div class="default-text" [innerHTML]="data[3].text | translate"></div>
+        <div class="head4" [innerHTML]="data[3].text | translate"></div>
         <!-- <div class="aditional-txt" [innerHTML]="'MAIN_PAGE.CAROUSAL_MSG_3' | translate"></div> -->
       </div>
     </div>

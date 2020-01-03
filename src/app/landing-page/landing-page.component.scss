@@ -9,12 +9,6 @@
     display: flex;
     justify-content: flex-end;
     margin-right: 70px;
-    button {
-      font-weight: 600;
-      h5{
-        display: inline;
-      }
-    }
   }
   .slider-content-container {
     position: relative;
@@ -158,9 +152,6 @@
   min-height: 10px;
 }
 
-
-
-
-
-
-
+.head1 {
+  line-height: 1.5;
+}

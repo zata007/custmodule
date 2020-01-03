@@ -2,6 +2,8 @@
 @import './assets/styles/themes';
 @import './assets/styles/mixins';
 
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
 *{
   padding: 0;
@@ -9,7 +11,7 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Merriweather', serif; }
 
 body {
   font-size: $html-font-size-lg;
@@ -30,6 +32,9 @@ body {
     }
     .head3 {
       font-size: 20px;
+    }
+    .head4 {
+      font-size: 18px;
     }
     .para {
       font-size: 16px;
@@ -58,6 +63,9 @@ body {
     .head3 {
       font-size: 20px;
     }
+    .head4 {
+      font-size: 18px;
+    }
     .para {
       font-size: 14px;
     }
@@ -85,6 +93,9 @@ body {
     .head3 {
       font-size: 18px;
     }
+    .head4 {
+      font-size: 16px;
+    }
     .para {
       font-size: 14px;
     }
@@ -111,6 +122,9 @@ body {
     }
     .head3 {
       font-size: 16px;
+    }
+    .head4 {
+      font-size: 14px;
     }
     .para {
       font-size: 13px;
