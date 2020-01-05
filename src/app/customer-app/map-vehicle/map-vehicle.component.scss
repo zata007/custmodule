@@ -1,6 +1,7 @@
 .vehicle-location-container {
   box-shadow: none;
   padding: 0px;
+  position: relative;
 
   agm-map {
     height: 100vh;
