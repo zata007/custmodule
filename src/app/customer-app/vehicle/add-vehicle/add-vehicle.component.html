@@ -1,0 +1,14 @@
+<div class="add-vehicle-container">
+  <h3>Add a new vehicle</h3>
+    <mat-label>Your vehicle type</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let car of cars" [value]="car.value">
+        {{car.value}}
+      </mat-option>
+    </mat-select>
+    <input matInput type="text" placeholder="Vehicle brand" required>
+    <input matInput type="text" placeholder="Vehicle model" required>
+    <input matInput type="text" placeholder="Vehicle number" required>
+    <input matInput type="text" placeholder="Colour" required>
+    <button mat-raised-button color="primary">Submit</button>
+</div>

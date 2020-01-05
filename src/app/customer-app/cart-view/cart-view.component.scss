@@ -1,0 +1,99 @@
+.cartview-container{
+  position: fixed;
+  height: calc(100vh - 60px);
+  width: 100vw;
+  background: url('../../../assets/img/core/cornerillustration.png') no-repeat left top;
+  background-size: 200px auto;
+  background-color: #ffffff;
+  overflow: auto;
+  mat-toolbar {
+    background: rgba(0,0,0, 0)!important;
+    box-shadow: none;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  h1 {
+    margin-left: 2vw;
+    font-size: 2.4rem;
+    line-height: 3rem;
+  }
+  .card-items{
+    padding: 20px 0;
+  }
+  .zataakse .mat-toolbar {
+    box-shadow: none !important;
+  }
+  .other-info, .delivery-info{
+    h3{
+      margin: 8px 0;
+      font-size: 1.8rem;
+    }
+    .notes-content,.delivery-content{
+      background: #fff;
+        padding: 8px 8px 8px 16px;
+        color: #929292;
+    }
+  }
+
+  .other-info{
+    margin-left: 45px;
+    .notes{
+      mat-card {
+        padding: 5px;
+        border-radius: 0px;
+        img {
+          height: 16px;
+          width: auto;
+          display: inline-block;
+          margin-right: 5px;
+        }
+        h3 {
+          display: inline-block;
+        }
+      }
+    }
+    .delivery-info{
+      mat-card {
+        padding: 5px;
+        border-radius: 0px;
+        img {
+          height: 16px;
+          width: auto;
+          display: inline-block;
+          margin-right: 5px;
+        }
+        h3 {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.cartview-footer{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  flex-flow: nowrap;
+  justify-content: space-between;
+  button{
+    flex-basis: 50%;
+    min-width: 100px;
+  }
+  .left-content{
+    display: flex;
+    flex-flow: column;
+    font-size: 2rem;
+    font-weight: 500;
+    .price{
+      padding-left: 16px;
+      font-weight: 300;
+    }
+    button{
+      align-self: flex-start;
+    }
+  }
+}

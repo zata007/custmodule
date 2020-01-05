@@ -1,0 +1,81 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  PitstopViewComponent,
+  CustomerLayoutComponent,
+  NavBottomComponent,
+  NavTopComponent,
+  MapVehicleComponent,
+  MainContainerComponent,
+  CustomerStateService,
+} from './index';
+import { CustomerAppRoutes } from './customer-app.routes';
+import { AgmDirectionModule } from 'agm-direction';
+import { NavMainComponent } from './nav-main/nav-main.component';
+import { CustomerService } from './customer.service';
+import { OrderService } from './order.service';
+import { FoodsLandingItemsComponent } from './foods-landing-items/foods-landing-items.component';
+import { FoodsLandingComponent } from './foods-landing/foods-landing.component';
+import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { JoyrideModule } from 'ngx-joyride';
+import { PreOrderComponent } from './pre-order/pre-order.component';
+import { CustomerCareComponent } from './customer-care/customer-care.component';
+import { CartViewComponent } from './cart-view/cart-view.component';
+import { CartItemComponent } from './cart-view/cart-item/cart-item.component';
+import { BillDetailComponent } from './cart-view/bill-detail/bill-detail.component';
+import { OrderAheadComponent } from './order-ahead/order-ahead.component';
+import { OrderDeliveryComponent } from './order-delivery/order-delivery.component';
+import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
+import { AddAddressComponent } from './address/add-address/add-address.component';
+import { BottomAddressComponent } from './address/bottom-address/bottom-address.component';
+import { AddVehicleComponent } from './vehicle/add-vehicle/add-vehicle.component';
+import { BottomVehicleComponent } from './vehicle/bottom-vehicle/bottom-vehicle.component';
+import { MaterialModule } from '../shared/material-module/material.module';
+import { SharedModule } from '../shared/shared-components/shared.module';
+
+@NgModule({
+  declarations: [
+    CustomerLayoutComponent,
+    NavBottomComponent,
+    NavTopComponent,
+    MapVehicleComponent,
+    PitstopViewComponent,
+    MainContainerComponent,
+    NavMainComponent,
+    FoodsLandingItemsComponent,
+    FoodsLandingComponent,
+    PitstopLandingComponent,
+    PreOrderComponent,
+    CustomerCareComponent,
+    CartViewComponent,
+    CartItemComponent,
+    BillDetailComponent,
+    OrderAheadComponent,
+    OrderDeliveryComponent,
+    RestaurantListComponent,
+    AddAddressComponent,
+    BottomAddressComponent,
+    AddVehicleComponent,
+    BottomVehicleComponent,
+  ],
+  entryComponents:[BillDetailComponent, RestaurantListComponent, BottomAddressComponent, BottomVehicleComponent, AddAddressComponent, AddVehicleComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    AgmCoreModule,
+    AgmDirectionModule,
+    JoyrideModule.forChild(),
+    RouterModule.forChild(CustomerAppRoutes),
+    SwiperModule,
+  ],
+  bootstrap: [CustomerLayoutComponent],
+  providers: [CustomerService, CustomerStateService, OrderService],
+})
+export class CustomerAppModule {}

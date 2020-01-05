@@ -1,0 +1,54 @@
+.content-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0px 5px;
+
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+
+    .swiper-wrapper {
+      display: flex;
+      width: 100%;
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 1.8rem;
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+        mat-card{
+          padding: 0px;
+          border-radius: 5px;
+          width: 100px;
+          height: auto;
+          margin: 5px;
+          position: relative;
+          .item-wrapper{
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 100px;
+            z-index: 0;
+          }
+          .food-pref{
+            z-index: 1;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+          }
+          .content{
+            z-index: 1;
+            color: #0b0a0a;
+            font-size: 1.2rem;
+            font-weight: 700;
+            opacity: 1;
+            line-height: 1.6rem;
+          }
+        }
+      }
+    }
+  }
+}

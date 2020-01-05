@@ -1,0 +1,12 @@
+.new-address-container {
+    width: 100%;
+    height: 100%;
+    .map-area {
+        height: 33%;
+        width: 100%;
+    }
+    .input-area {
+        width: 100%;
+        overflow-y: scroll;
+    }
+}

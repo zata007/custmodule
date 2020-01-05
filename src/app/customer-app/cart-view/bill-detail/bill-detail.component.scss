@@ -1,0 +1,20 @@
+.bill-detail-container{
+  .title{
+    margin: 5px 0 20px 0;
+  }
+  .bill-split{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    .rate{
+      color:#FF7043;
+      font-weight: 600;
+    }
+    &:nth-child(4){
+      margin: 8px 0;
+    }
+    &:last-child{
+      margin-top: 20px;
+    }
+  }
+}

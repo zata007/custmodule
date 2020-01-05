@@ -1,0 +1,60 @@
+.restaurant-container {
+    height: 60vh;
+    overflow-y: scroll;
+    h2 {
+        text-align: center;
+        font-size: 2.4rem;
+        margin: 10px 0px 20px;
+    }
+    .restaurant-list {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin: 10px 0px;
+        border-radius: none;
+        padding: 0px;
+        h4{
+            font-size: 1.8rem;
+        }
+        h5{
+            font-size: 1.4rem;
+            font-weight: normal;
+            margin-bottom: 17px;
+        }
+        img {
+            width: 35%;
+            height: auto;
+        }
+        .restaurant-details {
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            width: 65%;
+            font-size: 1.3em;
+            .extra {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-top: 3px;
+                .rating, .offer {
+                    display: flex;
+                    flex-direction: row;
+                    justify-items: center;
+                    justify-content: center;
+                    mat-icon {
+                        padding: -5px;
+                        font-size: 1em;
+                    }
+                    p {
+                        font-size: 0.7em;
+                    }
+                    img {
+                        height: 16px;
+                        width: auto;
+                        margin-right: 2px;
+                    }
+                }
+            }
+        }
+    }
+}

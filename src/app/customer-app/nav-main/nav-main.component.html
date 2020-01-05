@@ -1,0 +1,64 @@
+<mat-sidenav-container class="sidenav-container" (backdropClick)="drawer.toggle()">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
+    <mat-toolbar matRipple>
+      <img src="https://image.flaticon.com/icons/png/512/64/64572.png" class="photo" />
+      <h3 class="name">Jhon Doe</h3>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-nav-list class="main-list">
+      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>account_circle</mat-icon>My Profile </a>
+      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>commute</mat-icon>Car Details </a>
+      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>local_offer</mat-icon>Coupons </a>
+      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>share</mat-icon>Refer </a>
+      <a mat-list-item (click)="onSideNavClick('Care')"> <mat-icon>record_voice_over</mat-icon>Customer Care </a>
+      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>settings</mat-icon>Settings </a>
+      <a mat-list-item (click)="onSideNavClick('Partner')"> <mat-icon>exit_to_app</mat-icon>Partner</a>
+      <a mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{isLoggedIn? 'Logout' : 'Login'}} </a>
+    </mat-nav-list>
+    <mat-nav-list class="rule-list">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="nav-top">
+    <mat-toolbar color="none" *ngIf="currentPage === 'main'; else other">
+      <button mat-icon-button color="primary" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <!-- <div class="button b2" id="button-10">
+        <input type="checkbox" class="checkbox">
+        <div class="knobs">
+          <span>Takeaway</span>
+        </div>
+        <div class="layer"></div>
+      </div> -->
+      <div class="menu">
+        <button matRipple [ngClass]="{'active': this.router.url=='/customer' || this.router.url=='/customer/order-takeaway'}" (click)="onNavigate('customer/order-takeaway')">Takeaway</button>
+        <button matRipple [ngClass]="{'active': this.router.url=='/customer/order-delivery'}" (click)="onNavigate('customer/order-delivery')">Delivery</button>
+        <button matRipple [ngClass]="{'active': this.router.url=='/customer/order-ahead'}" (click)="onNavigate('customer/order-ahead')">Order Ahead</button>
+      </div>
+      <button type="button" mat-icon-button color="primary"  (click)="onCartClick()">
+        <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon>
+      </button>
+    </mat-toolbar>
+    <ng-template #other>
+      <mat-toolbar>
+        <button type="button" mat-icon-button color="primary" (click)="onBackClick()">
+          <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+        </button>
+        <button type="button" mat-icon-button color="primary" (click)="onCartClick()">
+          <mat-icon aria-label="notification icon" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0">shopping_cart</mat-icon>
+        </button>
+      </mat-toolbar>
+    </ng-template>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -13,10 +13,17 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { AgmCoreModule } from '@agm/core';
+import { JoyrideModule } from 'ngx-joyride';
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket' } };
 
 @NgModule({
   declarations: [
@@ -38,7 +45,17 @@ export function createTranslateLoader(http: HttpClient) {
           deps: [HttpClient]
       }
   }),
-    SharedComponentsModule
+  SocketIoModule.forRoot(socketConfig),
+  AgmCoreModule.forRoot({ apiKey: environment.mapApiKey, libraries: ['places', 'geometry'] }),
+  JoyrideModule.forRoot(),
+    SharedComponentsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

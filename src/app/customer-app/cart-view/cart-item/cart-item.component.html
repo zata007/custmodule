@@ -1,0 +1,26 @@
+<div class="cart-item-container">
+  <div class="action"><button mat-icon-button>
+      <mat-icon (click)="removeItem.emit($event)"> delete_forever </mat-icon>
+      <!-- <img class="image" src="../../../assets/icons/minus.svg" alt="" (click)="removeFromCart(item)" /> -->
+    </button></div>
+  <mat-card class="item mat-elevation-z4">
+    <div class="item-image" [ngStyle]="{'background-image': 'url('+ '../../../assets/img/core/thumb.jpg' +')'}">
+      <!-- <img style="border-radius: 12px;" src="https://via.placeholder.com/150"> -->
+    </div>
+    <div class="item-content">
+      <div class="item-information">
+        <div class="dish-title">{{data.name}}</div>
+        <div class="dish-shop"> Naturals</div>
+        <div class="dish-description">skldfjsdl ldksjflskdfj lksdfjslkfjslkfjsl</div>
+      </div>
+      <div class="item-footer">
+        <div class="order-price">₹{{ data.price }}</div>
+        <div class="order-action">
+          <mat-icon mat-icon-button [inline]="true" [svgIcon]="'svg-minus'" color="#555555" (click)="removeUnit.emit($event)"></mat-icon>
+          <div class="count">{{data.count}}</div>
+          <mat-icon mat-icon-button [inline]="true" [svgIcon]="'svg-plus'" color="primary" (click)="addUnit.emit($event)"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

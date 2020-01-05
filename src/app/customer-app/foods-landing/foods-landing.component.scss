@@ -1,0 +1,21 @@
+.food-landing-container {
+  position: relative;
+  background: #ffffff;
+  .heading {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: center;
+    align-items: center;
+    margin-left: 2vw;
+    margin-top: 5px;
+      i{
+        font-size: 1.8rem;
+        color: #ff3823;
+      }
+    .content-heading {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-left: 5px;
+    }
+  }
+}

@@ -1,0 +1,71 @@
+<div class="new-address-container">
+  <div class="map-area">
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [scrollwheel]="true"
+      [zoomControl]="false"
+      [streetViewControl]="false"
+      (mapReady)="mapReady($event)"
+      [zoom]="zoom"
+      [clickableIcons]="false"
+      [styles]="mapStyles"
+    >
+      <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="false" [iconUrl]="'assets/icons/navigation.svg'"> </agm-marker>
+      <ng-container *ngIf="canShowDirection">
+        <agm-polyline
+          *ngFor="let polyline of polylines; let i = index"
+          (lineClick)="onPolylineClick(i)"
+          [zIndex]="polyline.zIndex"
+          [strokeColor]="polyline.color"
+        >
+          <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.lat" [longitude]="point.lng"> </agm-polyline-point>
+        </agm-polyline>
+
+        <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
+      </ng-container>
+      <agm-marker
+        *ngIf="customerStateService.selectedLocation.from.lat"
+        [latitude]="customerStateService.selectedLocation.from.lat"
+        [longitude]="customerStateService.selectedLocation.from.lng"
+        [markerDraggable]="false"
+        [iconUrl]="'assets/icons/pin-start.svg'"
+        [animation]="'BOUNCE'"
+      >
+      </agm-marker>
+      <agm-marker
+        *ngIf="customerStateService.selectedLocation.to.lat"
+        [latitude]="customerStateService.selectedLocation.to.lat"
+        [longitude]="customerStateService.selectedLocation.to.lng"
+        [markerDraggable]="false"
+        [iconUrl]="'assets/icons/pin-end.svg'"
+        [animation]="'BOUNCE'"
+      >
+      </agm-marker>
+
+      <agm-marker
+        *ngFor="let m of markers; let i = index"
+        (markerClick)="clickedMarker(m.label, i)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [markerDraggable]="m.draggable"
+        [iconUrl]="selectedLabel === m.label ? 'assets/icons/marker-active.svg' : 'assets/icons/marker.svg'"
+      >
+      </agm-marker>
+    </agm-map>
+  </div>
+  <div class="input-area">
+    <mat-form-field>
+      <input matInput type="text" placeholder="AddressLine 1" required>
+      <input matInput type="text" placeholder="AddressLine 2">
+      <input matInput type="text" placeholder="Landmark" required>
+      <input matInput type="text" placeholder="Locality" required>
+      <input matInput type="text" placeholder="City" required>
+      <input matInput type="text" placeholder="State" required>
+      <input matInput type="text" placeholder="Country" required>
+      <input matInput type="text" placeholder="PIN Code" required>
+      <input matInput type="text" placeholder="Address Type Eg. Home, Office, Other" required>
+      <button mat-raised-button color="primary">Submit</button>
+    </mat-form-field>
+  </div>
+</div>

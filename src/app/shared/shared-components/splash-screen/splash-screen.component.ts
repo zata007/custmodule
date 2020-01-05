@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 import { trigger, transition, query, animateChild, style, animate } from '@angular/animations';
-import { PwaService } from '../../service/pwa.service';
+import { PwaService } from '../../services/pwa.service';
 
 @Component({
   selector: 'app-splash-screen',

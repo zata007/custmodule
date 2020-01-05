@@ -1,0 +1,42 @@
+<div class="cartview-container">
+  <mat-toolbar>
+    <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
+      <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+    </button>
+    <!-- <button mat-raised-button color="primary" type="button" mat-icon-button color="primary" (click)="onCartClick()">
+          <mat-icon aria-label="notification icon" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0">shopping_cart</mat-icon>
+        </button> -->
+  </mat-toolbar>
+  <h1>My Cart</h1>
+  <div class="cart-items">
+    <app-cart-item *ngFor="let item of orderedItems" [data]="item" (addUnit)="onAddUnit(item)" (removeUnit)="onRemoveUnit(item)" (removeItem)="removeItemFromCart(item)"></app-cart-item>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="other-info">
+    <div class="notes">
+      <mat-card class="mat-elevation-z2">
+        <img src="../../../assets/img/core/edit.svg">
+        <h3>Notes</h3>
+      </mat-card>
+      <div class="notes-content">lskdjflskj lsl glsgkjskg slkjgslgjk  slkgjsdlkgjskg</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="delivery-info">
+      <mat-card class="mat-elevation-z2">
+        <img src="../../../assets/img/core/placeholder.svg">
+        <h3>Delivery Location</h3>
+      </mat-card>
+      <div class="delivery-content">
+        <div class="pitstop-name">PITSTOP-12</div>
+        <div class="delivery-location">skjglkgj sfkgjd flkgdjgldkjgld gldf fgdlk gjdg kdl dflkgjlskdjglkjg slkg jslkdg sldgkj</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cartview-footer">
+    <div class="left-content">
+      <div class="price">Total ₹320.00</div>
+      <button  color="primary" mat-button (click)="openDetailedBill()">See details</button>
+    </div>
+    <button mat-raised-button color="primary" style="border-radius: 0;">Proceed to pay</button>
+  </div>
