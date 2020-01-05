@@ -1,5 +1,8 @@
 .sidenav-container {
   height: 100%;
+  .mat-drawer-content{
+    height: auto;
+  }
   .sidenav {
     width: 260px;
     background-color: #ffffff;

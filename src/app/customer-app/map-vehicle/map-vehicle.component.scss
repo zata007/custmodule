@@ -1,19 +1,26 @@
+@import './../../../assets/styles/mixins';
 .vehicle-location-container {
   box-shadow: none;
   padding: 0px;
   position: relative;
 
   agm-map {
-    height: 100vh;
+    height: calc(100vh - 60px);
+    @include pc{
+      height: calc(100vh - 10px);
+    }
+    @include xs-phone{
+      height: calc(100vh - 80px);
+    }
   }
 
   .input-area {
     position: absolute;
     display: flex;
     flex-flow: column;
-    top: 60px;
+    top: 100px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -100px );
     .search-element {
       position: relative;
       min-width: 320px;

@@ -1,6 +1,7 @@
-<div class="vehicle-location-container">
-  <div class="map-area">
+<div class="vehicle-location-container" fxLayout="column">
+  <div class="map-area" fxFlex="1 1 100%" #mapContainer>
     <agm-map
+    [style.height.px]="mapContainer.offsetHeight"
       [latitude]="lat"
       [longitude]="lng"
       [scrollwheel]="true"
@@ -10,6 +11,7 @@
       [zoom]="zoom"
       [clickableIcons]="false"
       [styles]="mapStyles"
+
     >
       <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="false" [iconUrl]="'assets/icons/navigation.svg'"> </agm-marker>
       <ng-container *ngIf="canShowDirection">
