@@ -1,3 +1,4 @@
+@import '../../../assets/styles/variable';
 .sidenav-container {
   height: 100%;
   .mat-drawer-content{
@@ -7,7 +8,7 @@
     width: 260px;
     background-color: #ffffff;
     mat-toolbar {
-      background-color: #ffffff !important;
+      background-color: $color-background-light !important;
       padding: 5px;
       img {
         height: 70%;

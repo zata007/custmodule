@@ -58,23 +58,23 @@
   </div>
   <div class="input-area">
     <div
-      joyrideStep="onboard-location-input"
-      [stepContent]="customContent"
-      [doneTemplate]="doneButton"
-      [counterTemplate]="counter"
       class="search-element"
     >
       <input
-        class="from"
+        class="from zat-input"
         placeholder="Point A"
         autocorrect="off"
         autocapitalize="off"
         spellcheck="off"
         type="search"
         #searchFrom
+        joyrideStep="onboard-location-input"
+      [stepContent]="customContent"
+      [doneTemplate]="doneButton"
+      [counterTemplate]="counter"
         required
       />
-      <input class="to" placeholder="Point B" autocorrect="off" autocapitalize="off" spellcheck="off" type="search" #searchTo required />
+      <input class="to zat-input" placeholder="Point B" autocorrect="off" autocapitalize="off" spellcheck="off" type="search" #searchTo required />
     </div>
     <ng-template #customContent>
       <div style="border-radius: 10px">

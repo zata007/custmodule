@@ -1,11 +1,12 @@
 @import './../../../assets/styles/mixins';
+@import './../../../assets/styles/variable';
 .vehicle-location-container {
   box-shadow: none;
   padding: 0px;
   position: relative;
 
   agm-map {
-    height: calc(100vh - 60px);
+    height: 100vh;
     @include pc{
       height: calc(100vh - 10px);
     }
@@ -21,33 +22,28 @@
     top: 100px;
     left: 50%;
     transform: translate(-50%, -100px );
+    @include xs-phone{
+      width: 100vw;
+    }
     .search-element {
       position: relative;
-      min-width: 320px;
-
-
+      background-color: $color-background-light;
+      padding: 20px;
       input {
-        border-radius: 3px;
-        border: none;
-        display: block;
-        height: 30px;
-        width: 100%;
-        padding: 0 10px 0px 15px;
-        background-color: rgba(245, 245, 245, 1);
-       // transition: width ease-out 0.3s;
-        transition: all .5s ease-out;
-        color: rgba(0, 0, 0, 0.8);
+        width: 320px;
+        padding: 15px 0 15px 14px;
+        margin-bottom: 15px;
+        @include xs-phone{
+          width: 270px;
+
+        }
+        &:last-child{
+          margin-bottom: 0;
+        }
 
         &:active,
         &:focus {
-          position: relative;
-          margin-bottom: 1px;
-          transform: scale(1.1);
-          height: 40px;
-          background-color: rgba(255, 255, 255, 1);
-          color: rgba(0, 0, 0, 0.8);
-          outline: none;
-          box-shadow: 0.5px 0.5px 5px 0.5px #333333;
+           outline: none;
         }
       }
     }
