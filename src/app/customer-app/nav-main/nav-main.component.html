@@ -2,9 +2,9 @@
   <mat-sidenav
     #drawer
     class="sidenav"
+    fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)"
+    [mode]="'over'"
   >
     <mat-toolbar matRipple>
       <img src="https://image.flaticon.com/icons/png/512/64/64572.png" class="photo" />
@@ -28,7 +28,7 @@
   </mat-sidenav>
   <mat-sidenav-content class="nav-top">
     <mat-toolbar color="none" *ngIf="currentPage === 'main'; else other">
-      <button mat-icon-button color="primary" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+      <button mat-icon-button color="primary" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <!-- <div class="button b2" id="button-10">
