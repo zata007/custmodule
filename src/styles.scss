@@ -45,6 +45,14 @@ body {
     border: none;
   }
 
+  .bold {
+    font-weight: bold;
+  }
+
+  .primary-color {
+    color: #ff3823;
+  }
+
   @include pc {
     max-width: 600px;
     display: block;
@@ -191,4 +199,24 @@ body {
       font-size: 14px;
     }
   }
+}
+
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+  font-size: 1.5em;
+}
+
+input[type=search]::-moz-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+  font-size: 1.5em;
+}
+
+input[type=search]::-o-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+  font-size: 1.5em;
+}
+
+input[type=search]::search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+  font-size: 1.5em;
 }

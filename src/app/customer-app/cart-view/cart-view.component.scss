@@ -8,87 +8,45 @@
     box-shadow: none;
     padding: 5px;
   }
-  h1 {
-    margin-left: 2vw;
-    font-size: 2.4rem;
-    line-height: 3rem;
-  }
-  .card-items{
-    padding: 20px 0;
-  }
-  .zataakse .mat-toolbar {
-    box-shadow: none !important;
-  }
-  .other-info, .delivery-info{
-    h3{
-      margin: 8px 0;
-      font-size: 1.8rem;
-    }
-    .notes-content,.delivery-content{
-      background: #fff;
-        padding: 8px 8px 8px 16px;
-        color: #929292;
-    }
-  }
-
-  .other-info{
-    margin-left: 45px;
-    .notes{
-      mat-card {
-        padding: 5px;
-        border-radius: 0px;
-        img {
-          height: 16px;
-          width: auto;
-          display: inline-block;
-          margin-right: 5px;
-        }
-        h3 {
-          display: inline-block;
-        }
+  .address {
+    margin: 20px 16px;
+    overflow: visible;
+    .address-box {
+      margin: 15px 0;
+      width: 85%;
+      padding: 15px 15px 15px 23px;
+      position: relative;
+      border-radius: 4px;
+      .head2 {
+        line-height: 1.5;
       }
-    }
-    .delivery-info{
-      mat-card {
-        padding: 5px;
-        border-radius: 0px;
-        img {
-          height: 16px;
-          width: auto;
-          display: inline-block;
-          margin-right: 5px;
-        }
-        h3 {
-          display: inline-block;
-        }
+      .head4 {
+        line-height: 1.25;
+      }
+      .edit {
+        position: absolute;
+        bottom: 5px;
+        right: 0px;
       }
     }
   }
-}
-
-.cartview-footer{
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  height: 60px;
-  display: flex;
-  flex-flow: nowrap;
-  justify-content: space-between;
-  button{
-    flex-basis: 50%;
-    min-width: 100px;
+  .note {    
+    margin: 25px 16px;
+    overflow: visible;
   }
-  .left-content{
-    display: flex;
-    flex-flow: column;
-    font-size: 2rem;
-    font-weight: 500;
-    .price{
-      padding-left: 16px;
-      font-weight: 300;
-    }
-    button{
-      align-self: flex-start;
+  mat-divider {
+    margin: 20px 16px;
+  }
+  .amount {
+    margin: auto 16px;
+  }
+  .order-button {
+    height: 55px;
+    margin: 30px 16px;
+    border-radius: 7px;
+    button {
+      height: 100%;
+      width: 100%;
     }
   }
 }
