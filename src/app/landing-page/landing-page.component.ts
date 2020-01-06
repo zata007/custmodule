@@ -121,7 +121,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           // this.prelaunchService.setLocationData(latitude, longitude);
-          this.router.navigate(['login-signup']);
+          this.router.navigate(['customer']);
         },
         error => {
           // User blocked location

@@ -63,7 +63,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AddVehicleComponent,
     BottomVehicleComponent,
   ],
-  entryComponents:[BillDetailComponent, RestaurantListComponent, BottomAddressComponent, BottomVehicleComponent, AddAddressComponent, AddVehicleComponent],
+  entryComponents: [
+    BillDetailComponent,
+    RestaurantListComponent,
+    BottomAddressComponent,
+    BottomVehicleComponent,
+    AddAddressComponent,
+    AddVehicleComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
