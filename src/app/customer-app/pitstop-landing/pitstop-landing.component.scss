@@ -1,90 +1,43 @@
 .pitstop-landing-container {
   margin-top: 20px;
   .food-item-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: scroll;
+    margin: 16px;
+    overflow: visible;
     .food-item {
-      width: 90vw;
-      height: 130px;
-      margin: 7px 0px 7px 10vw;
-      border-radius: 5px;
-      position: relative;      
-      white-space: nowrap;
-      overflow: hidden;
-      .thumb {
-        position: absolute;
-        height: 100%;
-        width: auto;
-        top:0px;
-        left:0px;
+      img {
+        width: 150px;
+        height: auto;
+        border-radius: 10px;
       }
-      .first {
+      .details {
+        width: 80%;
+        height: 190px;
+        border-radius: 5px;
+        margin-left: -20%;
+        padding-left: 25%;
+        padding-right: 20px;
         .food-name {
-          position: absolute;
-          top: 5px;
-          left: 135px;
-          font-size: 1.1em;
           font-weight: bold;
+          line-height: 1.5;
         }
-        .shop-name {
-          position: absolute;
-          top: 30px;
-          left: 135px;
-          font-size: 1em;
+        .restaurant {
+          line-height: 1.21;
         }
-        .food-preference {
-          position: absolute;
-          top: -10px;
-          left: 0px;
-          z-index: 999;
+        .description {
+          color: #717171;
+          line-height: 1.21;
+          margin-bottom: 10px;
         }
-      }
-      .second {
-        width: 60%;
-        position: absolute;
-        top: 50px;
-        left: 135px;
-        font-size: 0.7em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .third {
-        .order-price {
-          position: absolute;
-          top: 80px;
-          left: 135px;
-          color: #FF513F;
-        }
-        .order-action {
-          position: absolute;
-          top: 75px;
-          right: 10px;
-          display: flex;
-          flex-flow: row;
-          justify-content: center;
-          align-items: center;
-          button {
-            width:25px;
+        div {
+          width: 100%;
+          .order-action {
+            text-align: center;
+            border: 1px solid orange;
+            padding: auto 5px;
+            .counter {
+              vertical-align: middle;
+            }
           }
-          .counter {
-            width: 25px;
-            padding: 0px auto;            
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-        }
-      }
-      .fourth {
-        .tax-info {
-          position: absolute;
-          bottom: 2px;
-          left: 135px;
-          font-size: 0.6em;
         }
       }
     }

@@ -1,64 +1,20 @@
 <div class="pitstop-landing-container">
   <div class="food-item-container" *ngFor="let item of foods">
-    <mat-card class="food-item mat-elevation-z4" [ngClass]="{ added: isAddedToCart(item) }">
-      <img class="thumb" src="../../../assets/img/core/thumb.jpg" alt="" />
-      <div class="first flexy">
-        <div class="food-name">{{ item.name }}</div>
-        <div class="shop-name">Shop Name</div>
-        <div class="food-prefrence">
-            <svg
-              *ngIf="item.catagory === 'veg'; else nonveg"
-              width="50px"
-              height="50px"
-              viewBox="0 0 144 62"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="Group">
-                  <rect id="Rectangle" stroke="#008200" stroke-width="3" x="1.5" y="1.5" width="59" height="59"></rect>
-                  <circle id="Oval" fill="#008200" cx="31" cy="31" r="18"></circle>
-                </g>
-              </g>
-            </svg>
-            <ng-template #nonveg>
-              <svg
-                width="50px"
-                height="50px"
-                viewBox="0 0 144 62"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
-                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g id="Group">
-                    <rect id="Rectangle" stroke="#964122" stroke-width="3" x="1.5" y="1.5" width="59" height="59"></rect>
-                    <circle id="Oval" fill="#964122" cx="31" cy="31" r="18"></circle>
-                  </g>
-                </g>
-              </svg>
-            </ng-template>
+    <div fxLayout="row" fxLayoutAlign="start center" class="food-item" [ngClass]="{ added: isAddedToCart(item) }">
+      <img class="thumb mat-elevation-z4" src="../../../assets/img/core/thumb.jpg" alt="" />
+      <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
+        <div class="head4 food-name">{{ item.name }}</div>
+        <div class="restaurant para">Restaurant</div>
+        <div class="description para">Lorem Ipsum Dolor Si Amet Contour di saptlire elitr</div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div class="price head4">₹{{ item.price }}</div>
+          <div fxLayout="row" fxLayoutAlign="space-between baseline" class="order-action">
+            <div (click)="removeFromCart(item)" >-</div>
+            <div class="counter">{{countInCart(item)}}</div>
+            <div (click)="addToCart(item)" >+</div>
           </div>
-      </div>
-      <div class="second flexy">
-        If there is any food description. But who read description when hungry!
-      </div>
-      <div class="third flexy">
-        <div class="order-price">₹{{ item.price }}</div>
-        <div class="order-action">
-          <button mat-icon-button color="primary"  disabled="!isAddedToCart(item)">
-            <mat-icon [inline]="true" [svgIcon]="'svg-minus'" (click)="removeFromCart(item)"></mat-icon>
-            <!-- <img class="image" src="../../../assets/icons/minus.svg" alt="" (click)="removeFromCart(item)" /> -->
-          </button>
-          <div class="counter">{{countInCart(item)}}</div>
-          <button mat-icon-button color="primary">
-              <mat-icon [inline]="true" [svgIcon]="'svg-plus'" (click)="addToCart(item)"></mat-icon>
-            <!-- <img class="image" src="../../../assets/icons/plus.svg" alt="" (click)="addToCart(item)" /> -->
-          </button>
         </div>
       </div>
-      <div class="fourth flexy">
-          <div class="tax-info">*Total Amount is inclusive of tax</div>
-      </div>
-    </mat-card>
+    </div>
   </div>
 </div>

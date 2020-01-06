@@ -1,17 +1,12 @@
 .cartview-container{
   position: fixed;
   height: calc(100vh - 60px);
-  width: 100vw;
-  background: url('../../../assets/img/core/cornerillustration.png') no-repeat left top;
-  background-size: 200px auto;
-  background-color: #ffffff;
+  width: 100%;
   overflow: auto;
   mat-toolbar {
     background: rgba(0,0,0, 0)!important;
     box-shadow: none;
     padding: 5px;
-    display: flex;
-    justify-content: flex-start;
   }
   h1 {
     margin-left: 2vw;

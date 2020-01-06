@@ -28,7 +28,7 @@
   </mat-sidenav>
   <mat-sidenav-content class="nav-top">
     <mat-toolbar color="none" *ngIf="currentPage === 'main'; else other">
-      <button mat-icon-button color="primary" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button mat-icon-button color="dark" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <!-- <div class="button b2" id="button-10">
@@ -38,21 +38,21 @@
         </div>
         <div class="layer"></div>
       </div> -->
-      <div class="menu">
+      <div class="menu mat-elevation-z3">
         <button matRipple [ngClass]="{'active': this.router.url=='/customer' || this.router.url=='/customer/order-takeaway'}" (click)="onNavigate('customer/order-takeaway')">Takeaway</button>
         <button matRipple [ngClass]="{'active': this.router.url=='/customer/order-delivery'}" (click)="onNavigate('customer/order-delivery')">Delivery</button>
         <button matRipple [ngClass]="{'active': this.router.url=='/customer/order-ahead'}" (click)="onNavigate('customer/order-ahead')">Order Ahead</button>
       </div>
-      <button type="button" mat-icon-button color="primary"  (click)="onCartClick()">
+      <button type="button" mat-icon-button color="dark"  (click)="onCartClick()">
         <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon>
       </button>
     </mat-toolbar>
     <ng-template #other>
       <mat-toolbar>
-        <button type="button" mat-icon-button color="primary" (click)="onBackClick()">
+        <button type="button" mat-icon-button color="dark" (click)="onBackClick()">
           <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
         </button>
-        <button type="button" mat-icon-button color="primary" (click)="onCartClick()">
+        <button type="button" mat-icon-button color="dark" (click)="onCartClick()">
           <mat-icon aria-label="notification icon" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0">shopping_cart</mat-icon>
         </button>
       </mat-toolbar>

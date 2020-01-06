@@ -17,11 +17,7 @@
 
   .input-area {
     position: absolute;
-    display: flex;
-    flex-flow: column;
-    top: 100px;
-    left: 50%;
-    transform: translate(-50%, -100px );
+    top: 0px;
     @include xs-phone{
       width: 100vw;
     }
@@ -83,7 +79,6 @@
 
 .custom-popup-container {
   .content-area {
-    display: flex;
     padding: 5px 12px;
 
     .action-btn {
@@ -121,16 +116,12 @@
 
       .requested-location {
         width: 100%;
-        display: flex;
-        flex-flow: column;
-        align-items: flex-start;
 
         span {
           margin: 3px 0px;
         }
 
         div {
-          display: flex;
           width: 100%;
 
           span {

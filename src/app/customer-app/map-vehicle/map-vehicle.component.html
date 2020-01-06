@@ -56,7 +56,7 @@
       </agm-marker>
     </agm-map>
   </div>
-  <div class="input-area">
+  <div fxLayout="column" class="input-area">
     <div
       class="search-element"
     >
@@ -103,7 +103,7 @@
 <!-- Swiper End -->
 <div class="custom-popup-container" [ngStyle]="{ visibility: haveNoPitstop ? 'visible' : 'hidden' }">
   <ng-container *ngIf="!isSubmitRequestVisible; else requestSubmit">
-    <div class="content-area">
+    <div fxLayout="column" fxLayoutAlign="center center" class="content-area">
       <div class="request-content">
         <div class="content">
           We aren't serving in vehicle on your choosen route yet..!
@@ -119,11 +119,11 @@
     <div class="submit-content">
       <div class="title">Service Request</div>
       <div class="sub-title">I'd like to request service on following route:</div>
-      <div class="requested-location">
-        <div>
+      <div fxLayout="column" fxLayoutAlign="start start" class="requested-location">
+        <div fxLayout="row">
           <span> From:</span> <span>{{ 'hshs jkdsjkd' }}</span>
         </div>
-        <div>
+        <div fxlayout="row">
           <span>To:</span> <span>{{ 'jfjls lsjfsl' }}</span>
         </div>
       </div>

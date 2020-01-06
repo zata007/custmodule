@@ -36,6 +36,7 @@ import { AddVehicleComponent } from './vehicle/add-vehicle/add-vehicle.component
 import { BottomVehicleComponent } from './vehicle/bottom-vehicle/bottom-vehicle.component';
 import { MaterialModule } from '../shared/material-module/material.module';
 import { SharedModule } from '../shared/shared-components/shared.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { SharedModule } from '../shared/shared-components/shared.module';
     JoyrideModule.forChild(),
     RouterModule.forChild(CustomerAppRoutes),
     SwiperModule,
+    FlexLayoutModule
   ],
   bootstrap: [CustomerLayoutComponent],
   providers: [CustomerService, CustomerStateService, OrderService],

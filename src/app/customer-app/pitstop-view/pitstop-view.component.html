@@ -1,24 +1,13 @@
 <div style="position: relative">
   <div *ngIf="!isOrdered" class="pitstop-view-container">
-      <h1>Let's Eat</h1>
-      <mat-card class="header mat-elevation-z4">
-        <span *ngIf="selectedFrom != selectedTo"><b>Source:</b> {{ selectedFrom }}</span>
-        <span><b>Destination:</b> {{ selectedTo }}</span>
-      </mat-card>
-        <mat-card class="search-area mat-elevation-z4">
-          <mat-icon>search</mat-icon>
-          <mat-form-field class="search-field" [hideRequiredMarker]="true" [floatLabel]="never">
-            <input #foodSearch matInput type="text" placeholder="Search your Cravings" [(ngModel)]="value" />
-            <button mat-button *ngIf="foodSearch.value" matSuffix mat-icon-button aria-label="Clear" (click)="value = ''">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-        </mat-card>
-      <div class="scroll-item">
-          <pitstop-landing *ngIf="canShowPitstopLanding" [foods]="foods"></pitstop-landing>
-          <foods-landing *ngIf="!canShowPitstopLanding"></foods-landing>
-          <div style="height: 100px;"></div>
-        </div>
+    <div class="input-area">
+      <input class="zat-input" type="text" placeholder="🔍 Search for your carvings">
+    </div>
+    <div class="scroll-item">
+      <pitstop-landing *ngIf="canShowPitstopLanding" [foods]="foods"></pitstop-landing>
+      <foods-landing *ngIf="!canShowPitstopLanding"></foods-landing>
+      <div style="height: 100px;"></div>
+    </div>
   </div>
   <div *ngIf="getTotal() > 0 && !isOrdered" class="place-order-container">
     <button mat-raised-button color="primary" (click)="placeOrder()">
