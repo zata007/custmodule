@@ -1,75 +1,41 @@
 .cart-item-container {
-  display: flex;
-  padding: 10px 0px;
-  padding-left: 5px;
-  flex-wrap: nowrap;
+  padding: 10px 16px;
   width: 100%;
-  .action {
-    flex-basis: 60px;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    mat-icon{
-      font-size: 3.2rem;
-      color: #555555;
-    }
-
-  }
-  .item {
-    display: flex;
-    flex-flow: row nowrap;
+  .food-item {
     width: 100%;
-    overflow: hidden;
-    border-radius: 15px;
-    padding: 0px;
-    margin: 0px;
-    .item-image {
-      flex-basis: 150px;
-      background-size: cover;
-      height: 100%;
-      width: 100%;
-      background-position: center;
+    img {
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
     }
-    .item-content {
-      display: flex;
-      flex-flow: column;
-      width: 100%;
-      margin-left: 8px;
-      .item-information {
-        display: block;
-        .dish-title{
-          color: #000;
-          font-weight: 600;
-          font-size: 20px;
-        }
-        .dish.shop{
-          font-weight: 300;
-          font-size: 1.6rem;
-          line-height: 2.6rem;
-        }
-        .dish-description{
-          font-size: 12px;
-          text-overflow: ellipsis;
-          font-weight: 100;
-          line-break: auto;
-        }
+    .details {
+      width: 85%;
+      height: 125px;
+      border-radius: 5px;
+      margin-left: -15%;
+      padding-left: 20%;
+      padding-right: 16px;
+      .food-name {
+        font-weight: bold;
+        line-height: 1.5;
       }
-      .item-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .restaurant {
+        line-height: 1.21;
+      }
+      .description {
+        color: #717171;
+        line-height: 1.21;
+        margin-bottom: 10px;
+      }
+      div {
+        width: 100%;
         .order-action {
-          padding: 5px;
-          display: flex;
-          flex-flow: row nowrap;
-          .count{
-            align-self: center;
+          text-align: center;
+          border: 1px solid orange;
+          padding: auto 5px;
+          .counter {
+            vertical-align: middle;
           }
-         .mat-icon.mat-icon-inline {
-          height: 20px;
-          width: 20px;
-          margin: 2px;
-        }
         }
       }
     }
