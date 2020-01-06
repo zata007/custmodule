@@ -22,7 +22,7 @@ export class NavMainComponent implements OnInit, OnDestroy {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private customerStateService: CustomerStateService,
-    private router: Router,
+    public router: Router,
     private cookieService: CookieService,
     private store: Store<IAppState>,
     private orderService: OrderService
