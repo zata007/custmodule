@@ -48,7 +48,7 @@ const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, opt
   SocketIoModule.forRoot(socketConfig),
   AgmCoreModule.forRoot({ apiKey: environment.mapApiKey, libraries: ['places', 'geometry'] }),
   JoyrideModule.forRoot(),
-    SharedComponentsModule,
+  SharedComponentsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {

@@ -7,9 +7,10 @@ import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
 import { JoyrideService } from 'ngx-joyride';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from './map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
+import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
 interface Marker {
   lat: number;
   lng: number;
@@ -31,7 +32,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   public longitude = 72.853532;
   selectedLabel = 'A';
   selectedIndex = 0;
-  haveNoPitstop = false;
 
   canShowDirection = false;
   canShowPitstops = false;
@@ -60,7 +60,8 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
     private readonly joyrideService: JoyrideService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private bottomSheet: MatBottomSheet
   ) {}
 
   ngOnInit() {
@@ -90,8 +91,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.customerStateService.directionResults$.subscribe((data: google.maps.DirectionsRoute[]) => this.onDirectionResultUpdate(data));
 
     this.customerStateService.pitstopOnEdge$.subscribe((d: any) => {
-      // TODO: Remove ! once backend is completed.
-      if (!d.isLocationOnEdge) {
+      if (d.isLocationOnEdge) {
         const pitstopMarker: Marker = {
           lat: d.pitstop[1],
           lng: d.pitstop[0],
@@ -215,9 +215,14 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
           const pitstops: Array<any> = data.data;
 
           // check if pitstop is on the edge.
-          if (pitstops.length === 0) {
+          // TODO: Remove !
+          if (pitstops.length !== 0) {
             this.canShowPitstops = false;
-            this.haveNoPitstop = true;
+            this.bottomSheet.open(NotServicebleComponent, {
+              data: {
+               location: this.searchElementRefFrom.nativeElement.value
+              }
+            });
             return;
           }
 
@@ -236,19 +241,15 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
       } else {
         // Show not servicable
         this.canShowPitstops = false;
-        this.haveNoPitstop = true;
+        // TODO: Show BottomSheet
+        this.bottomSheet.open(NotServicebleComponent, {
+          data: {
+            location: this.searchElementRefFrom.nativeElement.value
+          }
+        });
+
       }
     });
-  }
-
-  requestService() {
-    // TODO: Uncomment after release this.isSubmitRequestVisible = true;
-    this.haveNoPitstop = false;
-  }
-
-  submitServiceRequest() {
-    this.haveNoPitstop = false;
-    this.isSubmitRequestVisible = false;
   }
 
   GotoRoute() {

@@ -30,6 +30,36 @@ body {
   margin: 0;
   font-family: "Merriweather", serif;
 
+  .title {
+    font-size: 16px;
+  }
+  .head1 {
+    font-size: 24px;
+  }
+  .head2 {
+    font-size: 22px;
+  }
+  .head3 {
+    font-size: 20px;
+  }
+  .head4 {
+    font-size: 18px;
+  }
+  .para {
+    font-size: 16px;
+  }
+  .list-item {
+    font-size: 18px;
+  }
+  .secondary-text,
+  .caption,
+  .helping {
+    font-size: 16px;
+  }
+  button {
+    font-size: 16px;
+  }
+
   .zat-input {
     height: 60px;
     background-color: #ecedee;
@@ -219,4 +249,20 @@ input[type=search]::-o-search-cancel-button {
 input[type=search]::search-cancel-button {
   -webkit-appearance: searchfield-cancel-button;
   font-size: 1.5em;
+}
+
+
+//------------------------------------Bottom-Sheet styles-----------------------------------------------//
+.mat-bottom-sheet-container{
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+}
+
+
+//---------------------------------- Cross Btn ------------------------------------------------------
+
+.cross{
+  position: absolute;
+  right: 5px;
+  top: 0;
 }
