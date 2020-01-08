@@ -21,7 +21,6 @@
     }
     .main-list {
       a {
-        font-size: 1.5rem;
         mat-icon {
           margin-right: 15px;
         }
@@ -29,8 +28,8 @@
     }
     .rule-list {
       margin-top: 15px;
-      a {
-        font-size: 1.2rem;
+      a.ham-list {
+        font-size: 0.75rem;
         display: block;
         padding-left: 15px;
         margin: 5px 0px;
@@ -51,7 +50,6 @@
         padding: 0px;
         border-radius: 5px;
         background: none;
-        font-size: 1.5rem;
         border: none;
         color: #000!important;
         outline: none;
@@ -76,6 +74,7 @@
           border-radius: 25px;
           background-color: white;
           outline: none;
+          font-size: 0.75rem;
         }
         .active {
           background: #ff3823 !important;
@@ -154,7 +153,6 @@
     top: 0px;
     width: 70px;
     height: 13px;
-    font-size: 1.2rem;
     text-align: center;
     line-height: 1;
     padding: 6px 2px;

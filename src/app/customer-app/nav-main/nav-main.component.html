@@ -8,22 +8,22 @@
   >
     <mat-toolbar matRipple>
       <img src="https://image.flaticon.com/icons/png/512/64/64572.png" class="photo" />
-      <h3 class="name">Jhon Doe</h3>
+      <div class="name head3">Jhon Doe</div>
     </mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list class="main-list">
-      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>account_circle</mat-icon>My Profile </a>
-      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>commute</mat-icon>Car Details </a>
-      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>local_offer</mat-icon>Coupons </a>
-      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>share</mat-icon>Refer </a>
-      <a mat-list-item (click)="onSideNavClick('Care')"> <mat-icon>record_voice_over</mat-icon>Customer Care </a>
-      <a mat-list-item (click)="onSideNavClick('')"> <mat-icon>settings</mat-icon>Settings </a>
-      <a mat-list-item (click)="onSideNavClick('Partner')"> <mat-icon>exit_to_app</mat-icon>Partner</a>
-      <a mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{isLoggedIn? 'Logout' : 'Login'}} </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>account_circle</mat-icon>My Profile </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>commute</mat-icon>Car Details </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>local_offer</mat-icon>Coupons </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>share</mat-icon>Refer </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Care')"> <mat-icon>record_voice_over</mat-icon>Customer Care </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>settings</mat-icon>Settings </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Partner')"> <mat-icon>exit_to_app</mat-icon>Partner</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{isLoggedIn? 'Logout' : 'Login'}} </a>
     </mat-nav-list>
     <mat-nav-list class="rule-list">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms & Conditions</a>
+      <a class="ham-list" href="#">Privacy Policy</a>
+      <a class="ham-list" href="#">Terms & Conditions</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="nav-top">
@@ -39,9 +39,9 @@
         <div class="layer"></div>
       </div> -->
       <div class="menu mat-elevation-z3">
-        <button matRipple [ngClass]="{'active': router.url=='/customer' || router.url=='/customer/order-takeaway'}" (click)="onNavigate('customer/order-takeaway')">Takeaway</button>
-        <button matRipple [ngClass]="{'active': router.url=='/customer/order-delivery'}" (click)="onNavigate('customer/order-delivery')">Delivery</button>
-        <button matRipple [ngClass]="{'active': router.url=='/customer/order-ahead'}" (click)="onNavigate('customer/order-ahead')">Order Ahead</button>
+        <button class="ham-list" matRipple [ngClass]="{'active': router.url=='/customer' || router.url=='/customer/order-takeaway'}" (click)="onNavigate('customer/order-takeaway')">Takeaway</button>
+        <button class="ham-list" matRipple [ngClass]="{'active': router.url=='/customer/order-delivery'}" (click)="onNavigate('customer/order-delivery')">Delivery</button>
+        <button class="ham-list" matRipple [ngClass]="{'active': router.url=='/customer/order-ahead'}" (click)="onNavigate('customer/order-ahead')">Order Ahead</button>
       </div>
       <button type="button" mat-icon-button color="dark"  (click)="onCartClick()">
         <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon>

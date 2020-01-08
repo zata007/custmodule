@@ -1,60 +1,44 @@
 .restaurant-container {
-    height: 60vh;
-    overflow-y: scroll;
-    h2 {
-        text-align: center;
-        font-size: 2.4rem;
-        margin: 10px 0px 20px;
-    }
-    .restaurant-list {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        margin: 10px 0px;
-        border-radius: none;
-        padding: 0px;
-        h4{
-            font-size: 1.8rem;
+  .head2 {
+    text-align: center;
+    margin: 20px auto;
+  }
+  .restaurant-item-container {
+    overflow: visible;
+    .restaurant-item {
+      margin: 5px auto;
+      img {
+        width: 110px;
+        height: auto;
+        border-radius: 10px;
+      }
+      .details {
+        width: 85%;
+        height: 120px;
+        border-radius: 5px;
+        margin-left: -20%;
+        padding-left: 23%;
+        padding-right: 10px;
+        .restaurant-name {
+          font-weight: bold;
+          line-height: 1.5;
         }
-        h5{
-            font-size: 1.4rem;
-            font-weight: normal;
-            margin-bottom: 17px;
+        .restaurant {
+          line-height: 1.21;
         }
-        img {
-            width: 35%;
-            height: auto;
-        }
-        .restaurant-details {
-            padding: 5px;
-            display: flex;
-            flex-direction: column;
-            width: 65%;
-            font-size: 1.3em;
-            .extra {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                margin-top: 3px;
-                .rating, .offer {
-                    display: flex;
-                    flex-direction: row;
-                    justify-items: center;
-                    justify-content: center;
-                    mat-icon {
-                        padding: -5px;
-                        font-size: 1em;
-                    }
-                    p {
-                        font-size: 0.7em;
-                    }
-                    img {
-                        height: 16px;
-                        width: auto;
-                        margin-right: 2px;
-                    }
-                }
+        .other-info {
+          width: 100%;
+          .caption {
+            font-size: 0.7rem;
+          }
+          .rate, .offer {
+            img {
+              height: 13px;
+              width: auto;
             }
+          }
         }
+      }
     }
+  }
 }

@@ -3,25 +3,28 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<ng-template #requestSubmit>
-  <div class="head2">Recommend a Restaurant</div>
+<ng-template id="bottom2" #requestSubmit>
+  <div class="head2 bold heading" style="margin-top: 20px; text-align: center;">Recommend a Restaurant</div>
   <div fxLayout="column" fxLayoutAlign="space-between stretch">
-    <div class="flex-inline">
-      <mat-icon color="primary" style="width: 35px;">business</mat-icon>
-      <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
-        <input matInput placeholder="Restaurant Name" [(ngModel)]="restaurantData.name"  required>
+    <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
+      <mat-form-field appearance="standard" style="width: 100%;">
+        <mat-icon matPrefix style="width: 35px;">business</mat-icon>
+        <mat-label>Restaurant Name</mat-label>
+        <input matInput [(ngModel)]="restaurantData.name"  required>
       </mat-form-field>
     </div>
-    <div class="flex-inline">
-      <mat-icon color="primary" style="width: 35px;">call</mat-icon>
-      <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
-        <input matInput placeholder="Restaurant Contact" [(ngModel)]="restaurantData.contact"  required>
+    <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
+      <mat-form-field appearance="standard" style="width: 100%;">
+        <mat-label>Restaurant Contact</mat-label>
+        <mat-icon matPrefix style="width: 35px;">call</mat-icon>
+        <input matInput [(ngModel)]="restaurantData.contact"  required>
       </mat-form-field>
     </div>
-    <div class="flex-inline">
-      <mat-icon color="primary" style="width: 35px;">near_me</mat-icon>
-      <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
-        <textarea matInput [(ngModel)]="restaurantData.address" placeholder="Restaurant Address" ></textarea>
+    <div fxLayout="row" fxLayoutAlign="start start" class="flex-inline">
+      <mat-form-field appearance="standard" style="width: 100%;">
+        <mat-label>Restaurant Address</mat-label>
+        <mat-icon matPrefix style="width: 35px;">near_me</mat-icon>
+        <input matInput [(ngModel)]="restaurantData.address" >
       </mat-form-field>
     </div>
     <button mat-raised-button color="primary" class="action-btn" (click)="mailMe()">
@@ -30,18 +33,23 @@
   </div>
 </ng-template>
 <div>
-  <ng-container *ngIf="!isSubmitRequestVisible; else requestSubmit">
+  <ng-container class="bottom1" *ngIf="!isSubmitRequestVisible; else requestSubmit">
     <div fxLayout="column" fxLayoutAlign="space-between stretch" class="content-area" style="padding: 20px;">
       <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
-        <div class="head2">
-          We aren't serving on your choosen route yet..!
+        <div class="head4 bold">
+         Not servicing:
         </div>
-        <div class="head3">
-          Recommend a food joint
+        <div class="para">
+          <mat-icon>near_me</mat-icon> pointA
+        </div>
+        <br />
+        <div class="head4" style="text-align: center;">
+          Want to recommend a food joint?
         </div>
       </div>
+      <br />
       <button mat-raised-button color="primary" (click)="isSubmitRequestVisible = true">
-        Continue
+        Recommend
       </button>
     </div>
   </ng-container>
