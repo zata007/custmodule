@@ -1,0 +1,34 @@
+<div class="pre-register-container" fxLayout="column" fxLayoutAlign="center center">
+  <div class="head2">We appreciate your recommendation and promise to bring great offers to you when we launch in your locality</div>
+  <div class="input-fields" fxLayout="column" fxLayoutAlign="space-between stretch">
+    <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
+      <mat-form-field appearance="standard" style="width: 100%;">
+        <mat-icon matPrefix style="width: 35px;">perm_identity</mat-icon>
+        <mat-label>Your Name</mat-label>
+        <input matInput  required>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
+      <mat-form-field appearance="standard" style="width: 100%;">
+        <mat-label>Mobile Number</mat-label>
+        <mat-icon matPrefix style="width: 35px;">call</mat-icon>
+        <input matInput  required>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" class="flex-inline">
+      <mat-form-field appearance="standard" style="width: 100%;">
+        <mat-label>Email Address</mat-label>
+        <mat-icon matPrefix style="width: 35px;">email</mat-icon>
+        <input matInput>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="checkboxes">
+    <mat-checkbox>Veg</mat-checkbox>
+    <mat-checkbox>NonVeg</mat-checkbox>
+  </div>
+  <div><mat-checkbox>I have read and accept the terms & conditions and privacy policy</mat-checkbox></div>
+  <button mat-raised-button color="primary" class="action-btn" (click)="mailMe()">
+    Submit
+  </button>
+</div>

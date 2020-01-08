@@ -8,11 +8,18 @@ import { LocationPopupComponent } from './location-popup/location-popup.componen
 import { NotServicebleComponent } from './not-serviceble/not-serviceble.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PreRegisterComponent } from './pre-register/pre-register.component';
 
 
 
 @NgModule({
-  declarations: [SplashScreenComponent, LocationPopupComponent, LocationDialogComponent, NotServicebleComponent],
+  declarations: [
+    SplashScreenComponent,
+    LocationPopupComponent,
+    LocationDialogComponent,
+    NotServicebleComponent,
+    PreRegisterComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,7 +27,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     TranslateModule.forChild()
   ],
-  entryComponents: [LocationPopupComponent, LocationDialogComponent, NotServicebleComponent],
+  entryComponents: [LocationPopupComponent, LocationDialogComponent, NotServicebleComponent, PreRegisterComponent],
   exports: [SplashScreenComponent, NotServicebleComponent]
 })
 export class SharedComponentsModule { }
