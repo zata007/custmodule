@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, Input, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-// import { PrelaunchService } from '../prelaunch.service';
-// import { CookieService } from 'src/app/shared/services/cookie.service';
 import { MatSnackBar, MatBottomSheet, MatDialog } from '@angular/material';
 import { LocationPopupComponent } from '../shared/shared-components/location-popup/location-popup.component';
-// import { LocationPopupComponent } from '../location-popup/location-popup.component';
 
+const ZATAAKSE_PREF_LANG = 'zataakse_pref_lang';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -50,7 +48,13 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sliderIntervalRef = setInterval(() =>{
+    const language = localStorage.getItem(ZATAAKSE_PREF_LANG);
+    if (language) {
+      this.canShowLanguagePanel = false;
+      this.translate.setDefaultLang(language);
+      this.translate.use(language);
+    }
+    this.sliderIntervalRef = setInterval(() => {
      this.selected((this.selectedIndex + 1) % this.data.length);
     }, 2500);
   }
@@ -67,6 +71,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   onLanguageChange(val: string) {
     this.translate.setDefaultLang(val);
     this.translate.use(val);
+    // Set into LocalStorage
+    localStorage.setItem(ZATAAKSE_PREF_LANG, val);
   }
 
   keySelected(x) {

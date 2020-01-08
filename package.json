@@ -39,7 +39,7 @@
     "ngx-joyride": "^2.2.10",
     "ngx-socket-io": "^3.0.1",
     "ngx-swiper-wrapper": "^8.0.2",
-    "rxjs": "~6.4.0",
+    "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

@@ -16,7 +16,8 @@
     "MOBILE_TOOLTIP" :"আপনি এই মোবাইল নম্বরটিতে OTP পাবেন",
     "TOP_TEXT" : "সফল নিবন্ধনে পান ₹200 পর্যন্ত",
     "REFERAL_CODE":"রেফারেল কোড (ঐচ্ছিক)",
-    "TOOLTIP_COMPLETE_ALL_FIELDS":"সমস্ত প্রয়োজনীয় ক্ষেত্র সম্পূর্ণ করুন"
+    "TOOLTIP_COMPLETE_ALL_FIELDS":"সমস্ত প্রয়োজনীয় ক্ষেত্র সম্পূর্ণ করুন",
+    "ORDER_NOW": "এখনি আদেশ কর"
   },
   "MAIN_PAGE":{
     "CAROUSAL_MSG_1": "<br><b>প্রতিদিন</b> <h5>ট্রাফিকে আটকে থাকেন?</h5><br><h4>আপনার জন্য এসে গেছে - </h4> <h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><br><h5><strong>খাবার</strong> এবং <strong>পানীয়</strong> order করুন এবং <strong>ডেলিভারি পেয়ে যান</strong> আপনার নির্ধারিত রুটের কোন <strong>pit-stop এ</strong></h5>",
@@ -26,7 +27,9 @@
     "EXCITING_LAUNCH_OFFER":"আকর্ষণীয় অফার",
     "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
     "OFFER_NEAR_ME":"আপনার কাছাকাছি অফার সন্ধান করতে আপনার অবস্থান প্রয়োজন",
-    "TERMS": "চুক্তি ও শর্তাবলী"
+    "TERMS": "চুক্তি ও শর্তাবলী",
+    "SELECT_LANGUAGE":"আপনার ভাষা বেছে নিন",
+    "GET_STARTED": "এবার শুরু করা যাক"
   },
   "SNACK_PAGE":{
     "QUESTION_1":{

@@ -16,7 +16,8 @@
     "MOBILE_TOOLTIP" :"You will receive OTP on this mobile number.",
     "TOP_TEXT" : "Get upto ₹200 on Succesful Registration",
     "REFERAL_CODE":"Referal Code (Optional)",
-    "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields"
+    "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
+    "ORDER_NOW": "Order Now"
   },
   "MAIN_PAGE":{
     "CAROUSAL_MSG_1": "<br><span>Stuck in Traffic – <b>Everyday</b> ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>is for you ...<br><br/>Order Food & Beverages  and have them delivered at a pit-stop on your route</span>",
@@ -29,7 +30,9 @@
     "OFFER_NEAR_ME":"Seems you have disabled location for Zataakse, please allow location permissionto use Zataakse",
     "NEED_LOCATION_FOR_OFFER": "Zataakse requires your Location to show Offers Nearby. Please allow Location to Continue",
     "TERMS": "Terms & Conditions",
-    "ENABLE": "Steps to enable location"
+    "ENABLE": "Steps to enable location",
+    "SELECT_LANGUAGE":"Choose you language",
+    "GET_STARTED": "Get Started"
   },
   "SNACK_PAGE":{
     "QUESTION_1":{
