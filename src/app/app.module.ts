@@ -19,7 +19,6 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AgmCoreModule } from '@agm/core';
 import { JoyrideModule } from 'ngx-joyride';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { SkeletonComponent } from './shared/shared-components/skeleton/skeleton.component'
 
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
@@ -31,7 +30,6 @@ const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, opt
 @NgModule({
   declarations: [
     AppComponent,
-    SkeletonComponent,
     LandingPageComponent
   ],
   imports: [

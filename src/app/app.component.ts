@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { SkeletonComponent } from './shared/shared-components/skeleton/skeleton.component'
 
 @Component({
   selector: 'app-root',
