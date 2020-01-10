@@ -6,7 +6,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 const routes: Routes = [
   {
     path: 'customer',
-    loadChildren: () => import(`./customer-app/customer-app.module`).then(m => m.CustomerAppModule),
+    loadChildren: './customer-app/customer-app.module#CustomerAppModule',
     data: { preload: true },
   },
   { path: '', component: LandingPageComponent },
