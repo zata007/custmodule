@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatBottomSheet, MatDialog } from '@angular/material';
 import { LocationPopupComponent } from '../shared/shared-components/location-popup/location-popup.component';
+import { DataService } from '../shared/services/data.service';
+import { CommonService } from '../shared/services/common.service';
 
 const ZATAAKSE_PREF_LANG = 'zataakse_pref_lang';
 @Component({
@@ -40,7 +42,9 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     private router: Router,
     // private prelaunchService: PrelaunchService,
     // private cookieService: CookieService,
+    private dataService: DataService,
     private matSnack: MatSnackBar,
+    private commonService: CommonService,
     private bottomsheet: MatBottomSheet,
   ) {
     this.selectedIndex = 0;
@@ -73,6 +77,13 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.translate.use(val);
     // Set into LocalStorage
     localStorage.setItem(ZATAAKSE_PREF_LANG, val);
+  }
+
+  onLanguageSelected(val: string) {
+    this.canShowLanguagePanel = false;
+    this.dataService.checkServiceAvailable({fingerprint: this.commonService.fingerPrint, lan: val}).subscribe(res=>{
+      console.log(res);
+    })
   }
 
   keySelected(x) {
@@ -121,12 +132,21 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   setCurrentLocation() {
     // this.canShowLocationPopup = false;
+    // TODO: setup loader
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         position => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           // this.prelaunchService.setLocationData(latitude, longitude);
+          this.dataService.checkZataakseServiceAvailable({
+            fingerprint: this.commonService.fingerPrint,
+            lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
+            latitude,
+            longitude
+          }).subscribe(res => {
+
+          })
           this.router.navigate(['customer']);
         },
         error => {

@@ -24,8 +24,7 @@ export class DataService {
   }
 
   getMethod(url: string, params: any) {
-    const getUrl = `${environment.USER_API_Endpoint}/${url}`;
-    return this.httpClient.get(getUrl, params);
+    return this.httpClient.get(url, params);
   }
 
   addSubscriber(subscription: any) {
@@ -41,6 +40,29 @@ export class DataService {
     const options = this.getOptions();
     return this.putMethod(url, options, data);
   }
+
+  checkZataakseServiceAvailable(data: {
+    fingerprint: string
+    lan: string
+    latitude: number
+    longitude: number
+  }) {
+    return this.getMethod(`${environment.USER_API_Endpoint}/checkZataakseService`, data);
+  }
+
+  checkServiceAvailable(data: { fingerprint: string, lan: string }) {
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        fingerprint: data.fingerprint,
+        lan: data.lan
+      },
+    };
+    return this.httpClient.get(`${environment.ACCESS_API_ENDPOINT}/checkInternet`, options);
+  }
+
+
 
   verifyOtp(userByMobile: IMobileLoginData): Observable<any> {
     const url = `${environment.USER_API_Endpoint}/verifyOTP`;
