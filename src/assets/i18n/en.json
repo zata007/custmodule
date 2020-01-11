@@ -28,7 +28,7 @@
     "EXCITING_LAUNCH_OFFER":"Exciting Launch Offers",
     "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
     "OFFER_NEAR_ME":"Seems you have disabled location for Zataakse, please allow location permissionto use Zataakse",
-    "NEED_LOCATION_FOR_OFFER": "Zataakse requires your Location to show Offers Nearby. Please allow Location to Continue",
+    "NEED_LOCATION_FOR_OFFER": "Zataakse requires access to your location information to find best food options for you. Please select Accept when prompted for sharing location.",
     "TERMS": "Terms & Conditions",
     "ENABLE": "Steps to enable location",
     "SELECT_LANGUAGE":"Choose you language",
