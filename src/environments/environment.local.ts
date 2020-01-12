@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   API_Endpoint: 'https://d.z07.xyz',
   OA_API_Endpoint: 'https://d.z07.xyz/oa',
   USER_API_Endpoint: 'https://d.z07.xyz/user',
