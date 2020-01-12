@@ -1,7 +1,13 @@
-import { Component, OnInit, ViewEncapsulation, Input, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  Input,
+  OnDestroy
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatBottomSheet, MatDialog } from '@angular/material';
+import { MatSnackBar, MatBottomSheet } from '@angular/material';
 import { LocationPopupComponent } from '../shared/shared-components/location-popup/location-popup.component';
 import { DataService } from '../shared/services/data.service';
 import { CommonService } from '../shared/services/common.service';
@@ -30,7 +36,11 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       alt: '',
       text: 'MAIN_PAGE.CAROUSAL_MSG_3'
     },
-    { img: 'assets/img/core/slider3.png', alt: '', text: 'MAIN_PAGE.CAROUSAL_MSG_4' }
+    {
+      img: 'assets/img/core/slider3.png',
+      alt: '',
+      text: 'MAIN_PAGE.CAROUSAL_MSG_4'
+    }
   ];
   transform: number;
   selectedIndex = 0;
@@ -45,7 +55,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private matSnack: MatSnackBar,
     private commonService: CommonService,
-    private bottomsheet: MatBottomSheet,
+    private bottomsheet: MatBottomSheet
   ) {
     this.selectedIndex = 0;
     this.transform = 100;
@@ -59,7 +69,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.translate.use(language);
     }
     this.sliderIntervalRef = setInterval(() => {
-     this.selected((this.selectedIndex + 1) % this.data.length);
+      this.selected((this.selectedIndex + 1) % this.data.length);
     }, 2500);
   }
 
@@ -81,9 +91,25 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   onLanguageSelected(val: string) {
     this.canShowLanguagePanel = false;
-    this.dataService.checkServiceAvailable({fingerprint: this.commonService.fingerPrint, lan: val}).subscribe(res=>{
-      console.log(res);
-    })
+    this.dataService
+      .checkServiceAvailable({
+        fingerprint: this.commonService.fingerPrint,
+        lan: val
+      })
+      .subscribe((res: any) => {
+        // {
+        //   "message": "Success",
+        //   "data": {
+        //     "status": true
+        //   }
+        // }
+        if (res.data && res.data.status) {
+          // TODO: Success and proceed
+          console.log(res);
+        } else {
+          // TODO: Show popup for no service
+        }
+      });
   }
 
   keySelected(x) {
@@ -122,7 +148,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   onSubmitButtonClick() {
     const disRef = this.bottomsheet.open(LocationPopupComponent, {
       data: {
-        isLocationNotAllowed: false,
+        isLocationNotAllowed: false
       }
     });
     disRef.afterDismissed().subscribe(() => {
@@ -139,15 +165,33 @@ export class LandingPageComponent implements OnInit, OnDestroy {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           // this.prelaunchService.setLocationData(latitude, longitude);
-          this.dataService.checkZataakseServiceAvailable({
-            fingerprint: this.commonService.fingerPrint,
-            lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
-            latitude,
-            longitude
-          }).subscribe(res => {
-
-          })
-          this.router.navigate(['customer']);
+          this.dataService
+            .checkZataakseServiceAvailable({
+              fingerprint: this.commonService.fingerPrint,
+              lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
+              latitude,
+              longitude
+            })
+            .subscribe(
+              (res: any) => {
+                // {
+                //   "message": "Success",
+                //   "data": {
+                //     "isServedLocation": false,
+                //     "isLocationKnown": false,
+                //     "currentLocationDetails": "VS Marg, Block E, Lalbagh, Lucknow, Uttar Pradesh 226001, India"
+                //   }
+                // }
+                if (res.data) {
+                  this.router.navigate(['customer']);
+                } else {
+                  // TODO: Show popup for no service
+                }
+              },
+              err => {
+                // TODO: Handle Error.
+              }
+            );
         },
         error => {
           // User blocked location
@@ -155,7 +199,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
           if (error.code === 1) {
             this.bottomsheet.open(LocationPopupComponent, {
               data: {
-                isLocationNotAllowed: true,
+                isLocationNotAllowed: true
               }
             });
           }

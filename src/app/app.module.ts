@@ -19,6 +19,9 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AgmCoreModule } from '@agm/core';
 import { JoyrideModule } from 'ngx-joyride';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { ConnectionServiceModule } from 'ng-connection-service';
+import { SharedModule } from './shared/shared-components/shared.module';
 
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
@@ -41,6 +44,7 @@ const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, opt
     HttpClientModule,
     NgxSkeletonLoaderModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    DeviceDetectorModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -52,13 +56,15 @@ const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, opt
   AgmCoreModule.forRoot({ apiKey: environment.mapApiKey, libraries: ['places', 'geometry'] }),
   JoyrideModule.forRoot(),
   SharedComponentsModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    })
+  ConnectionServiceModule,
+  StoreModule.forRoot(reducers, {
+    metaReducers,
+    runtimeChecks: {
+      strictStateImmutability: true,
+      strictActionImmutability: true
+    }
+  }),
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

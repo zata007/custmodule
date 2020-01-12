@@ -47,7 +47,17 @@ export class DataService {
     latitude: number
     longitude: number
   }) {
-    return this.getMethod(`${environment.USER_API_Endpoint}/checkZataakseService`, data);
+    const options: any = {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        fingerprint: data.fingerprint,
+        lan: data.lan,
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString()
+      },
+    };
+    return this.httpClient.get(`${environment.USER_API_Endpoint}/checkZataakseService`, options);
   }
 
   checkServiceAvailable(data: { fingerprint: string, lan: string }) {

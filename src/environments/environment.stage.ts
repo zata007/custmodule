@@ -4,7 +4,7 @@ export const environment = {
   OA_API_Endpoint: 'https://d.z07.xyz/oa',
   USER_API_Endpoint: 'https://s.z07.xyz/user',
   SOCKET_API_Endpoint: 'https://d.z07.xyz',
-  ACCESS_API_ENDPOINT: 'http://s.z07.xyz/access',
+  ACCESS_API_ENDPOINT: 'https://s.z07.xyz/access',
   PARAMS_API_ENDPOINT: 'https://s.z07.xyz/params',
   referralURL: 'https://d.z07.xyz/#/pre-launch/main/',
   mapApiKey: 'AIzaSyB9rjY3fL8F0OUcy1ubyFnAVl96FhbadVY',
