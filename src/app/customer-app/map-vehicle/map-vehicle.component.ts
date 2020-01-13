@@ -70,6 +70,21 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
       this.joyrideService.startTour({ steps: ['onboard-location-input'] });
     }, 500);
 
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          this.commonService.setUserLocation(latitude, longitude);
+        },
+        error => {
+          // User blocked location
+          // LocationPopupComponent
+          console.log(error);
+        }
+      );
+    }
+
     // Patch map data,
 
 
@@ -211,12 +226,15 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
       if (val < 100000) {
         // TODO: get pitstops
-        this.customerService.getPitstops().subscribe((data: any) => {
+        this.customerService.getPitstops({
+          ...this.commonService.getRequestEssentialParams(),
+          ...this.customerStateService.getLocationData()
+        }).subscribe((data: any) => {
           const pitstops: Array<any> = data.data;
 
           // check if pitstop is on the edge.
           // TODO: Remove !
-          if (pitstops.length !== 0) {
+          if (pitstops.length === 0) {
             this.canShowPitstops = false;
             this.bottomSheet.open(NotServicebleComponent, {
               data: {

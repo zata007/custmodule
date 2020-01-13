@@ -131,6 +131,13 @@ export class CustomerStateService {
     this.selectedRoute = this.directionResults[selectedRouteIndex];
   }
 
+  getLocationData() {
+    return {
+      sourcePoint: [this.selectedLocation.from.lng, this.selectedLocation.from.lat],
+      destnationPoint: [this.selectedLocation.to.lng, this.selectedLocation.to.lat]
+    };
+  }
+
   hasLocationData() {
     return !!(
       this.selectedLocation &&

@@ -11,8 +11,7 @@ import { MatSnackBar, MatBottomSheet } from '@angular/material';
 import { LocationPopupComponent } from '../shared/shared-components/location-popup/location-popup.component';
 import { DataService } from '../shared/services/data.service';
 import { CommonService } from '../shared/services/common.service';
-
-const ZATAAKSE_PREF_LANG = 'zataakse_pref_lang';
+import { ZATAAKSE_PREF_LANG } from '../shared/constants/constants';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -165,6 +164,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           // this.prelaunchService.setLocationData(latitude, longitude);
+          this.commonService.setUserLocation(latitude, longitude);
           this.dataService
             .checkZataakseServiceAvailable({
               fingerprint: this.commonService.fingerPrint,

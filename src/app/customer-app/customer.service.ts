@@ -49,17 +49,33 @@ export class CustomerService {
     }
   }
 
-  getPitstops() {
+  getPitstops(requestData: {
+    fingerprint: string,
+    lan: string,
+    latitude: number,
+    longitude: number,
+    sourcePoint: Array<number>,
+    destnationPoint: Array<number>,
+  }) {
     const data = {
       sourcePoint: [72.870403, 19.130181], // lng, lon
       destnationPoint: [72.870403, 19.130181]
     };
     const params = new HttpParams()
-  .set('sourcePoint', JSON.stringify(data.sourcePoint))
-  .set('destnationPoint', JSON.stringify(data.destnationPoint));
+      .set('sourcePoint', JSON.stringify(data.sourcePoint))
+      .set('destnationPoint', JSON.stringify(data.destnationPoint));
 
     //http://52.66.208.60:8000/user/findPitstops
-    return this.getMethod('findPitstops', {params});
+    const getUrl = `${environment.USER_API_Endpoint}/findPitstops`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      fingerprint: requestData.fingerprint,
+      lan: requestData.lan,
+      latitude: requestData.latitude.toString(),
+      longitude: requestData.longitude.toString()
+    };
+    return this.httpClient.get(getUrl, { headers, params });
   }
 
   placeOrder(cart: { name: string; catagory: string; price: number }[]) {

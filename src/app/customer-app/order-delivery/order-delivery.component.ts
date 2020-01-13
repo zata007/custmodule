@@ -214,7 +214,11 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
       if (val < 100000) {
         // TODO: get pitstops
-        this.customerService.getPitstops().subscribe((data: any) => {
+        this.customerService.getPitstops({
+          ...this.commonService.getRequestEssentialParams(),
+          sourcePoint: [72.870403, 19.130181], // lng, lon
+          destnationPoint: [72.870403, 19.130181]
+        }).subscribe((data: any) => {
           const pitstops: Array<any> = data.data;
 
           // check if pitstop is on the edge.
