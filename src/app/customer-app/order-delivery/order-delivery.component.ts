@@ -20,7 +20,7 @@ interface Marker {
 @Component({
   selector: 'app-order-delivery',
   templateUrl: './order-delivery.component.html',
-  styleUrls: ['./order-delivery.component.scss']
+  styleUrls: ['./../map-vehicle/map-vehicle.component.scss', './order-delivery.component.scss']
 })
 export class OrderDeliveryComponent implements OnInit, OnDestroy {
 

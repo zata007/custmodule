@@ -1,4 +1,34 @@
 <div class="vehicle-location-container">
+  <div class="input-area">
+    <div
+      joyrideStep="onboard-location-input"
+      [stepContent]="customContent"
+      [doneTemplate]="doneButton"
+      [counterTemplate]="counter"
+      class="search-element"
+    >
+      <input
+        class="from zat-input"
+        placeholder="Location"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="off"
+        type="search"
+        #searchFrom
+        required
+      />
+      <!-- <input class="to" placeholder="Point B" autocorrect="off" autocapitalize="off" spellcheck="off" type="search" #searchTo required /> -->
+    </div>
+    <ng-template #customContent>
+      <div style="border-radius: 10px">
+        Provide your delivery location
+      </div>
+    </ng-template>
+    <ng-template #counter> </ng-template>
+    <ng-template #doneButton>
+      <button mat-raised-button color="primary" (click)="onOnboardingCompletion()">Okay</button>
+    </ng-template>
+  </div>
   <div class="map-area">
     <agm-map
       [latitude]="lat"
@@ -53,36 +83,6 @@
       >
       </agm-marker>
     </agm-map>
-  </div>
-  <div class="input-area">
-    <div
-      joyrideStep="onboard-location-input"
-      [stepContent]="customContent"
-      [doneTemplate]="doneButton"
-      [counterTemplate]="counter"
-      class="search-element"
-    >
-      <input
-        class="from zat-input"
-        placeholder="Location"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="off"
-        type="search"
-        #searchFrom
-        required
-      />
-      <!-- <input class="to" placeholder="Point B" autocorrect="off" autocapitalize="off" spellcheck="off" type="search" #searchTo required /> -->
-    </div>
-    <ng-template #customContent>
-      <div style="border-radius: 10px">
-        Provide your delivery location
-      </div>
-    </ng-template>
-    <ng-template #counter> </ng-template>
-    <ng-template #doneButton>
-      <button mat-raised-button color="primary" (click)="onOnboardingCompletion()">Okay</button>
-    </ng-template>
   </div>
 </div>
 

@@ -21,7 +21,7 @@ interface Marker {
 @Component({
   selector: 'app-order-ahead',
   templateUrl: './order-ahead.component.html',
-  styleUrls: ['./order-ahead.component.scss']
+  styleUrls: ['./../map-vehicle/map-vehicle.component.scss', './order-ahead.component.scss']
 })
 export class OrderAheadComponent implements OnInit {
   @ViewChild('searchFrom', {static: false}) public searchElementRefFrom: ElementRef;
