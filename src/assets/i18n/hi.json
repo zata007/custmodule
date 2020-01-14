@@ -1,8 +1,8 @@
 {
-    "NEXT":"Next",
-    "OKAY": "Okay",
-    "RESEND_OTP":"Resend OTP",
-    "TERMS":"terms and conditions",
+    "NEXT":"आगे",
+    "OKAY": "ठीक",
+    "RESEND_OTP":"ओटीपी पुनः भेजें",
+    "TERMS":"नियम और शर्तें",
     "VERIFY":"Verify",
     "LANDING_PAGE":{
       "TAG_LINE" : "Zataakse...",
@@ -17,10 +17,10 @@
       "TOP_TEXT" : "Get upto ₹200 on Succesful Registration",
       "REFERAL_CODE":"Referal Code (Optional)",
       "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
-      "ORDER_NOW": "Order Now"
+      "ORDER_NOW": "आर्डर करे"
     },
     "MAIN_PAGE":{
-      "CAROUSAL_MSG_1": "<br><span>Stuck in Traffic – <b>Everyday</b> ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>is for you ...<br><br/>Order Food & Beverages  and have them delivered at a pit-stop on your route</span>",
+      "CAROUSAL_MSG_1": "<br><span>ट्रैफिक जैम – <b>हररोज</b> ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>आपके लिए है ...<br><br/>खाद्य और पेय खरीदे और फिर have them delivered at a pit-stop on your route</span>",
       "CAROUSAL_MSG_2": "<br><span>If this is your <b>daily view ...</b><br/><span><h1 class='head1'>Zataakse</h1></span><span>is to rescue ...</span><br/><br/><span>Order that <strong>sandwich..</strong> or <strong>juice..</strong> or <strong>coffee..</strong> that you always wanted to try</span>",
       "CAROUSAL_MSG_3": "<br><span>Within <b>10-15 minutes </b>on your <b>route</b> at</span><br><span><h1 class='head1'>Zataakse</h1></span><span>Pit-Stop ... </span><br/><br/><span>Have your favourites delivered to your <b> vehicle</b> and <b>keep moving</b></span>",
       "CAROUSAL_MSG_4": "<br><span>Get Coupons worth Upto</span><br/><h3 class='head1'>₹200/-</h3><span>On Successful Registration</span>",
@@ -31,8 +31,8 @@
       "NEED_LOCATION_FOR_OFFER": "Zataakse requires your Location to show Offers Nearby. Please allow Location to Continue",
       "TERMS": "Terms & Conditions",
       "ENABLE": "Steps to enable location",
-      "SELECT_LANGUAGE":"Choose you language",
-      "GET_STARTED": "Get Started"
+      "SELECT_LANGUAGE":"भाषा चुनें",
+      "GET_STARTED": "शुरू करे"
     },
     "SNACK_PAGE":{
       "QUESTION_1":{
