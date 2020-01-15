@@ -76,8 +76,20 @@ export class DataService {
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/checkInternet`, options);
   }
 
-  getPlatformParams() {
-
+  getPlatformParams(data: { fingerprint: string, lan: string, latitude: number, longitude: number }) {
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        fingerprint: data.fingerprint,
+        lan: data.lan,
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString()
+      },
+      params: {
+        flag: '0'
+      }
+    };
+    return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.PARAMS}/getPlatformParams`, options);
   }
 
 
