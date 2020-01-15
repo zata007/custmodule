@@ -180,8 +180,10 @@ export class LandingPageComponent implements OnInit, OnDestroy {
                 //     "isServedLocation": false,
                 //     "isLocationKnown": false,
                 //     "currentLocationDetails": "VS Marg, Block E, Lalbagh, Lucknow, Uttar Pradesh 226001, India"
+                //     "businessLocData": []
                 //   }
                 // }
+                console.log(res);
                 if (res.data) {
                   this.router.navigate(['customer']);
                 } else {

@@ -12,4 +12,8 @@ export class PreRegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(value: number) {
+    // TODO: Send register data.
+  }
+
 }

@@ -1,25 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ISignUpData, ILoginData, IMobileLoginData } from '../models/common-model';
+import { ILoginData, IMobileLoginData } from '../models/common-model';
 import { Observable } from 'rxjs';
+import { API_ENDPOINTS } from '../constants/constants';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
+  lan = '';
+  fingerprint = '';
   constructor(private httpClient: HttpClient) {}
 
   getOptions() {
     return {
-      headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-      },
-    };
+      };
   }
 
   postMethod(url: string, param: any) {
-    const postUrl = `${environment.USER_API_Endpoint}/${url}`;
-    const options = this.getOptions();
+    const postUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/${url}`;
+    const options = {
+      headers: this.getOptions()
+    };
     return this.httpClient.post(postUrl, param, options);
   }
 
@@ -36,8 +39,10 @@ export class DataService {
   }
 
   loginByNumber(data: ILoginData): Observable<any> {
-    const url = `${environment.USER_API_Endpoint}/userLogin`;
-    const options = this.getOptions();
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/userLogin`;
+    const options = {
+      headers: this.getOptions()
+    };
     return this.putMethod(url, options, data);
   }
 
@@ -57,26 +62,31 @@ export class DataService {
         longitude: data.longitude.toString()
       },
     };
-    return this.httpClient.get(`${environment.USER_API_Endpoint}/checkZataakseService`, options);
+    return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/isLocationServed`, options);
   }
 
   checkServiceAvailable(data: { fingerprint: string, lan: string }) {
     const options = {
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        ...this.getOptions(),
         fingerprint: data.fingerprint,
         lan: data.lan
       },
     };
-    return this.httpClient.get(`${environment.ACCESS_API_ENDPOINT}/checkInternet`, options);
+    return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/checkInternet`, options);
+  }
+
+  getPlatformParams() {
+
   }
 
 
 
   verifyOtp(userByMobile: IMobileLoginData): Observable<any> {
-    const url = `${environment.USER_API_Endpoint}/verifyOTP`;
-    const options = this.getOptions();
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/verifyOTP`;
+    const options = {
+      headers: this.getOptions()
+    };
     return this.putMethod(url, options, userByMobile);
   }
 }

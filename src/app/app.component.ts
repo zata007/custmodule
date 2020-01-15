@@ -19,16 +19,15 @@ export class AppComponent implements OnInit {
     translationService.addLangs(['en', 'bn']);
     translationService.getTranslation('bn').subscribe();
     translationService.getTranslation('en').subscribe();
-  }
-
-  ngOnInit(): void {
     Fingerprint2.get({}, (components) => {
       const values = components.map((component) => component.value);
       const murmur = Fingerprint2.x64hash128(values.join(''), 31);
       localStorage.setItem(LOCAL_STORAGE_FINGERPRINT, murmur);
       this.commonService.setFingerPrint(murmur);
     });
+  }
 
+  ngOnInit(): void {
     this.connectionService.monitor().subscribe((isConnected) => {
       if (isConnected) {
         this.commonService.setUserConnectedStatus(true);
@@ -42,5 +41,7 @@ export class AppComponent implements OnInit {
         });
       }
     });
+
+    // TODO: Fetch location and Platform params once token is setup.
   }
 }

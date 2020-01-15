@@ -66,24 +66,9 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // TODO: Update logic if user is first time visitor then only we should show onboarding
-    setTimeout(() => {
-      this.joyrideService.startTour({ steps: ['onboard-location-input'] });
-    }, 500);
-
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          this.commonService.setUserLocation(latitude, longitude);
-        },
-        error => {
-          // User blocked location
-          // LocationPopupComponent
-          console.log(error);
-        }
-      );
-    }
+    // setTimeout(() => {
+    //   this.joyrideService.startTour({ steps: ['onboard-location-input'] });
+    // }, 500);
 
     // Patch map data,
 
