@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUserDetails } from '../models/common-model';
+import { IUserDetails, IPlatformParams } from '../models/common-model';
 import { BehaviorSubject } from 'rxjs';
 import { ZATAAKSE_PREF_LANG } from '../constants/constants';
 
@@ -14,6 +14,7 @@ export class CommonService {
   userId: any;
   haslocationData = false;
   fingerPrintData = null;
+  platformParams = null;
   userLocation = {
     latitude: 0,
     longitude: 0,
@@ -33,6 +34,14 @@ export class CommonService {
 
   setFingerPrint(murmur: string) {
     this.fingerPrintData = murmur;
+  }
+
+  setPlatformParams(data: IPlatformParams) {
+    this.platformParams = data;
+  }
+
+  getPlatformParams(): IPlatformParams {
+    return this.platformParams;
   }
 
   get fingerPrint() {

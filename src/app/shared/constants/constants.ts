@@ -7,4 +7,11 @@ export const API_ENDPOINTS = {
   ACCSSS: 'access',
   PARAMS: 'params',
   OA: 'oa'
-}
+};
+
+export const RELATION_CODE = {
+  Customer: 'C',
+  Employee: 'E',
+  Maker: 'M',
+  Admin: 'Adm'
+};
