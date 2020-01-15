@@ -83,3 +83,18 @@ export interface IResponsePlatformParams {
   message: string;
   data: IPlatformParams;
 }
+
+export interface IRequestRegister {
+    reqType: string;
+    pRoleId: string;
+    pRelationId: string;
+    pInterface: string;
+    indCountryCode: string;
+    indMobileNum: string;
+    indEmailNotify?: boolean;
+    indMobileNotify?: boolean;
+    indPushNotify?: boolean;
+    latitude?: number;
+    longitude?: number;
+    indPwd?: string;
+}

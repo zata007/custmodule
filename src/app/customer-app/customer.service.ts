@@ -63,8 +63,8 @@ export class CustomerService {
       destnationPoint: [72.870403, 19.130181]
     };
     const params = new HttpParams()
-      .set('sourcePoint', JSON.stringify(data.sourcePoint))
-      .set('destnationPoint', JSON.stringify(data.destnationPoint));
+      .set('sourcePoint', JSON.stringify(requestData.sourcePoint))
+      .set('destnationPoint', JSON.stringify(requestData.destnationPoint));
 
     //http://52.66.208.60:8000/user/findPitstops
     const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/findPitstops`;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ILoginData, IMobileLoginData } from '../models/common-model';
+import { ILoginData, IMobileLoginData, IRequestRegister } from '../models/common-model';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../constants/constants';
 
@@ -90,6 +90,17 @@ export class DataService {
       }
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.PARAMS}/getPlatformParams`, options);
+  }
+
+  registerLogin(data: {fingerprint: string, lan: string, data: IRequestRegister }) {
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        fingerprint: data.fingerprint,
+        lan: data.lan,
+      }
+    };
+    return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.PARAMS}/getPlatformParams`, data.data, options);
   }
 
 
