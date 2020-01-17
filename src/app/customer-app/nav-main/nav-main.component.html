@@ -39,9 +39,9 @@
         <div class="layer"></div>
       </div> -->
       <div class="menu mat-elevation-z3">
-        <button class="ham-list" matRipple [ngClass]="{'active': router.url=='/customer' || router.url=='/customer/order-takeaway'}" (click)="onNavigate('customer/order-takeaway')">Takeaway</button>
-        <button class="ham-list" matRipple [ngClass]="{'active': router.url=='/customer/order-delivery'}" (click)="onNavigate('customer/order-delivery')">Delivery</button>
-        <button class="ham-list" matRipple [ngClass]="{'active': router.url=='/customer/order-ahead'}" (click)="onNavigate('customer/order-ahead')">Order Ahead</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer' || router.url=='/customer/order-takeaway'}" (click)="onNavigate('customer/order-takeaway')">Takeaway</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-delivery'}" (click)="onNavigate('customer/order-delivery')">Delivery</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}" (click)="onNavigate('customer/order-ahead')">Order Ahead</button>
       </div>
       <button type="button" mat-icon-button color="dark"  (click)="onCartClick()">
         <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon>
