@@ -6,7 +6,6 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { JoyrideService } from 'ngx-joyride';
 import { MatDialog } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
@@ -61,15 +60,11 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     public customerStateService: CustomerStateService,
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
-    private readonly joyrideService: JoyrideService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
     // TODO: Update logic if user is first time visitor then only we should show onboarding
-    setTimeout(() => {
-      this.joyrideService.startTour({ steps: ['onboard-location-input'] });
-    }, 500);
 
     // Patch map data,
 
@@ -125,7 +120,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.joyrideService.closeTour();
     this.curLocResDataSubscription.unsubscribe();
   }
 

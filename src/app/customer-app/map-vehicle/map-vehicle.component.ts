@@ -6,7 +6,6 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { JoyrideService } from 'ngx-joyride';
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from './map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
@@ -64,7 +63,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     public customerStateService: CustomerStateService,
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
-    private readonly joyrideService: JoyrideService,
     public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
     private dataService: DataService
@@ -129,7 +127,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.joyrideService.closeTour();
     this.curLocResDataSubscription.unsubscribe();
   }
 
@@ -312,25 +309,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     const sub = this.geoLocationService.getPosition().subscribe((val) => {
       this.lat = val.coords.latitude;
       this.lng = val.coords.longitude;
-      this.customerStateService.setFromLocation({ lat: val.coords.latitude, lng: val.coords.longitude }, true);
-      this.dataService.checkZataakseServiceAvailable({
-        fingerprint: this.commonService.fingerPrint,
-        lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
-        latitude: this.lat,
-        longitude: this.lng
-      })
-      .subscribe((res: IResponseLocationServed) => {
-        this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
-        if (res.data && res.data.isLocationServed) {
-            // this.router.navigate(['customer']);
-          } else {
-            // TODO: Show popup for no service
-          }
-        },
-        err => {
-          // TODO: Handle Error.
-        }
-      );
       this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
         if (!this.searchElementRefFrom.nativeElement.value) {
           const bounds = new google.maps.LatLngBounds();
