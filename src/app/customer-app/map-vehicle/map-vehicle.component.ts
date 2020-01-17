@@ -315,7 +315,13 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
           //     "businessLocData": []
           //   }
           // }
-          console.log(res);
+        res.data.businessLocData.forEach((i, index) => {
+          var cardLocation = {
+            lat: i.businessLocationCoord[1],
+            lng: i.businessLocationCoord[0],
+          }
+          this.markers.push(cardLocation);
+        })
           if (res.data) {
             this.router.navigate(['customer']);
           } else {
