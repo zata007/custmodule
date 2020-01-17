@@ -6,7 +6,6 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { JoyrideService } from 'ngx-joyride';
 import { MatDialog } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
@@ -51,6 +50,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
   map: google.maps.Map;
   lng: number;
   lat: number;
+  curLocResDataSubscription: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -60,15 +60,11 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     public customerStateService: CustomerStateService,
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
-    private readonly joyrideService: JoyrideService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
     // TODO: Update logic if user is first time visitor then only we should show onboarding
-    setTimeout(() => {
-      this.joyrideService.startTour({ steps: ['onboard-location-input'] });
-    }, 500);
 
     // Patch map data,
 
@@ -109,10 +105,22 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     this.searchControl = new FormControl();
 
     this.initMapAutocomplete();
+
+    this.curLocResDataSubscription = this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
+      console.log(resData);
+      this.markers = [];
+      resData.filter(i => i.blDelivery).forEach((i, index) => {
+        const cardLocation = {
+          lat: i.businessLocationCoord[1],
+          lng: i.businessLocationCoord[0],
+        };
+        this.markers.push(cardLocation);
+      });
+    });
   }
 
   ngOnDestroy() {
-    this.joyrideService.closeTour();
+    this.curLocResDataSubscription.unsubscribe();
   }
 
   initMapAutocomplete() {
@@ -334,7 +342,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
         if (result != null) {
           console.log(result);
           callback(result);
-          //this.address = rsltAdrComponent[resultLength - 8].short_name;
+          // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
           callback(result);
           alert('No address available!');

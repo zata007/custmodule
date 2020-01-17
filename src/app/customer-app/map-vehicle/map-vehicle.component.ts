@@ -6,13 +6,13 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { JoyrideService } from 'ngx-joyride';
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from './map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
 import { DataService } from '../../shared/services/data.service';
 import { ZATAAKSE_PREF_LANG } from '../../shared/constants/constants';
+import { IResponseLocationServed } from 'src/app/shared/models/common-model';
 
 interface Marker {
   lat: number;
@@ -53,6 +53,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   map: google.maps.Map;
   lng: number;
   lat: number;
+  curLocResDataSubscription: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -62,7 +63,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     public customerStateService: CustomerStateService,
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
-    private readonly joyrideService: JoyrideService,
     public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
     private dataService: DataService
@@ -112,10 +112,22 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.searchControl = new FormControl();
 
     this.initMapAutocomplete();
+
+    this.curLocResDataSubscription = this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
+      console.log(resData)
+      this.markers = [];
+      resData.filter(i => i.blPitstops).forEach((i, index) => {
+        const cardLocation = {
+          lat: i.businessLocationCoord[1],
+          lng: i.businessLocationCoord[0],
+        };
+        this.markers.push(cardLocation);
+      });
+    });
   }
 
   ngOnDestroy() {
-    this.joyrideService.closeTour();
+    this.curLocResDataSubscription.unsubscribe();
   }
 
   initMapAutocomplete() {
@@ -297,35 +309,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     const sub = this.geoLocationService.getPosition().subscribe((val) => {
       this.lat = val.coords.latitude;
       this.lng = val.coords.longitude;
-      this.customerStateService.setFromLocation({ lat: val.coords.latitude, lng: val.coords.longitude }, true);
-      this.dataService.checkZataakseServiceAvailable({
-        fingerprint: this.commonService.fingerPrint,
-        lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
-        latitude: this.lat,
-        longitude: this.lng
-      })
-      .subscribe(
-        (res: any) => {
-          // {
-          //   "message": "Success",
-          //   "data": {
-          //     "isServedLocation": false,
-          //     "isLocationKnown": false,
-          //     "currentLocationDetails": "VS Marg, Block E, Lalbagh, Lucknow, Uttar Pradesh 226001, India"
-          //     "businessLocData": []
-          //   }
-          // }
-          console.log(res);
-          if (res.data) {
-            this.router.navigate(['customer']);
-          } else {
-            // TODO: Show popup for no service
-          }
-        },
-        err => {
-          // TODO: Handle Error.
-        }
-      );
       this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
         if (!this.searchElementRefFrom.nativeElement.value) {
           const bounds = new google.maps.LatLngBounds();
@@ -364,7 +347,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
         if (result != null) {
           console.log(result);
           callback(result);
-          //this.address = rsltAdrComponent[resultLength - 8].short_name;
+          // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
           callback(result);
           alert('No address available!');

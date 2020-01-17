@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
+import { IBusinessLocData } from '../shared/models/common-model';
 
 class ISelectedPathData {
   from: {
@@ -30,12 +31,19 @@ export class CustomerStateService {
   currentPageSubject = new BehaviorSubject<string>(CustomerPages.Main);
   currentPage$ = this.currentPageSubject.asObservable();
 
+  currentLocationRestaurantData = new BehaviorSubject<IBusinessLocData[]>([]);
+  currenLocationRestaurantData$ = this.currentLocationRestaurantData.asObservable();
+
   locationSelectionCompleted$ = new Subject<boolean>();
   directionResults$ = this.socket.fromEvent('getDirectionsResult');
   pitstopOnEdge$ = this.socket.fromEvent('checkLocationOnEdgeResult');
 
   setCurrentPage(page: string) {
     this.currentPageSubject.next(page);
+  }
+
+  setCurrentLocationRestaurantData(businessLocData: IBusinessLocData[]) {
+    this.currentLocationRestaurantData.next(businessLocData);
   }
 
   setFromLocation(data: { lat: number; lng: number }, isFrom: boolean) {
