@@ -12,6 +12,8 @@ import { LocationPopupComponent } from '../shared/shared-components/location-pop
 import { DataService } from '../shared/services/data.service';
 import { CommonService } from '../shared/services/common.service';
 import { ZATAAKSE_PREF_LANG } from '../shared/constants/constants';
+import { CustomerStateService } from '../customer-app';
+import { IResponseLocationServed } from '../shared/models/common-model';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -54,6 +56,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private matSnack: MatSnackBar,
     private commonService: CommonService,
+    private customerStateService: CustomerStateService,
     private bottomsheet: MatBottomSheet
   ) {
     this.selectedIndex = 0;
@@ -173,18 +176,9 @@ export class LandingPageComponent implements OnInit, OnDestroy {
               longitude
             })
             .subscribe(
-              (res: any) => {
-                // {
-                //   "message": "Success",
-                //   "data": {
-                //     "isServedLocation": false,
-                //     "isLocationKnown": false,
-                //     "currentLocationDetails": "VS Marg, Block E, Lalbagh, Lucknow, Uttar Pradesh 226001, India"
-                //     "businessLocData": []
-                //   }
-                // }
-                console.log(res);
-                if (res.data) {
+              (res: IResponseLocationServed) => {
+                this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
+                if (res.data.isLocationServed) {
                   this.router.navigate(['customer']);
                 } else {
                   // TODO: Show popup for no service

@@ -13,6 +13,7 @@ import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog
 import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
 import { DataService } from '../../shared/services/data.service';
 import { ZATAAKSE_PREF_LANG } from '../../shared/constants/constants';
+import { IResponseLocationServed } from 'src/app/shared/models/common-model';
 
 interface Marker {
   lat: number;
@@ -53,6 +54,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   map: google.maps.Map;
   lng: number;
   lat: number;
+  curLocResDataSubscription: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -112,10 +114,23 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.searchControl = new FormControl();
 
     this.initMapAutocomplete();
+
+    this.curLocResDataSubscription = this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
+      console.log(resData)
+      this.markers = [];
+      resData.filter(i => i.blPitstops).forEach((i, index) => {
+        const cardLocation = {
+          lat: i.businessLocationCoord[1],
+          lng: i.businessLocationCoord[0],
+        };
+        this.markers.push(cardLocation);
+      });
+    });
   }
 
   ngOnDestroy() {
     this.joyrideService.closeTour();
+    this.curLocResDataSubscription.unsubscribe();
   }
 
   initMapAutocomplete() {
@@ -304,26 +319,10 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
         latitude: this.lat,
         longitude: this.lng
       })
-      .subscribe(
-        (res: any) => {
-          // {
-          //   "message": "Success",
-          //   "data": {
-          //     "isServedLocation": false,
-          //     "isLocationKnown": false,
-          //     "currentLocationDetails": "VS Marg, Block E, Lalbagh, Lucknow, Uttar Pradesh 226001, India"
-          //     "businessLocData": []
-          //   }
-          // }
-        res.data.businessLocData.forEach((i, index) => {
-          var cardLocation = {
-            lat: i.businessLocationCoord[1],
-            lng: i.businessLocationCoord[0],
-          }
-          this.markers.push(cardLocation);
-        })
-          if (res.data) {
-            this.router.navigate(['customer']);
+      .subscribe((res: IResponseLocationServed) => {
+        this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
+        if (res.data && res.data.isLocationServed) {
+            // this.router.navigate(['customer']);
           } else {
             // TODO: Show popup for no service
           }
@@ -370,7 +369,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
         if (result != null) {
           console.log(result);
           callback(result);
-          //this.address = rsltAdrComponent[resultLength - 8].short_name;
+          // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
           callback(result);
           alert('No address available!');

@@ -51,6 +51,7 @@ export class OrderAheadComponent implements OnInit {
   map: google.maps.Map;
   lng: number;
   lat: number;
+  curLocResDataSubscription: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -110,10 +111,23 @@ export class OrderAheadComponent implements OnInit {
     this.searchControl = new FormControl();
 
     this.initMapAutocomplete();
+
+    this.curLocResDataSubscription =  this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
+      console.log(resData);
+      this.markers = [];
+      resData.filter(i => i.blOrderAhead).forEach((i, index) => {
+        const cardLocation = {
+          lat: i.businessLocationCoord[1],
+          lng: i.businessLocationCoord[0],
+        };
+        this.markers.push(cardLocation);
+      });
+    });
   }
 
   ngOnDestroy() {
     this.joyrideService.closeTour();
+    this.curLocResDataSubscription.unsubscribe();
   }
 
   initMapAutocomplete() {
@@ -335,7 +349,7 @@ export class OrderAheadComponent implements OnInit {
         if (result != null) {
           console.log(result);
           callback(result);
-          //this.address = rsltAdrComponent[resultLength - 8].short_name;
+          // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
           callback(result);
           alert('No address available!');

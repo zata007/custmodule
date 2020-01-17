@@ -78,7 +78,7 @@ export interface IPlatformParams {
   interfaceData: Array<IInterfaceData>;
   designationsData: IDesignationsData;
   addressTypesData: Array<IAddressTypesData>;
-};
+}
 export interface IResponsePlatformParams {
   message: string;
   data: IPlatformParams;
@@ -97,4 +97,28 @@ export interface IRequestRegister {
     latitude?: number;
     longitude?: number;
     indPwd?: string;
+}
+
+export interface IBusinessLocData {
+  _id: string;
+  businessLocationsId: string;
+  blPitstops: boolean;
+  blOrderAhead: boolean;
+  blDelivery: boolean;
+  blDineIn: boolean;
+  blDeliveryRadius: number;
+  businessLocationCoord: Array<number>;
+  distance: number;
+  coDoingBusinessAs: string;
+}
+
+export interface IResponseLocationServed {
+     message: 'Success';
+     data: {
+        isLocationServed: boolean;
+        isLocationKnown: boolean;
+        currentLocationDetails: string;
+        businessLocData: Array<IBusinessLocData>
+      };
+
 }
