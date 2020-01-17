@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ILoginData, IMobileLoginData, IRequestRegister } from '../models/common-model';
+import { ILoginData, IMobileLoginData, IRequestRegister, IResponseLocationServed } from '../models/common-model';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../constants/constants';
 
@@ -51,15 +51,15 @@ export class DataService {
     lan: string
     latitude: number
     longitude: number
-  }) {
+  }): Observable<any> {
     const options: any = {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         fingerprint: data.fingerprint,
         lan: data.lan,
-        latitude: data.latitude.toString(),
-        longitude: data.longitude.toString()
+        latitude: '22.484977', // data.latitude.toString(),
+        longitude: '88.384863', // data.longitude.toString()  // 22.484977, 88.384863
       },
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/isLocationServed`, options);
