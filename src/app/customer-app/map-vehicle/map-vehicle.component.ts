@@ -11,6 +11,9 @@ import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from './map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
+import { DataService } from '../../shared/services/data.service';
+import { ZATAAKSE_PREF_LANG } from '../../shared/constants/constants';
+
 interface Marker {
   lat: number;
   lng: number;
@@ -61,29 +64,15 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     private geoLocationService: GeoLocationService,
     private readonly joyrideService: JoyrideService,
     public dialog: MatDialog,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private dataService: DataService
   ) {}
 
   ngOnInit() {
     // TODO: Update logic if user is first time visitor then only we should show onboarding
-    setTimeout(() => {
-      this.joyrideService.startTour({ steps: ['onboard-location-input'] });
-    }, 500);
-
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          this.commonService.setUserLocation(latitude, longitude);
-        },
-        error => {
-          // User blocked location
-          // LocationPopupComponent
-          console.log(error);
-        }
-      );
-    }
+    // setTimeout(() => {
+    //   this.joyrideService.startTour({ steps: ['onboard-location-input'] });
+    // }, 500);
 
     // Patch map data,
 
@@ -246,9 +235,10 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
           this.markers = [];
           pitstops.forEach((i, index) => {
+
             const pitstopMarker: Marker = {
-              lat: i.pitstopLongLat[1],
-              lng: i.pitstopLongLat[0],
+              lat: i.blPitStopLongLat.coordinates[1],
+              lng: i.blPitStopLongLat.coordinates[0],
               label: index + '',
             };
             this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
@@ -308,6 +298,34 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
       this.lat = val.coords.latitude;
       this.lng = val.coords.longitude;
       this.customerStateService.setFromLocation({ lat: val.coords.latitude, lng: val.coords.longitude }, true);
+      this.dataService.checkZataakseServiceAvailable({
+        fingerprint: this.commonService.fingerPrint,
+        lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
+        latitude: this.lat,
+        longitude: this.lng
+      })
+      .subscribe(
+        (res: any) => {
+          // {
+          //   "message": "Success",
+          //   "data": {
+          //     "isServedLocation": false,
+          //     "isLocationKnown": false,
+          //     "currentLocationDetails": "VS Marg, Block E, Lalbagh, Lucknow, Uttar Pradesh 226001, India"
+          //     "businessLocData": []
+          //   }
+          // }
+          console.log(res);
+          if (res.data) {
+            this.router.navigate(['customer']);
+          } else {
+            // TODO: Show popup for no service
+          }
+        },
+        err => {
+          // TODO: Handle Error.
+        }
+      );
       this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
         if (!this.searchElementRefFrom.nativeElement.value) {
           const bounds = new google.maps.LatLngBounds();

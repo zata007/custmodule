@@ -6,9 +6,9 @@ import { CardSliderComponent } from './card-slider/card-slider.component';
 
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { DialogPreOrderComponent } from './dialog-pre-order/dialog-pre-order.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  imports: [CommonModule, FormsModule, SwiperModule, MaterialModule],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule, SwiperModule, MaterialModule],
   exports: [
     CarousalComponent,
     LoaderComponent,

@@ -6,6 +6,7 @@ import { ILoginData, IMobileLoginData } from '../models/common-model';
 import { CookieService } from './cookie.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { API_ENDPOINTS } from '../constants/constants';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -30,6 +31,6 @@ export class LoginService {
   }
 
   resendOTP(userId: string, lng: string) {
-    return this.httpClient.put(`${environment.OA_API_Endpoint}/${lng}/resendOTP/${userId}`, undefined);
+    return this.httpClient.put(`${environment.API_Endpoint}/${API_ENDPOINTS.OA}/${lng}/resendOTP/${userId}`, undefined);
   }
 }

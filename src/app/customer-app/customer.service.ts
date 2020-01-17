@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CookieService } from '../shared/services/cookie.service';
+import { API_ENDPOINTS } from '../shared/constants/constants';
 
 @Injectable()
 export class CustomerService {
@@ -26,13 +27,13 @@ export class CustomerService {
   }
 
   postMethod(url: string, param: any) {
-    const postUrl = `${environment.USER_API_Endpoint}/${url}`;
+    const postUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/${url}`;
     const options = this.getOptions();
     return this.httpClient.post(postUrl, param, options);
   }
 
   getMethod(url: string, params: any) {
-    const getUrl = `${environment.USER_API_Endpoint}/${url}`;
+    const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/${url}`;
     return this.httpClient.get(getUrl , params);
   }
 
@@ -62,11 +63,11 @@ export class CustomerService {
       destnationPoint: [72.870403, 19.130181]
     };
     const params = new HttpParams()
-      .set('sourcePoint', JSON.stringify(data.sourcePoint))
-      .set('destnationPoint', JSON.stringify(data.destnationPoint));
+      .set('sourcePoint', JSON.stringify(requestData.sourcePoint))
+      .set('destnationPoint', JSON.stringify(requestData.destnationPoint));
 
     //http://52.66.208.60:8000/user/findPitstops
-    const getUrl = `${environment.USER_API_Endpoint}/findPitstops`;
+    const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/findPitstops`;
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',

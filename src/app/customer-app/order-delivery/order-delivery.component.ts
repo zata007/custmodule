@@ -231,8 +231,8 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
           this.markers = [];
           pitstops.forEach((i, index) => {
             const pitstopMarker: Marker = {
-              lat: i.pitstopLongLat[1],
-              lng: i.pitstopLongLat[0],
+              lat: i.blPitStopLongLat.coordinates[1],
+              lng: i.blPitStopLongLat.coordinates[0],
               label: index + '',
             };
             this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
