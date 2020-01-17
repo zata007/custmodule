@@ -105,8 +105,8 @@ export class DataService {
         isOrderAhead:  '' + data.isOrderAhead,
         isDelivery:  '' + data.isDelivery,
         isTakeAway: '' + data.isTakeAway,
-        pitstopLatitude: data.pitstopLatitude.toString(),
-        pitstopLongitude: data.pitstopLongitude.toString()
+        pitstopLatitude: data.pitstopLatitude ? data.pitstopLatitude.toString() : null,
+        pitstopLongitude: data.pitstopLongitude ?  data.pitstopLongitude.toString() : null
       }
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getRestaurants`, options);

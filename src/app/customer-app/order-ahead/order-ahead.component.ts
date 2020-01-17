@@ -10,6 +10,8 @@ import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
+import { IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
+import { DataService } from 'src/app/shared/services/data.service';
 interface Marker {
   lat: number;
   lng: number;
@@ -61,7 +63,8 @@ export class OrderAheadComponent implements OnInit {
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private dataService: DataService,
   ) {}
 
   ngOnInit() {
@@ -273,11 +276,6 @@ export class OrderAheadComponent implements OnInit {
     return !!this.customerStateService.hasLocationData();
   }
 
-  gotoPitstop() {
-    this.customerStateService.setCurrentPage('pitstop-view');
-    this.router.navigate(['customer/pitstop']);
-  }
-
   onPolylineClick(polylineIndex: number) {
     this.polylines.forEach((i, index) => {
       i.color = '#ACACAC';
@@ -401,8 +399,19 @@ export class OrderAheadComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(RestaurantListComponent, {
-      data: {}
+    const data: IRequestGetRestaurantData = {
+      ...this.commonService.getRequestEssentialParams(),
+      pitstopLatitude: this.latitude, // pitStopData.lat,
+      pitstopLongitude: this.longitude, // pitStopData.lng,
+      isTakeAway: false,
+      isDelivery: false,
+      isOrderAhead: true,
+    };
+    this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
+      // TODO: Handle no data
+      this.bottomSheet.open(RestaurantListComponent, {
+        data: res.data
+      });
     });
   }
 }
