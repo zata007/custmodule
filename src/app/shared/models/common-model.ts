@@ -99,6 +99,70 @@ export interface IRequestRegister {
     indPwd?: string;
 }
 
+export interface IRequestGetRestaurantData {
+  isOrderAhead: boolean;
+  isTakeAway: boolean;
+  isDelivery: boolean;
+  pitstopLatitude: number;
+  pitstopLongitude: number;
+  fingerprint: string;
+  lan: string;
+  latitude: number;
+  longitude: number;
+}
+
+export interface IRestaurantData {
+    _id: string;
+    blAddr: {
+      longLat: {
+        type: string;
+        coordinates: Array<number>
+      };
+      addrTypeId: string;
+      addrLine1: string;
+      city: string;
+      locality: string;
+      state: string;
+      country: string;
+      pincode: string;
+      addrLine2: string;
+      landmark: string
+    };
+    blIsWorkingNow: boolean;
+    blPitstops: boolean;
+    blOrderAhead: boolean;
+    blDelivery: boolean;
+    blDineIn: boolean;
+    blDeliveryRadius: number;
+    corpId: {
+      _id: string;
+      coLegalName: string;
+      coBrandName: string;
+      coDoingBusinessAs: string
+    };
+    blWorkingHrs: [
+      {
+        _id: string;
+        day: number;
+        time: [
+          {
+            _id: string;
+            startTime: number;
+            endTime: number;
+          }
+        ]
+      }
+    ];
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    distance: number;
+}
+export interface IResponseGetRestaurantData {
+    message: string;
+    data: IRestaurantData[];
+}
+
 export interface IBusinessLocData {
   _id: string;
   businessLocationsId: string;

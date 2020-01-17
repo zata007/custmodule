@@ -12,7 +12,8 @@ import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog
 import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
 import { DataService } from '../../shared/services/data.service';
 import { ZATAAKSE_PREF_LANG } from '../../shared/constants/constants';
-import { IResponseLocationServed } from 'src/app/shared/models/common-model';
+import { IResponseLocationServed, IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
+import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 
 interface Marker {
   lat: number;
@@ -281,8 +282,25 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   }
 
   gotoPitstop() {
-    this.customerStateService.setCurrentPage('pitstop-view');
-    this.router.navigate(['customer/pitstop']);
+    // console.log(this.selectedIndex, this.markers);
+    const pitStopData = this.markers[this.selectedIndex];
+    const data: IRequestGetRestaurantData = {
+      ...this.commonService.getRequestEssentialParams(),
+      pitstopLatitude: pitStopData.lat,
+      pitstopLongitude: pitStopData.lng,
+      isTakeAway: true,
+      isDelivery: false,
+      isOrderAhead: false,
+    };
+    this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
+      console.log(res);
+      // TODO: Handle no data
+      this.bottomSheet.open(RestaurantListComponent, {
+        data: res.data
+      });
+    });
+    // this.customerStateService.setCurrentPage('pitstop-view');
+    // this.router.navigate(['customer/pitstop']);
   }
 
   onPolylineClick(polylineIndex: number) {

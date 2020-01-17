@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ILoginData, IMobileLoginData, IRequestRegister, IResponseLocationServed } from '../models/common-model';
+import { ILoginData, IMobileLoginData, IRequestRegister, IResponseLocationServed, IRequestGetRestaurantData } from '../models/common-model';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../constants/constants';
 
@@ -90,6 +90,26 @@ export class DataService {
       }
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.PARAMS}/getPlatformParams`, options);
+  }
+
+  getRestauratData(data: IRequestGetRestaurantData) {
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        fingerprint: data.fingerprint,
+        lan: data.lan,
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString()
+      },
+      params: {
+        isOrderAhead:  '' + data.isOrderAhead,
+        isDelivery:  '' + data.isDelivery,
+        isTakeAway: '' + data.isTakeAway,
+        pitstopLatitude: data.pitstopLatitude.toString(),
+        pitstopLongitude: data.pitstopLongitude.toString()
+      }
+    };
+    return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getRestaurants`, options);
   }
 
   registerLogin(data: {fingerprint: string, lan: string, data: IRequestRegister }) {
