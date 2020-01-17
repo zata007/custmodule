@@ -12,7 +12,6 @@ import { LocationPopupComponent } from '../shared/shared-components/location-pop
 import { DataService } from '../shared/services/data.service';
 import { CommonService } from '../shared/services/common.service';
 import { ZATAAKSE_PREF_LANG } from '../shared/constants/constants';
-import { CustomerStateService } from '../customer-app';
 import { IResponseLocationServed } from '../shared/models/common-model';
 @Component({
   selector: 'app-landing-page',
@@ -56,7 +55,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private matSnack: MatSnackBar,
     private commonService: CommonService,
-    private customerStateService: CustomerStateService,
     private bottomsheet: MatBottomSheet
   ) {
     this.selectedIndex = 0;
@@ -177,7 +175,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
             })
             .subscribe(
               (res: IResponseLocationServed) => {
-                this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
+                // this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
                 if (res.data.isLocationServed) {
                   this.router.navigate(['customer']);
                 } else {
