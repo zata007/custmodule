@@ -99,7 +99,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     });
     this.customerStateService.setCurrentPage('main');
     // set google maps defaults
-    this.zoom = 14;
+    this.zoom = 11.5;
 
     // create search FormControl
     this.searchControl = new FormControl();

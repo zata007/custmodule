@@ -7,19 +7,19 @@
   max-height: 100vh;
 
   agm-map {
-    height: calc(100vh - 232px);
+    height: calc(100vh - 210px);
     z-index: 0;
     @include pc{
-      height: calc(100vh - 250px);
+      height: calc(100vh - 230px);
     }
     @include tablet{
-      height: calc(100vh - 50px);
+      height: calc(100vh - 30px);
     }
     @include phone{
-      height: calc(100vh - 195px);
+      height: calc(100vh - 170px);
     }
     @include xs-phone{
-      height: calc(100vh - 185px);
+      height: calc(100vh - 160px);
     }
   }
 
@@ -42,12 +42,6 @@
         padding: 15px 0 15px 14px;
         margin-bottom: 10px;
         font-size: 0.8rem;
-        @include xs-phone{
-          width: 270px;
-        }
-        @include pc{
-          width: 100%;
-        }
         &:last-child{
           margin-bottom: 0;
         }
