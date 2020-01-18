@@ -50,13 +50,6 @@
       [clickableIcons]="false"
       [styles]="mapStyles"
     >
-      <agm-marker
-        [latitude]="lat"
-        [longitude]="lng"
-        [markerDraggable]="false"
-        [iconUrl]="'assets/icons/navigation.svg'"
-      >
-      </agm-marker>
       <ng-container *ngIf="canShowDirection">
         <agm-polyline
           *ngFor="let polyline of polylines; let i = index"
@@ -78,18 +71,21 @@
         *ngIf="customerStateService.selectedLocation.from.lat"
         [latitude]="customerStateService.selectedLocation.from.lat"
         [longitude]="customerStateService.selectedLocation.from.lng"
-        [markerDraggable]="false"
+        [markerDraggable]="true"
         [iconUrl]="'assets/icons/pin-start.svg'"
         [animation]="'BOUNCE'"
+        (drag)="setFromLatLng($event)"
+
       >
       </agm-marker>
       <agm-marker
         *ngIf="customerStateService.selectedLocation.to.lat"
         [latitude]="customerStateService.selectedLocation.to.lat"
         [longitude]="customerStateService.selectedLocation.to.lng"
-        [markerDraggable]="false"
+        [markerDraggable]="true"
         [iconUrl]="'assets/icons/pin-end.svg'"
         [animation]="'BOUNCE'"
+        (drag)="setToLatLng($event)"
       >
       </agm-marker>
 

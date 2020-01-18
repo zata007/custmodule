@@ -6,9 +6,12 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
+import { IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
+import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
+import { DataService } from 'src/app/shared/services/data.service';
 interface Marker {
   lat: number;
   lng: number;
@@ -24,7 +27,6 @@ interface Marker {
 export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchFrom', {static: false}) public searchElementRefFrom: ElementRef;
-  @ViewChild('searchTo', {static: false}) public searchElementRefTo: ElementRef;
   @ViewChild('requestSubmit', {static: false}) requestSubmit: TemplateRef<any>;
   // initial center position for the map
   public latitude = 19.125956;
@@ -45,7 +47,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
   markers: Marker[] = [];
   isSubmitRequestVisible: boolean;
-  polylines: Array<{ color: string; path: Array<{ lat: number; lng: string }>; encodedString: string; zIndex: number }> = [];
   bounds: google.maps.LatLngBounds = null;
   map: google.maps.Map;
   lng: number;
@@ -60,44 +61,15 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     public customerStateService: CustomerStateService,
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
+    private dataService: DataService,
   ) {}
 
   ngOnInit() {
     // TODO: Update logic if user is first time visitor then only we should show onboarding
 
     // Patch map data,
-
-
-    this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
-      if (hasCompleted) {
-        // TODO: DO work once location completed.
-        this.bounds = new google.maps.LatLngBounds();
-        const selectedLocation = this.customerStateService.selectedLocation;
-        const from = new google.maps.LatLng(selectedLocation.from.lat, selectedLocation.from.lng);
-        const to = new google.maps.LatLng(selectedLocation.to.lat, selectedLocation.to.lng);
-        this.bounds.extend(from);
-        this.bounds.extend(to);
-
-        this.map.fitBounds(this.bounds, 160); // # auto-zoom
-        this.map.panToBounds(this.bounds); // # auto-center
-      }
-    });
-
-    this.customerStateService.directionResults$.subscribe((data: google.maps.DirectionsRoute[]) => this.onDirectionResultUpdate(data));
-
-    this.customerStateService.pitstopOnEdge$.subscribe((d: any) => {
-      // TODO: Remove ! once backend is completed.
-      if (!d.isLocationOnEdge) {
-        const pitstopMarker: Marker = {
-          lat: d.pitstop[1],
-          lng: d.pitstop[0],
-          label: '', // TODO: Add label/id recieved from socket
-        };
-        this.markers.push(pitstopMarker);
-      }
-    });
-    this.customerStateService.setCurrentPage('main');
     // set google maps defaults
     this.zoom = 11.5;
 
@@ -164,10 +136,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
           this.onMapLocationChange();
         });
       });
-      // const autocompleteTo = new google.maps.places.Autocomplete(this.searchElementRefTo.nativeElement, {
-      //   types: ['establishment'],
-      //   componentRestrictions: { country: 'ind' },
-      // });
 
       const autocompleteTo = autocomplete;
 
@@ -190,12 +158,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
         });
       });
     });
-  }
-
-  onDirectionResultUpdate(data: google.maps.DirectionsRoute[]) {
-    this.customerStateService.setDirectionResults(data);
-    this.polylines = this.customerStateService.getPolyLines(data);
-    this.canShowDirection = true;
   }
 
   clickedMarker(label: string, index: number) {
@@ -279,19 +241,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     this.router.navigate(['customer/pitstop']);
   }
 
-  onPolylineClick(polylineIndex: number) {
-    this.polylines.forEach((i, index) => {
-      i.color = '#ACACAC';
-      i.zIndex = 0;
-      if (index === polylineIndex) {
-        this.polylines[index].color = 'blue';
-        this.polylines[index].zIndex = 999;
-      }
-    });
-
-    // Set selected route to service.
-    this.customerStateService.updateSelectedRoute(this.polylines[polylineIndex]);
-  }
 
   mapReady(map: any) {
     this.map = map;
@@ -399,5 +348,22 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
   calculateDistance(from: google.maps.LatLng, to: google.maps.LatLng) {
     return google.maps.geometry.spherical.computeDistanceBetween(from, to);
+  }
+
+  openBottomSheet(): void {
+    const data: IRequestGetRestaurantData = {
+      ...this.commonService.getRequestEssentialParams(),
+      pitstopLatitude: this.latitude, // pitStopData.lat,
+      pitstopLongitude: this.longitude, // pitStopData.lng,
+      isTakeAway: false,
+      isDelivery: true,
+      isOrderAhead: false,
+    };
+    this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
+      // TODO: Handle no data
+      this.bottomSheet.open(RestaurantListComponent, {
+        data: res.data
+      });
+    });
   }
 }

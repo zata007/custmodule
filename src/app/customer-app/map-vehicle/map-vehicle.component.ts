@@ -423,4 +423,17 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   calculateDistance(from: google.maps.LatLng, to: google.maps.LatLng) {
     return google.maps.geometry.spherical.computeDistanceBetween(from, to);
   }
+
+  setFromLatLng(event) {
+    // {
+    //   "coords": {
+    //     "lat": 22.414647108065093,
+    //     "lng": 88.35080562880512
+    //   }
+    // }
+    console.log(event)
+  }
+  setToLatLng(event) {
+    console.log(event)
+  }
 }
