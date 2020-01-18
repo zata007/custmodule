@@ -10,6 +10,8 @@ import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
+import { IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
+import { DataService } from 'src/app/shared/services/data.service';
 interface Marker {
   lat: number;
   lng: number;
@@ -24,7 +26,6 @@ interface Marker {
 })
 export class OrderAheadComponent implements OnInit {
   @ViewChild('searchFrom', {static: false}) public searchElementRefFrom: ElementRef;
-  @ViewChild('searchTo', {static: false}) public searchElementRefTo: ElementRef;
   @ViewChild('requestSubmit', {static: false}) requestSubmit: TemplateRef<any>;
   // initial center position for the map
   public latitude = 19.125956;
@@ -33,7 +34,6 @@ export class OrderAheadComponent implements OnInit {
   selectedIndex = 0;
   haveNoPitstop = false;
 
-  canShowDirection = false;
   canShowPitstops = false;
 
   public searchControl: FormControl;
@@ -45,7 +45,6 @@ export class OrderAheadComponent implements OnInit {
 
   markers: Marker[] = [];
   isSubmitRequestVisible: boolean;
-  polylines: Array<{ color: string; path: Array<{ lat: number; lng: string }>; encodedString: string; zIndex: number }> = [];
   bounds: google.maps.LatLngBounds = null;
   map: google.maps.Map;
   lng: number;
@@ -61,7 +60,8 @@ export class OrderAheadComponent implements OnInit {
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private dataService: DataService,
   ) {}
 
   ngOnInit() {
@@ -83,22 +83,9 @@ export class OrderAheadComponent implements OnInit {
       }
     });
 
-    this.customerStateService.directionResults$.subscribe((data: google.maps.DirectionsRoute[]) => this.onDirectionResultUpdate(data));
-
-    this.customerStateService.pitstopOnEdge$.subscribe((d: any) => {
-      // TODO: Remove ! once backend is completed.
-      if (!d.isLocationOnEdge) {
-        const pitstopMarker: Marker = {
-          lat: d.pitstop[1],
-          lng: d.pitstop[0],
-          label: '', // TODO: Add label/id recieved from socket
-        };
-        this.markers.push(pitstopMarker);
-      }
-    });
     this.customerStateService.setCurrentPage('main');
     // set google maps defaults
-    this.zoom = 14;
+    this.zoom = 11.5;
 
     // create search FormControl
     this.searchControl = new FormControl();
@@ -163,10 +150,6 @@ export class OrderAheadComponent implements OnInit {
           this.onMapLocationChange();
         });
       });
-      // const autocompleteTo = new google.maps.places.Autocomplete(this.searchElementRefTo.nativeElement, {
-      //   types: ['establishment'],
-      //   componentRestrictions: { country: 'ind' },
-      // });
 
       const autocompleteTo = autocomplete;
 
@@ -191,12 +174,6 @@ export class OrderAheadComponent implements OnInit {
     });
   }
 
-  onDirectionResultUpdate(data: google.maps.DirectionsRoute[]) {
-    this.customerStateService.setDirectionResults(data);
-    this.polylines = this.customerStateService.getPolyLines(data);
-    this.canShowDirection = true;
-  }
-
   clickedMarker(label: string, index: number) {
     this.selectedLabel = label;
     this.selectedIndex = index;
@@ -208,52 +185,9 @@ export class OrderAheadComponent implements OnInit {
 
   onMapLocationChange() {
     this.canShowPitstops = false;
-    this.canShowDirection = false;
     this.markers = [];
   }
 
-  onRouteSelected(item: any) {
-    // Get distance from pitstop
-    this.commonService.setDataLoading(true);
-    this.customerStateService.calculateDistance((val) => {
-      // if more than 100km then not servicable;
-      this.commonService.setDataLoading(false);
-
-      if (val < 100000) {
-        // TODO: get pitstops
-        this.customerService.getPitstops({
-          ...this.commonService.getRequestEssentialParams(),
-          sourcePoint: [72.870403, 19.130181], // lng, lon
-          destnationPoint: [72.870403, 19.130181]
-        }).subscribe((data: any) => {
-          const pitstops: Array<any> = data.data;
-
-          // check if pitstop is on the edge.
-          if (pitstops.length === 0) {
-            this.canShowPitstops = false;
-            this.haveNoPitstop = true;
-            return;
-          }
-
-          this.markers = [];
-          pitstops.forEach((i, index) => {
-            const pitstopMarker: Marker = {
-              lat: i.blPitStopLongLat.coordinates[1],
-              lng: i.blPitStopLongLat.coordinates[0],
-              label: index + '',
-            };
-            this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
-          });
-        });
-        // Show pitstops
-        this.canShowPitstops = true;
-      } else {
-        // Show not servicable
-        this.canShowPitstops = false;
-        this.haveNoPitstop = true;
-      }
-    });
-  }
 
   requestService() {
     // TODO: Uncomment after release this.isSubmitRequestVisible = true;
@@ -271,25 +205,6 @@ export class OrderAheadComponent implements OnInit {
 
   hasLocationData() {
     return !!this.customerStateService.hasLocationData();
-  }
-
-  gotoPitstop() {
-    this.customerStateService.setCurrentPage('pitstop-view');
-    this.router.navigate(['customer/pitstop']);
-  }
-
-  onPolylineClick(polylineIndex: number) {
-    this.polylines.forEach((i, index) => {
-      i.color = '#ACACAC';
-      i.zIndex = 0;
-      if (index === polylineIndex) {
-        this.polylines[index].color = 'blue';
-        this.polylines[index].zIndex = 999;
-      }
-    });
-
-    // Set selected route to service.
-    this.customerStateService.updateSelectedRoute(this.polylines[polylineIndex]);
   }
 
   mapReady(map: any) {
@@ -401,8 +316,19 @@ export class OrderAheadComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(RestaurantListComponent, {
-      data: {}
+    const data: IRequestGetRestaurantData = {
+      ...this.commonService.getRequestEssentialParams(),
+      pitstopLatitude: this.latitude, // pitStopData.lat,
+      pitstopLongitude: this.longitude, // pitStopData.lng,
+      isTakeAway: false,
+      isDelivery: false,
+      isOrderAhead: true,
+    };
+    this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
+      // TODO: Handle no data
+      this.bottomSheet.open(RestaurantListComponent, {
+        data: res.data
+      });
     });
   }
 }

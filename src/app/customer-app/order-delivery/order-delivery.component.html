@@ -13,7 +13,6 @@
         #searchFrom
         required
       />
-      <!-- <input class="to" placeholder="Point B" autocorrect="off" autocapitalize="off" spellcheck="off" type="search" #searchTo required /> -->
     </div>
     <ng-template #customContent>
       <div style="border-radius: 10px">
@@ -37,19 +36,6 @@
       [clickableIcons]="false"
       [styles]="mapStyles"
     >
-      <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="false" [iconUrl]="'assets/icons/navigation.svg'"> </agm-marker>
-      <ng-container *ngIf="canShowDirection">
-        <agm-polyline
-          *ngFor="let polyline of polylines; let i = index"
-          (lineClick)="onPolylineClick(i)"
-          [zIndex]="polyline.zIndex"
-          [strokeColor]="polyline.color"
-        >
-          <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.lat" [longitude]="point.lng"> </agm-polyline-point>
-        </agm-polyline>
-
-        <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
-      </ng-container>
       <agm-marker
         *ngIf="customerStateService.selectedLocation.from.lat"
         [latitude]="customerStateService.selectedLocation.from.lat"
@@ -75,7 +61,7 @@
         [latitude]="m.lat"
         [longitude]="m.lng"
         [markerDraggable]="m.draggable"
-        [iconUrl]="selectedLabel === m.label ? 'assets/icons/marker-active.svg' : 'assets/icons/marker.svg'"
+        [iconUrl]="'assets/icons/marker.gif'"
       >
       </agm-marker>
     </agm-map>
@@ -84,45 +70,14 @@
 
 <!-- Swiper -->
 <div class="swiper-parent-container">
-  <card-slider
+  <!-- <card-slider
     *ngIf="canShowPitstops"
     [data]="markers"
     (slideChange)="onSlideChange($event)"
     [selectedIndex]="selectedIndex"
     (itemClicked)="gotoPitstop()"
-  ></card-slider>
-  <button mat-raised-button color="primary" *ngIf="canShowDirection && !canShowPitstops" (click)="onRouteSelected($event)">Confirm Location</button>
+  ></card-slider> -->
+  <button mat-raised-button color="primary" *ngIf="customerStateService.selectedLocation.from.lat" (click)="openBottomSheet()">Confirm Location</button>
 </div>
 
 <!-- Swiper End -->
-<div class="custom-popup-container" [ngStyle]="{ visibility: haveNoPitstop ? 'visible' : 'hidden' }">
-  <ng-container *ngIf="!isSubmitRequestVisible; else requestSubmit">
-    <div class="content-area">
-      <div class="request-content">
-        <div class="content">
-          We aren't serving in vehicle on your choosen route yet..!
-        </div>
-        <button mat-raised-button color="primary" class="action-btn" (click)="requestService()">Request it</button>
-      </div>
-    </div>
-  </ng-container>
-</div>
-
-<ng-template #requestSubmit>
-  <div class="content-area">
-    <div class="submit-content">
-      <div class="title">Service Request</div>
-      <div class="sub-title">I'd like to request service on following route:</div>
-      <div class="requested-location">
-        <div>
-          <span> From:</span> <span>{{ 'hshs jkdsjkd' }}</span>
-        </div>
-        <div>
-          <span>To:</span> <span>{{ 'jfjls lsjfsl' }}</span>
-        </div>
-      </div>
-    </div>
-    <button mat-raised-button color="primary" class="action-btn" (click)="submitServiceRequest()">Submit</button>
-  </div>
-</ng-template>
-<div class="overlay"></div>
