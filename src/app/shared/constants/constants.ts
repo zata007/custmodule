@@ -16,8 +16,13 @@ export const RELATION_CODE = {
   Admin: 'Adm'
 };
 
-export enum CustomerServiceType {
+export enum ECustomerServiceType {
   TakeAway = 'take-away',
   Delivery = 'delivery',
   OrderAhead = 'order-ahead',
+}
+
+export enum EListPageViewType {
+  FoodList = 'foodList',
+  RestaurantList =  'restaurantList'
 }

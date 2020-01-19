@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { OrderedItem } from './customer.model';
 import { BehaviorSubject } from 'rxjs';
+import { IMenuData } from '../shared/models/common-model';
 
 @Injectable()
 export class OrderService {
-  cart: Array<OrderedItem> = [];
+  cart: Array<IMenuData> = [];
   orderCount$ = new BehaviorSubject(0);
   foods = [
     {
@@ -69,8 +69,8 @@ export class OrderService {
   ];
   constructor() {}
 
-  removeFromCart(item: OrderedItem) {
-    const index = this.cart.findIndex((i) => i.name === item.name);
+  removeFromCart(item: IMenuData) {
+    const index = this.cart.findIndex((i) => i._id === item._id);
     if (index !== -1) {
       if (this.cart[index].count > 1) {
         this.cart[index].count -= 1;
@@ -81,8 +81,8 @@ export class OrderService {
     }
   }
 
-  removeItem(item: OrderedItem) {
-    const index = this.cart.findIndex((i) => i.name === item.name);
+  removeItem(item: IMenuData) {
+    const index = this.cart.findIndex((i) => i._id === item._id);
     if (index !== -1) {
       this.cart.splice(index, 1);
       this.orderCount$.next(this.updatedTotalOrderCount());
@@ -94,9 +94,9 @@ export class OrderService {
     this.orderCount$.next(0);
   }
 
-  addToCart(item: OrderedItem) {
+  addToCart(item: IMenuData) {
     // Find item index;
-    const index = this.cart.findIndex((i) => i.name === item.name);
+    const index = this.cart.findIndex((i) => i._id === item._id);
     if (index > -1) {
       if (this.cart[index].count) {
         this.cart[index].count += 1;
@@ -119,13 +119,13 @@ export class OrderService {
     return count;
   }
 
-  isAddedToCart(item: OrderedItem) {
-    const index = this.cart.findIndex((i) => i.name === item.name);
+  isAddedToCart(item: IMenuData) {
+    const index = this.cart.findIndex((i) => i._id === item._id);
     return index > -1;
   }
 
-  countInCart(item: OrderedItem) {
-    const data = this.cart.find((i) => i.name === item.name);
+  countInCart(item: IMenuData) {
+    const data = this.cart.find((i) => i._id === item._id);
     return (data && data.count) || 0;
   }
 
@@ -136,7 +136,7 @@ export class OrderService {
   getTotal() {
     let total = 0;
     this.cart.forEach((i) => {
-      total += i.price * i.count;
+      total += i.dishPrice * i.count;
     });
     return Math.ceil(total);
   }

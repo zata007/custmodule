@@ -12,7 +12,7 @@ import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog
 import { IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
 import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 import { DataService } from 'src/app/shared/services/data.service';
-import { CustomerServiceType } from 'src/app/shared/constants/constants';
+import { ECustomerServiceType } from 'src/app/shared/constants/constants';
 interface Marker {
   lat: number;
   lng: number;
@@ -360,7 +360,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
       // TODO: Handle no data
       this.bottomSheet.open(RestaurantListComponent, {
-        data:  {data: res.data, openedFrom: CustomerServiceType.Delivery }
+        data:  {data: res.data, openedFrom: ECustomerServiceType.Delivery }
       });
     });
   }

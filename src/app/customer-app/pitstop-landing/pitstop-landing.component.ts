@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrderedItem } from '../customer.model';
 import { OrderService } from '../order.service';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IMenuData } from 'src/app/shared/models/common-model';
 
 @Component({
   selector: 'pitstop-landing',
@@ -11,7 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PitstopLandingComponent implements OnInit {
 
-  @Input() foods = [];
+  @Input() foods: IMenuData[] = [];
+  @Input() resName: string;
   constructor(private orderService: OrderService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon('svg-minus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/minus.svg'));
     this.matIconRegistry.addSvgIcon('svg-plus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/plus.svg'));
@@ -20,18 +21,18 @@ export class PitstopLandingComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeFromCart(item: OrderedItem) {
+  removeFromCart(item: IMenuData) {
     this.orderService.removeFromCart(item);
   }
-  addToCart(item: OrderedItem) {
+  addToCart(item: IMenuData) {
     this.orderService.addToCart({...item});
   }
 
-  isAddedToCart(item: OrderedItem) {
+  isAddedToCart(item: IMenuData) {
     return this.orderService.isAddedToCart(item);
   }
 
-  countInCart(item: OrderedItem) {
+  countInCart(item: IMenuData) {
     return this.orderService.countInCart(item);
   }
 

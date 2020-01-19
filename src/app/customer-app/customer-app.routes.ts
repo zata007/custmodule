@@ -16,7 +16,7 @@ export const CustomerAppRoutes: Routes = [
     component: CustomerLayoutComponent,
     pathMatch: 'prefix',
     children: [
-      // { path: 'pitstop/:id', component: PitstopViewComponent },
+      { path: 'pitstop/:openType', component: PitstopViewComponent },
       { path: 'pitstop', component: PitstopViewComponent },
       { path: 'quick-preorder', component: PreOrderComponent },
       { path: 'quick-pickup', component: PreOrderComponent },

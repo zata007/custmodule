@@ -3,11 +3,11 @@
     <div fxLayout="row" fxLayoutAlign="start center" class="food-item" [ngClass]="{ added: isAddedToCart(item) }">
       <img class="thumb mat-elevation-z4" src="../../../assets/img/core/thumb.jpg" alt="" />
       <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
-        <div class="head4 food-name">{{ item.name }}</div>
-        <div class="restaurant para">Restaurant</div>
-        <div class="description para">Lorem Ipsum Dolor Si Amet Contour di saptlire elitr</div>
+        <div class="head4 food-name">{{ item.dishName }}</div>
+        <div class="restaurant para">{{resName}}</div>
+        <div class="description para">{{item.dishDesc}}</div>
         <div fxLayout="row" fxLayoutAlign="space-between">
-          <div class="price head4">₹{{ item.price }}</div>
+          <div class="price head4">₹{{ item.dishPrice }}</div>
           <div fxLayout="row" fxLayoutAlign="space-between baseline" class="order-action">
             <div (click)="removeFromCart(item)" >-</div>
             <div class="counter">{{countInCart(item)}}</div>

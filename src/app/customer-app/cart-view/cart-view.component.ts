@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { OrderedItem } from '../customer.model';
+import { IMenuData } from '../customer.model';
 
 @Component({
   selector: 'app-cart-view',
@@ -13,7 +13,7 @@ import { OrderedItem } from '../customer.model';
 })
 export class CartViewComponent implements OnInit {
 
-  orderedItems: OrderedItem[] = [];
+  orderedItems: IMenuData[] = [];
   constructor(private location: Location, private bottomSheet: MatBottomSheet, private orderService: OrderService) { }
 
   ngOnInit() {
@@ -29,15 +29,15 @@ export class CartViewComponent implements OnInit {
     });
   }
 
-  onAddUnit(data: OrderedItem) {
+  onAddUnit(data: IMenuData) {
     this.orderService.addToCart(data);
   }
 
-  onRemoveUnit(data: OrderedItem) {
+  onRemoveUnit(data: IMenuData) {
     this.orderService.removeFromCart(data);
   }
 
-  removeItemFromCart(data: OrderedItem) {
+  removeItemFromCart(data: IMenuData) {
     this.orderService.removeItem(data);
   }
 

@@ -4,10 +4,12 @@ import {
   MatBottomSheet,
   MAT_BOTTOM_SHEET_DATA
 } from '@angular/material';
-import { IRestaurantData, IPaginationResGetRestaurant, IRequestGetSkuData } from 'src/app/shared/models/common-model';
-import { CustomerServiceType } from 'src/app/shared/constants/constants';
+import { IRestaurantData, IPaginationResGetRestaurant, IRequestGetSkuData, IResponseGetSkuData } from 'src/app/shared/models/common-model';
+import { ECustomerServiceType, EListPageViewType } from 'src/app/shared/constants/constants';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
+import { Router } from '@angular/router';
+import { CustomerStateService } from '../customer-state.service';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -22,7 +24,9 @@ export class RestaurantListComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private dataService: DataService,
     private commonService: CommonService,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {data: IPaginationResGetRestaurant, openedFrom: string}
+    private customerStateService: CustomerStateService,
+    private router: Router,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {data: IPaginationResGetRestaurant, openedFrom: string, pitstopLatLng?: number[]}
   ) {
     this.restaurantLists = data.data.blData;
     this.openedFrom = data.openedFrom;
@@ -35,29 +39,42 @@ export class RestaurantListComponent implements OnInit {
     console.log(item, this.openedFrom);
     const data: IRequestGetSkuData = {
       businessLocId: item.businessLocId,
-      pitstopLatitude: '' + item.longLat[1],
-      pitstopLongitude: '' + item.longLat[0],
       flag: 1,
       pageNum: 1,
       ...this.commonService.getRequestEssentialParams()
     };
     switch (this.openedFrom) {
-      case CustomerServiceType.TakeAway:
-       // delete data.businessLocId;
+      case ECustomerServiceType.TakeAway:
+        data.pitstopLatitude = this.data.pitstopLatLng[0].toString();
+        data.pitstopLongitude = this.data.pitstopLatLng[1].toString();
+        delete data.businessLocId;
         break;
-      case CustomerServiceType.OrderAhead:
-      case CustomerServiceType.Delivery:
-        // delete data.pitstopLatitude;
-        // delete data.pitstopLongitude;
+      case ECustomerServiceType.OrderAhead:
+      case ECustomerServiceType.Delivery:
+        data.flag = 2;
         break;
       default:
         break;
     }
 
     console.log(data);
-    this.dataService.getSku(data).subscribe(res => {
+    this.dataService.getSku(data).subscribe((res: IResponseGetSkuData) => {
+      // openType = foodList, restaurantList
       console.log(res);
-      this.bottomSheetRef.dismiss();
+      if (res.data && res.data.skuData) {
+        this.bottomSheetRef.dismiss();
+        this.customerStateService.setCurrentPage('pitstop-view');
+        this.router.navigate([`customer/pitstop/${EListPageViewType.FoodList}`]).then(r=>{
+          if (r) {
+            const dataToStore = {
+              ...res.data,
+              resName: item.displayName
+            };
+            this.customerStateService.setSkuData(dataToStore);
+          }
+        });
+        // Send to menu page.
+      }
     });
 
   }

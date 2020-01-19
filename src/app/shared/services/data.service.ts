@@ -124,13 +124,22 @@ export class DataService {
         longitude: data.longitude.toString()
       },
       params: {
-        pitstopLatitude: data.pitstopLatitude ? data.pitstopLatitude.toString() : null,
-        pitstopLongitude: data.pitstopLongitude ? data.pitstopLongitude.toString() : null,
-        businessLocId: data.businessLocId,
         flag: data.flag.toString(),
         pageNum: data.pageNum ? data.pageNum.toString() : '1' // TODO: Remove once pagination is implemented
       }
     };
+
+    if (data.pitstopLatitude && data.pitstopLongitude) {
+      // tslint:disable-next-line: no-string-literal
+      options.params['pitstopLatitude'] = data.pitstopLatitude.toString();
+      // tslint:disable-next-line: no-string-literal
+      options.params['pitstopLongitude'] = data.pitstopLongitude.toString();
+    }
+
+    if (data.businessLocId) {
+      // tslint:disable-next-line: no-string-literal
+      options.params['businessLocId'] = data.businessLocId;
+    }
 
     // delete pitstops
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getSku`, options);

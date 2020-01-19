@@ -99,7 +99,7 @@ export interface IRequestRegister {
     indPwd?: string;
 }
 
-export interface IRequestMainParams{
+export interface IRequestMainParams {
   fingerprint: string;
   lan: string;
   latitude: number;
@@ -145,8 +145,10 @@ export interface IRestaurantData {
 }
 
 export interface IPaginationResGetRestaurant {
-  count: number;
   blData: IRestaurantData[];
+  totalPage: number;
+  itemPerPage: number;
+  currentPage: number;
 }
 
 export interface IResponseGetRestaurantData {
@@ -184,4 +186,35 @@ export interface IRequestGetSkuData extends IRequestMainParams {
   pitstopLatitude?: string;
   pitstopLongitude?: string;
   businessLocId: string;
+}
+
+export interface IMenuData {
+  _id: string;
+  apPsBusinessLocId: string;
+  skuType: string[];
+  skuSubType: string[];
+  dishName: string[];
+  dishQty: string[];
+  dishPrice: number;
+  dishDesc: string[];
+  dishImages: [];
+  dishCuisine: string[];
+  dishType: string[];
+  dishServes: number;
+  dishRating: number;
+  dishSpice: number;
+  dishNutrition: string[];
+  dishCustom: string[];
+  dishCombo: any[];
+  count: number;
+}
+
+export interface IResponseGetSkuData {
+  message: string;
+  data: {
+    totalPage: number;
+    itemPerPage: number;
+    currentPage: number;
+    skuData: IMenuData[];
+  };
 }

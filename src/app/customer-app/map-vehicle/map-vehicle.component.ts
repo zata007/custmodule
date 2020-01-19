@@ -11,7 +11,7 @@ import { MAP_STYLES } from './map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
 import { DataService } from '../../shared/services/data.service';
-import { ZATAAKSE_PREF_LANG, CustomerServiceType } from '../../shared/constants/constants';
+import { ZATAAKSE_PREF_LANG, ECustomerServiceType } from '../../shared/constants/constants';
 import { IResponseLocationServed, IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
 import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 
@@ -293,7 +293,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
       // TODO: Handle no data
       this.bottomSheet.open(RestaurantListComponent, {
-        data: {data: res.data, openedFrom: CustomerServiceType.TakeAway }
+        data: {data: res.data, openedFrom: ECustomerServiceType.TakeAway, pitstopLatLng: [pitStopData.lat, pitStopData.lng] }
       });
     });
     // this.customerStateService.setCurrentPage('pitstop-view');

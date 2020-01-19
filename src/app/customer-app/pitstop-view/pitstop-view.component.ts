@@ -3,10 +3,12 @@ import { CustomerService } from '../customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { OrderService } from '../order.service';
-import { OrderedItem } from '../customer.model';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { BottomAddressComponent } from '../address/bottom-address/bottom-address.component';
 import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component'
+import { EListPageViewType } from 'src/app/shared/constants/constants';
+import { CustomerStateService } from '../customer-state.service';
+import { IMenuData } from 'src/app/shared/models/common-model';
 
 @Component({
   selector: 'app-pitstop-view',
@@ -18,27 +20,46 @@ export class PitstopViewComponent implements OnInit {
   canShowPitstopLanding = false;
   selectedFrom = '';
   selectedTo = '';
+  resName = '';
   path = sessionStorage.getItem('path');
 
-  foods = [];
+  foods: IMenuData[]  = [];
   constructor(
-    private customerService: CustomerService,
+    private customerStateService: CustomerStateService,
     private router: Router,
     private route: ActivatedRoute,
     private commonService: CommonService,
     private orderService: OrderService,
     private bottomSheet: MatBottomSheet
-  ) {}
+  ) {
+    this.customerStateService.currentSkuData$.subscribe(data => {
+      console.log(data);
+      this.foods = data.skuData;
+      this.resName = data.resName;
+    });
+  }
 
   ngOnInit() {
-    // const resId =  this.route.snapshot.params.id;
-    this.foods = this.orderService.getFoodListByRestaurant(+1);
-    if (this.customerService.selectedPlaces.from && this.customerService.selectedPlaces.to) {
-      this.selectedFrom = this.customerService.selectedPlaces.from.formatted_address;
-      this.selectedTo = this.customerService.selectedPlaces.to.formatted_address;
-    } else {
-      this.router.navigate(['/customer']);
+    const openType =  this.route.snapshot.params.openType;
+    if (openType) {
+      switch (openType) {
+        case EListPageViewType.FoodList:
+          this.canShowPitstopLanding = true;
+          break;
+        default:
+          this.canShowPitstopLanding = false;
+          break;
+      }
     }
+   // this.foods = this.orderService.getFoodListByRestaurant(+1);
+
+    // TODO Refactor
+    // if (this.customerService.selectedPlaces.from && this.customerService.selectedPlaces.to) {
+    //   this.selectedFrom = this.customerService.selectedPlaces.from.formatted_address;
+    //   this.selectedTo = this.customerService.selectedPlaces.to.formatted_address;
+    // } else {
+    //   this.router.navigate(['/customer']);
+    // }
   }
 
   placeOrder() {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
-import { OrderedItem } from '../../customer.model';
+import { IMenuData } from 'src/app/shared/models/common-model';
 
 @Component({
   selector: 'app-cart-item',
@@ -9,7 +9,7 @@ import { OrderedItem } from '../../customer.model';
   styleUrls: ['./cart-item.component.scss']
 })
 export class CartItemComponent implements OnInit {
-  @Input() data: OrderedItem;
+  @Input() data: IMenuData;
   @Output() public addUnit = new EventEmitter();
   @Output() public removeUnit = new EventEmitter();
   @Output() public removeItem = new EventEmitter();
