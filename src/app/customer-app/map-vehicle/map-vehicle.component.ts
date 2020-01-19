@@ -28,9 +28,9 @@ interface Marker {
   styleUrls: ['./map-vehicle.component.scss'],
 })
 export class MapVehicleComponent implements OnInit, OnDestroy {
-  @ViewChild('searchFrom', {static: false}) public searchElementRefFrom: ElementRef;
-  @ViewChild('searchTo',  {static: false}) public searchElementRefTo: ElementRef;
-  @ViewChild('requestSubmit', {static: false}) requestSubmit: TemplateRef<any>;
+  @ViewChild('searchFrom', { static: false }) public searchElementRefFrom: ElementRef;
+  @ViewChild('searchTo', { static: false }) public searchElementRefTo: ElementRef;
+  @ViewChild('requestSubmit', { static: false }) requestSubmit: TemplateRef<any>;
   // initial center position for the map
   public latitude = 19.125956;
   public longitude = 72.853532;
@@ -67,7 +67,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
     private dataService: DataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // TODO: Update logic if user is first time visitor then only we should show onboarding
@@ -115,7 +115,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.initMapAutocomplete();
 
     this.curLocResDataSubscription = this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
-      console.log(resData)
       this.markers = [];
       resData.filter(i => i.blPitstops).forEach((i, index) => {
         const cardLocation = {
@@ -240,7 +239,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
             this.canShowPitstops = false;
             this.bottomSheet.open(NotServicebleComponent, {
               data: {
-               location: this.searchElementRefFrom.nativeElement.value
+                location: this.searchElementRefFrom.nativeElement.value
               }
             });
             return;
@@ -282,7 +281,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   }
 
   gotoPitstop() {
-    // console.log(this.selectedIndex, this.markers);
     const pitStopData = this.markers[this.selectedIndex];
     const data: IRequestGetRestaurantData = {
       ...this.commonService.getRequestEssentialParams(),
@@ -293,7 +291,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
       isOrderAhead: false,
     };
     this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
-      console.log(res);
       // TODO: Handle no data
       this.bottomSheet.open(RestaurantListComponent, {
         data: res.data
@@ -328,23 +325,25 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
       this.lat = val.coords.latitude;
       this.lng = val.coords.longitude;
       this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
-        if (!this.searchElementRefFrom.nativeElement.value) {
-          const bounds = new google.maps.LatLngBounds();
-          const currentLocation = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
-          bounds.extend(currentLocation);
-
-          this.map.panToBounds(bounds); // # auto-center
-          this.searchElementRefFrom.nativeElement.value = result.formatted_address;
-          const latlng = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
-          const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
-          if (this.calculateDistance(Wankhede, latlng) < 2000) {
-            // TODO: handle stadium logic
-            this.openDialog();
-          }
-        }
+        this.patchLocationToInput({ lat: val.coords.latitude, lng: val.coords.longitude }, this.searchElementRefFrom, result);
         sub.unsubscribe();
       });
     });
+  }
+
+  patchLocationToInput(currentCords: { lat: number, lng: number }, inputToPatch: ElementRef<any>, result: google.maps.GeocoderResult) {
+    const bounds = new google.maps.LatLngBounds();
+    const currentLocation = new google.maps.LatLng(currentCords.lat, currentCords.lng);
+    bounds.extend(currentLocation);
+
+    this.map.panToBounds(bounds); // # auto-center
+    inputToPatch.nativeElement.value = result.formatted_address;
+    const latlng = new google.maps.LatLng(currentCords.lat, currentCords.lng);
+    const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
+    if (this.calculateDistance(Wankhede, latlng) < 2000) {
+      // TODO: handle stadium logic
+      this.openDialog();
+    }
   }
 
   /**
@@ -363,7 +362,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
         const rsltAdrComponent = result.address_components;
         const resultLength = rsltAdrComponent.length;
         if (result != null) {
-          console.log(result);
           callback(result);
           // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
@@ -424,16 +422,24 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     return google.maps.geometry.spherical.computeDistanceBetween(from, to);
   }
 
-  setFromLatLng(event) {
-    // {
-    //   "coords": {
-    //     "lat": 22.414647108065093,
-    //     "lng": 88.35080562880512
-    //   }
-    // }
-    console.log(event)
+  setFromLatLng(event: { coords: { lat: number, lng: number } }) {
+    const fromLocation = {
+      lat: event.coords.lat,
+      lng: event.coords.lng,
+    };
+    this.customerStateService.setFromLocation({ ...fromLocation }, true);
+    this.getPlaceName(event.coords.lat, event.coords.lng, (result) => {
+      this.patchLocationToInput({ lat: fromLocation.lat, lng: fromLocation.lng }, this.searchElementRefFrom, result);
+    });
   }
-  setToLatLng(event) {
-    console.log(event)
+  setToLatLng(event: { coords: { lat: number, lng: number } }) {
+    const toLocation = {
+      lat: event.coords.lat,
+      lng: event.coords.lng,
+    };
+    this.customerStateService.setFromLocation({ ...toLocation }, false);
+    this.getPlaceName(event.coords.lat, event.coords.lng, (result) => {
+      this.patchLocationToInput({ lat: toLocation.lat, lng: toLocation.lng }, this.searchElementRefTo, result);
+    });
   }
 }
