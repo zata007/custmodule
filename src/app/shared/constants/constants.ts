@@ -15,3 +15,9 @@ export const RELATION_CODE = {
   Maker: 'M',
   Admin: 'Adm'
 };
+
+export enum CustomerServiceType {
+  TakeAway = 'take-away',
+  Delivery = 'delivery',
+  OrderAhead = 'order-ahead',
+}

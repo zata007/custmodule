@@ -99,16 +99,18 @@ export interface IRequestRegister {
     indPwd?: string;
 }
 
-export interface IRequestGetRestaurantData {
+export interface IRequestMainParams{
+  fingerprint: string;
+  lan: string;
+  latitude: number;
+  longitude: number;
+}
+export interface IRequestGetRestaurantData extends IRequestMainParams  {
   isOrderAhead: boolean;
   isTakeAway: boolean;
   isDelivery: boolean;
   pitstopLatitude: number;
   pitstopLongitude: number;
-  fingerprint: string;
-  lan: string;
-  latitude: number;
-  longitude: number;
   page?: number;
 }
 
@@ -145,7 +147,7 @@ export interface IRestaurantData {
 export interface IPaginationResGetRestaurant {
   count: number;
   blData: IRestaurantData[];
-};
+}
 
 export interface IResponseGetRestaurantData {
     message: string;
@@ -174,4 +176,12 @@ export interface IResponseLocationServed {
         businessLocData: Array<IBusinessLocData>
       };
 
+}
+
+export interface IRequestGetSkuData extends IRequestMainParams {
+  pageNum: number;
+  flag: number;
+  pitstopLatitude?: string;
+  pitstopLongitude?: string;
+  businessLocId: string;
 }
