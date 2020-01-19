@@ -64,7 +64,7 @@ export class RestaurantListComponent implements OnInit {
       if (res.data && res.data.skuData) {
         this.bottomSheetRef.dismiss();
         this.customerStateService.setCurrentPage('pitstop-view');
-        this.router.navigate([`customer/pitstop/${EListPageViewType.FoodList}`]).then(r=>{
+        this.router.navigate([`customer/pitstop/${EListPageViewType.FoodList}`]).then(r => {
           if (r) {
             const dataToStore = {
               ...res.data,

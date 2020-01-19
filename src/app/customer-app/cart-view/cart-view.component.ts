@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData } from '../customer.model';
+import { IMenuData } from 'src/app/shared/models/common-model';
 
 @Component({
   selector: 'app-cart-view',
