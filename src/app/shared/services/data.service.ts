@@ -106,7 +106,8 @@ export class DataService {
         isDelivery:  '' + data.isDelivery,
         isTakeAway: '' + data.isTakeAway,
         pitstopLatitude: data.pitstopLatitude ? data.pitstopLatitude.toString() : null,
-        pitstopLongitude: data.pitstopLongitude ?  data.pitstopLongitude.toString() : null
+        pitstopLongitude: data.pitstopLongitude ?  data.pitstopLongitude.toString() : null,
+        pageNum: data.page ? data.page.toString() : '1' // TODO: Remove once pagination is implemented
       }
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getRestaurants`, options);

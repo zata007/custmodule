@@ -28,9 +28,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchFrom', {static: false}) public searchElementRefFrom: ElementRef;
   @ViewChild('requestSubmit', {static: false}) requestSubmit: TemplateRef<any>;
-  // initial center position for the map
-  public latitude = 19.125956;
-  public longitude = 72.853532;
   selectedLabel = 'A';
   selectedIndex = 0;
   haveNoPitstop = false;
@@ -116,16 +113,16 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
           this.customerService.setSelectedPlace(place, true);
           // set latitude, longitude and zoom
 
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
           const fromLocation = {
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng(),
           };
           this.map.setCenter(fromLocation);
           this.customerStateService.setFromLocation({ ...fromLocation }, true);
-          this.customerService.setLocationData(this.latitude, this.longitude);
-          const current = new google.maps.LatLng(this.latitude, this.longitude);
+          this.customerService.setLocationData(this.lat, this.lng);
+          const current = new google.maps.LatLng(this.lat, this.lng);
           // TODO: Refactor make generic implementation for finding places near stadium
           const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
           if (this.calculateDistance(Wankhede, current) < 2000) {
@@ -353,8 +350,8 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
   openBottomSheet(): void {
     const data: IRequestGetRestaurantData = {
       ...this.commonService.getRequestEssentialParams(),
-      pitstopLatitude: this.latitude, // pitStopData.lat,
-      pitstopLongitude: this.longitude, // pitStopData.lng,
+      pitstopLatitude: this.lat, // pitStopData.lat,
+      pitstopLongitude: this.lng, // pitStopData.lng,
       isTakeAway: false,
       isDelivery: true,
       isOrderAhead: false,

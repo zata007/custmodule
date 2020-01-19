@@ -4,7 +4,7 @@ import {
   MatBottomSheet,
   MAT_BOTTOM_SHEET_DATA
 } from '@angular/material';
-import { IRestaurantData } from 'src/app/shared/models/common-model';
+import { IRestaurantData, IPaginationResGetRestaurant } from 'src/app/shared/models/common-model';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -16,10 +16,17 @@ export class RestaurantListComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<RestaurantListComponent>,
     private bottomSheet: MatBottomSheet,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: IRestaurantData[]
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: IPaginationResGetRestaurant
   ) {
-    this.restaurantLists = data;
+    this.restaurantLists = data.blData;
   }
 
   ngOnInit() {}
+
+  onRestaurantClick(item: IRestaurantData) {
+    // TODO: Goto page.
+    console.log(item);
+    this.bottomSheetRef.dismiss();
+
+  }
 }

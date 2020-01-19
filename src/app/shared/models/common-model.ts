@@ -109,62 +109,47 @@ export interface IRequestGetRestaurantData {
   lan: string;
   latitude: number;
   longitude: number;
+  page?: number;
 }
 
 export interface IRestaurantData {
-    _id: string;
-    // blAddr: {
-    //   longLat: {
-    //     type: string;
-    //     coordinates: Array<number>
-    //   };
-    //   addrTypeId: string;
-    //   addrLine1: string;
-    //   city: string;
-    //   locality: string;
-    //   state: string;
-    //   country: string;
-    //   pincode: string;
-    //   addrLine2: string;
-    //   landmark: string
-    // };
-    blIsWorkingNow: boolean;
-    blPitstops: boolean;
-    blOrderAhead: boolean;
-    blDelivery: boolean;
-    blDineIn: boolean;
-    blDeliveryRadius: number;
-    coDoingBusinessAs: string;
-    businessLocationCoord: number[];
-    businessLocationsId: string;
-    // corpId: {
-    //   _id: string;
-    //   coLegalName: string;
-    //   coBrandName: string;
-    //   coDoingBusinessAs: string
-    // };
-    // blWorkingHrs: [
-    //   {
-    //     _id: string;
-    //     day: number;
-    //     time: [
-    //       {
-    //         _id: string;
-    //         startTime: number;
-    //         endTime: number;
-    //       }
-    //     ]
-    //   }
-    // ];
-    // createdAt: string;
-    // updatedAt: string;
-    // __v: number;
-    distance: number;
+  _id: string;
+  businessLocId: string;
+  displayName: string;
+  locality: string;
+  longLat: number[];
+  avgRating: number;
+  images: [
+    {
+      _id: string,
+      original: string,
+      thumbnail: string;
+    }
+  ];
+  blWorkingHrs: [
+    {
+      _id: string;
+      day: number;
+      time: [
+        {
+          _id: string;
+          startTime: number;
+          endTime: number;
+        }
+      ]
+    }
+  ];
+  distance: number;
 }
+
+export interface IPaginationResGetRestaurant {
+  count: number;
+  blData: IRestaurantData[];
+};
 
 export interface IResponseGetRestaurantData {
     message: string;
-    data: IRestaurantData[];
+    data: IPaginationResGetRestaurant;
 }
 
 export interface IBusinessLocData {
