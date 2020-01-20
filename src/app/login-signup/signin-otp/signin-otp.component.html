@@ -1,0 +1,32 @@
+<div class="signin-otp">
+    <div class="header">
+        <h3> {{getHeaderText()}}</h3>
+        <mat-icon mat-icon-button (click)="onClose()">close</mat-icon>
+      </div>
+  <ng-container *ngIf="isOtp">
+    <mat-form-field class="input-container" appearance="outline">
+      <mat-label>Otp</mat-label>
+      <input matInput [(ngModel)]="otp" placeholder="Enter OTP" />
+    </mat-form-field>
+    <div class="actions">
+      <button mat-raised-button color="primary" class="action-btn-started" (click)="verifyOtp()">Proceed</button>
+      <div class="resend-otp" (click)="resendOTP()">Resend OTP</div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isNotRegistered">
+    <h4 class="msg">
+      Looks like you are not registered with Zataakse. Proceed with registration
+    </h4>
+    <div class="actions">
+      <button mat-raised-button color="primary" class="action-btn-started" (click)="gotoSignup()">Proceed</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isAlreadyRegistered">
+    <h4 class="msg">
+      Looks like you are already registered with Zataakse. Proceed with login
+    </h4>
+    <div class="actions">
+      <button mat-raised-button color="primary" class="action-btn-started" (click)="gotoLogin()">Login</button>
+    </div>
+  </ng-container>
+</div>

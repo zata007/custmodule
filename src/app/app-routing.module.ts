@@ -11,6 +11,11 @@ const routes: Routes = [
     path: 'customer',
     loadChildren: './customer-app/customer-app.module#CustomerAppModule',
     data: { preload: true },
+  },  
+  {
+    path: 'login-signup',
+    loadChildren: './login-signup/login-signup.module#LoginSignupModule',
+    data: { preload: true },
   },
   { path: '', component: LandingPageComponent },
   { path: '**', component: PageNotFoundComponent },

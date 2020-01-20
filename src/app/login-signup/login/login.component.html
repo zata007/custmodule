@@ -1,0 +1,24 @@
+<div class="login-container">
+  <div class="header">
+    <h1>Welcome Back?</h1>
+  </div>
+  <div class="login-area">
+    <div class="flex-inline">
+        <mat-icon color="primary" style="width: 40px;">call</mat-icon>
+        <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
+            <input #numberField placeholder="{{ 'LANDING_PAGE.PHONE' | translate }}"
+            #tooltipNum="matTooltip"
+            matTooltip="{{ 'LANDING_PAGE.MOBILE_TOOLTIP' | translate }}"
+            (focus)="tooltipNum.show()"
+            (blur)="tooltipNum.hide()"
+            maxlength="10"
+            required matInput (keyup)="numberUpdate.next(numberField.value)" >
+        </mat-form-field>
+    </div>
+  </div>
+  <div class="login-oauth">
+    <h4>Or Login using</h4>
+      <img src='../../../assets/img/core/facebook.svg' />
+      <img src='../../../assets/img/core/google-plus.svg' />
+  </div>
+</div>
