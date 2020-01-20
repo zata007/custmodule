@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
-import { IBusinessLocData } from '../shared/models/common-model';
+import { IBusinessLocData, IMenuData } from '../shared/models/common-model';
 
 class ISelectedPathData {
   from: {
@@ -30,6 +30,8 @@ export class CustomerStateService {
 
   currentPageSubject = new BehaviorSubject<string>(CustomerPages.Main);
   currentPage$ = this.currentPageSubject.asObservable();
+
+  currentSkuData$ = new Subject<{ totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; }>();
 
   currentLocationRestaurantData = new BehaviorSubject<IBusinessLocData[]>([]);
   currenLocationRestaurantData$ = this.currentLocationRestaurantData.asObservable();
@@ -65,6 +67,10 @@ export class CustomerStateService {
   setDirectionResults(data: Array<google.maps.DirectionsRoute>) {
     this.directionResults = data;
     this.selectedRoute = data[0];
+  }
+
+  setSkuData(data: { totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; }) {
+    this.currentSkuData$.next(data);
   }
 
   private getRoutes() {

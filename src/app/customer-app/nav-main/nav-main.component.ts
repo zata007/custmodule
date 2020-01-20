@@ -56,7 +56,7 @@ export class NavMainComponent implements OnInit, OnDestroy {
 
   onBackClick() {
     this.customerStateService.setCurrentPage('main');
-    this.router.navigate(['/customer']);
+    this.router.navigate([this.router.url]);
   }
 
   onSideNavClick(item: string) {

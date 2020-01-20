@@ -99,68 +99,61 @@ export interface IRequestRegister {
     indPwd?: string;
 }
 
-export interface IRequestGetRestaurantData {
-  isOrderAhead: boolean;
-  isTakeAway: boolean;
-  isDelivery: boolean;
-  pitstopLatitude: number;
-  pitstopLongitude: number;
+export interface IRequestMainParams {
   fingerprint: string;
   lan: string;
   latitude: number;
   longitude: number;
 }
+export interface IRequestGetRestaurantData extends IRequestMainParams  {
+  isOrderAhead: boolean;
+  isTakeAway: boolean;
+  isDelivery: boolean;
+  pitstopLatitude: number;
+  pitstopLongitude: number;
+  page?: number;
+}
 
 export interface IRestaurantData {
-    _id: string;
-    blAddr: {
-      longLat: {
-        type: string;
-        coordinates: Array<number>
-      };
-      addrTypeId: string;
-      addrLine1: string;
-      city: string;
-      locality: string;
-      state: string;
-      country: string;
-      pincode: string;
-      addrLine2: string;
-      landmark: string
-    };
-    blIsWorkingNow: boolean;
-    blPitstops: boolean;
-    blOrderAhead: boolean;
-    blDelivery: boolean;
-    blDineIn: boolean;
-    blDeliveryRadius: number;
-    corpId: {
+  _id: string;
+  businessLocId: string;
+  displayName: string;
+  locality: string;
+  longLat: number[];
+  avgRating: number;
+  images: [
+    {
+      _id: string,
+      original: string,
+      thumbnail: string;
+    }
+  ];
+  blWorkingHrs: [
+    {
       _id: string;
-      coLegalName: string;
-      coBrandName: string;
-      coDoingBusinessAs: string
-    };
-    blWorkingHrs: [
-      {
-        _id: string;
-        day: number;
-        time: [
-          {
-            _id: string;
-            startTime: number;
-            endTime: number;
-          }
-        ]
-      }
-    ];
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-    distance: number;
+      day: number;
+      time: [
+        {
+          _id: string;
+          startTime: number;
+          endTime: number;
+        }
+      ]
+    }
+  ];
+  distance: number;
 }
+
+export interface IPaginationResGetRestaurant {
+  blData: IRestaurantData[];
+  totalPage: number;
+  itemPerPage: number;
+  currentPage: number;
+}
+
 export interface IResponseGetRestaurantData {
     message: string;
-    data: IRestaurantData[];
+    data: IPaginationResGetRestaurant;
 }
 
 export interface IBusinessLocData {
@@ -185,4 +178,43 @@ export interface IResponseLocationServed {
         businessLocData: Array<IBusinessLocData>
       };
 
+}
+
+export interface IRequestGetSkuData extends IRequestMainParams {
+  pageNum: number;
+  flag: number;
+  pitstopLatitude?: string;
+  pitstopLongitude?: string;
+  businessLocId: string;
+}
+
+export interface IMenuData {
+  _id: string;
+  apPsBusinessLocId: string;
+  skuType: string[];
+  skuSubType: string[];
+  dishName: string[];
+  dishQty: string[];
+  dishPrice: number;
+  dishDesc: string[];
+  dishImages: [];
+  dishCuisine: string[];
+  dishType: string[];
+  dishServes: number;
+  dishRating: number;
+  dishSpice: number;
+  dishNutrition: string[];
+  dishCustom: string[];
+  dishCombo: any[];
+  count: number;
+}
+
+export interface IResponseGetSkuData {
+  message: string;
+  data: {
+    totalPage: number;
+    itemPerPage: number;
+    currentPage: number;
+    skuData: IMenuData[];
+  };
 }

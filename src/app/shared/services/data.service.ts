@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ILoginData, IMobileLoginData, IRequestRegister, IResponseLocationServed, IRequestGetRestaurantData } from '../models/common-model';
+import { ILoginData, IMobileLoginData,
+   IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData } from '../models/common-model';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../constants/constants';
 
@@ -9,13 +10,13 @@ import { API_ENDPOINTS } from '../constants/constants';
 export class DataService {
   lan = '';
   fingerprint = '';
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getOptions() {
     return {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      };
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
   }
 
   postMethod(url: string, param: any) {
@@ -102,17 +103,49 @@ export class DataService {
         longitude: data.longitude.toString()
       },
       params: {
-        isOrderAhead:  '' + data.isOrderAhead,
-        isDelivery:  '' + data.isDelivery,
+        isOrderAhead: '' + data.isOrderAhead,
+        isDelivery: '' + data.isDelivery,
         isTakeAway: '' + data.isTakeAway,
         pitstopLatitude: data.pitstopLatitude ? data.pitstopLatitude.toString() : null,
-        pitstopLongitude: data.pitstopLongitude ?  data.pitstopLongitude.toString() : null
+        pitstopLongitude: data.pitstopLongitude ? data.pitstopLongitude.toString() : null,
+        pageNum: data.page ? data.page.toString() : '1' // TODO: Remove once pagination is implemented
       }
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getRestaurants`, options);
   }
 
-  registerLogin(data: {fingerprint: string, lan: string, data: IRequestRegister }) {
+  getSku(data: IRequestGetSkuData) {
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        fingerprint: data.fingerprint,
+        lan: data.lan,
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString()
+      },
+      params: {
+        flag: data.flag.toString(),
+        pageNum: data.pageNum ? data.pageNum.toString() : '1' // TODO: Remove once pagination is implemented
+      }
+    };
+
+    if (data.pitstopLatitude && data.pitstopLongitude) {
+      // tslint:disable-next-line: no-string-literal
+      options.params['pitstopLatitude'] = data.pitstopLatitude.toString();
+      // tslint:disable-next-line: no-string-literal
+      options.params['pitstopLongitude'] = data.pitstopLongitude.toString();
+    }
+
+    if (data.businessLocId) {
+      // tslint:disable-next-line: no-string-literal
+      options.params['businessLocId'] = data.businessLocId;
+    }
+
+    // delete pitstops
+    return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getSku`, options);
+  }
+
+  registerLogin(data: { fingerprint: string, lan: string, data: IRequestRegister }) {
     const options = {
       headers: {
         ...this.getOptions(),

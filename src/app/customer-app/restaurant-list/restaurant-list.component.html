@@ -1,15 +1,15 @@
 <div class="restaurant-container">
   <div class="head2 bold">Restaurants Nearby</div>
   <div fxLayout="column" fxLayoutAlign="center start" class="restaurant-item-container">
-    <div *ngFor="let item of restaurantLists" fxLayout="row" fxLayoutAlign="start center" class="restaurant-item">
+    <div *ngFor="let item of restaurantLists" fxLayout="row" fxLayoutAlign="start center" (click)="onRestaurantClick(item)" class="restaurant-item">
       <img class="thumb mat-elevation-z4" src="https://www.ahstatic.com/photos/5555_rsr001_01_p_1024x768.jpg" alt="" />
       <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
-        <div class="head4 restaurant-name">{{item.corpId.coBrandName}}</div>
+        <div class="head4 restaurant-name">{{item.displayName}}</div>
         <div class="restaurant para">Restaurant category</div>
         <br />
         <mat-divider></mat-divider>
         <div fxLayout="row" fxLayoutAlign="space-between center" class="other-info">
-          <div class="caption rate"><img src="../../../assets/img/core/star.svg" alt=""> 4.5</div>
+          <div class="caption rate"><img src="../../../assets/img/core/star.svg" alt=""> {{item.avgRating}}</div>
           <div>•</div>
           <div class="caption">₹300 for Two</div>
           <div>•</div>

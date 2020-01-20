@@ -74,7 +74,7 @@
         [markerDraggable]="true"
         [iconUrl]="'assets/icons/pin-start.svg'"
         [animation]="'BOUNCE'"
-        (drag)="setFromLatLng($event)"
+        (dragEnd)="setFromLatLng($event)"
 
       >
       </agm-marker>
@@ -85,7 +85,7 @@
         [markerDraggable]="true"
         [iconUrl]="'assets/icons/pin-end.svg'"
         [animation]="'BOUNCE'"
-        (drag)="setToLatLng($event)"
+        (dragEnd)="setToLatLng($event)"
       >
       </agm-marker>
 

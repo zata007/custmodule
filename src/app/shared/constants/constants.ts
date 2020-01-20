@@ -15,3 +15,14 @@ export const RELATION_CODE = {
   Maker: 'M',
   Admin: 'Adm'
 };
+
+export enum ECustomerServiceType {
+  TakeAway = 'take-away',
+  Delivery = 'delivery',
+  OrderAhead = 'order-ahead',
+}
+
+export enum EListPageViewType {
+  FoodList = 'foodList',
+  RestaurantList =  'restaurantList'
+}

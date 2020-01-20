@@ -4,7 +4,7 @@
       <input class="zat-input" type="text" placeholder="🔍 Search for your carvings">
     </div>
     <div class="scroll-item">
-      <pitstop-landing *ngIf="canShowPitstopLanding" [foods]="foods"></pitstop-landing>
+      <pitstop-landing *ngIf="canShowPitstopLanding" [foods]="foods" [resName]="resName"></pitstop-landing>
       <foods-landing *ngIf="!canShowPitstopLanding"></foods-landing>
       <div style="height: 100px;"></div>
     </div>
