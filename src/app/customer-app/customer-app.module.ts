@@ -37,6 +37,8 @@ import { BottomVehicleComponent } from './vehicle/bottom-vehicle/bottom-vehicle.
 import { MaterialModule } from '../shared/material-module/material.module';
 import { SharedModule } from '../shared/shared-components/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ItemLandingComponent } from './item-landing/item-landing.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BottomAddressComponent,
     AddVehicleComponent,
     BottomVehicleComponent,
+    ItemLandingComponent,
+    ProfileComponent,
   ],
   entryComponents: [
     BillDetailComponent,

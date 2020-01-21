@@ -1,0 +1,35 @@
+.profile-landing {
+    width: 100%;
+    padding: 0px 16px;
+    .profile {
+        margin: 30px;
+        .profile-img {
+            width: 144px;
+            height: auto;
+        }
+        .profile-detail {
+            margin-left: 25px;
+        }
+    }
+    .header {
+        margin: 10px 0px;
+    }
+    mat-card {
+        padding: 10px;
+        width: 100%;
+        .profile-item {
+            img {
+                width: 23px;
+                height: auto;
+                margin-right: 10px;
+            }
+        }
+        .address-item {
+            img {
+                width: 23px;
+                height: auto;
+                margin-right: 10px;
+            }
+        }
+    }
+}
