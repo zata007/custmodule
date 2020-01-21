@@ -1,7 +1,7 @@
 .pitstop-landing-container {
   margin-top: 20px;
   .food-item-container {
-    margin: 16px;
+    margin: 5px 16px;
     overflow: visible;
     .food-item {
       img {
@@ -16,9 +16,17 @@
         margin-left: -15%;
         padding-left: 20%;
         padding-right: 20px;
-        .food-name {
-          font-weight: bold;
-          line-height: 1.5;
+        div {
+          .food-name {
+            font-weight: bold;
+            line-height: 1.5;
+          }
+          .type {
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
         }
         .restaurant {
           line-height: 1.21;

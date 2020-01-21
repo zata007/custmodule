@@ -15,9 +15,17 @@
       margin-left: -15%;
       padding-left: 20%;
       padding-right: 16px;
-      .food-name {
-        font-weight: bold;
-        line-height: 1.5;
+      div {
+        .food-name {
+          font-weight: bold;
+          line-height: 1.5;
+        }
+        .type {
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
       }
       .restaurant {
         line-height: 1.21;
