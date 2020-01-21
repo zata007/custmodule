@@ -200,7 +200,7 @@ export interface IMenuData {
   apPsBusinessLocId: string;
   skuType: string[];
   skuSubType: string[];
-  dishName: string[];
+  dishName: string;
   dishQty: string[];
   dishPrice: number;
   dishDesc: string[];

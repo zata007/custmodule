@@ -39,6 +39,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProfileComponent } from './profile/profile.component';
 import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
+import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { MenuListComponent } from './menu-list/menu-list.component';
     BottomVehicleComponent,
     PitstopLandingComponent,
     ProfileComponent,
-    MenuListComponent
+    MenuListComponent,
+    RestaurantsListComponent,
   ],
   entryComponents: [
     BillDetailComponent,

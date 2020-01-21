@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerStateService } from '../customer-state.service';
 import { IMenuData, IResponseGetSkuData, IRequestGetSkuData,
-   IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
+   IRequestGetRestaurantData, IResponseGetRestaurantData, IRestaurantData } from 'src/app/shared/models/common-model';
 import { DataService } from 'src/app/shared/services/data.service';
 import { EListPageViewType, ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { CommonService } from 'src/app/shared/services/common.service';
@@ -14,7 +14,12 @@ import { Observable } from 'rxjs';
 })
 export class PitstopLandingComponent implements OnInit {
   foods: IMenuData[];
+  filteredFoods: IMenuData[];
+  restaurants: IRestaurantData[];
+  filteredRestaurants: IRestaurantData[];
   resName: string;
+  searchTerms = '';
+  selectedTab = 0;
 
   constructor(private customerStateService: CustomerStateService, private dataService: DataService, private commonService: CommonService) {
     // this.customerStateService.currentSkuData$.subscribe(data => {
@@ -28,7 +33,35 @@ export class PitstopLandingComponent implements OnInit {
     this.customerStateService.setCurrentPage('pitstop-view');
     this.getFoodList().subscribe(res => {
       this.foods = res.data.skuData;
+      this.filteredFoods = this.foods;
     });
+
+    this.getRestaurants().subscribe(res => {
+      this.restaurants = res.data.blData;
+      this.filteredRestaurants = this.restaurants;
+    });
+  }
+
+  onSearchKeyUp(searchTerm: string) {
+    if (searchTerm.length > 2) {
+      // TODO: Find selected tab and filter data
+      if (this.selectedTab === 0) {
+        this.filteredFoods = this.foods.filter(i => i.dishName.toLowerCase().includes(searchTerm.toLowerCase()));
+      } else {
+        this.filteredRestaurants = this.restaurants.filter(i => i.displayName.toLowerCase().includes(searchTerm.toLowerCase()));
+      }
+    } else {
+      this.resetSearch();
+    }
+  }
+
+  resetSearch() {
+    this.filteredFoods = this.foods;
+    this.filteredRestaurants = this.restaurants;
+  }
+
+  onTabChange() {
+    this.onSearchKeyUp(this.searchTerms);
   }
 
   getRestaurants(): Observable<IResponseGetRestaurantData>{

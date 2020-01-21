@@ -1,10 +1,13 @@
 <div class="item-landing-container">
-  <mat-tab-group>
+  <div class="input-area">
+    <input class="zat-input" type="text" [(ngModel)]="searchTerms" (keyup)="onSearchKeyUp(searchTerms)" placeholder="🔍 Search for your carvings">
+  </div>
+  <mat-tab-group [(selectedIndex)]="selectedTab" (selectedTabChange)="onTabChange()">
     <mat-tab label="Foods">
-      <app-menu-list [foods]="foods" [resName]="resName"></app-menu-list>
+      <app-menu-list [foods]="filteredFoods" [resName]="resName"></app-menu-list>
     </mat-tab>
     <mat-tab label="Restaurants">
-      <!-- <app-restaurant-list></app-restaurant-list> -->
+      <restaurants-list [restaurantLists]="filteredRestaurants"></restaurants-list>
     </mat-tab>
   </mat-tab-group>
 </div>
