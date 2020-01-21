@@ -1,25 +1,13 @@
-<div fxLayout="column" fxLayoutAlign="start center" class="pitstop-landing-container">
-  <div class="food-item-container" *ngFor="let item of foods">
-    <div fxLayout="row" fxLayoutAlign="start center" class="food-item" [ngClass]="{ added: isAddedToCart(item) }">
-      <img class="thumb mat-elevation-z4" src="../../../assets/img/core/thumb.jpg" alt="" />
-      <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <div class="head4 food-name">{{item.dishName}}</div>
-          <div fxLayout="row" fxLayoutAlign="flex-end" class="type">
-            <img src="../../../assets/icons/non-veg.png" alt="">
-          </div>
-        </div>
-        <div class="restaurant para">{{resName}}</div>
-        <div class="description para">{{item.dishDesc}}</div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <div class="price head4">₹{{ item.dishPrice }}</div>
-          <div fxLayout="row" fxLayoutAlign="space-between baseline" class="order-action">
-            <div (click)="removeFromCart(item)" >-</div>
-            <div class="counter">{{countInCart(item)}}</div>
-            <div (click)="addToCart(item)" >+</div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="item-landing-container">
+  <div class="input-area">
+    <input class="zat-input" type="text" [(ngModel)]="searchTerms" (keyup)="onSearchKeyUp(searchTerms)" placeholder="🔍 Search for your carvings">
   </div>
+  <mat-tab-group [(selectedIndex)]="selectedTab" (selectedTabChange)="onTabChange()">
+    <mat-tab label="Foods">
+      <app-menu-list [foods]="filteredFoods" [resName]="resName"></app-menu-list>
+    </mat-tab>
+    <mat-tab label="Restaurants">
+      <restaurants-list [restaurantLists]="filteredRestaurants"></restaurants-list>
+    </mat-tab>
+  </mat-tab-group>
 </div>

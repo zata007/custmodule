@@ -9,6 +9,13 @@ export interface ISignUpData {
   lanPreference: string;
 }
 
+export interface Marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable?: boolean;
+}
+
 export interface ILoginData {
   lanPreference: string;
   fingurePrint?: string;
@@ -185,7 +192,7 @@ export interface IRequestGetSkuData extends IRequestMainParams {
   flag: number;
   pitstopLatitude?: string;
   pitstopLongitude?: string;
-  businessLocId: string;
+  businessLocId?: string;
 }
 
 export interface IMenuData {
@@ -193,7 +200,7 @@ export interface IMenuData {
   apPsBusinessLocId: string;
   skuType: string[];
   skuSubType: string[];
-  dishName: string[];
+  dishName: string;
   dishQty: string[];
   dishPrice: number;
   dishDesc: string[];

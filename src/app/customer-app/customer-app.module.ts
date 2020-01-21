@@ -19,7 +19,6 @@ import { CustomerService } from './customer.service';
 import { OrderService } from './order.service';
 import { FoodsLandingItemsComponent } from './foods-landing-items/foods-landing-items.component';
 import { FoodsLandingComponent } from './foods-landing/foods-landing.component';
-import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { JoyrideModule } from 'ngx-joyride';
 import { PreOrderComponent } from './pre-order/pre-order.component';
@@ -37,8 +36,10 @@ import { BottomVehicleComponent } from './vehicle/bottom-vehicle/bottom-vehicle.
 import { MaterialModule } from '../shared/material-module/material.module';
 import { SharedModule } from '../shared/shared-components/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ItemLandingComponent } from './item-landing/item-landing.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
+import { MenuListComponent } from './menu-list/menu-list.component';
+import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,6 @@ import { ProfileComponent } from './profile/profile.component';
     NavMainComponent,
     FoodsLandingItemsComponent,
     FoodsLandingComponent,
-    PitstopLandingComponent,
     PreOrderComponent,
     CustomerCareComponent,
     CartViewComponent,
@@ -64,8 +64,10 @@ import { ProfileComponent } from './profile/profile.component';
     BottomAddressComponent,
     AddVehicleComponent,
     BottomVehicleComponent,
-    ItemLandingComponent,
+    PitstopLandingComponent,
     ProfileComponent,
+    MenuListComponent,
+    RestaurantsListComponent,
   ],
   entryComponents: [
     BillDetailComponent,
