@@ -1,44 +1,59 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { OrderService } from '../order.service';
-import { MatIconRegistry } from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
-import { IMenuData } from 'src/app/shared/models/common-model';
+import { Component, OnInit } from '@angular/core';
+import { CustomerStateService } from '../customer-state.service';
+import { IMenuData, IResponseGetSkuData, IRequestGetSkuData,
+   IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
+import { DataService } from 'src/app/shared/services/data.service';
+import { EListPageViewType, ECustomerServiceType } from 'src/app/shared/constants/constants';
+import { CommonService } from 'src/app/shared/services/common.service';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'pitstop-landing',
+  selector: 'app-pitstop-landing',
   templateUrl: './pitstop-landing.component.html',
   styleUrls: ['./pitstop-landing.component.scss']
 })
 export class PitstopLandingComponent implements OnInit {
+  foods: IMenuData[];
+  resName: string;
 
-  @Input() foods: IMenuData[] = [];
-  @Input() resName: string;
-  constructor(private orderService: OrderService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon('svg-minus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/minus.svg'));
-    this.matIconRegistry.addSvgIcon('svg-plus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/plus.svg'));
+  constructor(private customerStateService: CustomerStateService, private dataService: DataService, private commonService: CommonService) {
+    // this.customerStateService.currentSkuData$.subscribe(data => {
+    //   console.log(data);
+    //   this.foods = data.skuData;
+    //   this.resName = data.resName;
+    // });
    }
 
   ngOnInit() {
+    this.customerStateService.setCurrentPage('pitstop-view');
+    this.getFoodList().subscribe(res => {
+      this.foods = res.data.skuData;
+    });
   }
 
-  removeFromCart(item: IMenuData) {
-    this.orderService.removeFromCart(item);
-  }
-  addToCart(item: IMenuData) {
-    this.orderService.addToCart({...item});
-  }
-
-  isAddedToCart(item: IMenuData) {
-    return this.orderService.isAddedToCart(item);
-  }
-
-  countInCart(item: IMenuData) {
-    return this.orderService.countInCart(item);
+  getRestaurants(): Observable<IResponseGetRestaurantData>{
+    const pitstopData = this.customerStateService.getCurrentPitstopData();
+    const data: IRequestGetRestaurantData = {
+      ...this.commonService.getRequestEssentialParams(),
+      pitstopLatitude: pitstopData.lat,
+      pitstopLongitude: pitstopData.lng,
+      isTakeAway: true,
+      isDelivery: false,
+      isOrderAhead: false,
+    };
+    return this.dataService.getRestauratData(data) as any;
   }
 
-  getPrice(item: number) {
-    return this.orderService.getPrice(item);
+  getFoodList(): Observable<IResponseGetSkuData> {
+    const pitstopData = this.customerStateService.getCurrentPitstopData();
+    const data: IRequestGetSkuData = {
+      flag: 1,
+      pageNum: 1,
+      ...this.commonService.getRequestEssentialParams(),
+      pitstopLongitude: pitstopData.lng.toString(),
+      pitstopLatitude: pitstopData.lat.toString()
+    };
+    return this.dataService.getSku(data) as any;
   }
-
 
 }

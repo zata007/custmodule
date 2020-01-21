@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
-import { IBusinessLocData, IMenuData } from '../shared/models/common-model';
+import { IBusinessLocData, IMenuData, Marker } from '../shared/models/common-model';
 
 class ISelectedPathData {
   from: {
@@ -19,6 +19,7 @@ enum CustomerPages {
 }
 @Injectable()
 export class CustomerStateService {
+  currentPitstopData: Marker;
   constructor(private socket: Socket) {}
   selectedLocation: ISelectedPathData = {
     from: { lat: 0, lng: 0 },
@@ -71,6 +72,14 @@ export class CustomerStateService {
 
   setSkuData(data: { totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; }) {
     this.currentSkuData$.next(data);
+  }
+
+  setCurrentPitstop(pitStopData: Marker) {
+    this.currentPitstopData = pitStopData;
+  }
+
+  getCurrentPitstopData() {
+    return this.currentPitstopData;
   }
 
   private getRoutes() {
