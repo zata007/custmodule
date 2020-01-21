@@ -1,22 +1,23 @@
 .profile-landing {
-    width: 100%;
-    padding: 0px 16px;
+    padding: 0px;
     .profile {
         margin: 30px;
         .profile-img {
             width: 144px;
             height: auto;
+            border-radius: 50%;
         }
         .profile-detail {
             margin-left: 25px;
+            line-height: 1.8em;
         }
     }
     .header {
-        margin: 10px 0px;
+        margin: 20px 0px 10px 16px;
     }
     mat-card {
-        padding: 10px;
-        width: 100%;
+        padding: 20px;
+        border-radius: 4px;
         .profile-item {
             img {
                 width: 23px;
@@ -32,4 +33,8 @@
             }
         }
     }
+}
+
+.mat-card .mat-divider-horizontal.mat-divider-inset {
+    margin: 10px 0px;
 }

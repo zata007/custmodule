@@ -26,6 +26,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatBottomSheetModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatButtonModule,
@@ -87,6 +89,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTooltipModule,
     MatSnackBarModule,
     MatTabsModule,
+    MatSlideToggleModule,
   ],
   declarations: [],
 })
