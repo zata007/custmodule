@@ -75,7 +75,8 @@ export class NavMainComponent implements OnInit, OnDestroy {
       case 'Care':
         this.router.navigate(['/customer/care']);
         break;
-
+      case 'Profile':
+        this.router.navigate(['/customer/profile'])
       default:
         break;
     }

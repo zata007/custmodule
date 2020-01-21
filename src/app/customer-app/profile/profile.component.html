@@ -1,87 +1,92 @@
 <div class="profile-landing">
-    <div fxLayout="row" class="profile">
-        <img class="profile-img" src="../../../assets/img/core/rock.jpg" alt="">
-        <div fxLayout="column" class="profile-detail">
-            <div class="name head3 bold">
-                Dwayne Johnson
-            </div>
-            <div class="head4 phone">9458745125</div>
-            <button mat-stroked-button color="primary" class="head4">EDIT</button>
-        </div>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="flex-start">
+    <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
+      <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div fxLayout="row" class="profile">
+    <img class="profile-img" src="../../../assets/img/core/rock.jpg" alt="">
+    <div fxLayout="column" class="profile-detail">
+      <div class="name head3 bold">
+        Dwayne Johnson
+      </div>
+      <div class="head4 phone">9458745125</div>
+      <button mat-stroked-button color="primary" class="head4">EDIT</button>
     </div>
-    <div class="head3 bold header">Accounts</div>
-    <mat-card fxLayout="column" class="mat-elevation-z4">
-        <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
-            <img src="../../../assets/img/core/Mask Group 4.svg" alt="">
-            <div class="head4">Name Here</div>
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
-            <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
-            <div class="head4">Mobile</div>
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
-            <img src="../../../assets/img/core/Mask Group 6.svg" alt="">
-            <div class="head4">Mail</div>
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
-            <img src="../../../assets/img/core/Mask Group 7.svg" alt="">
-            <div class="head4">Gender</div>
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
-            <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
-            <div class="head4">Vegetarian</div>
-        </div>
-    </mat-card>
+  </div>
+  <div class="head3 bold header">Accounts</div>
+  <mat-card fxLayout="column" class="mat-elevation-z4">
+    <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
+      <img src="../../../assets/img/core/Mask Group 4.svg" alt="">
+      <div class="head4">Name Here</div>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
+      <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
+      <div class="head4">Mobile</div>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
+      <img src="../../../assets/img/core/Mask Group 6.svg" alt="">
+      <div class="head4">Mail</div>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
+      <img src="../../../assets/img/core/Mask Group 7.svg" alt="">
+      <div class="head4">Gender</div>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
+      <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
+      <div class="head4">Vegetarian</div>
+    </div>
+  </mat-card>
 
-    <div class="head3 bold header">Address</div>
-    <mat-card fxLayout="column" class="mat-elevation-z4">
-        <div fxLayout="column" class="address-item">
-            <div fxLayout="row" fxLayoutAlign="start start" class="head4">
-                <img src="../../../assets/img/core/Mask Group 2.svg" alt="">
-                <div class="address-detail">
-                    <div class="head4 bold">Home</div>
-                    <div class="head4">LOrem Ipsum Dolor sit amet consetetur sadicping elitr sed</div>
-                </div>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
-                <button mat-button color="primary">EDIT</button>
-                <button mat-button color="primary">DELETE</button>
-            </div>
-        </div>        
-        <mat-divider [inset]="true"></mat-divider>
-        <div fxLayout="column" class="address-item">
-            <div fxLayout="row" fxLayoutAlign="start start" class="head4">
-                <img src="../../../assets/img/core/Mask Group 3.svg" alt="">
-                <div class="address-detail">
-                    <div class="head4 bold">Office</div>
-                    <div class="head4">LOrem Ipsum Dolor sit amet consetetur sadicping elitr sed</div>
-                </div>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
-                <button mat-button color="primary">EDIT</button>
-                <button mat-button color="primary">DELETE</button>
-            </div>
+  <div class="head3 bold header">Address</div>
+  <mat-card fxLayout="column" class="mat-elevation-z4">
+    <div fxLayout="column" class="address-item">
+      <div fxLayout="row" fxLayoutAlign="start start" class="head4">
+        <img src="../../../assets/img/core/Mask Group 2.svg" alt="">
+        <div class="address-detail">
+          <div class="head4 bold">Home</div>
+          <div class="head4">Lorem Ipsum Dolor sit amet consetetur sadicping elitr sed</div>
         </div>
-    </mat-card>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
+        <button mat-button color="primary">EDIT</button>
+        <button mat-button color="primary">DELETE</button>
+      </div>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <div fxLayout="column" class="address-item">
+      <div fxLayout="row" fxLayoutAlign="start start" class="head4">
+        <img src="../../../assets/img/core/Mask Group 3.svg" alt="">
+        <div class="address-detail">
+          <div class="head4 bold">Office</div>
+          <div class="head4">Lorem Ipsum Dolor sit amet consetetur sadicping elitr sed</div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
+        <button mat-button color="primary">EDIT</button>
+        <button mat-button color="primary">DELETE</button>
+      </div>
+    </div>
+  </mat-card>
 
-    <div class="head3 bold header">Others</div>
-    <mat-card fxLayout="column" class="mat-elevation-z4">
-        <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="head4">Language preferences</div>
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="head4">App Notification</div>
-            <mat-slide-toggle color="primary"></mat-slide-toggle>
-        </div>
-        <mat-divider [inset]="true"></mat-divider>
-        <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="head4">Location Tracking</div>
-            <mat-slide-toggle color="primary"></mat-slide-toggle>
-        </div>
-    </mat-card>
+  <div class="head3 bold header">Others</div>
+  <mat-card fxLayout="column" class="mat-elevation-z4">
+    <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="head4">Language preferences</div>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="head4">App Notification</div>
+      <mat-slide-toggle color="primary"></mat-slide-toggle>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="head4">Location Tracking</div>
+      <mat-slide-toggle color="primary"></mat-slide-toggle>
+    </div>
+  </mat-card>
 </div>

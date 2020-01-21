@@ -7,10 +7,12 @@ import { CustomerCareComponent } from './customer-care/customer-care.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { OrderAheadComponent } from './order-ahead/order-ahead.component';
 import { OrderDeliveryComponent } from './order-delivery/order-delivery.component';
+import { ProfileComponent } from './profile/profile.component'
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
   { path: 'care', component: CustomerCareComponent },
+  { path: 'profile', component: ProfileComponent},
   {
     path: '',
     component: CustomerLayoutComponent,
