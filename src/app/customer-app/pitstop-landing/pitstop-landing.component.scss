@@ -9,14 +9,11 @@
       padding-right: 10px;
     }
   }
-
-  mat-tab-group {
-    overflow-y: scroll;
-    overflow-x: visible;
-  }
 }
 
 .mat-tab-label-active {
-  font-weight: bold !important;
-  color: #000000 !important;
+  .mat-tab-label-content {
+    font-weight: bold !important;
+    color: #000000 !important;
+  }
 }
