@@ -1,5 +1,4 @@
 <div class="restaurant-container">
-  <div class="head2 bold">Restaurants Nearby</div>
   <div fxLayout="column" fxLayoutAlign="center start" class="restaurant-item-container">
     <ng-container *ngIf="restaurantLists && restaurantLists.length; else noData">
       <div *ngFor="let item of restaurantLists" fxLayout="row" fxLayoutAlign="start center" (click)="onRestaurantClick(item)" class="restaurant-item">
@@ -10,11 +9,11 @@
           <br />
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="space-around center" class="other-info">
-            <div fxLayout="row" fxLayoutAlign="flex-end center" class="caption rate"><img src="../../../assets/img/core/star.svg" alt=""> {{item.avgRating}}</div>
+            <div fxLayout="row" fxLayoutAlign="flex-end center" class="caption rate"><img src="../../../assets/icons/star.svg" alt=""> {{item.avgRating}}</div>
             <div>•</div>
-            <div class="caption">₹300 for Two</div>
+            <div fxLayout="row" fxLayoutAlign="flex-start center" class="caption"><img src="../../../assets/icons/rupee.svg" alt=""> 300 for Two</div>
             <div>•</div>
-            <div fxLayout="row" fxLayoutAlign="flex-start center" class="caption offer"><img src="../../../assets/img/core/discount.svg" alt=""> 40% Off</div>
+            <div fxLayout="row" fxLayoutAlign="flex-start center" class="caption offer"><img src="../../../assets/icons/discount.svg" alt=""> 40% Off</div>
           </div>
         </div>
       </div>

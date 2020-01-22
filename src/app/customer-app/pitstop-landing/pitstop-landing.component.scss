@@ -1,12 +1,22 @@
 .item-landing-container {
-    width: 100%;
-    padding: 0px 16px;
-    .input-area {
-      padding: 0px 16px;
-      .zat-input {
-        width: 100%;
-        padding-left: 10px;
-        padding-right: 10px;
-      }
+  width: 100%;
+  padding: 0px 16px;
+
+  .input-area {
+    .zat-input {
+      width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
     }
+  }
+
+  mat-tab-group {
+    overflow-y: scroll;
+    overflow-x: visible;
+  }
+}
+
+.mat-tab-label-active {
+  font-weight: bold !important;
+  color: #000000 !important;
 }
