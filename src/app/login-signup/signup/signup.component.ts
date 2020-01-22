@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 //import { PrelaunchService } from 'src/app/pre-launch/prelaunch.service';
 import { IAppState } from 'src/app/store/states/app.states';
@@ -17,6 +17,7 @@ import { SigninOtpComponent } from '../signin-otp/signin-otp.component';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  @Output() dataChange = new EventEmitter();
   registrationForm: FormGroup;
   isAgreed: boolean;
   constructor(
@@ -58,7 +59,12 @@ export class SignupComponent implements OnInit {
     // }
 
     setTimeout(() => {
-      this.registrationForm.valueChanges.subscribe((_) => this.store.dispatch(new SignUpData(this.registrationForm.value)));
+      this.registrationForm.valueChanges.subscribe((_) => {
+
+        // TODO: remove once store is functional
+        this.dataChange.emit(this.registrationForm.value);
+        this.store.dispatch(new SignUpData(this.registrationForm.value));
+      });
     }, 2000);
   }
 

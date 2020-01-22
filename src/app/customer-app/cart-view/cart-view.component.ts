@@ -4,6 +4,8 @@ import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData } from 'src/app/shared/models/common-model';
+import { ZATAAKSE_JWT_TOKEN } from 'src/app/shared/constants/constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-view',
@@ -14,10 +16,12 @@ import { IMenuData } from 'src/app/shared/models/common-model';
 export class CartViewComponent implements OnInit {
 
   orderedItems: IMenuData[] = [];
-  constructor(private location: Location, private bottomSheet: MatBottomSheet, private orderService: OrderService) { }
+  hasAuthToken = false;
+  constructor(private location: Location, private bottomSheet: MatBottomSheet, private orderService: OrderService, private router: Router) { }
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
+    this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
   }
   onBackClick() {
     this.location.back();
@@ -39,6 +43,17 @@ export class CartViewComponent implements OnInit {
 
   removeItemFromCart(data: IMenuData) {
     this.orderService.removeItem(data);
+  }
+
+  onSubmitClick() {
+    if (this.hasAuthToken) {
+      // TODO place order.
+      console.log('order can be placed');
+
+    } else {
+      // Goto login-signup
+      this.router.navigate(['login-signup']);
+    }
   }
 
 

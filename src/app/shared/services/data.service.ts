@@ -153,7 +153,9 @@ export class DataService {
         lan: data.lan,
       }
     };
-    return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.PARAMS}/getPlatformParams`, data.data, options);
+
+    // POST /access/user/registerLogin
+    return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/registerLogin`, data.data, options);
   }
 
 

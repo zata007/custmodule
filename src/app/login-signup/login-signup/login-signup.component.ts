@@ -17,6 +17,7 @@ import { SignIn } from 'src/app/store/actions/customer.actions';
 import { IAppState } from 'src/app/store/states/app.states';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'src/app/shared/services/cookie.service';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-login-signup',
@@ -36,15 +37,17 @@ export class LoginSignupComponent implements OnInit {
     fingerprint: '',
     mobileOTP: null
   };
+  signupData: any;
   constructor(
     private bottomSheet: MatBottomSheet,
     private loginService: LoginService,
     private authService: AuthService,
-    //private prelaunchService: PrelaunchService,
     private router: Router,
     private snack: MatSnackBar,
     private store: Store<IAppState>,
     private cookieService: CookieService,
+    private commonService: CommonService,
+    private dataService: DataService,
   ) {}
 
   ngOnInit() {}
@@ -83,9 +86,10 @@ export class LoginSignupComponent implements OnInit {
   onSubmitButtonClick() {
     switch (this.selected) {
       case ELoginSignup.Login:
-        this.loginByNumber();
+        this.handleLoginSignupRequest('login');
         return;
       case ELoginSignup.Signup:
+        this.handleLoginSignupRequest('register');
         //this.signupComponent.register();
         return;
 
@@ -94,29 +98,48 @@ export class LoginSignupComponent implements OnInit {
     }
   }
 
-  loginByNumber() {
-    if (!this.loginByNumber || this.loginMobNumber < 100000) {
-      this.snack.open('Please provide valid number');
-      return;
-    }
-    const num = '+91' + this.loginMobNumber;
-    this.loginService.loginByNumber(num).subscribe(
-      res => {
-        this.userByMobile = { ...res.data };
-        //this.prelaunchService.setUserId(this.userByMobile.userId);
-        this.openVerifyOTP();
-      },
-      error => {
-        if (error.error.statusCode === 400) {
-          this.bottomSheet.open(SigninOtpComponent, {
-            data: {
-              isNotRegistered: true,
-              onProceed: (type) => this.onProceedFromBottomSheet(type)
-            }
-          });
-        }
+  handleLoginSignupRequest(type: string) {
+
+     // TODO: Send register data.
+    const params = this.commonService.getPlatformParams();
+    const { latitude, longitude} = this.commonService.getRequestEssentialParams();
+    this.dataService.registerLogin({
+      ...this.commonService.getRequestEssentialParams(),
+      data: {
+        indMobileNum: type === 'register' ? this.signupData.mobileNumber : this.loginMobNumber,
+        indCountryCode: '91',
+        pRoleId: params.interfaceData[0].pRoleId,
+        pRelationId: params.interfaceData[0].pRelationId,
+        pInterface: params.interfaceData[0]._id,
+        reqType: type,
+        indEmailNotify: true,
+        indMobileNotify: true,
+        indPushNotify: true,
+        latitude,
+        longitude,
+
       }
-    );
+    }).subscribe(res => {
+      console.log(res, `${type} done`);
+    });
+
+    // this.loginService.loginByNumber(num).subscribe(
+    //   res => {
+    //     this.userByMobile = { ...res.data };
+    //     //this.prelaunchService.setUserId(this.userByMobile.userId);
+    //     this.openVerifyOTP();
+    //   },
+    //   error => {
+    //     if (error.error.statusCode === 400) {
+    //       this.bottomSheet.open(SigninOtpComponent, {
+    //         data: {
+    //           isNotRegistered: true,
+    //           onProceed: (type) => this.onProceedFromBottomSheet(type)
+    //         }
+    //       });
+    //     }
+    //   }
+    // );
   }
 
   onProceedFromBottomSheet(type: number) {
@@ -139,6 +162,11 @@ export class LoginSignupComponent implements OnInit {
       //this.prelaunchService.userData = res;
       this.router.navigate(['pre-launch/landing-page']);
     });
+  }
+
+  onSignupDataChange(value: any){
+    this.signupData = value;
+
   }
 
   onPanelSelect(selected: number) {

@@ -23,6 +23,9 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ConnectionServiceModule } from 'ng-connection-service';
 import { SharedModule } from './shared/shared-components/shared.module';
 
+import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login';
+
+
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,6 +34,19 @@ export function createTranslateLoader(http: HttpClient) {
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
 withCredentials: false,
  query: { authorization: 'wehgfiewrfgierg'} } };
+
+export function provideConfig() {
+  return new AuthServiceConfig([
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider(environment.sso.google),
+    },
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider(environment.sso.fb),
+    },
+  ]);
+}
 
 @NgModule({
   declarations: [
@@ -46,6 +62,7 @@ withCredentials: false,
     HttpClientModule,
     NgxSkeletonLoaderModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    SocialLoginModule,
     DeviceDetectorModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -68,7 +85,12 @@ withCredentials: false,
   }),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

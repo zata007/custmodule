@@ -7,10 +7,10 @@
         <app-login (numberUpdate)="onLoginNumberUpdate($event)"></app-login>
     </div>
     <div class="component-container" [ngClass]="{ selected: selected === ELoginSignup.Signup }">
-        <app-signup></app-signup>
+        <app-signup (dataChange)="onSignupDataChange($event)"></app-signup>
     </div>
   </mat-card>
-  <div *ngIf="3 === 3" class="slide-action-btn">
+  <div class="slide-action-btn">
       <button mat-raised-button color="primary" class="action-btn-started" (click)="onSubmitButtonClick()" aria-label="Goto">
         <span>Proceed</span>
         <mat-icon mat-icon-button>arrow_forward</mat-icon>

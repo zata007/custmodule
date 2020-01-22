@@ -94,10 +94,11 @@ export class CustomerStateService {
     const data = {
       pitstop: [lng, lat],
       polyline: encodeURI(this.selectedRoute.overview_polyline['points']) ,
-      tolerance: 2000,
+      tolerance: 1000,
     };
 
-    this.socket.emit('checkLocationOnEdge', data);
+    console.log('emited', data)
+    this.socket.emit('checkLocationOnEdge', data, (e)=>{console.log(e)});
   }
 
   getPolyLines(data: Array<google.maps.DirectionsRoute>) {
