@@ -1,0 +1,56 @@
+.pitstop-landing-container {
+  overflow-x: visible;
+  overflow-y: scroll;
+  .food-item-container {
+    margin: 5px 0px;
+    width: 100%;
+    overflow: visible;
+    .food-item {
+      overflow: visible;
+      img {
+        width: 110px;
+        height: auto;
+        border-radius: 10px;
+      }
+      .details {
+        width: 85%;
+        height: 150px;
+        border-radius: 5px;
+        margin-left: -16%;
+        padding-left: 20%;
+        padding-right: 20px;
+        div {
+          .food-name {
+            font-weight: bold;
+            line-height: 1.5;
+          }
+          .type {
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+        .restaurant {
+          line-height: 1.21;
+        }
+        .description {
+          color: #717171;
+          line-height: 1.21;
+          margin-bottom: 10px;
+        }
+        div {
+          width: 100%;
+          .order-action {
+            text-align: center;
+            border: 1px solid orange;
+            padding: auto 5px;
+            .counter {
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+  }
+}

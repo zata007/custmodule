@@ -7,7 +7,7 @@
   height: 100vh;
   overflow: visible;
   .input-area {
-    padding: 30px 16px;
+    padding: 0px 16px;
     .zat-input {
       width: 100%;
       padding-left: 10px;
@@ -57,6 +57,7 @@
     position: relative;
     overflow: auto;
     height: 69vh;
+    margin-top: 10px
   }
 
 }

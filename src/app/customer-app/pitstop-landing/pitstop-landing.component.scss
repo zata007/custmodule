@@ -1,45 +1,19 @@
-.pitstop-landing-container {
-  margin-top: 20px;
-  .food-item-container {
-    margin: 16px;
-    overflow: visible;
-    .food-item {
-      img {
-        width: 110px;
-        height: auto;
-        border-radius: 10px;
-      }
-      .details {
-        width: 85%;
-        height: 150px;
-        border-radius: 5px;
-        margin-left: -15%;
-        padding-left: 20%;
-        padding-right: 20px;
-        .food-name {
-          font-weight: bold;
-          line-height: 1.5;
-        }
-        .restaurant {
-          line-height: 1.21;
-        }
-        .description {
-          color: #717171;
-          line-height: 1.21;
-          margin-bottom: 10px;
-        }
-        div {
-          width: 100%;
-          .order-action {
-            text-align: center;
-            border: 1px solid orange;
-            padding: auto 5px;
-            .counter {
-              vertical-align: middle;
-            }
-          }
-        }
-      }
+.item-landing-container {
+  width: 100%;
+  padding: 0px 16px;
+
+  .input-area {
+    .zat-input {
+      width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
     }
+  }
+}
+
+.mat-tab-label-active {
+  .mat-tab-label-content {
+    font-weight: bold !important;
+    color: #000000 !important;
   }
 }

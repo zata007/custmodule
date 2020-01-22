@@ -2,14 +2,19 @@
   <div fxLayout="row" fxLayoutAlign="start center" class="food-item">
     <img class="thumb mat-elevation-z4" src="../../../assets/img/core/thumb.jpg" alt="" />
     <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
-      <div class="head4 food-name">{{data.dishName}}</div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div class="head4 food-name">{{data.dishName}}</div>
+        <div fxLayout="row" fxLayoutAlign="flex-end" class="type">
+          <img src="../../../../assets/icons/non-veg.png" alt="">
+        </div>
+      </div>
       <div class="restaurant para">Restaurant</div>
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div class="price head4">₹{{ data.dishPrice }}</div>
         <div fxLayout="row" fxLayoutAlign="space-between baseline" class="order-action">
-          <div (click)="removeUnit.emit($event)" >-</div>
-          <div class="counter">{{data.count}}</div>
-          <div (click)="addUnit.emit($event)" >+</div>
+          <!-- <div (click)="removeUnit.emit($event)" >-</div> -->
+          <div class="counter">Qty: {{data.count}}</div>
+          <!-- <div (click)="addUnit.emit($event)" >+</div> -->
         </div>
       </div>
     </div>
