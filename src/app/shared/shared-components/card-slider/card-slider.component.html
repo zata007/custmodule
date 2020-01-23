@@ -1,16 +1,14 @@
 <div class="content-container">
   <div class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)" [index]="selectedIndex">
-    <div class="swiper-wrapper">
+    <div fxLayout="row" class="swiper-wrapper">
       <div *ngFor="let item of data" class="swiper-slide" (click)="onItemClick(item)">
-        <div class="pitstop-container">
-          <div class="left">
-              <img class="image" src="../../../assets/img/core/food-item.svg" width="90px" alt="" />
+        <div fxLayout="column" class="pitstop-container">
+          <div class="image">
+            <img src="../../../../assets/img/core/restaurant.jpg" alt="">
           </div>
-          <div class="right">
-            <div class="header">ZataakSe pitstop A0001</div>
-            <!-- <div class="famous"><b>Famous for:</b> Ajmeri Gate</div> -->
-            <!-- <div class="merchant"><b>Featured merchent:</b> Shirsho's Chapati</div>
-            <div class="rating"><b>Averahe rating:</b> 4</div> -->
+          <div fxLayout="column"fxLayoutAlign="start" class="info">
+            <div class="name head5 bold">Pitstop</div>
+            <div class="secondary landmark">Landmark</div>
           </div>
         </div>
       </div>
