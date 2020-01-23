@@ -12,6 +12,8 @@ export interface ISignUpData {
 export interface Marker {
   lat: number;
   lng: number;
+  pitstop?: string;
+  landmark?: string;
   label?: string;
   draggable?: boolean;
 }

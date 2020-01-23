@@ -95,7 +95,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
           lng: d.pitstop[0],
           label: '', // TODO: Add label/id recieved from socket
         };
-        this.markers.push(pitstopMarker);
+        //this.markers.push(pitstopMarker);
       }
     });
     this.customerStateService.setCurrentPage('main');
@@ -244,8 +244,11 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
             const pitstopMarker: Marker = {
               lat: i.blPitStopLongLat.coordinates[1],
               lng: i.blPitStopLongLat.coordinates[0],
+              pitstop: i.blPitstopName,
+              landmark: i.blPitStopLandmark,
               label: index + '',
             };
+            this.markers.push(pitstopMarker);
             this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
           });
         });
