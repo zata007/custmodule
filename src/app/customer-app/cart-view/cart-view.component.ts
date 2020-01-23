@@ -6,6 +6,8 @@ import { OrderService } from '../order.service';
 import { IMenuData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/shared/services/data.service';
+import { CommonService } from 'src/app/shared/services/common.service';
 
 @Component({
   selector: 'app-cart-view',
@@ -17,7 +19,12 @@ export class CartViewComponent implements OnInit {
 
   orderedItems: IMenuData[] = [];
   hasAuthToken = false;
-  constructor(private location: Location, private bottomSheet: MatBottomSheet, private orderService: OrderService, private router: Router) { }
+  constructor(private location: Location,
+              private dataService: DataService,
+              private bottomSheet: MatBottomSheet,
+              private orderService: OrderService,
+              private router: Router,
+              private commonService: CommonService) { }
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
@@ -49,6 +56,11 @@ export class CartViewComponent implements OnInit {
     if (this.hasAuthToken) {
       // TODO place order.
       console.log('order can be placed');
+      this.dataService.placeOrder(null).subscribe(res => {
+        console.log('order-placded', res);
+        this.commonService.paymentInformation = res;
+        window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
+      });
 
     } else {
       // Goto login-signup

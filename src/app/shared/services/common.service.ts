@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUserDetails, IPlatformParams } from '../models/common-model';
+import { IUserDetails, IPlatformParams, IResponsePlaceOrder } from '../models/common-model';
 import { BehaviorSubject } from 'rxjs';
 import { ZATAAKSE_PREF_LANG } from '../constants/constants';
 
@@ -11,6 +11,7 @@ export class CommonService {
   isUserConnectedSubject = new BehaviorSubject(true);
   isUserConnected$ = this.isUserConnectedSubject.asObservable();
   userDetails: IUserDetails = null;
+  paymentInformation: IResponsePlaceOrder;
   userId: any;
   haslocationData = false;
   fingerPrintData = null;
