@@ -40,6 +40,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
+import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
     ProfileComponent,
     MenuListComponent,
     RestaurantsListComponent,
+    PitstopRestaurantComponent,
   ],
   entryComponents: [
     BillDetailComponent,

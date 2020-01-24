@@ -77,7 +77,7 @@
     [selectedIndex]="selectedIndex"
     (itemClicked)="gotoPitstop()"
   ></card-slider> -->
-  <button mat-raised-button color="primary" *ngIf="customerStateService.selectedLocation.from.lat" (click)="openBottomSheet()">Confirm Location</button>
+  <button mat-raised-button color="primary" *ngIf="customerStateService.selectedLocation.from.lat" (click)="onRouteSelected()">Confirm Location</button>
 </div>
 
 <!-- Swiper End -->

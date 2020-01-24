@@ -214,6 +214,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
         this.haveNoPitstop = true;
       }
     });
+    this.gotoPitstop();
   }
 
   requestService() {
@@ -235,8 +236,9 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
   }
 
   gotoPitstop() {
-    this.customerStateService.setCurrentPage('pitstop-view');
-    this.router.navigate(['customer/pitstop']);
+    const pitStopData = this.markers[this.selectedIndex];
+    this.customerStateService.setCurrentPitstop(pitStopData);
+    this.router.navigate(['customer/pitstop-restaurant']);
   }
 
 
