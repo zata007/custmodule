@@ -36,7 +36,7 @@
     <div class="head2">₹320</div>
   </div>
   <div class="order-button head4 bold">
-    <button mat-raised-button color="primary" class="head4 bold">PLACE ORDER</button>
+    <button mat-raised-button color="primary" (click)="onSubmitClick()" class="head4 bold">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</button>
   </div>
 </div>
 

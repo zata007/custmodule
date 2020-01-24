@@ -1,6 +1,9 @@
 .pitstop-landing-container {
   overflow-x: visible;
   overflow-y: scroll;
+  overflow: auto;
+  // TODO: add mediaquery
+  height: 80vh;
   .food-item-container {
     margin: 5px 0px;
     width: 100%;
@@ -21,10 +24,8 @@
         padding-right: 20px;
         div {
           .food-name {
-            font-weight: bold;
+            font-weight: 500;
             line-height: 1.5;
-          }
-          .type {
             img {
               width: 20px;
               height: 20px;

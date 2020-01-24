@@ -12,6 +12,8 @@ export interface ISignUpData {
 export interface Marker {
   lat: number;
   lng: number;
+  pitstop?: string;
+  landmark?: string;
   label?: string;
   draggable?: boolean;
 }
@@ -224,4 +226,66 @@ export interface IResponseGetSkuData {
     currentPage: number;
     skuData: IMenuData[];
   };
+}
+
+export interface ILoginSignupData {
+  userId: string;
+  indLanPref: string;
+  indFingerPrint: string;
+  pRoleId: string;
+  pRelationId: string;
+}
+
+export interface IRequestVerifyOtp {
+  userId: string;
+  pRoleId: string;
+  pRelationId: string;
+  mobileOTP: number;
+  fingerprint: string;
+  lan: string;
+}
+export interface IRequestPlaceOrder {
+  userId?: string;
+}
+
+export interface IResponsePlaceOrder {
+    message: string;
+    data: {
+      msg: string,
+      billdeskUrl: string;
+    };
+}
+
+export interface IResponseVerifyOtp {
+  message: string;
+  data: {
+    indDetail: {
+      _id: string;
+      indCountryCode: string;
+      indMobileNum: string;
+      roles: [
+        {
+          indEmailNotify: boolean;
+          indMobileNotify: boolean;
+          _id: string;
+          deviceId: {
+            indCurrLocLongLat: {
+              type: string;
+              coordinates: number[]
+            };
+            indPushNotify: boolean;
+            indFingerPrint: string
+          };
+          indMobileNum: string
+        }
+      ];
+      uniqueId: string;
+      accessToken: string;
+    }
+  };
+}
+
+export interface IResponseLoginSignup {
+  message: string;
+  data: ILoginSignupData;
 }

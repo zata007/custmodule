@@ -4,6 +4,10 @@ import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData } from 'src/app/shared/models/common-model';
+import { ZATAAKSE_JWT_TOKEN } from 'src/app/shared/constants/constants';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/shared/services/data.service';
+import { CommonService } from 'src/app/shared/services/common.service';
 
 @Component({
   selector: 'app-cart-view',
@@ -14,10 +18,17 @@ import { IMenuData } from 'src/app/shared/models/common-model';
 export class CartViewComponent implements OnInit {
 
   orderedItems: IMenuData[] = [];
-  constructor(private location: Location, private bottomSheet: MatBottomSheet, private orderService: OrderService) { }
+  hasAuthToken = false;
+  constructor(private location: Location,
+              private dataService: DataService,
+              private bottomSheet: MatBottomSheet,
+              private orderService: OrderService,
+              private router: Router,
+              private commonService: CommonService) { }
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
+    this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
   }
   onBackClick() {
     this.location.back();
@@ -39,6 +50,22 @@ export class CartViewComponent implements OnInit {
 
   removeItemFromCart(data: IMenuData) {
     this.orderService.removeItem(data);
+  }
+
+  onSubmitClick() {
+    if (this.hasAuthToken) {
+      // TODO place order.
+      console.log('order can be placed');
+      this.dataService.placeOrder(null).subscribe(res => {
+        console.log('order-placded', res);
+        this.commonService.paymentInformation = res;
+        window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
+      });
+
+    } else {
+      // Goto login-signup
+      this.router.navigate(['login-signup']);
+    }
   }
 
 

@@ -21,7 +21,11 @@ export class PitstopLandingComponent implements OnInit {
   searchTerms = '';
   selectedTab = 0;
 
-  constructor(private customerStateService: CustomerStateService, private dataService: DataService, private commonService: CommonService) {
+  constructor(
+    private customerStateService: CustomerStateService,
+    private dataService: DataService,
+    private commonService: CommonService
+    ) {
     // this.customerStateService.currentSkuData$.subscribe(data => {
     //   console.log(data);
     //   this.foods = data.skuData;

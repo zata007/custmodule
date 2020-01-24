@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
 import { SigninOtpComponent } from '../signin-otp/signin-otp.component';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { IMobileLoginData } from 'src/app/shared/models/common-model';
+import { IMobileLoginData, IResponseLoginSignup, ILoginData, ILoginSignupData, IRequestVerifyOtp } from 'src/app/shared/models/common-model';
 import {
   FacebookLoginProvider,
   AuthService,
   SocialUser
 } from 'angularx-social-login';
-//import { PrelaunchService } from 'src/app/pre-launch/prelaunch.service';
+// import { PrelaunchService } from 'src/app/pre-launch/prelaunch.service';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { SignupComponent } from '../signup/signup.component';
@@ -17,6 +17,8 @@ import { SignIn } from 'src/app/store/actions/customer.actions';
 import { IAppState } from 'src/app/store/states/app.states';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'src/app/shared/services/cookie.service';
+import { DataService } from 'src/app/shared/services/data.service';
+import { ZATAAKSE_JWT_TOKEN } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-login-signup',
@@ -24,27 +26,24 @@ import { CookieService } from 'src/app/shared/services/cookie.service';
   styleUrls: ['./login-signup.component.scss']
 })
 export class LoginSignupComponent implements OnInit {
-  //@ViewChild(SignupComponent) signupComponent: SignupComponent;
+  // @ViewChild(SignupComponent) signupComponent: SignupComponent;
   selected = 0;
   ELoginSignup = ELoginSignup;
   loginMobNumber = null;
   isRegistrationFormValid = false;
   user: SocialUser;
-  userByMobile: IMobileLoginData = {
-    userId: '',
-    lanPreference: '',
-    fingerprint: '',
-    mobileOTP: null
-  };
+  userByMobile: ILoginSignupData;
+  signupData: any;
   constructor(
     private bottomSheet: MatBottomSheet,
     private loginService: LoginService,
     private authService: AuthService,
-    //private prelaunchService: PrelaunchService,
     private router: Router,
     private snack: MatSnackBar,
     private store: Store<IAppState>,
     private cookieService: CookieService,
+    private commonService: CommonService,
+    private dataService: DataService,
   ) {}
 
   ngOnInit() {}
@@ -64,15 +63,25 @@ export class LoginSignupComponent implements OnInit {
   }
 
   verifyLoginOtp(otp: number) {
-    this.userByMobile.mobileOTP = otp;
-    this.loginService.verifyOtp(this.userByMobile).subscribe(
+    const {fingerprint, lan} = this.commonService.getRequestEssentialParams();
+    const data: IRequestVerifyOtp =  {
+      userId: this.userByMobile.userId,
+      mobileOTP: otp,
+      pRoleId: this.userByMobile.pRoleId,
+      pRelationId: this.userByMobile.pRelationId,
+      fingerprint,
+      lan
+    };
+    this.dataService.verifyOtp(data).subscribe(
       (res) => {
         this.bottomSheet.dismiss();
-        const data = { ...res.data.userDetails };
-        data.id = data['_id'];
-        this.store.dispatch(new SignIn(data));
-        this.cookieService.setUserData(data);
-        this.router.navigate(['/customer']);
+        const data = { ...res.data.indDetail };
+        localStorage.setItem(ZATAAKSE_JWT_TOKEN, data.accessToken);
+        // data.id = data._id;
+        // this.store.dispatch(new SignIn(data));
+        // this.cookieService.setUserData(data);
+        // if navigated from cart then navigate back to cart-view page
+        this.router.navigate(['customer']);
       },
       (err) => {
         this.bottomSheet.dismiss();
@@ -83,10 +92,11 @@ export class LoginSignupComponent implements OnInit {
   onSubmitButtonClick() {
     switch (this.selected) {
       case ELoginSignup.Login:
-        this.loginByNumber();
+        this.handleLoginSignupRequest('login');
         return;
       case ELoginSignup.Signup:
-        //this.signupComponent.register();
+        this.handleLoginSignupRequest('register');
+        // this.signupComponent.register();
         return;
 
       default:
@@ -94,29 +104,50 @@ export class LoginSignupComponent implements OnInit {
     }
   }
 
-  loginByNumber() {
-    if (!this.loginByNumber || this.loginMobNumber < 100000) {
-      this.snack.open('Please provide valid number');
-      return;
-    }
-    const num = '+91' + this.loginMobNumber;
-    this.loginService.loginByNumber(num).subscribe(
-      res => {
-        this.userByMobile = { ...res.data };
-        //this.prelaunchService.setUserId(this.userByMobile.userId);
-        this.openVerifyOTP();
-      },
-      error => {
-        if (error.error.statusCode === 400) {
-          this.bottomSheet.open(SigninOtpComponent, {
-            data: {
-              isNotRegistered: true,
-              onProceed: (type) => this.onProceedFromBottomSheet(type)
-            }
-          });
-        }
+  handleLoginSignupRequest(type: string) {
+
+     // TODO: Send register data.
+    const params = this.commonService.getPlatformParams();
+    const { latitude, longitude} = this.commonService.getRequestEssentialParams();
+    this.dataService.registerLogin({
+      ...this.commonService.getRequestEssentialParams(),
+      data: {
+        indMobileNum: type === 'register' ? this.signupData.mobileNumber : this.loginMobNumber,
+        indCountryCode: '91',
+        pRoleId: params.interfaceData[0].pRoleId,
+        pRelationId: params.interfaceData[0].pRelationId,
+        pInterface: params.interfaceData[0]._id,
+        reqType: type,
+        indEmailNotify: true,
+        indMobileNotify: true,
+        indPushNotify: true,
+        latitude,
+        longitude,
+
       }
-    );
+    }).subscribe((res: IResponseLoginSignup) => {
+      console.log(res, `${type} done`);
+      this.userByMobile = res.data;
+      this.openVerifyOTP();
+    });
+
+    // this.loginService.loginByNumber(num).subscribe(
+    //   res => {
+    //     this.userByMobile = { ...res.data };
+    //     //this.prelaunchService.setUserId(this.userByMobile.userId);
+    //     this.openVerifyOTP();
+    //   },
+    //   error => {
+    //     if (error.error.statusCode === 400) {
+    //       this.bottomSheet.open(SigninOtpComponent, {
+    //         data: {
+    //           isNotRegistered: true,
+    //           onProceed: (type) => this.onProceedFromBottomSheet(type)
+    //         }
+    //       });
+    //     }
+    //   }
+    // );
   }
 
   onProceedFromBottomSheet(type: number) {
@@ -136,9 +167,14 @@ export class LoginSignupComponent implements OnInit {
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(res => {
       this.user = res;
-      //this.prelaunchService.userData = res;
+      // this.prelaunchService.userData = res;
       this.router.navigate(['pre-launch/landing-page']);
     });
+  }
+
+  onSignupDataChange(value: any) {
+    this.signupData = value;
+
   }
 
   onPanelSelect(selected: number) {

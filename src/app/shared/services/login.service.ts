@@ -26,10 +26,6 @@ export class LoginService {
     return this.dataService.loginByNumber(data);
   }
 
-  verifyOtp(userByMobile: IMobileLoginData): Observable<any> {
-    return this.dataService.verifyOtp(userByMobile);
-  }
-
   resendOTP(userId: string, lng: string) {
     return this.httpClient.put(`${environment.API_Endpoint}/${API_ENDPOINTS.OA}/${lng}/resendOTP/${userId}`, undefined);
   }

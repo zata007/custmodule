@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ILoginData, IMobileLoginData,
-   IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData } from '../models/common-model';
+   IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder } from '../models/common-model';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../constants/constants';
 
@@ -153,16 +153,34 @@ export class DataService {
         lan: data.lan,
       }
     };
-    return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.PARAMS}/getPlatformParams`, data.data, options);
+
+    // POST /access/user/registerLogin
+    return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/registerLogin`, data.data, options);
   }
 
 
 
-  verifyOtp(userByMobile: IMobileLoginData): Observable<any> {
-    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/verifyOTP`;
+  verifyOtp(data: IRequestVerifyOtp): Observable<any> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/verifyOTP`;
     const options = {
-      headers: this.getOptions()
+      headers: {
+        ...this.getOptions(),
+        fingerprint: data.fingerprint,
+        lan: data.lan
+      },
     };
-    return this.putMethod(url, options, userByMobile);
+    delete data.fingerprint;
+    delete data.lan;
+    return this.putMethod(url, options, data);
+  }
+
+  placeOrder(data: IRequestPlaceOrder): Observable<IResponsePlaceOrder> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/placeAnOrder`;
+    const options = {
+      headers: {
+        ...this.getOptions(),
+      },
+    };
+    return this.putMethod(url, options, data) as any;
   }
 }
