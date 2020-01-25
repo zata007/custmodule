@@ -59,10 +59,14 @@ export class CartViewComponent implements OnInit {
       this.dataService.placeOrder(null).subscribe(res => {
         console.log('order-placded', res);
         this.commonService.paymentInformation = res;
-        window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
+
+       // this.router.navigate([ `${res.data.billdeskUrl}?msg=${res.data.msg}`])
+        window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`)
+       // history.pushState(null,'test', `${res.data.billdeskUrl}?msg=${res.data.msg}` )
+        // window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
       });
 
-    } else {
+  } else {
       // Goto login-signup
       this.router.navigate(['login-signup']);
     }
