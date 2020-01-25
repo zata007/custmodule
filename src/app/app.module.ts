@@ -24,6 +24,7 @@ import { ConnectionServiceModule } from 'ng-connection-service';
 import { SharedModule } from './shared/shared-components/shared.module';
 
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login';
+import { PaymentComponent } from './payment/payment.component';
 
 
 // required for AOT compilation
@@ -51,7 +52,8 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    PaymentComponent,
   ],
   imports: [
     MaterialModule,

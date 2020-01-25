@@ -9,6 +9,8 @@ import { CookieService } from 'src/app/shared/services/cookie.service';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/states/app.states';
 import { OrderService } from '../order.service';
+import { MatBottomSheet } from '@angular/material';
+import { CartNotEmptyComponent } from 'src/app/shared/shared-components/cart-not-empty/cart-not-empty.component';
 
 enum HeaderState {}
 
@@ -25,7 +27,8 @@ export class NavMainComponent implements OnInit, OnDestroy {
     public router: Router,
     private cookieService: CookieService,
     private store: Store<IAppState>,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private bottomSheet: MatBottomSheet
   ) {}
 
   get isLoggedIn() {
@@ -56,7 +59,8 @@ export class NavMainComponent implements OnInit, OnDestroy {
 
   onBackClick() {
     this.customerStateService.setCurrentPage('main');
-    this.router.navigate([this.router.url]);
+    // TODO: This has to be previous url
+    this.router.navigate(['/customer']);
   }
 
   onSideNavClick(item: string) {
@@ -76,15 +80,29 @@ export class NavMainComponent implements OnInit, OnDestroy {
         this.router.navigate(['/customer/care']);
         break;
       case 'Profile':
-        this.router.navigate(['/customer/profile'])
+        this.router.navigate(['/customer/profile']);
+        break;
       default:
         break;
     }
   }
 
   onNavigate(url: string) {
-    sessionStorage.setItem('path', url);
-    this.router.navigate([url]);
+    // Check if cart has data
+    if (this.cartCount && this.cartCount > 0 ) {
+      const cartNotEmptyRef = this.bottomSheet.open(CartNotEmptyComponent);
+      cartNotEmptyRef.afterDismissed().subscribe(res => {
+        if (res) {
+          sessionStorage.setItem('path', url);
+          this.orderService.clearCart();
+          this.router.navigate([url]);
+        }
+      });
+
+    } else {
+      sessionStorage.setItem('path', url);
+      this.router.navigate([url]);
+    }
   }
 
   onCartClick() {
