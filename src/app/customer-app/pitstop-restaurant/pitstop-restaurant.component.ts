@@ -47,7 +47,7 @@ export class PitstopRestaurantComponent implements OnInit {
   }
 
   getRestaurants(): Observable<IResponseGetRestaurantData>{
-    const pitstopData = this.customerStateService.getCurrentPitstopData();
+    const pitstopData = this.customerStateService.getFromLocation();
     if(this.path === 'customer/order-delivery') {
       const data: IRequestGetRestaurantData = {
         ...this.commonService.getRequestEssentialParams(),

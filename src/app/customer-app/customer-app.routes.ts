@@ -9,6 +9,7 @@ import { OrderAheadComponent } from './order-ahead/order-ahead.component';
 import { OrderDeliveryComponent } from './order-delivery/order-delivery.component';
 import { ProfileComponent } from './profile/profile.component'
 import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
+import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
@@ -20,7 +21,7 @@ export const CustomerAppRoutes: Routes = [
     pathMatch: 'prefix',
     children: [
       { path: 'pitstop-landing', component: PitstopLandingComponent },
-      { path: 'pitstop-restaurant', component: PitstopViewComponent },
+      { path: 'pitstop-restaurant', component: PitstopRestaurantComponent },
       { path: 'pitstop/:openType', component: PitstopViewComponent },
       { path: 'pitstop', component: PitstopViewComponent },
       { path: 'quick-preorder', component: PreOrderComponent },
