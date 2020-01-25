@@ -10,17 +10,15 @@
     }
     .details {
       width: 85%;
-      height: 125px;
+      min-height: 125px;
       border-radius: 5px;
       margin-left: -15%;
-      padding-left: 20%;
-      padding-right: 16px;
+      padding: 10px 10px 10px 20%;
       div {
         .food-name {
           font-weight: bold;
-          line-height: 1.5;
-        }
-        .type {
+          line-height: 1.2;
+          margin-bottom: 7px;
           img {
             width: 20px;
             height: 20px;
