@@ -77,7 +77,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     this.initMapAutocomplete();
 
     this.curLocResDataSubscription = this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
-      console.log(resData);
       this.markers = [];
       resData.filter(i => i.blDelivery).forEach((i, index) => {
         const cardLocation = {
@@ -214,6 +213,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
         this.haveNoPitstop = true;
       }
     });
+    this.gotoPitstop();
   }
 
   requestService() {
@@ -235,8 +235,9 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
   }
 
   gotoPitstop() {
-    this.customerStateService.setCurrentPage('pitstop-view');
-    this.router.navigate(['customer/pitstop']);
+    const pitStopData = this.markers[this.selectedIndex];
+    this.customerStateService.setCurrentPitstop(pitStopData);
+    this.router.navigate(['customer/pitstop-restaurant']);
   }
 
 
@@ -348,7 +349,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     return google.maps.geometry.spherical.computeDistanceBetween(from, to);
   }
 
-  openBottomSheet(): void {
+  goToRestaurant(): void {
     const data: IRequestGetRestaurantData = {
       ...this.commonService.getRequestEssentialParams(),
       pitstopLatitude: this.lat, // pitStopData.lat,
@@ -359,9 +360,10 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     };
     this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
       // TODO: Handle no data
-      this.bottomSheet.open(RestaurantListComponent, {
-        data:  {data: res.data, openedFrom: ECustomerServiceType.Delivery }
-      });
+      if (res.data && res.data.blData) {
+        this.customerStateService.setCurrentPage('pitstop-restaurant');
+        this.router.navigate(['customer/pitstop-restaurant']);
+      }
     });
   }
 }

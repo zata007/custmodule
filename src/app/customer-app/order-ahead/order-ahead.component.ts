@@ -92,7 +92,6 @@ export class OrderAheadComponent implements OnInit {
     this.initMapAutocomplete();
 
     this.curLocResDataSubscription =  this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
-      console.log(resData);
       this.markers = [];
       resData.filter(i => i.blOrderAhead).forEach((i, index) => {
         const cardLocation = {
@@ -314,20 +313,21 @@ export class OrderAheadComponent implements OnInit {
     return google.maps.geometry.spherical.computeDistanceBetween(from, to);
   }
 
-  openBottomSheet(): void {
+  goToRestaurant(): void {
     const data: IRequestGetRestaurantData = {
       ...this.commonService.getRequestEssentialParams(),
       pitstopLatitude: this.lat, // pitStopData.lat,
       pitstopLongitude: this.lng, // pitStopData.lng,
       isTakeAway: false,
-      isDelivery: false,
-      isOrderAhead: true,
+      isDelivery: true,
+      isOrderAhead: false,
     };
     this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
       // TODO: Handle no data
-      this.bottomSheet.open(RestaurantListComponent, {
-        data:  {data: res.data, openedFrom: ECustomerServiceType.OrderAhead }
-      });
+      if (res.data && res.data.blData) {
+        this.customerStateService.setCurrentPage('pitstop-restaurant');
+        this.router.navigate(['customer/pitstop-restaurant']);
+      }
     });
   }
 }

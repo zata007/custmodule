@@ -1,0 +1,18 @@
+.pitstop-restaurant-container {
+    width: 100%;
+    padding: 0px 16px;
+  
+    .input-area {
+      .zat-input {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+    .scroll-item {
+      height: auto;
+      overflow-y: scroll;
+      overflow-x: visible;
+      margin-top: 20px;
+    }
+  }
