@@ -6,8 +6,8 @@
   width: 100%;
   height: 100vh;
   overflow: visible;
+  padding: 0px 16px;
   .input-area {
-    padding: 0px 16px;
     .zat-input {
       width: 100%;
       padding-left: 10px;
@@ -56,8 +56,8 @@
   .scroll-item{
     position: relative;
     overflow: auto;
-    height: 69vh;
-    margin-top: 10px
+    height: 100%;
+    margin-top: 20px
   }
 
 }

@@ -31,5 +31,43 @@ export class RestaurantsListComponent implements OnInit {
   onRestaurantClick(item: IRestaurantData) {
     // TODO: Goto page.
     console.log(item, this.openedFrom);
+    const data: IRequestGetSkuData = {
+      businessLocId: item.businessLocId,
+      flag: 2,
+      pageNum: 1,
+      ...this.commonService.getRequestEssentialParams()
+    };
+    switch (this.openedFrom) {
+      case ECustomerServiceType.TakeAway:
+        data.pitstopLatitude = item.longLat[1].toString();
+        data.pitstopLongitude = item.longLat[0].toString();
+        delete data.businessLocId;
+        break;
+      case ECustomerServiceType.OrderAhead:
+      case ECustomerServiceType.Delivery:
+        data.flag = 2;
+        break;
+      default:
+        break;
+    }
+
+    console.log(data);
+    this.dataService.getSku(data).subscribe((res: IResponseGetSkuData) => {
+      // openType = foodList, restaurantList
+      console.log(res);
+      if (res.data && res.data.skuData) {
+        this.customerStateService.setCurrentPage('pitstop-view');
+        this.router.navigate([`customer/pitstop/${EListPageViewType.FoodList}`]).then(r => {
+          if (r) {
+            const dataToStore = {
+              ...res.data,
+              resName: item.displayName
+            };
+            this.customerStateService.setSkuData(dataToStore);
+          }
+        });
+        // Send to menu page.
+      }
+    });
   }
 }

@@ -7,8 +7,9 @@ import { CardSliderComponent } from './card-slider/card-slider.component';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { DialogPreOrderComponent } from './dialog-pre-order/dialog-pre-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartNotEmptyComponent } from './cart-not-empty/cart-not-empty.component';
 @NgModule({
-  imports: [CommonModule, FormsModule,ReactiveFormsModule, SwiperModule, MaterialModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SwiperModule, MaterialModule],
   exports: [
     CarousalComponent,
     LoaderComponent,
@@ -17,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TermsAndConditionComponent,
     CardSliderComponent,
     DialogPreOrderComponent,
+    CartNotEmptyComponent
   ],
   declarations: [
     CarousalComponent,
@@ -25,8 +27,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TermsAndConditionComponent,
     CardSliderComponent,
     DialogPreOrderComponent,
+    CartNotEmptyComponent,
   ],
-  entryComponents: [DialogPreOrderComponent],
+  entryComponents: [DialogPreOrderComponent, CartNotEmptyComponent],
   providers: [],
 })
 export class SharedModule {}

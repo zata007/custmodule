@@ -42,11 +42,12 @@ export class PitstopViewComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private dataService: DataService
   ) {
-    // this.customerStateService.currentSkuData$.subscribe(data => {
-    //   console.log(data);
-    //   this.foods = data.skuData;
-    //   this.resName = data.resName;
-    // });
+    this.customerStateService.currentSkuData$.subscribe(data => {
+      console.log(data);
+      this.foods = data.skuData;
+      this.resName = data.resName;
+      this.filteredFoods = this.foods;
+    });
   }
 
   ngOnInit() {
@@ -73,15 +74,15 @@ export class PitstopViewComponent implements OnInit {
 
     this.customerStateService.setCurrentPage('pitstop-view');
 
-    this.getFoodList().subscribe(res => {
-      this.foods = res.data.skuData;
-      this.filteredFoods = this.foods;
-    });
+    // this.getFoodList().subscribe(res => {
+    //   this.foods = res.data.skuData;
+    //   this.filteredFoods = this.foods;
+    // });
 
-    this.getRestaurants().subscribe(res => {
-      this.restaurants = res.data.blData;
-      this.filteredRestaurants = this.restaurants;
-    });
+    // this.getRestaurants().subscribe(res => {
+    //   this.restaurants = res.data.blData;
+    //   this.filteredRestaurants = this.restaurants;
+    // });
   }
 
   onSearchKeyUp(searchTerm: string) {
@@ -106,42 +107,42 @@ export class PitstopViewComponent implements OnInit {
     this.onSearchKeyUp(this.searchTerms);
   }
 
-  getRestaurants(): Observable<IResponseGetRestaurantData>{
-    const pitstopData = this.customerStateService.getCurrentPitstopData();
-    if(this.path === 'customer/order-delivery') {
-      const data: IRequestGetRestaurantData = {
-        ...this.commonService.getRequestEssentialParams(),
-        pitstopLatitude: pitstopData.lat,
-        pitstopLongitude: pitstopData.lng,
-        isTakeAway: false,
-        isDelivery: true,
-        isOrderAhead: false,
-      };
-      return this.dataService.getRestauratData(data) as any;
-    } else if(this.path === 'customer/order-ahead') {
-      const data: IRequestGetRestaurantData = {
-        ...this.commonService.getRequestEssentialParams(),
-        pitstopLatitude: pitstopData.lat,
-        pitstopLongitude: pitstopData.lng,
-        isTakeAway: false,
-        isDelivery: false,
-        isOrderAhead: true,
-      };      
-    return this.dataService.getRestauratData(data) as any;
-    }
-  }
+  // getRestaurants(): Observable<IResponseGetRestaurantData>{
+  //   const pitstopData = this.customerStateService.getCurrentPitstopData();
+  //   if(this.path === 'customer/order-delivery') {
+  //     const data: IRequestGetRestaurantData = {
+  //       ...this.commonService.getRequestEssentialParams(),
+  //       pitstopLatitude: pitstopData.lat,
+  //       pitstopLongitude: pitstopData.lng,
+  //       isTakeAway: false,
+  //       isDelivery: true,
+  //       isOrderAhead: false,
+  //     };
+  //     return this.dataService.getRestauratData(data) as any;
+  //   } else if(this.path === 'customer/order-ahead') {
+  //     const data: IRequestGetRestaurantData = {
+  //       ...this.commonService.getRequestEssentialParams(),
+  //       pitstopLatitude: pitstopData.lat,
+  //       pitstopLongitude: pitstopData.lng,
+  //       isTakeAway: false,
+  //       isDelivery: false,
+  //       isOrderAhead: true,
+  //     };      
+  //   return this.dataService.getRestauratData(data) as any;
+  //   }
+  // }
 
-  getFoodList(): Observable<IResponseGetSkuData> {
-    const pitstopData = this.customerStateService.getCurrentPitstopData();
-    const data: IRequestGetSkuData = {
-      flag: 1,
-      pageNum: 1,
-      ...this.commonService.getRequestEssentialParams(),
-      pitstopLongitude: pitstopData.lng.toString(),
-      pitstopLatitude: pitstopData.lat.toString()
-    };
-    return this.dataService.getSku(data) as any;
-  }
+  // getFoodList(): Observable<IResponseGetSkuData> {
+  //   const pitstopData = this.customerStateService.getCurrentPitstopData();
+  //   const data: IRequestGetSkuData = {
+  //     flag: 1,
+  //     pageNum: 1,
+  //     ...this.commonService.getRequestEssentialParams(),
+  //     pitstopLongitude: pitstopData.lng.toString(),
+  //     pitstopLatitude: pitstopData.lat.toString()
+  //   };
+  //   return this.dataService.getSku(data) as any;
+  // }
 
   placeOrder() {
     if (this.path === 'customer/order-delivery') {

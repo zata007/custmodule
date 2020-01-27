@@ -65,6 +65,10 @@ export class CustomerStateService {
     }
   }
 
+  getFromLocation() {
+    return this.selectedLocation.from;
+  }
+
   setDirectionResults(data: Array<google.maps.DirectionsRoute>) {
     this.directionResults = data;
     this.selectedRoute = data[0];

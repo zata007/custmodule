@@ -3,15 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PageNotFoundComponent } from './shared/shared-components/page-not-found/page-not-found.component';
 import { DirectAccessGuard } from './shared/guards/direct-access.guard';
+import { PaymentComponent } from './payment/payment.component';
 
 
 const routes: Routes = [
   { path: 'no-internet', component: PageNotFoundComponent, canActivate: [DirectAccessGuard] },
+  { path: 'payment', component: PaymentComponent },
   {
     path: 'customer',
     loadChildren: './customer-app/customer-app.module#CustomerAppModule',
     data: { preload: true },
-  },  
+  },
   {
     path: 'login-signup',
     loadChildren: './login-signup/login-signup.module#LoginSignupModule',
@@ -22,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, {useHash: false})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
