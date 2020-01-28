@@ -41,6 +41,17 @@ export class CustomerStateService {
   directionResults$ = this.socket.fromEvent('getDirectionsResult');
   pitstopOnEdge$ = this.socket.fromEvent('checkLocationOnEdgeResult');
 
+  initState() {
+    if (this.hasLocationData()) {
+      this.getRoutes();
+      this.locationSelectionCompleted$.next(true);
+    } else {
+      this.locationSelectionCompleted$.next(false);
+    }
+
+    this.currentLocationRestaurantData.next([...this.currentLocationRestaurantData.value ]);
+  }
+
   setCurrentPage(page: string) {
     this.currentPageSubject.next(page);
   }

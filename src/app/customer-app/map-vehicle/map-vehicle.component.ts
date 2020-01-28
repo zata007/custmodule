@@ -63,14 +63,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // TODO: Update logic if user is first time visitor then only we should show onboarding
-    // setTimeout(() => {
-    //   this.joyrideService.startTour({ steps: ['onboard-location-input'] });
-    // }, 500);
-
     // Patch map data,
-
-
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
       if (hasCompleted) {
         // TODO: DO work once location completed.
@@ -298,19 +291,34 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
   mapReady(map: any) {
     this.map = map;
+    this.customerStateService.initState();
 
     // Create the img to hold the control and call the CenterControl()
     const centerControl = this.CenterControl(map);
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControl);
-
-    const sub = this.geoLocationService.getPosition().subscribe((val) => {
-      this.lat = val.coords.latitude;
-      this.lng = val.coords.longitude;
-      this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
-        this.patchLocationToInput({ lat: val.coords.latitude, lng: val.coords.longitude }, this.searchElementRefFrom, result);
-        sub.unsubscribe();
+    if (this.customerStateService.hasLocationData()) {
+      const selectedLocation = this.customerStateService.selectedLocation;
+      this.lat = selectedLocation.from.lat;
+      this.lng = selectedLocation.from.lng;
+      this.getPlaceName(this.lat, this.lng, (result: google.maps.GeocoderResult) => {
+        this.patchLocationToInput({ lat: this.lat, lng: this.lng }, this.searchElementRefFrom, result);
       });
-    });
+      this.getPlaceName(selectedLocation.to.lat, selectedLocation.to.lng, (result: google.maps.GeocoderResult) => {
+        this.patchLocationToInput({ lat: selectedLocation.to.lat, lng: selectedLocation.to.lng }, this.searchElementRefTo, result);
+      });
+      this.onRouteSelected(null);
+    } else {
+      const sub = this.geoLocationService.getPosition().subscribe((val) => {
+        this.lat = val.coords.latitude;
+        this.lng = val.coords.longitude;
+        this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
+          this.patchLocationToInput({ lat: val.coords.latitude, lng: val.coords.longitude }, this.searchElementRefFrom, result);
+          sub.unsubscribe();
+        });
+      });
+    }
+
+
   }
 
   patchLocationToInput(currentCords: { lat: number, lng: number }, inputToPatch: ElementRef<any>, result: google.maps.GeocoderResult) {
