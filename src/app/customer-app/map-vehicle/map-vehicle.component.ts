@@ -296,17 +296,20 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     // Create the img to hold the control and call the CenterControl()
     const centerControl = this.CenterControl(map);
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControl);
-    if (this.customerStateService.hasLocationData()) {
-      const selectedLocation = this.customerStateService.selectedLocation;
+    const selectedLocation = this.customerStateService.selectedLocation;
+    if (selectedLocation.from.lat || this.customerStateService.hasLocationData()) {
       this.lat = selectedLocation.from.lat;
       this.lng = selectedLocation.from.lng;
       this.getPlaceName(this.lat, this.lng, (result: google.maps.GeocoderResult) => {
         this.patchLocationToInput({ lat: this.lat, lng: this.lng }, this.searchElementRefFrom, result);
       });
-      this.getPlaceName(selectedLocation.to.lat, selectedLocation.to.lng, (result: google.maps.GeocoderResult) => {
-        this.patchLocationToInput({ lat: selectedLocation.to.lat, lng: selectedLocation.to.lng }, this.searchElementRefTo, result);
-      });
-      this.onRouteSelected(null);
+      if (this.customerStateService.hasLocationData()) {
+        this.getPlaceName(selectedLocation.to.lat, selectedLocation.to.lng, (result: google.maps.GeocoderResult) => {
+          this.patchLocationToInput({ lat: selectedLocation.to.lat, lng: selectedLocation.to.lng }, this.searchElementRefTo, result);
+        });
+        this.onRouteSelected(null);
+      }
+
     } else {
       const sub = this.geoLocationService.getPosition().subscribe((val) => {
         this.lat = val.coords.latitude;
