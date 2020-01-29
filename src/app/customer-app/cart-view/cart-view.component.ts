@@ -8,6 +8,7 @@ import { ZATAAKSE_JWT_TOKEN } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
+import { CustomerStateService } from '../customer-state.service';
 
 @Component({
   selector: 'app-cart-view',
@@ -24,13 +25,15 @@ export class CartViewComponent implements OnInit {
               private bottomSheet: MatBottomSheet,
               private orderService: OrderService,
               private router: Router,
-              private commonService: CommonService) { }
+              private commonService: CommonService,
+              private customerStateService: CustomerStateService) { }
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
     this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
   }
   onBackClick() {
+    this.customerStateService.setCurrentPage('main');
     this.location.back();
   }
 

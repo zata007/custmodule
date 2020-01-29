@@ -51,7 +51,7 @@ export class PitstopViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    const openType =  this.route.snapshot.params.openType;
+    const openType = this.route.snapshot.params.openType;
     if (openType) {
       switch (openType) {
         case EListPageViewType.FoodList:
@@ -62,27 +62,18 @@ export class PitstopViewComponent implements OnInit {
           break;
       }
     }
-   // this.foods = this.orderService.getFoodListByRestaurant(+1);
-
-    // TODO Refactor
-    // if (this.customerService.selectedPlaces.from && this.customerService.selectedPlaces.to) {
-    //   this.selectedFrom = this.customerService.selectedPlaces.from.formatted_address;
-    //   this.selectedTo = this.customerService.selectedPlaces.to.formatted_address;
-    // } else {
-    //   this.router.navigate(['/customer']);
-    // }
-
     this.customerStateService.setCurrentPage('pitstop-view');
+    this.initState();
+  }
 
-    // this.getFoodList().subscribe(res => {
-    //   this.foods = res.data.skuData;
-    //   this.filteredFoods = this.foods;
-    // });
+  initState() {
+      if (this.customerStateService.currentSkuData) {
+      const data = this.customerStateService.currentSkuData;
 
-    // this.getRestaurants().subscribe(res => {
-    //   this.restaurants = res.data.blData;
-    //   this.filteredRestaurants = this.restaurants;
-    // });
+      this.foods = data.skuData;
+      this.resName = data.resName;
+      this.filteredFoods = this.foods;
+    }
   }
 
   onSearchKeyUp(searchTerm: string) {
@@ -106,43 +97,6 @@ export class PitstopViewComponent implements OnInit {
   onTabChange() {
     this.onSearchKeyUp(this.searchTerms);
   }
-
-  // getRestaurants(): Observable<IResponseGetRestaurantData>{
-  //   const pitstopData = this.customerStateService.getCurrentPitstopData();
-  //   if(this.path === 'customer/order-delivery') {
-  //     const data: IRequestGetRestaurantData = {
-  //       ...this.commonService.getRequestEssentialParams(),
-  //       pitstopLatitude: pitstopData.lat,
-  //       pitstopLongitude: pitstopData.lng,
-  //       isTakeAway: false,
-  //       isDelivery: true,
-  //       isOrderAhead: false,
-  //     };
-  //     return this.dataService.getRestauratData(data) as any;
-  //   } else if(this.path === 'customer/order-ahead') {
-  //     const data: IRequestGetRestaurantData = {
-  //       ...this.commonService.getRequestEssentialParams(),
-  //       pitstopLatitude: pitstopData.lat,
-  //       pitstopLongitude: pitstopData.lng,
-  //       isTakeAway: false,
-  //       isDelivery: false,
-  //       isOrderAhead: true,
-  //     };      
-  //   return this.dataService.getRestauratData(data) as any;
-  //   }
-  // }
-
-  // getFoodList(): Observable<IResponseGetSkuData> {
-  //   const pitstopData = this.customerStateService.getCurrentPitstopData();
-  //   const data: IRequestGetSkuData = {
-  //     flag: 1,
-  //     pageNum: 1,
-  //     ...this.commonService.getRequestEssentialParams(),
-  //     pitstopLongitude: pitstopData.lng.toString(),
-  //     pitstopLatitude: pitstopData.lat.toString()
-  //   };
-  //   return this.dataService.getSku(data) as any;
-  // }
 
   placeOrder() {
     if (this.path === 'customer/order-delivery') {

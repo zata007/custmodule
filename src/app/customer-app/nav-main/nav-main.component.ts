@@ -11,8 +11,8 @@ import { IAppState } from 'src/app/store/states/app.states';
 import { OrderService } from '../order.service';
 import { MatBottomSheet } from '@angular/material';
 import { CartNotEmptyComponent } from 'src/app/shared/shared-components/cart-not-empty/cart-not-empty.component';
+import { Location } from '@angular/common';
 
-enum HeaderState {}
 
 @Component({
   selector: 'app-nav-main',
@@ -28,7 +28,8 @@ export class NavMainComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private store: Store<IAppState>,
     private orderService: OrderService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private location: Location,
   ) {}
 
   get isLoggedIn() {
@@ -58,9 +59,8 @@ export class NavMainComponent implements OnInit, OnDestroy {
   }
 
   onBackClick() {
-    this.customerStateService.setCurrentPage('main');
     // TODO: This has to be previous url
-    this.router.navigate(['/customer']);
+    this.location.back();
   }
 
   onSideNavClick(item: string) {

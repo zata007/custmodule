@@ -83,6 +83,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
         this.markers.push(cardLocation);
       });
     });
+    this.customerStateService.setCurrentPage('main');
   }
 
   ngOnDestroy() {

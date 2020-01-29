@@ -92,6 +92,7 @@ export class OrderAheadComponent implements OnInit {
         this.markers.push(cardLocation);
       });
     });
+    this.customerStateService.setCurrentPage('main');
   }
 
   ngOnDestroy() {

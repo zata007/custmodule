@@ -32,6 +32,7 @@ export class CustomerStateService {
   currentPageSubject = new BehaviorSubject<string>(CustomerPages.Main);
   currentPage$ = this.currentPageSubject.asObservable();
 
+  public currentSkuData: { totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; } = null;
   currentSkuData$ = new Subject<{ totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; }>();
 
   currentLocationRestaurantData = new BehaviorSubject<IBusinessLocData[]>([]);
@@ -86,6 +87,7 @@ export class CustomerStateService {
   }
 
   setSkuData(data: { totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; }) {
+    this.currentSkuData = data;
     this.currentSkuData$.next(data);
   }
 
