@@ -10,9 +10,7 @@ import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
-import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 import { DataService } from 'src/app/shared/services/data.service';
-import { ECustomerServiceType } from 'src/app/shared/constants/constants';
 interface Marker {
   lat: number;
   lng: number;
@@ -60,7 +58,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
-    private bottomSheet: MatBottomSheet,
     private dataService: DataService,
   ) {}
 
@@ -78,7 +75,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
     this.curLocResDataSubscription = this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
       this.markers = [];
-      resData.filter(i => i.blDelivery).forEach((i, index) => {
+      resData.filter(i => i.blDelivery).forEach((i) => {
         const cardLocation = {
           lat: i.businessLocationCoord[1],
           lng: i.businessLocationCoord[0],
@@ -86,6 +83,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
         this.markers.push(cardLocation);
       });
     });
+    this.customerStateService.setCurrentPage('main');
   }
 
   ngOnDestroy() {
@@ -172,7 +170,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     this.markers = [];
   }
 
-  onRouteSelected(item: any) {
+  onRouteSelected() {
     // Get distance from pitstop
     this.commonService.setDataLoading(true);
     this.customerStateService.calculateDistance((val) => {
@@ -243,33 +241,61 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
   mapReady(map: any) {
     this.map = map;
+    this.customerStateService.initState();
 
     // Create the img to hold the control and call the CenterControl()
     const centerControl = this.CenterControl(map);
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControl);
 
-    const sub = this.geoLocationService.getPosition().subscribe((val) => {
-      this.lat = val.coords.latitude;
-      this.lng = val.coords.longitude;
-      this.customerStateService.setFromLocation({ lat: val.coords.latitude, lng: val.coords.longitude }, true);
-      this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
+    const fromLocation = this.customerStateService.getFromLocation();
+    if (fromLocation.lat && fromLocation.lng) {
+      this.lng = fromLocation.lng;
+      this.lat = fromLocation.lat;
+      this.getPlaceName(fromLocation.lat, fromLocation.lng, (result: google.maps.GeocoderResult) => {
         if (!this.searchElementRefFrom.nativeElement.value) {
           const bounds = new google.maps.LatLngBounds();
-          const currentLocation = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
+          const currentLocation = new google.maps.LatLng(fromLocation.lat, fromLocation.lng);
+
+          map.setCenter(currentLocation);
           bounds.extend(currentLocation);
 
           this.map.panToBounds(bounds); // # auto-center
           this.searchElementRefFrom.nativeElement.value = result.formatted_address;
-          const latlng = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
+          const latlng = new google.maps.LatLng(fromLocation.lat, fromLocation.lng);
           const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
           if (this.calculateDistance(Wankhede, latlng) < 2000) {
             // TODO: handle stadium logic
             this.openDialog();
           }
         }
-        sub.unsubscribe();
       });
-    });
+
+
+    } else {
+      const sub = this.geoLocationService.getPosition().subscribe((val) => {
+        this.lat = val.coords.latitude;
+        this.lng = val.coords.longitude;
+        this.customerStateService.setFromLocation({ lat: val.coords.latitude, lng: val.coords.longitude }, true);
+        this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
+          if (!this.searchElementRefFrom.nativeElement.value) {
+            const bounds = new google.maps.LatLngBounds();
+            const currentLocation = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
+            bounds.extend(currentLocation);
+
+            this.map.panToBounds(bounds); // # auto-center
+            this.searchElementRefFrom.nativeElement.value = result.formatted_address;
+            const latlng = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
+            const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
+            if (this.calculateDistance(Wankhede, latlng) < 2000) {
+              // TODO: handle stadium logic
+              this.openDialog();
+            }
+          }
+          sub.unsubscribe();
+        });
+      });
+
+    }
   }
 
   /**
@@ -286,7 +312,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
       if (status === google.maps.GeocoderStatus.OK) {
         const result = results[0];
         const rsltAdrComponent = result.address_components;
-        const resultLength = rsltAdrComponent.length;
         if (result != null) {
           console.log(result);
           callback(result);

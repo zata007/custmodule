@@ -32,6 +32,7 @@ export class CustomerStateService {
   currentPageSubject = new BehaviorSubject<string>(CustomerPages.Main);
   currentPage$ = this.currentPageSubject.asObservable();
 
+  public currentSkuData: { totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; } = null;
   currentSkuData$ = new Subject<{ totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; }>();
 
   currentLocationRestaurantData = new BehaviorSubject<IBusinessLocData[]>([]);
@@ -40,6 +41,17 @@ export class CustomerStateService {
   locationSelectionCompleted$ = new Subject<boolean>();
   directionResults$ = this.socket.fromEvent('getDirectionsResult');
   pitstopOnEdge$ = this.socket.fromEvent('checkLocationOnEdgeResult');
+
+  initState() {
+    if (this.hasLocationData()) {
+      this.getRoutes();
+      this.locationSelectionCompleted$.next(true);
+    } else {
+      this.locationSelectionCompleted$.next(false);
+    }
+
+    this.currentLocationRestaurantData.next([...this.currentLocationRestaurantData.value ]);
+  }
 
   setCurrentPage(page: string) {
     this.currentPageSubject.next(page);
@@ -75,6 +87,7 @@ export class CustomerStateService {
   }
 
   setSkuData(data: { totalPage: number; itemPerPage: number; currentPage: number; resName: string, skuData: IMenuData[]; }) {
+    this.currentSkuData = data;
     this.currentSkuData$.next(data);
   }
 

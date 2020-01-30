@@ -52,6 +52,7 @@
     "@angular/cli": "^8.3.22",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
+    "@ngrx/store-devtools": "^8.6.0",
     "@types/fingerprintjs2": "^2.0.0",
     "@types/googlemaps": "^3.39.1",
     "@types/jasmine": "~3.3.8",

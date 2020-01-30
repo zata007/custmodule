@@ -23,8 +23,12 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ConnectionServiceModule } from 'ng-connection-service';
 import { SharedModule } from './shared/shared-components/shared.module';
 
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+
+
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { PaymentComponent } from './payment/payment.component';
+import { NgrxRouterStoreModule } from './store/reducers/router/ngrx-router.module';
 
 
 // required for AOT compilation
@@ -85,6 +89,8 @@ export function provideConfig() {
       strictActionImmutability: true
     }
   }),
+  !environment.production ? StoreDevtoolsModule.instrument() : [],
+  NgrxRouterStoreModule,
     SharedModule
   ],
   providers: [
