@@ -1,10 +1,10 @@
 <div class="item-landing-container">
-  <div fxLayout="row" fxLayoutAlign="flex-end">    
-    <p>Only Veg </p>
-    <mat-slide-toggle color="primary"></mat-slide-toggle>
-  </div>
   <div class="input-area">
     <input class="zat-input" type="text" [(ngModel)]="searchTerms" (keyup)="onSearchKeyUp(searchTerms)" placeholder="🔍 Search for your carvings">
+  </div>
+  <div *ngIf="selectedTab === 0" fxLayout="row" fxLayoutAlign="flex-end">    
+    <p>Only Veg </p>
+    <mat-slide-toggle color="primary"></mat-slide-toggle>
   </div>
   <mat-tab-group [(selectedIndex)]="selectedTab" (selectedTabChange)="onTabChange()">
     <mat-tab label="Foods">
