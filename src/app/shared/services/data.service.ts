@@ -59,8 +59,8 @@ export class DataService {
         Accept: 'application/json',
         fingerprint: data.fingerprint,
         lan: data.lan,
-        latitude: '22.484977', // data.latitude.toString(),
-        longitude: '88.384863', // data.longitude.toString()  // 22.484977, 88.384863
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString()  // 22.484977, 88.384863
       },
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/isLocationServed`, options);
