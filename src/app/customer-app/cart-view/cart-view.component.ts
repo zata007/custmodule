@@ -63,8 +63,6 @@ export class CartViewComponent implements OnInit {
 
         localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
         window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
-       // history.pushState(null,'test', `${res.data.billdeskUrl}?msg=${res.data.msg}` )
-        // window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
       });
 
   } else {
