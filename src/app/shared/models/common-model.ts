@@ -289,3 +289,33 @@ export interface IResponseLoginSignup {
   message: string;
   data: ILoginSignupData;
 }
+
+export interface IResponseGetProfileData {
+  message: string;
+  data: {
+    indDetail: {
+      _id: string;
+      indCountryCode: string;
+      indMobileNum: string;
+      uniqueId: string;
+      basic: {
+        indFirstName: string;
+        indLastName: string;
+        indDob: string;
+        apAge: number;
+        apAgeUpdateOn: string;
+        indGender: string;
+        indFoodPref: string;
+        indLanPref: string;
+        indPic: [
+          {
+            imageName: string;
+            original: string;
+            thumbnail: string;
+            tags: [];
+          }
+        ];
+      };
+    };
+  };
+}

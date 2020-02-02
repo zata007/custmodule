@@ -3,12 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PageNotFoundComponent } from './shared/shared-components/page-not-found/page-not-found.component';
 import { DirectAccessGuard } from './shared/guards/direct-access.guard';
-import { PaymentComponent } from './payment/payment.component';
 
 
 const routes: Routes = [
   { path: 'no-internet', component: PageNotFoundComponent, canActivate: [DirectAccessGuard] },
-  { path: 'payment', component: PaymentComponent },
   {
     path: 'customer',
     loadChildren: './customer-app/customer-app.module#CustomerAppModule',

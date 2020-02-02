@@ -111,7 +111,7 @@ export class CustomerStateService {
     const data = {
       pitstop: [lng, lat],
       polyline: encodeURI(this.selectedRoute.overview_polyline['points']) ,
-      tolerance: 1000,
+      tolerance: 0.001,
     };
 
     console.log('emited', data)
