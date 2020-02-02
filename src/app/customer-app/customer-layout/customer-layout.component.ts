@@ -44,7 +44,7 @@ export class CustomerLayoutComponent implements OnInit {
       .subscribe((res: IResponseLocationServed) => {
         this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
         if (res.data && res.data.isLocationServed) {
-            // this.router.navigate(['customer']);
+            // TODO: DO Nothing
           } else {
             // TODO: Show popup for no service
           }

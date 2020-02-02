@@ -4,7 +4,7 @@ import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData } from 'src/app/shared/models/common-model';
-import { ZATAAKSE_JWT_TOKEN } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
@@ -58,13 +58,11 @@ export class CartViewComponent implements OnInit {
   onSubmitClick() {
     if (this.hasAuthToken) {
       // TODO place order.
-      console.log('order can be placed');
       this.dataService.placeOrder(null).subscribe(res => {
-        console.log('order-placded', res);
         this.commonService.paymentInformation = res;
 
-       // this.router.navigate([ `${res.data.billdeskUrl}?msg=${res.data.msg}`])
-        window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`)
+        localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
+        window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
        // history.pushState(null,'test', `${res.data.billdeskUrl}?msg=${res.data.msg}` )
         // window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
       });
