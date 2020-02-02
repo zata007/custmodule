@@ -5,12 +5,14 @@ import { ILoginData, IMobileLoginData,
    IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder } from '../models/common-model';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../constants/constants';
+import { Socket } from 'ngx-socket-io';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
   lan = '';
   fingerprint = '';
-  constructor(private httpClient: HttpClient) { }
+  paymentStatus$ = this.socket.fromEvent<{ _id: string, paymentStatus: string }>('getOrderPaymentStatus');
+  constructor(private httpClient: HttpClient, private socket: Socket) { }
 
   getOptions() {
     return {
@@ -29,6 +31,13 @@ export class DataService {
 
   getMethod(url: string, params: any) {
     return this.httpClient.get(url, params);
+  }
+
+  getOrderStatus(orderId: string) {
+    const data = {
+      orderId
+    };
+    this.socket.emit('getOrderPaymentStatus', data);
   }
 
   addSubscriber(subscription: any) {
