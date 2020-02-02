@@ -10,6 +10,7 @@ import { OrderDeliveryComponent } from './order-delivery/order-delivery.componen
 import { ProfileComponent } from './profile/profile.component'
 import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
+import { AddAddressComponent } from './address/add-address/add-address.component'
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
@@ -29,6 +30,7 @@ export const CustomerAppRoutes: Routes = [
       { path: 'order-ahead', component: OrderAheadComponent },
       { path: 'order-delivery', component: OrderDeliveryComponent},
       { path: 'order-takeaway', component: MapVehicleComponent},
+      { path: 'address/add', component: AddAddressComponent},
       { path: '', component: MapVehicleComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

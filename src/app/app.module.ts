@@ -27,7 +27,6 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login';
-import { PaymentComponent } from './payment/payment.component';
 import { NgrxRouterStoreModule } from './store/reducers/router/ngrx-router.module';
 
 
@@ -57,7 +56,6 @@ export function provideConfig() {
   declarations: [
     AppComponent,
     LandingPageComponent,
-    PaymentComponent,
   ],
   imports: [
     MaterialModule,
