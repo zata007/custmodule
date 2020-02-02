@@ -81,15 +81,13 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
     this.customerStateService.directionResults$.subscribe((data: google.maps.DirectionsRoute[]) => this.onDirectionResultUpdate(data));
 
-    this.customerStateService.pitstopOnEdge$.subscribe((i: any) => {
-      if (i.isLocationOnEdge) {
-        const pitstopMarker: Marker = {
-          lat: i.blPitStopLongLat.coordinates[1],
-          lng: i.blPitStopLongLat.coordinates[0],
-          pitstop: i.blPitstopName,
-          landmark: i.blPitStopLandmark,
-        };
-        this.markers.push(pitstopMarker);
+    this.customerStateService.pitstopOnEdge$.subscribe((i) => {
+      if (!i.isLocationOnEdge) {
+        // Pop from markers list
+        const index = this.markers.findIndex(j => j.lat === i.pitstop[0] && j.lng === i.pitstop[1]);
+        if (index > -1) {
+          this.markers.splice(index, 1);
+        }
       }
     });
     this.customerStateService.setCurrentPage('main');
@@ -234,7 +232,16 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
           this.markers = [];
           pitstops.forEach((i, index) => {
-            this.customerStateService.isPitStopOnEdge(i.blPitStopLongLat.coordinates[1], i.blPitStopLongLat.coordinates[0]);
+
+            const pitstopMarker: Marker = {
+              lat: i.blPitStopLongLat.coordinates[1],
+              lng: i.blPitStopLongLat.coordinates[0],
+              pitstop: i.blPitstopName,
+              landmark: i.blPitStopLandmark,
+              label: index + '',
+            };
+            this.markers.push(pitstopMarker);
+            this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
           });
         });
         // Show pitstops
@@ -263,6 +270,9 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
   gotoPitstop() {
     const pitStopData = this.markers[this.selectedIndex];
+    if (!pitStopData) {
+      return;
+    }
     this.customerStateService.setCurrentPitstop(pitStopData);
     this.router.navigate(['customer/pitstop-landing']);
   }

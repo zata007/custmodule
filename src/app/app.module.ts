@@ -28,6 +28,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { NgrxRouterStoreModule } from './store/reducers/router/ngrx-router.module';
+import { PaymentComponent } from './payment/payment.component';
 
 
 // required for AOT compilation
@@ -56,6 +57,7 @@ export function provideConfig() {
   declarations: [
     AppComponent,
     LandingPageComponent,
+    PaymentComponent,
   ],
   imports: [
     MaterialModule,

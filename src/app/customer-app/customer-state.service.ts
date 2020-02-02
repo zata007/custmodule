@@ -40,7 +40,7 @@ export class CustomerStateService {
 
   locationSelectionCompleted$ = new Subject<boolean>();
   directionResults$ = this.socket.fromEvent('getDirectionsResult');
-  pitstopOnEdge$ = this.socket.fromEvent('checkLocationOnEdgeResult');
+  pitstopOnEdge$ = this.socket.fromEvent<{isLocationOnEdge: boolean, pitstop: number[]}>('checkLocationOnEdgeResult');
 
   initState() {
     if (this.hasLocationData()) {
