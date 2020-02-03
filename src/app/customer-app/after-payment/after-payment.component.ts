@@ -1,17 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone, TemplateRef, OnDestroy } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MapsAPILoader } from '@agm/core';
-import { Router } from '@angular/router';
-import { CommonService } from 'src/app/shared/services/common.service';
+import { Component, OnInit } from '@angular/core';
 import { CustomerStateService } from '../customer-state.service';
-import { CustomerService } from '../customer.service';
-import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { MatDialog, MatBottomSheet } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { ECustomerServiceType } from '../../shared/constants/constants';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
-import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
-import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
-import { DataService } from '../../shared/services/data.service';
-import { ZATAAKSE_PREF_LANG, ECustomerServiceType } from '../../shared/constants/constants';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-after-payment',
@@ -19,21 +11,29 @@ import { ZATAAKSE_PREF_LANG, ECustomerServiceType } from '../../shared/constants
   styleUrls: ['./after-payment.component.scss']
 })
 export class AfterPaymentComponent implements OnInit {
+  ECustomerServiceType = ECustomerServiceType;
+  selectedService = ECustomerServiceType.Delivery;
+  mapStyles = MAP_STYLES;
+
+  mapForHeader = {
+    [ECustomerServiceType.Delivery] : 'Delivery',
+    [ECustomerServiceType.OrderAhead] : 'OrderAhead',
+    [ECustomerServiceType.TakeAway] : 'TakeAway',
+
+  };
 
   constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone,
-    private router: Router,
-    private commonService: CommonService,
     public customerStateService: CustomerStateService,
-    private customerService: CustomerService,
-    private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
-    private bottomSheet: MatBottomSheet,
-    private dataService: DataService
-  ) { }
+    private route: ActivatedRoute  ) { }
 
   ngOnInit() {
+    this.selectedService = this.route.snapshot.params.orderType;
+  }
+
+  mapReady() {
+    console.log('map-ready');
+
   }
 
 }

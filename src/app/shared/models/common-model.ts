@@ -16,6 +16,7 @@ export interface Marker {
   landmark?: string;
   label?: string;
   draggable?: boolean;
+  id?: string;
 }
 
 export interface ILoginData {
@@ -245,7 +246,17 @@ export interface IRequestVerifyOtp {
   lan: string;
 }
 export interface IRequestPlaceOrder {
-  userId?: string;
+  orderType: string;
+  orderData: [
+    {
+      businessLocId: string;
+      skuId: string;
+      qty: number
+    }
+  ];
+  addressId?: string;
+  pitstopId?: string;
+  totalPrice: number;
 }
 
 export interface IResponsePlaceOrder {

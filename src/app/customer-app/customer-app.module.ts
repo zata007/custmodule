@@ -9,8 +9,7 @@ import {
   NavBottomComponent,
   NavTopComponent,
   MapVehicleComponent,
-  MainContainerComponent,
-  CustomerStateService,
+  MainContainerComponent
 } from './index';
 import { CustomerAppRoutes } from './customer-app.routes';
 import { AgmDirectionModule } from 'agm-direction';
@@ -95,6 +94,6 @@ import { AfterPaymentComponent } from './after-payment/after-payment.component';
     FlexLayoutModule
   ],
   bootstrap: [CustomerLayoutComponent],
-  providers: [CustomerService, CustomerStateService, OrderService],
+  providers: [CustomerService, OrderService],
 })
 export class CustomerAppModule {}

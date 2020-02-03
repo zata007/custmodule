@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData } from 'src/app/shared/models/common-model';
+import { IMenuData, IRequestPlaceOrder } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -58,11 +58,26 @@ export class CartViewComponent implements OnInit {
   onSubmitClick() {
     if (this.hasAuthToken) {
       // TODO place order.
-      this.dataService.placeOrder(null).subscribe(res => {
+      const data: IRequestPlaceOrder = {
+
+        orderData: this.orderService.cart.map(i => {
+          return  {
+            businessLocId: i.apPsBusinessLocId,
+            skuId: i._id,
+            qty: i.count
+          };
+        }) as any,
+        orderType: this.customerStateService.currentServiceSelected,
+        totalPrice: 10,
+        pitstopId: this.customerStateService.getCurrentPitstopData().id
+
+      }
+      this.dataService.placeOrder(data).subscribe(res => {
         this.commonService.paymentInformation = res;
 
         localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
         window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
+        console.log(this.customerStateService.currentServiceSelected);
       });
 
   } else {

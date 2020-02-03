@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
 import { IBusinessLocData, IMenuData, Marker } from '../shared/models/common-model';
+import { ECustomerServiceType } from '../shared/constants/constants';
 
 class ISelectedPathData {
   from: {
@@ -28,6 +29,7 @@ export class CustomerStateService {
   polylines = [];
   directionResults: Array<google.maps.DirectionsRoute> = [];
   selectedRoute: google.maps.DirectionsRoute = null;
+  currentServiceSelected = ECustomerServiceType.TakeAway as string;
 
   currentPageSubject = new BehaviorSubject<string>(CustomerPages.Main);
   currentPage$ = this.currentPageSubject.asObservable();
@@ -51,6 +53,10 @@ export class CustomerStateService {
     }
 
     this.currentLocationRestaurantData.next([...this.currentLocationRestaurantData.value ]);
+  }
+
+  updateCurrentService(service: string) {
+    this.currentServiceSelected = service;
   }
 
   setCurrentPage(page: string) {
