@@ -1,5 +1,5 @@
-<div class="new-address-container">
-  <div class="map-area">
+<div class="add-address-container" fxLayout="column">
+  <div class="map-area" fxFlex="1 1 100%" #mapContainer>
     <agm-map
       [latitude]="lat"
       [longitude]="lng"
@@ -18,7 +18,12 @@
           [zIndex]="polyline.zIndex"
           [strokeColor]="polyline.color"
         >
-          <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.lat" [longitude]="point.lng"> </agm-polyline-point>
+          <agm-polyline-point
+            *ngFor="let point of polyline.path"
+            [latitude]="point.lat"
+            [longitude]="point.lng"
+          >
+          </agm-polyline-point>
         </agm-polyline>
 
         <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
@@ -27,18 +32,21 @@
         *ngIf="customerStateService.selectedLocation.from.lat"
         [latitude]="customerStateService.selectedLocation.from.lat"
         [longitude]="customerStateService.selectedLocation.from.lng"
-        [markerDraggable]="false"
+        [markerDraggable]="true"
         [iconUrl]="'assets/icons/pin-start.svg'"
         [animation]="'BOUNCE'"
+        (dragEnd)="setFromLatLng($event)"
+
       >
       </agm-marker>
       <agm-marker
         *ngIf="customerStateService.selectedLocation.to.lat"
         [latitude]="customerStateService.selectedLocation.to.lat"
         [longitude]="customerStateService.selectedLocation.to.lng"
-        [markerDraggable]="false"
+        [markerDraggable]="true"
         [iconUrl]="'assets/icons/pin-end.svg'"
         [animation]="'BOUNCE'"
+        (dragEnd)="setToLatLng($event)"
       >
       </agm-marker>
 
@@ -48,23 +56,29 @@
         [latitude]="m.lat"
         [longitude]="m.lng"
         [markerDraggable]="m.draggable"
-        [iconUrl]="selectedLabel === m.label ? 'assets/icons/marker-active.svg' : 'assets/icons/marker.svg'"
+        [iconUrl]="'assets/icons/marker.gif'"
       >
       </agm-marker>
     </agm-map>
   </div>
-  <div class="input-area">
-    <mat-form-field>
-      <input matInput type="text" placeholder="AddressLine 1" required>
-      <input matInput type="text" placeholder="AddressLine 2">
-      <input matInput type="text" placeholder="Landmark" required>
-      <input matInput type="text" placeholder="Locality" required>
-      <input matInput type="text" placeholder="City" required>
-      <input matInput type="text" placeholder="State" required>
-      <input matInput type="text" placeholder="Country" required>
-      <input matInput type="text" placeholder="PIN Code" required>
-      <input matInput type="text" placeholder="Address Type Eg. Home, Office, Other" required>
-      <button mat-raised-button color="primary">Submit</button>
-    </mat-form-field>
+</div>
+<div class="location-confirm">
+  <div class="head3 bold">
+    Select delivery location
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="location" fxLayout="column" fxLayoutAlign="space-around">
+      <div class="caption">Your Location</div>
+      <div class="head4 bold">Torit Innovation Private Limited</div>
+      <div class="caption">East Rajapur, Kolkata, West Bengal 700075</div>
+    </div>
+    <button mat-stroked-button color="primary">CHANGE</button>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <button class="confirm-button" mat-raised-button color="primary" (click)="openBottomSheet()">CONFIRM LOCATION AND PROCEED</button>
   </div>
 </div>
+
+<div class="overlay"></div>
