@@ -1,0 +1,93 @@
+<div class="after-payment-container" fxLayout="column">
+    <div class="map-area" fxFlex="1 1 100%" #mapContainer>
+      <agm-map
+        [latitude]="lat"
+        [longitude]="lng"
+        [scrollwheel]="true"
+        [zoomControl]="false"
+        [streetViewControl]="false"
+        (mapReady)="mapReady($event)"
+        [zoom]="zoom"
+        [clickableIcons]="false"
+        [styles]="mapStyles"
+      >
+        <ng-container *ngIf="canShowDirection">
+          <agm-polyline
+            *ngFor="let polyline of polylines; let i = index"
+            (lineClick)="onPolylineClick(i)"
+            [zIndex]="polyline.zIndex"
+            [strokeColor]="polyline.color"
+          >
+            <agm-polyline-point
+              *ngFor="let point of polyline.path"
+              [latitude]="point.lat"
+              [longitude]="point.lng"
+            >
+            </agm-polyline-point>
+          </agm-polyline>
+  
+          <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
+        </ng-container>
+        <agm-marker
+          *ngIf="customerStateService.selectedLocation.from.lat"
+          [latitude]="customerStateService.selectedLocation.from.lat"
+          [longitude]="customerStateService.selectedLocation.from.lng"
+          [markerDraggable]="true"
+          [iconUrl]="'assets/icons/pin-start.svg'"
+          [animation]="'BOUNCE'"
+          (dragEnd)="setFromLatLng($event)"
+  
+        >
+        </agm-marker>
+        <agm-marker
+          *ngIf="customerStateService.selectedLocation.to.lat"
+          [latitude]="customerStateService.selectedLocation.to.lat"
+          [longitude]="customerStateService.selectedLocation.to.lng"
+          [markerDraggable]="true"
+          [iconUrl]="'assets/icons/pin-end.svg'"
+          [animation]="'BOUNCE'"
+          (dragEnd)="setToLatLng($event)"
+        >
+        </agm-marker>
+  
+        <agm-marker
+          *ngFor="let m of markers; let i = index"
+          (markerClick)="clickedMarker(m.label, i)"
+          [latitude]="m.lat"
+          [longitude]="m.lng"
+          [markerDraggable]="m.draggable"
+          [iconUrl]="'assets/icons/marker.gif'"
+        >
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
+  <div class="message">
+    <ng-template #takeAway>
+        <div class="head4">Proceed to the Zataakse Pitstop to receive your order</div>
+        <div class="head3 bold">Pitstop Name</div>
+        <div class="caption">Pitstop Locality</div>
+        <div fxLayout="row" fxlayoutAlign="flex-end">
+            <button mat-raised-button color="primary">NAVIGATE</button>
+        </div>
+    </ng-template>
+    <ng-template #deliver>
+        <div class="head4">Your order will be delivered to following address:</div>
+        <div class="head4">Customer Address</div>
+        <div fxLayout="row" fxlayoutAlign="flex-end">
+            <button mat-fab color="primary">30:00</button>
+        </div>
+    </ng-template>
+    <ng-template #orderAhead>
+        <div class="head4">Please enter your tentative time of arrival</div>
+        <mat-form-field>
+            <input type="time" matInput placeholder="Add time">
+        </mat-form-field>
+        <div fxLayout="row" fxlayoutAlign="center">
+            <button mat-raised-button color="primary">Submit</button>
+        </div>
+    </ng-template>
+  </div>
+  
+  <div class="overlay"></div>
+  
