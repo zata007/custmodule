@@ -101,6 +101,8 @@ export class CustomerStateService {
 
   setCurrentPitstop(pitStopData: Marker) {
     this.currentPitstopData = pitStopData;
+    localStorage.setItem('pitstop', this.currentPitstopData.pitstop);
+    localStorage.setItem('landmark', this.currentPitstopData.landmark);
   }
 
   getCurrentPitstopData() {

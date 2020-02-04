@@ -61,8 +61,8 @@
   <div [ngSwitch]="selectedService">
   <div class="message" *ngSwitchCase="ECustomerServiceType.TakeAway">
     <div class="para">Proceed to the Zataakse Pitstop to receive your order</div>
-    <div class="head3">Pitstop Name</div>
-    <div class="caption">Pitstop Locality</div>
+    <div class="head3">{{this.pitstop[0]}}</div>
+    <div class="caption">{{this.pitstop[1]}}</div>
     <div fxLayout="row" fxLayoutAlign="flex-end">
       <button mat-raised-button color="primary">NAVIGATE</button>
     </div>

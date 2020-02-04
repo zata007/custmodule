@@ -15,6 +15,7 @@ export class AfterPaymentComponent implements OnInit {
   selectedService = ECustomerServiceType.Delivery;
   mapStyles = MAP_STYLES;
   timer : any;
+  pitstop: any;
 
   mapForHeader = {
     [ECustomerServiceType.Delivery] : 'Delivery',
@@ -43,7 +44,9 @@ export class AfterPaymentComponent implements OnInit {
       }
 
     }, 1000);
-    console.log(this.timer)
+
+    this.pitstop = [localStorage.getItem('pitstop'), localStorage.getItem('landmark')];
+    //console.log(this.customerStateService.getCurrentPitstopData());
   }
 
   mapReady() {
