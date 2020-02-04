@@ -8,7 +8,7 @@ import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   { path: 'no-internet', component: PageNotFoundComponent, canActivate: [DirectAccessGuard] },
-  { path: 'payment', component: PaymentComponent },
+  { path: 'payment-status', component: PaymentComponent },
   {
     path: 'customer',
     loadChildren: './customer-app/customer-app.module#CustomerAppModule',

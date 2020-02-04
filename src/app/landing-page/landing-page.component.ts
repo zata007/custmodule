@@ -164,28 +164,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
         position => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-          // this.prelaunchService.setLocationData(latitude, longitude);
           this.commonService.setUserLocation(latitude, longitude);
-          this.dataService
-            .checkZataakseServiceAvailable({
-              fingerprint: this.commonService.fingerPrint,
-              lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
-              latitude,
-              longitude
-            })
-            .subscribe(
-              (res: IResponseLocationServed) => {
-                // this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
-                if (res.data.isLocationServed) {
-                  this.router.navigate(['customer']);
-                } else {
-                  // TODO: Show popup for no service
-                }
-              },
-              err => {
-                // TODO: Handle Error.
-              }
-            );
+          this.router.navigate(['customer']);
         },
         error => {
           // User blocked location

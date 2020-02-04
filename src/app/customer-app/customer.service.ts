@@ -88,4 +88,14 @@ export class CustomerService {
     };
     return this.postMethod('placeAnOrder', resData);
   }
+
+  getProfile( token: string ) {
+    const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getProfile`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      authorization: token.toString()
+    };
+    return this.httpClient.get(getUrl, { headers });
+  }
 }

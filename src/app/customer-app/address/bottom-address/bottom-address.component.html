@@ -1,7 +1,32 @@
-<div class="bottom-address-container">
-  <h3>Add your address</h3>
-  <div>
-    <button mat-raised-button >Use Previous</button>
-    <button mat-raised-button color="primary" (click)="addAddress()">Add New</button>
+<div class="bottom-address-container" fxLayout="column">  
+  <div class="head3 bold">Enter location details</div>
+  <mat-divider></mat-divider>
+  <div class="location-confirm" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="location" fxLayout="column" fxLayoutAlign="space-around">
+      <div class="caption">Your Location</div>
+      <div class="head4 bold">Torit Innovation Private Limited</div>
+    </div>
+    <button mat-stroked-button color="primary">CHANGE</button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="input-area" fxLayout="column">
+    <mat-form-field>
+      <input matInput placeholder="Complete Address" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Floor Number (Optional)">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="How To Reach (Optional)">
+    </mat-form-field>
+    <label class="bold">Location Type</label>
+    <mat-radio-group aria-label="Location Type">
+      <mat-radio-button color="primary" value="Residential">Residential</mat-radio-button>
+      <mat-radio-button color="primary" value="Work">Work</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <button class="confirm-button" mat-raised-button color="primary">SAVE ADDRESS</button>
   </div>
 </div>

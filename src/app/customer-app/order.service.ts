@@ -72,8 +72,8 @@ export class OrderService {
   removeFromCart(item: IMenuData) {
     const index = this.cart.findIndex((i) => i._id === item._id);
     if (index !== -1) {
-      if (this.cart[index].count > 1) {
-        this.cart[index].count -= 1;
+      if (this.cart[index].skuServes  > 1) {
+        this.cart[index].skuServes  -= 1;
       } else {
         this.cart.splice(index, 1);
       }
@@ -98,13 +98,13 @@ export class OrderService {
     // Find item index;
     const index = this.cart.findIndex((i) => i._id === item._id);
     if (index > -1) {
-      if (this.cart[index].count) {
-        this.cart[index].count += 1;
+      if (this.cart[index].skuServes ) {
+        this.cart[index].skuServes  += 1;
       } else {
-        this.cart[index].count = 1;
+        this.cart[index].skuServes  = 1;
       }
     } else {
-      item.count = 1;
+      item.skuServes  = 1;
       this.cart.push({ ...item });
     }
     this.orderCount$.next(this.updatedTotalOrderCount());
@@ -126,7 +126,7 @@ export class OrderService {
 
   countInCart(item: IMenuData) {
     const data = this.cart.find((i) => i._id === item._id);
-    return (data && data.count) || 0;
+    return (data && data.skuServes) || 0;
   }
 
   getPrice(item: number) {
@@ -136,7 +136,7 @@ export class OrderService {
   getTotal() {
     let total = 0;
     this.cart.forEach((i) => {
-      total += i.dishPrice * i.count;
+      total += i.skuPrice * i.skuServes;
     });
     return Math.ceil(total);
   }

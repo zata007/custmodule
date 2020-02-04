@@ -38,6 +38,7 @@ export class PitstopLandingComponent implements OnInit {
     this.getFoodList().subscribe(res => {
       this.foods = res.data.skuData;
       this.filteredFoods = this.foods;
+      console.log(this.filteredFoods);
     });
 
     this.getRestaurants().subscribe(res => {
@@ -50,7 +51,7 @@ export class PitstopLandingComponent implements OnInit {
     if (searchTerm.length > 2) {
       // TODO: Find selected tab and filter data
       if (this.selectedTab === 0) {
-        this.filteredFoods = this.foods.filter(i => i.dishName.toLowerCase().includes(searchTerm.toLowerCase()));
+        this.filteredFoods = this.foods.filter(i => i.skuName.toLowerCase().includes(searchTerm.toLowerCase()));
       } else {
         this.filteredRestaurants = this.restaurants.filter(i => i.displayName.toLowerCase().includes(searchTerm.toLowerCase()));
       }

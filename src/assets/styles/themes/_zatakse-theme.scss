@@ -56,7 +56,7 @@ $zataakse-primary-color: (
 );
 
 
-$zataakse-theme: mat-light-theme(mat-palette($zataakse-primary-color), mat-palette($mat-yellow), mat-palette($mat-red));
+$zataakse-theme: mat-light-theme(mat-palette($zataakse-primary-color), mat-palette($mat-green), mat-palette($mat-red));
 
 .zataakse {
   @include angular-material-theme($zataakse-theme);
@@ -64,7 +64,7 @@ $zataakse-theme: mat-light-theme(mat-palette($zataakse-primary-color), mat-palet
 
   $background: mat-color($zataakse-primary-color, 50);
   $primary: mat-color($zataakse-primary-color, 500);
-  $accent: mat-color($mat-yellow, 500);
+  $accent: mat-color($mat-green, 500);
   $warn: mat-color($mat-red, 500);
 
   main {

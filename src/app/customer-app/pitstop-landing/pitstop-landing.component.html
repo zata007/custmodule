@@ -2,6 +2,10 @@
   <div class="input-area">
     <input class="zat-input" type="text" [(ngModel)]="searchTerms" (keyup)="onSearchKeyUp(searchTerms)" placeholder="🔍 Search for your carvings">
   </div>
+  <div class="toggle-veg" *ngIf="selectedTab === 0" fxLayout="row" fxLayoutAlign="flex-end">    
+    <p>Only Veg </p>
+    <mat-slide-toggle color="green"></mat-slide-toggle>
+  </div>
   <mat-tab-group [(selectedIndex)]="selectedTab" (selectedTabChange)="onTabChange()">
     <mat-tab label="Foods">
       <app-menu-list [foods]="filteredFoods" [resName]="resName"></app-menu-list>

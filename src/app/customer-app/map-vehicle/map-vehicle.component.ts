@@ -81,14 +81,13 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
     this.customerStateService.directionResults$.subscribe((data: google.maps.DirectionsRoute[]) => this.onDirectionResultUpdate(data));
 
-    this.customerStateService.pitstopOnEdge$.subscribe((d: any) => {
-      if (d.isLocationOnEdge) {
-        const pitstopMarker: Marker = {
-          lat: d.pitstop[1],
-          lng: d.pitstop[0],
-          label: '', // TODO: Add label/id recieved from socket
-        };
-        //this.markers.push(pitstopMarker);
+    this.customerStateService.pitstopOnEdge$.subscribe((i) => {
+      if (!i.isLocationOnEdge) {
+        // Pop from markers list
+        const index = this.markers.findIndex(j => j.lat === i.pitstop[0] && j.lng === i.pitstop[1]);
+        if (index > -1) {
+          this.markers.splice(index, 1);
+        }
       }
     });
     this.customerStateService.setCurrentPage('main');
@@ -240,6 +239,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
               pitstop: i.blPitstopName,
               landmark: i.blPitStopLandmark,
               label: index + '',
+              id: i._id,
             };
             this.markers.push(pitstopMarker);
             this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
@@ -271,6 +271,9 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
 
   gotoPitstop() {
     const pitStopData = this.markers[this.selectedIndex];
+    if (!pitStopData) {
+      return;
+    }
     this.customerStateService.setCurrentPitstop(pitStopData);
     this.router.navigate(['customer/pitstop-landing']);
   }

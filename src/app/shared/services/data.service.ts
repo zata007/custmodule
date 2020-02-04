@@ -4,13 +4,15 @@ import { environment } from 'src/environments/environment';
 import { ILoginData, IMobileLoginData,
    IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder } from '../models/common-model';
 import { Observable } from 'rxjs';
-import { API_ENDPOINTS } from '../constants/constants';
+import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../constants/constants';
+import { Socket } from 'ngx-socket-io';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
   lan = '';
   fingerprint = '';
-  constructor(private httpClient: HttpClient) { }
+  paymentStatus$ = this.socket.fromEvent<{ _id: string, paymentStatus: string }>('getOrderPaymentStatus');
+  constructor(private httpClient: HttpClient, private socket: Socket) { }
 
   getOptions() {
     return {
@@ -29,6 +31,13 @@ export class DataService {
 
   getMethod(url: string, params: any) {
     return this.httpClient.get(url, params);
+  }
+
+  getOrderStatus(orderId: string) {
+    const data = {
+      orderId
+    };
+    this.socket.emit('getOrderPaymentStatus', data);
   }
 
   addSubscriber(subscription: any) {
@@ -59,8 +68,8 @@ export class DataService {
         Accept: 'application/json',
         fingerprint: data.fingerprint,
         lan: data.lan,
-        latitude: '22.484977', // data.latitude.toString(),
-        longitude: '88.384863', // data.longitude.toString()  // 22.484977, 88.384863
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString()  // 22.484977, 88.384863
       },
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/isLocationServed`, options);
@@ -179,6 +188,7 @@ export class DataService {
     const options = {
       headers: {
         ...this.getOptions(),
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
       },
     };
     return this.putMethod(url, options, data) as any;

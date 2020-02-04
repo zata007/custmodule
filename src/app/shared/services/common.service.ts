@@ -41,6 +41,7 @@ export class CommonService {
     this.platformParams = data;
   }
 
+
   getPlatformParams(): IPlatformParams {
     return this.platformParams;
   }

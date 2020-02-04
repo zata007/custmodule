@@ -1,0 +1,89 @@
+<div class="after-payment-container" fxLayout="column">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="flex-start">
+    <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
+      <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+    </button>
+    <div fxLayoutAlign="center">{{ mapForHeader[selectedService]}}</div>
+  </mat-toolbar>
+
+  <div class="map-area" fxFlex="1 1 100%" #mapContainer>
+    <agm-map
+      [latitude]="customerStateService.selectedLocation.from.lat"
+      [longitude]="customerStateService.selectedLocation.from.lng"
+      [scrollwheel]="true"
+      [zoomControl]="false"
+      [streetViewControl]="false"
+      (mapReady)="mapReady($event)"
+      [zoom]="12"
+      [clickableIcons]="false"
+      [styles]="mapStyles"
+    >
+      <ng-container *ngIf="false">
+        <agm-polyline
+          *ngFor="let polyline of polylines; let i = index"
+          (lineClick)="onPolylineClick(i)"
+          [zIndex]="polyline.zIndex"
+          [strokeColor]="polyline.color"
+        >
+          <agm-polyline-point
+            *ngFor="let point of polyline.path"
+            [latitude]="point.lat"
+            [longitude]="point.lng"
+          >
+          </agm-polyline-point>
+        </agm-polyline>
+
+        <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
+      </ng-container>
+      <agm-marker
+        *ngIf="customerStateService.selectedLocation.from.lat"
+        [latitude]="customerStateService.selectedLocation.from.lat"
+        [longitude]="customerStateService.selectedLocation.from.lng"
+        [markerDraggable]="false"
+        [iconUrl]="'assets/icons/pin-start.svg'"
+        [animation]="'DROP'"
+
+      >
+      </agm-marker>
+      <agm-marker
+        *ngIf="customerStateService.selectedLocation.to.lat"
+        [latitude]="customerStateService.selectedLocation.to.lat"
+        [longitude]="customerStateService.selectedLocation.to.lng"
+        [markerDraggable]="false"
+        [iconUrl]="'assets/icons/pin-end.svg'"
+        [animation]="'DROP'"
+      >
+      </agm-marker>
+    </agm-map>
+  </div>
+
+
+  <div [ngSwitch]="selectedService">
+  <div class="message" *ngSwitchCase="ECustomerServiceType.TakeAway">
+    <div class="head4">Proceed to the Zataakse Pitstop to receive your order</div>
+    <div class="head3 bold">Pitstop Name</div>
+    <div class="caption">Pitstop Locality</div>
+    <div fxLayout="row" fxlayoutAlign="flex-end">
+      <button mat-raised-button color="primary">NAVIGATE</button>
+    </div>
+  </div>
+  <div  class="message" *ngSwitchCase="ECustomerServiceType.Delivery">
+    <div class="head4">Your order will be delivered to following address:</div>
+    <div class="head4">Customer Address</div>
+    <div fxLayout="row" fxlayoutAlign="flex-end">
+      <button mat-fab color="primary">30:00</button>
+    </div>
+
+  </div>
+  <div  class="message" *ngSwitchDefault>
+    <div class="head4">Please enter your tentative time of arrival</div>
+    <mat-form-field>
+      <input type="time" matInput placeholder="Add time">
+    </mat-form-field>
+    <div fxLayout="row" fxlayoutAlign="center">
+      <button mat-raised-button color="primary">Submit</button>
+    </div>
+
+  </div>
+</div>
+</div>

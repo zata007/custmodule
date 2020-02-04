@@ -16,19 +16,20 @@ export interface Marker {
   landmark?: string;
   label?: string;
   draggable?: boolean;
+  id?: string;
 }
 
 export interface ILoginData {
   lanPreference: string;
-  fingurePrint?: string;
+  fingurePrint ? : string;
   mobileNumber: string;
 }
 
 export interface IMobileLoginData {
-    userId: string;
-    lanPreference: string;
-    fingerprint: string;
-    mobileOTP: number;
+  userId: string;
+  lanPreference: string;
+  fingerprint: string;
+  mobileOTP: number;
 }
 
 export interface IUserDetails {
@@ -36,7 +37,9 @@ export interface IUserDetails {
   email: string;
   fullName: string;
   isVerified: boolean;
-  locationLongLat?: { type: string; coordinates: number[] };
+  locationLongLat ? : {
+    type: string;coordinates: number[]
+  };
   mobileNumber: string;
   referralCode: string;
   remainingReferrals: number;
@@ -81,12 +84,12 @@ export interface IAddressTypesData {
 }
 
 export interface IPlatformParams {
-  rolesData: Array<IRolesData>;
-  relationsData: Array<IRelationsData>;
-  languageData: Array<ILanguageData>;
-  interfaceData: Array<IInterfaceData>;
+  rolesData: Array < IRolesData > ;
+  relationsData: Array < IRelationsData > ;
+  languageData: Array < ILanguageData > ;
+  interfaceData: Array < IInterfaceData > ;
   designationsData: IDesignationsData;
-  addressTypesData: Array<IAddressTypesData>;
+  addressTypesData: Array < IAddressTypesData > ;
 }
 export interface IResponsePlatformParams {
   message: string;
@@ -94,18 +97,18 @@ export interface IResponsePlatformParams {
 }
 
 export interface IRequestRegister {
-    reqType: string;
-    pRoleId: string;
-    pRelationId: string;
-    pInterface: string;
-    indCountryCode: string;
-    indMobileNum: string;
-    indEmailNotify?: boolean;
-    indMobileNotify?: boolean;
-    indPushNotify?: boolean;
-    latitude?: number;
-    longitude?: number;
-    indPwd?: string;
+  reqType: string;
+  pRoleId: string;
+  pRelationId: string;
+  pInterface: string;
+  indCountryCode: string;
+  indMobileNum: string;
+  indEmailNotify ? : boolean;
+  indMobileNotify ? : boolean;
+  indPushNotify ? : boolean;
+  latitude ? : number;
+  longitude ? : number;
+  indPwd ? : string;
 }
 
 export interface IRequestMainParams {
@@ -114,13 +117,13 @@ export interface IRequestMainParams {
   latitude: number;
   longitude: number;
 }
-export interface IRequestGetRestaurantData extends IRequestMainParams  {
+export interface IRequestGetRestaurantData extends IRequestMainParams {
   isOrderAhead: boolean;
   isTakeAway: boolean;
   isDelivery: boolean;
   pitstopLatitude: number;
   pitstopLongitude: number;
-  page?: number;
+  page ? : number;
 }
 
 export interface IRestaurantData {
@@ -130,26 +133,20 @@ export interface IRestaurantData {
   locality: string;
   longLat: number[];
   avgRating: number;
-  images: [
-    {
-      _id: string,
-      original: string,
-      thumbnail: string;
-    }
-  ];
-  blWorkingHrs: [
-    {
+  images: [{
+    _id: string,
+    original: string,
+    thumbnail: string;
+  }];
+  blWorkingHrs: [{
+    _id: string;
+    day: number;
+    time: [{
       _id: string;
-      day: number;
-      time: [
-        {
-          _id: string;
-          startTime: number;
-          endTime: number;
-        }
-      ]
-    }
-  ];
+      startTime: number;
+      endTime: number;
+    }]
+  }];
   distance: number;
 }
 
@@ -161,8 +158,8 @@ export interface IPaginationResGetRestaurant {
 }
 
 export interface IResponseGetRestaurantData {
-    message: string;
-    data: IPaginationResGetRestaurant;
+  message: string;
+  data: IPaginationResGetRestaurant;
 }
 
 export interface IBusinessLocData {
@@ -173,49 +170,80 @@ export interface IBusinessLocData {
   blDelivery: boolean;
   blDineIn: boolean;
   blDeliveryRadius: number;
-  businessLocationCoord: Array<number>;
+  businessLocationCoord: Array < number > ;
   distance: number;
   coDoingBusinessAs: string;
 }
 
 export interface IResponseLocationServed {
-     message: 'Success';
-     data: {
-        isLocationServed: boolean;
-        isLocationKnown: boolean;
-        currentLocationDetails: string;
-        businessLocData: Array<IBusinessLocData>
-      };
+  message: 'Success';
+  data: {
+    isLocationServed: boolean;
+    isLocationKnown: boolean;
+    currentLocationDetails: string;
+    businessLocData: Array < IBusinessLocData >
+  };
 
 }
 
 export interface IRequestGetSkuData extends IRequestMainParams {
   pageNum: number;
   flag: number;
-  pitstopLatitude?: string;
-  pitstopLongitude?: string;
-  businessLocId?: string;
+  pitstopLatitude ? : string;
+  pitstopLongitude ? : string;
+  businessLocId ? : string;
 }
 
 export interface IMenuData {
   _id: string;
-  apPsBusinessLocId: string;
+  apPsBusinessLocId: {
+    corpId: {
+      _id: string;
+      coDoingBusinessAs: string;
+      coLegalName: string;
+      coBrandName: string;
+    };
+  };
   skuType: string[];
   skuSubType: string[];
-  dishName: string;
-  dishQty: string[];
-  dishPrice: number;
-  dishDesc: string[];
-  dishImages: [];
-  dishCuisine: string[];
-  dishType: string[];
-  dishServes: number;
-  dishRating: number;
-  dishSpice: number;
-  dishNutrition: string[];
-  dishCustom: string[];
-  dishCombo: any[];
-  count: number;
+  skuName: string;
+  skuQty: string[];
+  isTaxIncluded: boolean;
+  skuPrice: number;
+  cgstPercentFlag: boolean;
+  cgst: number;
+  cgstSuffix: string;
+  sgstPercentFlag: boolean;
+  sgst: number;
+  sgstSuffix: string;
+  totalPrice: number;
+  skuDesc: string;
+  skuCuisine: string;
+  skuServes: number;
+  skuRating: number;
+  skuSpice: number;
+  skuImages: {
+    _id: string;
+    original: string;
+    thumbnail: string;
+  };
+  skuNutrition: string;
+  skuCustom: string[];
+  skuCombo ? : {
+    skuType: string;
+    skuSubType: string;
+    skuName: string;
+    skuQty: string;
+    skuPrice: number;
+    skuDesc: string;
+    skuCuisine: string;
+    type: string;
+    skuServes: number;
+    skuRating: number;
+    skuSpice: number;
+    skuNutrition: string;
+    skuCustom: string[];
+  };
 }
 
 export interface IResponseGetSkuData {
@@ -245,15 +273,25 @@ export interface IRequestVerifyOtp {
   lan: string;
 }
 export interface IRequestPlaceOrder {
-  userId?: string;
+  orderType: string;
+  orderData: [
+    {
+      businessLocId: string;
+      skuId: string;
+      qty: number
+    }
+  ];
+  addressId?: string;
+  pitstopId?: string;
+  totalPrice: number;
 }
 
 export interface IResponsePlaceOrder {
-    message: string;
-    data: {
-      msg: string,
-      billdeskUrl: string;
-    };
+  message: string;
+  data: {
+    msg: string,
+    billdeskUrl: string;
+  };
 }
 
 export interface IResponseVerifyOtp {
@@ -263,22 +301,20 @@ export interface IResponseVerifyOtp {
       _id: string;
       indCountryCode: string;
       indMobileNum: string;
-      roles: [
-        {
-          indEmailNotify: boolean;
-          indMobileNotify: boolean;
-          _id: string;
-          deviceId: {
-            indCurrLocLongLat: {
-              type: string;
-              coordinates: number[]
-            };
-            indPushNotify: boolean;
-            indFingerPrint: string
+      roles: [{
+        indEmailNotify: boolean;
+        indMobileNotify: boolean;
+        _id: string;
+        deviceId: {
+          indCurrLocLongLat: {
+            type: string;
+            coordinates: number[]
           };
-          indMobileNum: string
-        }
-      ];
+          indPushNotify: boolean;
+          indFingerPrint: string
+        };
+        indMobileNum: string
+      }];
       uniqueId: string;
       accessToken: string;
     }
@@ -288,4 +324,33 @@ export interface IResponseVerifyOtp {
 export interface IResponseLoginSignup {
   message: string;
   data: ILoginSignupData;
+}
+
+export interface IResponseGetProfileData {
+  message: string;
+  data: {
+    indDetail: {
+      _id: string;
+      indCountryCode: string;
+      indMobileNum: string;
+      roles: [];
+      uniqueId: string;
+      basic: {
+        indFirstName: string;
+        indLastName: string;
+        indDob: string;
+        apAge: number;
+        apAgeUpdateOn: string;
+        indGender: string;
+        indFoodPref: string;
+        indLanPref: string;
+        indPic: [{
+          imageName: string;
+          original: string;
+          thumbnail: string;
+          tags: [];
+        }];
+      };
+    };
+  };
 }

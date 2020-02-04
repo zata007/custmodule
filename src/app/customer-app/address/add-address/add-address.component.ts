@@ -6,32 +6,31 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../../customer-state.service';
 import { CustomerService } from '../../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { JoyrideService } from 'ngx-joyride';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
-interface Marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable?: boolean;
-}
+import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
+import { BottomAddressComponent } from "../bottom-address/bottom-address.component"
+import { DataService } from '../../../shared/services/data.service';
+import { ZATAAKSE_PREF_LANG, ECustomerServiceType } from '../../../shared/constants/constants';
+import { IResponseLocationServed, IRequestGetRestaurantData, IResponseGetRestaurantData, Marker } from 'src/app/shared/models/common-model';
+import { RestaurantListComponent } from '../../restaurant-list/restaurant-list.component';
+
 
 @Component({
   selector: 'app-add-address',
   templateUrl: './add-address.component.html',
   styleUrls: ['./add-address.component.scss']
 })
-export class AddAddressComponent implements OnInit {
- // @ViewChild('searchFrom') public searchElementRefFrom: ElementRef;
-  @ViewChild('searchTo', {static: false}) public searchElementRefTo: ElementRef;
-  @ViewChild('requestSubmit', {static: false}) requestSubmit: TemplateRef<any>;
+export class AddAddressComponent implements OnInit, OnDestroy {
+  @ViewChild('searchFrom', { static: false }) public searchElementRefFrom: ElementRef;
+  @ViewChild('searchTo', { static: false }) public searchElementRefTo: ElementRef;
+  @ViewChild('requestSubmit', { static: false }) requestSubmit: TemplateRef<any>;
   // initial center position for the map
   public latitude = 19.125956;
   public longitude = 72.853532;
   selectedLabel = 'A';
   selectedIndex = 0;
-  haveNoPitstop = false;
 
   canShowDirection = false;
   canShowPitstops = false;
@@ -40,7 +39,6 @@ export class AddAddressComponent implements OnInit {
   public zoom: number;
   locationFetched: boolean;
 
-  // TODO: Move this value to const file.
   mapStyles = MAP_STYLES;
 
   markers: Marker[] = [];
@@ -50,6 +48,7 @@ export class AddAddressComponent implements OnInit {
   map: google.maps.Map;
   lng: number;
   lat: number;
+  curLocResDataSubscription: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -59,19 +58,13 @@ export class AddAddressComponent implements OnInit {
     public customerStateService: CustomerStateService,
     private customerService: CustomerService,
     private geoLocationService: GeoLocationService,
-    private readonly joyrideService: JoyrideService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
-    // // TODO: Update logic if user is first time visitor then only we should show onboarding
-    // setTimeout(() => {
-    //   this.joyrideService.startTour({ steps: ['onboard-location-input'] });
-    // }, 500);
-
     // Patch map data,
-
-
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
       if (hasCompleted) {
         // TODO: DO work once location completed.
@@ -89,97 +82,106 @@ export class AddAddressComponent implements OnInit {
 
     this.customerStateService.directionResults$.subscribe((data: google.maps.DirectionsRoute[]) => this.onDirectionResultUpdate(data));
 
-    this.customerStateService.pitstopOnEdge$.subscribe((d: any) => {
-      // TODO: Remove ! once backend is completed.
-      if (!d.isLocationOnEdge) {
-        const pitstopMarker: Marker = {
-          lat: d.pitstop[1],
-          lng: d.pitstop[0],
-          label: '', // TODO: Add label/id recieved from socket
-        };
-        this.markers.push(pitstopMarker);
+    this.customerStateService.pitstopOnEdge$.subscribe((i) => {
+      if (!i.isLocationOnEdge) {
+        // Pop from markers list
+        const index = this.markers.findIndex(j => j.lat === i.pitstop[0] && j.lng === i.pitstop[1]);
+        if (index > -1) {
+          this.markers.splice(index, 1);
+        }
       }
     });
     this.customerStateService.setCurrentPage('main');
     // set google maps defaults
-    this.zoom = 14;
+    this.zoom = 11.5;
 
     // create search FormControl
     this.searchControl = new FormControl();
 
-    //this.initMapAutocomplete();
+    this.initMapAutocomplete();
+
+    this.curLocResDataSubscription = this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
+      this.markers = [];
+      resData.filter(i => i.blPitstops).forEach((i, index) => {
+        const cardLocation = {
+          lat: i.businessLocationCoord[1],
+          lng: i.businessLocationCoord[0],
+        };
+        this.markers.push(cardLocation);
+      });
+    });
   }
 
   ngOnDestroy() {
-    this.joyrideService.closeTour();
+    this.curLocResDataSubscription.unsubscribe();
   }
 
-  // initMapAutocomplete() {
-  //   // load Places Autocomplete
-  //   this.mapsAPILoader.load().then(() => {
-  //     this.bounds = new google.maps.LatLngBounds();
-  //     const autocomplete = new google.maps.places.Autocomplete(this.searchElementRefFrom.nativeElement, {
-  //       types: ['establishment'],
-  //       componentRestrictions: { country: 'ind' },
-  //     });
+  initMapAutocomplete() {
+    // load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      this.bounds = new google.maps.LatLngBounds();
+      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRefFrom.nativeElement, {
+        types: ['establishment'],
+        componentRestrictions: { country: 'ind' },
+      });
 
-  //     autocomplete.addListener('place_changed', () => {
-  //       this.ngZone.run(() => {
-  //         // get the place result
-  //         const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-  //         // verify result
-  //         if (place.geometry === undefined || place.geometry === null) {
-  //           return;
-  //         }
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          // get the place result
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          // verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
 
-  //         this.customerService.setSelectedPlace(place, true);
-  //         // set latitude, longitude and zoom
+          this.customerService.setSelectedPlace(place, true);
+          // set latitude, longitude and zoom
 
-  //         this.latitude = place.geometry.location.lat();
-  //         this.longitude = place.geometry.location.lng();
-  //         const fromLocation = {
-  //           lat: place.geometry.location.lat(),
-  //           lng: place.geometry.location.lng(),
-  //         };
-  //         this.map.setCenter(fromLocation);
-  //         this.customerStateService.setFromLocation({ ...fromLocation }, true);
-  //         this.customerService.setLocationData(this.latitude, this.longitude);
-  //         const current = new google.maps.LatLng(this.latitude, this.longitude);
-  //         // TODO: Refactor make generic implementation for finding places near stadium
-  //         const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
-  //         if (this.calculateDistance(Wankhede, current) < 2000) {
-  //           // TODO: handle stadium logic
-  //           this.openDialog();
-  //         }
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          const fromLocation = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+          };
+          this.map.setCenter(fromLocation);
+          this.customerStateService.setFromLocation({ ...fromLocation }, true);
+          this.customerService.setLocationData(this.latitude, this.longitude);
+          const current = new google.maps.LatLng(this.latitude, this.longitude);
+          // TODO: Refactor make generic implementation for finding places near stadium
+          const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
+          if (this.calculateDistance(Wankhede, current) < 2000) {
+            // TODO: handle stadium logic
+            this.openDialog();
+          }
 
-  //         this.onMapLocationChange();
-  //       });
-  //     });
-  //     const autocompleteTo = new google.maps.places.Autocomplete(this.searchElementRefTo.nativeElement, {
-  //       types: ['establishment'],
-  //       componentRestrictions: { country: 'ind' },
-  //     });
+          this.onMapLocationChange();
+        });
+      });
+      const autocompleteTo = new google.maps.places.Autocomplete(this.searchElementRefTo.nativeElement, {
+        types: ['establishment'],
+        componentRestrictions: { country: 'ind' },
+      });
 
-  //     autocompleteTo.addListener('place_changed', () => {
-  //       this.ngZone.run(() => {
-  //         // get the place result
-  //         const place: google.maps.places.PlaceResult = autocompleteTo.getPlace();
-  //         // verify result
-  //         if (place.geometry === undefined || place.geometry === null) {
-  //           return;
-  //         }
+      autocompleteTo.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          // get the place result
+          const place: google.maps.places.PlaceResult = autocompleteTo.getPlace();
+          // verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
 
-  //         this.customerService.setSelectedPlace(place, false);
-  //         const toLocation = {
-  //           lat: place.geometry.location.lat(),
-  //           lng: place.geometry.location.lng(),
-  //         };
-  //         this.customerStateService.setFromLocation({ ...toLocation }, false);
-  //         this.onMapLocationChange();
-  //       });
-  //     });
-  //   });
-  // }
+          this.customerService.setSelectedPlace(place, false);
+          const toLocation = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+          };
+          this.customerStateService.setFromLocation({ ...toLocation }, false);
+          this.onMapLocationChange();
+        });
+      });
+    });
+  }
 
   onDirectionResultUpdate(data: google.maps.DirectionsRoute[]) {
     this.customerStateService.setDirectionResults(data);
@@ -213,25 +215,33 @@ export class AddAddressComponent implements OnInit {
         // TODO: get pitstops
         this.customerService.getPitstops({
           ...this.commonService.getRequestEssentialParams(),
-          sourcePoint: [72.870403, 19.130181], // lng, lon
-          destnationPoint: [72.870403, 19.130181]
+          ...this.customerStateService.getLocationData()
         }).subscribe((data: any) => {
           const pitstops: Array<any> = data.data;
 
           // check if pitstop is on the edge.
+          // TODO: Remove !
           if (pitstops.length === 0) {
             this.canShowPitstops = false;
-            this.haveNoPitstop = true;
+            this.bottomSheet.open(NotServicebleComponent, {
+              data: {
+                location: this.searchElementRefFrom.nativeElement.value
+              }
+            });
             return;
           }
 
           this.markers = [];
           pitstops.forEach((i, index) => {
+
             const pitstopMarker: Marker = {
-              lat: i.pitstopLongLat[1],
-              lng: i.pitstopLongLat[0],
+              lat: i.blPitStopLongLat.coordinates[1],
+              lng: i.blPitStopLongLat.coordinates[0],
+              pitstop: i.blPitstopName,
+              landmark: i.blPitStopLandmark,
               label: index + '',
             };
+            this.markers.push(pitstopMarker);
             this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
           });
         });
@@ -240,19 +250,15 @@ export class AddAddressComponent implements OnInit {
       } else {
         // Show not servicable
         this.canShowPitstops = false;
-        this.haveNoPitstop = true;
+        // TODO: Show BottomSheet
+        this.bottomSheet.open(NotServicebleComponent, {
+          data: {
+            location: this.searchElementRefFrom.nativeElement.value
+          }
+        });
+
       }
     });
-  }
-
-  requestService() {
-    // TODO: Uncomment after release this.isSubmitRequestVisible = true;
-    this.haveNoPitstop = false;
-  }
-
-  submitServiceRequest() {
-    this.haveNoPitstop = false;
-    this.isSubmitRequestVisible = false;
   }
 
   GotoRoute() {
@@ -264,8 +270,12 @@ export class AddAddressComponent implements OnInit {
   }
 
   gotoPitstop() {
-    this.customerStateService.setCurrentPage('pitstop-view');
-    this.router.navigate(['customer/pitstop']);
+    const pitStopData = this.markers[this.selectedIndex];
+    if (!pitStopData) {
+      return;
+    }
+    this.customerStateService.setCurrentPitstop(pitStopData);
+    this.router.navigate(['customer/pitstop-landing']);
   }
 
   onPolylineClick(polylineIndex: number) {
@@ -284,33 +294,52 @@ export class AddAddressComponent implements OnInit {
 
   mapReady(map: any) {
     this.map = map;
+    this.customerStateService.initState();
 
     // Create the img to hold the control and call the CenterControl()
     const centerControl = this.CenterControl(map);
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControl);
-
-    const sub = this.geoLocationService.getPosition().subscribe((val) => {
-      this.lat = val.coords.latitude;
-      this.lng = val.coords.longitude;
-      this.customerStateService.setFromLocation({ lat: val.coords.latitude, lng: val.coords.longitude }, true);
-      this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
-        // if (!this.searchElementRefFrom.nativeElement.value) {
-        //   const bounds = new google.maps.LatLngBounds();
-        //   const currentLocation = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
-        //   bounds.extend(currentLocation);
-
-        //   this.map.panToBounds(bounds); // # auto-center
-        //   this.searchElementRefFrom.nativeElement.value = result.formatted_address;
-        //   const latlng = new google.maps.LatLng(val.coords.latitude, val.coords.longitude);
-        //   const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
-        //   if (this.calculateDistance(Wankhede, latlng) < 2000) {
-        //     // TODO: handle stadium logic
-        //     this.openDialog();
-        //   }
-        // }
-        sub.unsubscribe();
+    const selectedLocation = this.customerStateService.selectedLocation;
+    if (selectedLocation.from.lat || this.customerStateService.hasLocationData()) {
+      this.lat = selectedLocation.from.lat;
+      this.lng = selectedLocation.from.lng;
+      this.getPlaceName(this.lat, this.lng, (result: google.maps.GeocoderResult) => {
+        this.patchLocationToInput({ lat: this.lat, lng: this.lng }, this.searchElementRefFrom, result);
       });
-    });
+      if (this.customerStateService.hasLocationData()) {
+        this.getPlaceName(selectedLocation.to.lat, selectedLocation.to.lng, (result: google.maps.GeocoderResult) => {
+          this.patchLocationToInput({ lat: selectedLocation.to.lat, lng: selectedLocation.to.lng }, this.searchElementRefTo, result);
+        });
+        this.onRouteSelected(null);
+      }
+
+    } else {
+      const sub = this.geoLocationService.getPosition().subscribe((val) => {
+        this.lat = val.coords.latitude;
+        this.lng = val.coords.longitude;
+        this.getPlaceName(val.coords.latitude, val.coords.longitude, (result: google.maps.GeocoderResult) => {
+          this.patchLocationToInput({ lat: val.coords.latitude, lng: val.coords.longitude }, this.searchElementRefFrom, result);
+          sub.unsubscribe();
+        });
+      });
+    }
+
+
+  }
+
+  patchLocationToInput(currentCords: { lat: number, lng: number }, inputToPatch: ElementRef<any>, result: google.maps.GeocoderResult) {
+    const bounds = new google.maps.LatLngBounds();
+    const currentLocation = new google.maps.LatLng(currentCords.lat, currentCords.lng);
+    bounds.extend(currentLocation);
+
+    this.map.panToBounds(bounds); // # auto-center
+    inputToPatch.nativeElement.value = result.formatted_address;
+    const latlng = new google.maps.LatLng(currentCords.lat, currentCords.lng);
+    const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
+    if (this.calculateDistance(Wankhede, latlng) < 2000) {
+      // TODO: handle stadium logic
+      this.openDialog();
+    }
   }
 
   /**
@@ -329,9 +358,8 @@ export class AddAddressComponent implements OnInit {
         const rsltAdrComponent = result.address_components;
         const resultLength = rsltAdrComponent.length;
         if (result != null) {
-          console.log(result);
           callback(result);
-          //this.address = rsltAdrComponent[resultLength - 8].short_name;
+          // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
           callback(result);
           alert('No address available!');
@@ -369,7 +397,7 @@ export class AddAddressComponent implements OnInit {
   }
 
   onOnboardingCompletion() {
-    // this.searchElementRefFrom.nativeElement.focus();
+    this.searchElementRefFrom.nativeElement.focus();
   }
 
   openDialog(): void {
@@ -388,5 +416,29 @@ export class AddAddressComponent implements OnInit {
 
   calculateDistance(from: google.maps.LatLng, to: google.maps.LatLng) {
     return google.maps.geometry.spherical.computeDistanceBetween(from, to);
+  }
+
+  setFromLatLng(event: { coords: { lat: number, lng: number } }) {
+    const fromLocation = {
+      lat: event.coords.lat,
+      lng: event.coords.lng,
+    };
+    this.customerStateService.setFromLocation({ ...fromLocation }, true);
+    this.getPlaceName(event.coords.lat, event.coords.lng, (result) => {
+      this.patchLocationToInput({ lat: fromLocation.lat, lng: fromLocation.lng }, this.searchElementRefFrom, result);
+    });
+  }
+  setToLatLng(event: { coords: { lat: number, lng: number } }) {
+    const toLocation = {
+      lat: event.coords.lat,
+      lng: event.coords.lng,
+    };
+    this.customerStateService.setFromLocation({ ...toLocation }, false);
+    this.getPlaceName(event.coords.lat, event.coords.lng, (result) => {
+      this.patchLocationToInput({ lat: toLocation.lat, lng: toLocation.lng }, this.searchElementRefTo, result);
+    });
+  }
+  openBottomSheet(): void {
+    this.bottomSheet.open(BottomAddressComponent);
   }
 }

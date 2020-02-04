@@ -9,8 +9,7 @@ import {
   NavBottomComponent,
   NavTopComponent,
   MapVehicleComponent,
-  MainContainerComponent,
-  CustomerStateService,
+  MainContainerComponent
 } from './index';
 import { CustomerAppRoutes } from './customer-app.routes';
 import { AgmDirectionModule } from 'agm-direction';
@@ -41,6 +40,7 @@ import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.compo
 import { MenuListComponent } from './menu-list/menu-list.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
+import { AfterPaymentComponent } from './after-payment/after-payment.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +70,7 @@ import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaur
     MenuListComponent,
     RestaurantsListComponent,
     PitstopRestaurantComponent,
+    AfterPaymentComponent,
   ],
   entryComponents: [
     BillDetailComponent,
@@ -93,6 +94,6 @@ import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaur
     FlexLayoutModule
   ],
   bootstrap: [CustomerLayoutComponent],
-  providers: [CustomerService, CustomerStateService, OrderService],
+  providers: [CustomerService, OrderService],
 })
 export class CustomerAppModule {}

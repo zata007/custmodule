@@ -80,7 +80,7 @@ export class PitstopViewComponent implements OnInit {
     if (searchTerm.length > 2) {
       // TODO: Find selected tab and filter data
       if (this.selectedTab === 0) {
-        this.filteredFoods = this.foods.filter(i => i.dishName.toLowerCase().includes(searchTerm.toLowerCase()));
+        this.filteredFoods = this.foods.filter(i => i.skuName.toLowerCase().includes(searchTerm.toLowerCase()));
       } else {
         this.filteredRestaurants = this.restaurants.filter(i => i.displayName.toLowerCase().includes(searchTerm.toLowerCase()));
       }
@@ -99,9 +99,9 @@ export class PitstopViewComponent implements OnInit {
   }
 
   placeOrder() {
-    if (this.path === 'customer/order-delivery') {
+    if (this.path === 'customer/delivery') {
       this.bottomSheet.open(BottomAddressComponent);
-    } else if (!this.path || this.path === 'customer/order-takeaway') {
+    } else if (!this.path || this.path === 'customer/take-away') {
       this.bottomSheet.open(BottomVehicleComponent);
     }
   }
