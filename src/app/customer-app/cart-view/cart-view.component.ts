@@ -4,7 +4,7 @@ import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData, IRequestPlaceOrder } from 'src/app/shared/models/common-model';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
@@ -71,15 +71,37 @@ export class CartViewComponent implements OnInit {
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
         totalPrice: 150,
-        pitstopId: "5e3694f1d2321da3b45e361b" //this.customerStateService.getCurrentPitstopData().id
+        pitstopId: "5e3694f1d2321da3b45e361b" // this.customerStateService.getCurrentPitstopData().id
 
       }
       this.dataService.placeOrder(data).subscribe(res => {
         this.commonService.paymentInformation = res;
+        const localStorageData = {};
+        switch (this.customerStateService.currentServiceSelected) {
+          case ECustomerServiceType.TakeAway:
+            // tslint:disable-next-line: no-string-literal
+            localStorageData['data'] = {
+              locationData: this.customerStateService.selectedLocation,
+              pitstopData: this.customerStateService.getCurrentPitstopData()
+            };
+            break;
+          case ECustomerServiceType.Delivery:
+            // tslint:disable-next-line: no-string-literal
+            localStorageData['data'] = {
+              locationData: this.customerStateService.selectedLocation,
+              address: 'Ishan Appartments, NewLand road, Bangladesh.', // TODO: pass customer's address
+            };
+            break;
 
+          default:
+            break;
+        }
+        // tslint:disable-next-line: no-string-literal
+        localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
+        localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
         localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
         window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
-        console.log(this.customerStateService.currentServiceSelected);
+
       });
 
     } else {
