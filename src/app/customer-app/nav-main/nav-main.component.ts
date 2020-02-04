@@ -93,15 +93,17 @@ export class NavMainComponent implements OnInit, OnDestroy {
       const cartNotEmptyRef = this.bottomSheet.open(CartNotEmptyComponent);
       cartNotEmptyRef.afterDismissed().subscribe(res => {
         if (res) {
-          sessionStorage.setItem('path', url);
+          sessionStorage.setItem('path', `customer/${url}`);
           this.orderService.clearCart();
-          this.router.navigate([url]);
+          this.customerStateService.updateCurrentService(url);
+          this.router.navigate([`customer/${url}`]);
         }
       });
 
     } else {
-      sessionStorage.setItem('path', url);
-      this.router.navigate([url]);
+      this.customerStateService.updateCurrentService(url);
+      sessionStorage.setItem('path', `customer/${url}`);
+      this.router.navigate([`customer/${url}`]);
     }
   }
 

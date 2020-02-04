@@ -99,9 +99,9 @@ export class PitstopViewComponent implements OnInit {
   }
 
   placeOrder() {
-    if (this.path === 'customer/order-delivery') {
+    if (this.path === 'customer/delivery') {
       this.bottomSheet.open(BottomAddressComponent);
-    } else if (!this.path || this.path === 'customer/order-takeaway') {
+    } else if (!this.path || this.path === 'customer/take-away') {
       this.bottomSheet.open(BottomVehicleComponent);
     }
   }

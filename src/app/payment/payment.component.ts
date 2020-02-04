@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ZATAAKSE_PAYMENT_TOKEN } from '../shared/constants/constants';
 import { DataService } from '../shared/services/data.service';
 import { IResponsePlaceOrder } from '../shared/models/common-model';
-import { Socket } from 'ngx-socket-io';
+import { Router } from '@angular/router';
 
 const PAYMENT_STATUS = {
   PENDING : 'Pending',
@@ -35,7 +35,7 @@ export class PaymentComponent implements OnInit {
     [PAYMENT_STATUS.ABANDONED]: 'Payment is Abandoned',
   };
 
-  constructor(private dataService: DataService, private socket: Socket) {
+  constructor(private dataService: DataService, private router: Router) {
     this.dataService.paymentStatus$.subscribe((res) => {
       if (res) {
         this.paymentStatus = res.paymentStatus;
@@ -44,10 +44,22 @@ export class PaymentComponent implements OnInit {
    }
 
   ngOnInit() {
-    const paymentItem : IResponsePlaceOrder = JSON.parse(localStorage.getItem(ZATAAKSE_PAYMENT_TOKEN));
+    const paymentItem: IResponsePlaceOrder = JSON.parse(localStorage.getItem(ZATAAKSE_PAYMENT_TOKEN));
     console.log('Navigated after payment', paymentItem);
     const msg = paymentItem.data.msg.split('|');
     this.dataService.getOrderStatus(msg[1]);
+  }
+
+  onSubmit() {
+    switch (this.paymentStatus) {
+      case PAYMENT_STATUS.COMPLETED:
+        this.router.navigate(['customer/order-placed/take-away']);
+        break;
+
+      default:
+        break;
+    }
+
   }
 
 }

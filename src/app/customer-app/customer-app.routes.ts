@@ -11,11 +11,13 @@ import { ProfileComponent } from './profile/profile.component'
 import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.component';
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AddAddressComponent } from './address/add-address/add-address.component'
+import { AfterPaymentComponent } from './after-payment/after-payment.component';
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
   { path: 'care', component: CustomerCareComponent },
   { path: 'profile', component: ProfileComponent},
+  { path: 'order-placed/:orderType', component: AfterPaymentComponent },
   {
     path: '',
     component: CustomerLayoutComponent,
@@ -28,8 +30,8 @@ export const CustomerAppRoutes: Routes = [
       { path: 'quick-preorder', component: PreOrderComponent },
       { path: 'quick-pickup', component: PreOrderComponent },
       { path: 'order-ahead', component: OrderAheadComponent },
-      { path: 'order-delivery', component: OrderDeliveryComponent},
-      { path: 'order-takeaway', component: MapVehicleComponent},
+      { path: 'delivery', component: OrderDeliveryComponent},
+      { path: 'take-away', component: MapVehicleComponent},
       { path: 'address/add', component: AddAddressComponent},
       { path: '', component: MapVehicleComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },

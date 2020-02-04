@@ -39,7 +39,6 @@ export class AddAddressComponent implements OnInit, OnDestroy {
   public zoom: number;
   locationFetched: boolean;
 
-  // TODO: Move this value to const file.
   mapStyles = MAP_STYLES;
 
   markers: Marker[] = [];

@@ -239,6 +239,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
               pitstop: i.blPitstopName,
               landmark: i.blPitStopLandmark,
               label: index + '',
+              id: i._id,
             };
             this.markers.push(pitstopMarker);
             this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);

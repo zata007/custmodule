@@ -29,7 +29,6 @@
         </g>
       </svg>
     </div>
-
   </div>
   <div *ngSwitchDefault>
     <!-- Warning -->
@@ -49,8 +48,12 @@
       </svg>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
-    {{PAYMENT_MSG_MAP[paymentStatus]}}
+  <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="30px">
+    <span>{{PAYMENT_MSG_MAP[paymentStatus]}}</span>
+
+    <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="20px">
+      <button mat-button color="primary" (click)="onSubmit()">Okay</button>
+    </div>
   </div>
 </div>
 </div>
