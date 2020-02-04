@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
+import { ZATAAKSE_JWT_TOKEN } from '../../shared/constants/constants'
 
 @Component({
   selector: 'app-profile',
@@ -20,13 +21,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     //Fetching profile details
-    if(typeof localStorage.getItem('zataakse_jwt_token') !== "undefined" && localStorage.getItem('zataakse_jwt_token') !== null) {
-      // this.data = this.customerService.getProfile(localStorage.getItem('zataakse_jwt_token'));
+    if(typeof localStorage.getItem(ZATAAKSE_JWT_TOKEN) !== "undefined" && localStorage.getItem(ZATAAKSE_JWT_TOKEN) !== null) {
+      this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((data: any) => {
+        const profile: Array<any> = data.data;
+        console.log(profile);
+      });
     } else {
       this.router.navigate(['login-signup']);
     }
-    console.log(this.customerService.getProfile(localStorage.getItem('zataakse_jwt_token')));
-    console.log(localStorage.getItem('zataakse_jwt_token'));
   }
 
   onBackClick() {

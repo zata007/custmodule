@@ -20,13 +20,15 @@ export class CartViewComponent implements OnInit {
 
   orderedItems: IMenuData[] = [];
   hasAuthToken = false;
-  constructor(private location: Location,
-              private dataService: DataService,
-              private bottomSheet: MatBottomSheet,
-              private orderService: OrderService,
-              private router: Router,
-              private commonService: CommonService,
-              private customerStateService: CustomerStateService) { }
+  constructor(
+    private location: Location,
+    private dataService: DataService,
+    private bottomSheet: MatBottomSheet,
+    private orderService: OrderService,
+    private router: Router,
+    private commonService: CommonService,
+    private customerStateService: CustomerStateService
+  ){}
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
@@ -39,7 +41,7 @@ export class CartViewComponent implements OnInit {
 
   openDetailedBill() {
     this.bottomSheet.open(BillDetailComponent, {
-      data: {  }
+      data: {}
     });
   }
 
@@ -62,10 +64,10 @@ export class CartViewComponent implements OnInit {
         this.commonService.paymentInformation = res;
 
         localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
-        window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
+        window.location.replace(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
       });
 
-  } else {
+    } else {
       // Goto login-signup
       this.router.navigate(['login-signup']);
     }

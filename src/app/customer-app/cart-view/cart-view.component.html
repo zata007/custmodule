@@ -5,7 +5,8 @@
     </button>
   </mat-toolbar>
   <div class="cart-items">
-    <app-cart-item *ngFor="let item of orderedItems" [data]="item" (addUnit)="onAddUnit(item)" (removeUnit)="onRemoveUnit(item)" (removeItem)="removeItemFromCart(item)"></app-cart-item>
+    <app-cart-item *ngFor="let item of orderedItems" [data]="item" (addUnit)="onAddUnit(item)"
+      (removeUnit)="onRemoveUnit(item)" (removeItem)="removeItemFromCart(item)"></app-cart-item>
   </div>
   <div class="address">
     <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
@@ -36,8 +37,7 @@
     <div class="head2">₹320</div>
   </div>
   <div class="order-button head4 bold">
-    <button mat-raised-button color="primary" (click)="onSubmitClick()" class="head4 bold">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</button>
+    <button mat-raised-button color="primary" (click)="onSubmitClick()"
+      class="head4 bold">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</button>
   </div>
 </div>
-
-
