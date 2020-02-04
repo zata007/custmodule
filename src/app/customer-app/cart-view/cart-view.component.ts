@@ -64,14 +64,14 @@ export class CartViewComponent implements OnInit {
 
         orderData: this.orderService.cart.map(i => {
           return  {
-            businessLocId: i.apPsBusinessLocId,
-            skuId: i._id,
-            qty: i.skuServes
+            businessLocId: "5e356afe2000b41e6ba0a397", //i.apPsBusinessLocId,
+            skuId: "5e36d6ced2321da3b48fcb41", //i._id,
+            qty: 1 //i.skuServes
           };
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
-        totalPrice: 10,
-        pitstopId: this.customerStateService.getCurrentPitstopData().id
+        totalPrice: 150,
+        pitstopId: "5e3694f1d2321da3b45e361b" //this.customerStateService.getCurrentPitstopData().id
 
       }
       this.dataService.placeOrder(data).subscribe(res => {

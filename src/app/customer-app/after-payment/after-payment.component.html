@@ -60,23 +60,26 @@
 
   <div [ngSwitch]="selectedService">
   <div class="message" *ngSwitchCase="ECustomerServiceType.TakeAway">
-    <div class="head4">Proceed to the Zataakse Pitstop to receive your order</div>
-    <div class="head3 bold">Pitstop Name</div>
+    <div class="para">Proceed to the Zataakse Pitstop to receive your order</div>
+    <div class="head3">Pitstop Name</div>
     <div class="caption">Pitstop Locality</div>
-    <div fxLayout="row" fxlayoutAlign="flex-end">
+    <div fxLayout="row" fxLayoutAlign="flex-end">
       <button mat-raised-button color="primary">NAVIGATE</button>
     </div>
   </div>
   <div  class="message" *ngSwitchCase="ECustomerServiceType.Delivery">
-    <div class="head4">Your order will be delivered to following address:</div>
+    <div class="para">Your order will be delivered to following address:</div>
     <div class="head4">Customer Address</div>
-    <div fxLayout="row" fxlayoutAlign="flex-end">
-      <button mat-fab color="primary">30:00</button>
+    <div fxLayout="row" fxLayoutAlign="flex-end">
+      <button mat-fab color="primary">{{this.string}}</button>
     </div>
 
   </div>
   <div  class="message" *ngSwitchDefault>
-    <div class="head4">Please enter your tentative time of arrival</div>
+    <div class="para">Please enter your tentative time of arrival</div>
+    <!-- <input [ngxTimepicker]="picker"> -->
+    <!-- <ngx-material-timepicker #picker></ngx-material-timepicker> -->
+
     <mat-form-field>
       <input type="time" matInput placeholder="Add time">
     </mat-form-field>

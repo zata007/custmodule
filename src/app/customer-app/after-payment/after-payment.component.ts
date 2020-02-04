@@ -14,6 +14,7 @@ export class AfterPaymentComponent implements OnInit {
   ECustomerServiceType = ECustomerServiceType;
   selectedService = ECustomerServiceType.Delivery;
   mapStyles = MAP_STYLES;
+  timer : any;
 
   mapForHeader = {
     [ECustomerServiceType.Delivery] : 'Delivery',
@@ -29,6 +30,20 @@ export class AfterPaymentComponent implements OnInit {
 
   ngOnInit() {
     this.selectedService = this.route.snapshot.params.orderType;
+    var countdown = 30 * 60 * 1000;
+    this.timer = setInterval(function(){
+      countdown -= 1000;
+      var min = Math.floor(countdown / (60 * 1000));
+      var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);
+
+      if (countdown <= 0) {
+        return "0:00";
+      } else {
+        return min+':'+sec;
+      }
+
+    }, 1000);
+    console.log(this.timer)
   }
 
   mapReady() {

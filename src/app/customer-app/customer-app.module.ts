@@ -41,6 +41,7 @@ import { MenuListComponent } from './menu-list/menu-list.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { AfterPaymentComponent } from './after-payment/after-payment.component';
     JoyrideModule.forChild(),
     RouterModule.forChild(CustomerAppRoutes),
     SwiperModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxMaterialTimepickerModule
   ],
   bootstrap: [CustomerLayoutComponent],
   providers: [CustomerService, OrderService],

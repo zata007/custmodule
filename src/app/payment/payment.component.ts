@@ -39,6 +39,7 @@ export class PaymentComponent implements OnInit {
     this.dataService.paymentStatus$.subscribe((res) => {
       if (res) {
         this.paymentStatus = res.paymentStatus;
+        console.log(res);
       }
     });
    }
@@ -51,14 +52,15 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    switch (this.paymentStatus) {
-      case PAYMENT_STATUS.COMPLETED:
-        this.router.navigate(['customer/order-placed/take-away']);
-        break;
+    this.router.navigate(['customer/order-placed/take-away']);
+    // switch (this.paymentStatus) {
+    //   case PAYMENT_STATUS.COMPLETED:
+    //     this.router.navigate(['customer/order-placed/take-away']);
+    //     break;
 
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
 
   }
 

@@ -18,7 +18,9 @@ enum CustomerPages {
   Main = 'main',
   Pitstop = 'pit-stop',
 }
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CustomerStateService {
   currentPitstopData: Marker;
   constructor(private socket: Socket) {}
