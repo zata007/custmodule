@@ -18,8 +18,10 @@ import { CustomerStateService } from '../customer-state.service';
 })
 export class CartViewComponent implements OnInit {
 
+  ECustomerServiceType = ECustomerServiceType;
   orderedItems: IMenuData[] = [];
   hasAuthToken = false;
+  selectedLocation = '';
   constructor(
     private location: Location,
     private dataService: DataService,
@@ -27,12 +29,18 @@ export class CartViewComponent implements OnInit {
     private orderService: OrderService,
     private router: Router,
     private commonService: CommonService,
-    private customerStateService: CustomerStateService
-  ){}
+    public customerStateService: CustomerStateService
+  ) {}
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
     this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
+    if (this.customerStateService.selectedLocation.from) {
+      this.getPlaceName(this.customerStateService.selectedLocation.from.lat, this.customerStateService.selectedLocation.from.lng, (res)=>{
+        this.selectedLocation = res.formatted_address;
+      });
+    }
+
   }
   onBackClick() {
     this.customerStateService.setCurrentPage('main');
@@ -108,6 +116,28 @@ export class CartViewComponent implements OnInit {
       // Goto login-signup
       this.router.navigate(['login-signup']);
     }
+  }
+
+
+
+  private getPlaceName(lat, lng, callback: Function) {
+    const geocoder = new google.maps.Geocoder();
+    const latlng = new google.maps.LatLng(lat, lng);
+    const request = { location: latlng };
+    geocoder.geocode(request, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK) {
+        const result = results[0];
+        const rsltAdrComponent = result.address_components;
+        const resultLength = rsltAdrComponent.length;
+        if (result != null) {
+          callback(result);
+          // this.address = rsltAdrComponent[resultLength - 8].short_name;
+        } else {
+          callback(result);
+          alert('No address available!');
+        }
+      }
+    });
   }
 
 
