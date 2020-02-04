@@ -104,7 +104,6 @@ export class AfterPaymentComponent implements OnInit {
 
   mapReady() {
     console.log('map-ready');
-
   }
 
   private getRoutes(from, to) {
