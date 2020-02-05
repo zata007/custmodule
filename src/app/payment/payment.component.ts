@@ -22,6 +22,7 @@ const PAYMENT_STATUS = {
 })
 export class PaymentComponent implements OnInit {
   paymentStatus = null;
+  selectedService = null;
 
   PAYMENT_STATUS = PAYMENT_STATUS;
 
@@ -52,7 +53,7 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['customer/order-placed/take-away']);
+    this.router.navigate([`customer/order-placed`]);
     // switch (this.paymentStatus) {
     //   case PAYMENT_STATUS.COMPLETED:
     //     this.router.navigate(['customer/order-placed/take-away']);

@@ -17,7 +17,7 @@ export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
   { path: 'care', component: CustomerCareComponent },
   { path: 'profile', component: ProfileComponent},
-  { path: 'order-placed/:orderType', component: AfterPaymentComponent },
+  { path: 'order-placed', component: AfterPaymentComponent },
   {
     path: '',
     component: CustomerLayoutComponent,
