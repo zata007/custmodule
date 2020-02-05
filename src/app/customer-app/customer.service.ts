@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CookieService } from '../shared/services/cookie.service';
-import { API_ENDPOINTS } from '../shared/constants/constants';
+import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../shared/constants/constants';
 
 @Injectable()
 export class CustomerService {
