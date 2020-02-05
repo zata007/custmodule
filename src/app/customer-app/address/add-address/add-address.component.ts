@@ -8,7 +8,7 @@ import { CustomerService } from '../../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../../map-vehicle/map-consts';
-import { BottomAddressComponent } from "../bottom-address/bottom-address.component"
+import { BottomAddressComponent } from '../bottom-address/bottom-address.component';
 import { Marker } from 'src/app/shared/models/common-model';
 
 
@@ -112,7 +112,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
         const cardLocation = {
           lat: i.businessLocationCoord[1],
           lng: i.businessLocationCoord[0],
-        };        
+        };
         this.address['latitude'] = cardLocation.lat;
         this.address['longitude'] = cardLocation.lng;
         this.markers.push(cardLocation);

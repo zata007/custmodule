@@ -3,8 +3,8 @@ import { Location } from '@angular/common';
 import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData, IRequestPlaceOrder, IRestaurantData } from 'src/app/shared/models/common-model';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType } from 'src/app/shared/constants/constants';
+import { IMenuData, IRequestPlaceOrder, IRestaurantData, IProfileData } from 'src/app/shared/models/common-model';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
@@ -20,6 +20,7 @@ export class CartViewComponent implements OnInit {
 
   ECustomerServiceType = ECustomerServiceType;
   orderedItems: IMenuData[] = [];
+  profileData: IProfileData = null;
   hasAuthToken = false;
   deliveryLocation = '';
   pitstopData = {
@@ -56,6 +57,8 @@ export class CartViewComponent implements OnInit {
         }
         break;
       default:
+        this.profileData =  localStorage.getItem(ZATAAKSE_PROFILE_DATA) ? JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) : null;
+        console.log('This is list of add:', this.profileData.indDetail.roles[0]);
         this.currentRestaurantData = this.customerStateService.currentRestaurantData;
         break;
     }
