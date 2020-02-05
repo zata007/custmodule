@@ -3,7 +3,7 @@
     <div class="food-item-container" *ngFor="let item of foods">
       <div fxLayout="row" fxLayoutAlign="flex-start center" class="food-item"
         [ngClass]="{ added: isAddedToCart(item) }">
-        <img class="thumb mat-elevation-z4" src="{{item.skuImages[0]['thumbnail']}}" alt="" />
+        <img class="thumb mat-elevation-z4" src="{{ item.skuImages[0] ? item.skuImages[0]['thumbnail'] : '../../../assets/img/core/thumb.jpg'}}" alt="" />
         <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
           <div fxLayout="row" fxLayoutAlign="start">
             <div class="head4 food-name">{{item.skuName}} <img src="../../../assets/icons/non-veg.png" alt=""></div>

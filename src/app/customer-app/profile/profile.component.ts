@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
-import { ZATAAKSE_JWT_TOKEN } from '../../shared/constants/constants'
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants'
+import { IResponseGetProfileData, IProfileData } from 'src/app/shared/models/common-model';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,7 @@ import { ZATAAKSE_JWT_TOKEN } from '../../shared/constants/constants'
 })
 export class ProfileComponent implements OnInit {
 
-  data: any = [];
+  data: IProfileData;
   basic: any = [];
   address: any = [];
 
@@ -23,12 +24,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     //Fetching profile details
-    if(typeof localStorage.getItem(ZATAAKSE_JWT_TOKEN) !== "undefined" && localStorage.getItem(ZATAAKSE_JWT_TOKEN) !== null) {
-      this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((data: any) => {
-        const profile: Array<any> = data.data;
-        this.data = profile;
-        this.basic = this.data.indDetail.basic;
-        this.address = this.data.indDetail.roles[0].indAddr;
+    if (localStorage.getItem(ZATAAKSE_JWT_TOKEN)) {
+      this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((data: IResponseGetProfileData) => {
+        // Store profile data
+        localStorage.setItem(ZATAAKSE_PROFILE_DATA, JSON.stringify(data.data));
+        this.data =  data.data;
+        this.basic =  data.data.indDetail.basic;
+        this.address =  data.data.indDetail.roles[0].indAddr;
         console.log(this.address);
         console.log(this.data);
         console.log(this.basic.indFirstName);

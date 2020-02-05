@@ -1,9 +1,18 @@
+@import '../../../assets/styles/mixins';
 .pitstop-landing-container {
   overflow-x: visible;
   overflow-y: scroll;
-  overflow: auto;
   // TODO: add mediaquery
   height: 80vh;
+  overflow: auto;
+
+
+    @include pc {
+      max-height: 71vh;
+    }
+    @include xs-phone {
+      max-height: 80vh;
+    }
   .food-item-container {
     margin: 5px 0px;
     width: 100%;

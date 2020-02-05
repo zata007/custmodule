@@ -44,7 +44,7 @@ export class CustomerStateService {
 
   locationSelectionCompleted$ = new Subject<boolean>();
   directionResults$ = this.socket.fromEvent('getDirectionsResult');
-  pitstopOnEdge$ = this.socket.fromEvent<{isLocationOnEdge: boolean, pitstop: number[]}>('checkLocationOnEdgeResult');
+  pitstopOnEdge$ = this.socket.fromEvent<{isLocationOnEdge: boolean, pitstop: number[], pitstopId: string}>('checkLocationOnEdgeResult');
 
   initState() {
     if (this.hasLocationData()) {
@@ -115,8 +115,9 @@ export class CustomerStateService {
     this.socket.emit('getDirections', JSON.stringify(data));
   }
 
-  isPitStopOnEdge(lat: number, lng: number) {
+  isPitStopOnEdge(id: string, lat: number, lng: number) {
     const data = {
+      pitstopId: id,
       pitstop: [lng, lat],
       polyline: encodeURI(this.selectedRoute.overview_polyline['points']) ,
       tolerance: 0.001,

@@ -8,9 +8,9 @@
     <img class="profile-img" src="../../../assets/img/core/rock.jpg" alt="">
     <div fxLayout="column" class="profile-detail">
       <div class="name head3 bold">
-        {{ this.basic.indFirstName }}
+        {{ basic.indFirstName }}
       </div>
-      <div class="head4 phone">{{ this.data.indDetail.indMobileNum }}</div>
+      <div class="head4 phone">{{ data.indDetail.indMobileNum }}</div>
       <button mat-stroked-button color="primary" class="head4">EDIT</button>
     </div>
   </div>
@@ -20,12 +20,12 @@
   <mat-card fxLayout="column" class="mat-elevation-z4">
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 4.svg" alt="">
-      <div class="head4">{{ this.basic.indFirstName }}</div>
+      <div class="head4">{{ basic.indFirstName }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
-      <div class="head4">{{ this.data.indDetail.indMobileNum }}</div>
+      <div class="head4">{{ data.indDetail.indMobileNum }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
@@ -49,12 +49,12 @@
     <button mat-stroked-button color="primary" (click)="addNewAddress()">Add New</button>
   </div>
   <mat-card fxLayout="column" class="mat-elevation-z4">
-    <div *ngFor="let address of this.address" fxLayout="column" class="address-item">
+    <div *ngFor="let addressItem of address" fxLayout="column" class="address-item">
       <div fxLayout="row" fxLayoutAlign="start start" class="head4">
         <img src="../../../assets/img/core/Mask Group 2.svg" alt="">
         <div class="address-detail">
-          <div class="head4 bold">{{address.addrType}}</div>
-          <div class="head4">{{address.addrLine1}}, {{address.addrLine2}}, {{address.city}}</div>
+          <div class="head4 bold">{{addressItem.addrType}}</div>
+          <div class="head4">{{addressItem.addrLine1}}, {{addressItem.addrLine2}}, {{addressItem.city}}</div>
         </div>
       </div>
       <!-- <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">

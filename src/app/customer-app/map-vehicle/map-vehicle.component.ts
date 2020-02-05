@@ -84,7 +84,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.customerStateService.pitstopOnEdge$.subscribe((i) => {
       if (!i.isLocationOnEdge) {
         // Pop from markers list
-        const index = this.markers.findIndex(j => j.lat === i.pitstop[0] && j.lng === i.pitstop[1]);
+        const index = this.markers.findIndex(j => j.id === i.pitstopId);
         if (index > -1) {
           this.markers.splice(index, 1);
         }
@@ -242,7 +242,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
               id: i._id,
             };
             this.markers.push(pitstopMarker);
-            this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
+            this.customerStateService.isPitStopOnEdge(pitstopMarker.id, pitstopMarker.lat, pitstopMarker.lng);
           });
         });
         // Show pitstops

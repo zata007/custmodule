@@ -200,7 +200,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
               lng: i.blPitStopLongLat.coordinates[0],
               label: index + '',
             };
-            this.customerStateService.isPitStopOnEdge(pitstopMarker.lat, pitstopMarker.lng);
+            this.customerStateService.isPitStopOnEdge(i.id, pitstopMarker.lat, pitstopMarker.lng);
           });
         });
         // Show pitstops

@@ -4,6 +4,7 @@ export const ZATAAKSE_PREF_LANG = 'zataakse_pref_lang';
 export const ZATAAKSE_JWT_TOKEN = 'zataakse_jwt_token';
 export const ZATAAKSE_PAYMENT_TOKEN = 'zataakse_payment_token';
 export const ZATAAKSE_SELECTED_SERVICE = 'zataakse_service_selected';
+export const ZATAAKSE_PROFILE_DATA = 'zataakse_profile_data';
 
 export const API_ENDPOINTS = {
   USER : 'user',

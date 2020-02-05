@@ -21,7 +21,7 @@ export interface Marker {
 
 export interface ILoginData {
   lanPreference: string;
-  fingurePrint ? : string;
+  fingurePrint ?: string;
   mobileNumber: string;
 }
 
@@ -37,8 +37,8 @@ export interface IUserDetails {
   email: string;
   fullName: string;
   isVerified: boolean;
-  locationLongLat ? : {
-    type: string;coordinates: number[]
+  locationLongLat ?: {
+    type: string; coordinates: number[]
   };
   mobileNumber: string;
   referralCode: string;
@@ -103,12 +103,12 @@ export interface IRequestRegister {
   pInterface: string;
   indCountryCode: string;
   indMobileNum: string;
-  indEmailNotify ? : boolean;
-  indMobileNotify ? : boolean;
-  indPushNotify ? : boolean;
-  latitude ? : number;
-  longitude ? : number;
-  indPwd ? : string;
+  indEmailNotify ?: boolean;
+  indMobileNotify ?: boolean;
+  indPushNotify ?: boolean;
+  latitude ?: number;
+  longitude ?: number;
+  indPwd ?: string;
 }
 
 export interface IRequestMainParams {
@@ -123,7 +123,7 @@ export interface IRequestGetRestaurantData extends IRequestMainParams {
   isDelivery: boolean;
   pitstopLatitude: number;
   pitstopLongitude: number;
-  page ? : number;
+  page ?: number;
 }
 
 export interface IRestaurantData {
@@ -133,11 +133,11 @@ export interface IRestaurantData {
   locality: string;
   longLat: number[];
   avgRating: number;
-  images: [{
+  images: {
     _id: string,
     original: string,
     thumbnail: string;
-  }];
+  }[];
   blWorkingHrs: [{
     _id: string;
     day: number;
@@ -189,9 +189,9 @@ export interface IResponseLocationServed {
 export interface IRequestGetSkuData extends IRequestMainParams {
   pageNum: number;
   flag: number;
-  pitstopLatitude ? : string;
-  pitstopLongitude ? : string;
-  businessLocId ? : string;
+  pitstopLatitude ?: string;
+  pitstopLongitude ?: string;
+  businessLocId ?: string;
 }
 
 export interface IMenuData {
@@ -229,7 +229,7 @@ export interface IMenuData {
   };
   skuNutrition: string;
   skuCustom: string[];
-  skuCombo ? : {
+  skuCombo ?: {
     skuType: string;
     skuSubType: string;
     skuName: string;
@@ -326,31 +326,67 @@ export interface IResponseLoginSignup {
   data: ILoginSignupData;
 }
 
-export interface IResponseGetProfileData {
-  message: string;
-  data: {
-    indDetail: {
+export interface IProfileData {
+  indDetail: {
+    _id: string;
+    indCountryCode: string;
+    indMobileNum: string;
+    roles: {
+      indEmailNotify: boolean;
+      indMobileNotify: boolean;
       _id: string;
-      indCountryCode: string;
+      pRoleId: string;
+      pRoleAuthority: number;
+      pRelationId: string;
+      pRelationAuthority: number,
+      deviceId: {
+        indCurrLocLongLat: {
+          type: string;
+          coordinates: number[];
+        },
+        indPushNotify: boolean;
+        indFingerPrint: string;
+      },
       indMobileNum: string;
-      roles: [];
-      uniqueId: string;
-      basic: {
-        indFirstName: string;
-        indLastName: string;
-        indDob: string;
-        apAge: number;
-        apAgeUpdateOn: string;
-        indGender: string;
-        indFoodPref: string;
-        indLanPref: string;
-        indPic: [{
-          imageName: string;
-          original: string;
-          thumbnail: string;
-          tags: [];
-        }];
-      };
+      indAddr: {
+          locationLongLat: {
+            type: string;
+            coordinates: number[];
+          },
+          _id: string;
+          addrType: string;
+          addrLine1: string;
+          addrLine2: string;
+          city: string;
+          state: string;
+          country: string;
+          pincode: string;
+          locality: string;
+          landmark: string;
+        }[];
+      indVehicles: any[];
+    }[];
+    uniqueId: string;
+    basic: {
+      indFirstName: string;
+      indLastName: string;
+      indDob: string;
+      apAge: number;
+      apAgeUpdateOn: string;
+      indGender: string;
+      indFoodPref: string;
+      indLanPref: string;
+      indPic: [{
+        imageName: string;
+        original: string;
+        thumbnail: string;
+        tags: [];
+      }];
     };
   };
+}
+
+export interface IResponseGetProfileData {
+  message: string;
+  data: IProfileData;
 }
