@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData, IRequestPlaceOrder } from 'src/app/shared/models/common-model';
+import { IMenuData, IRequestPlaceOrder, IRestaurantData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -21,7 +21,12 @@ export class CartViewComponent implements OnInit {
   ECustomerServiceType = ECustomerServiceType;
   orderedItems: IMenuData[] = [];
   hasAuthToken = false;
-  selectedLocation = '';
+  deliveryLocation = '';
+  pitstopData = {
+    locality: '',
+    name: ''
+  };
+  currentRestaurantData: IRestaurantData = null;
   constructor(
     private location: Location,
     private dataService: DataService,
@@ -35,10 +40,24 @@ export class CartViewComponent implements OnInit {
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
     this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
-    if (this.customerStateService.selectedLocation.from) {
-      this.getPlaceName(this.customerStateService.selectedLocation.from.lat, this.customerStateService.selectedLocation.from.lng, (res)=>{
-        this.selectedLocation = res.formatted_address;
-      });
+
+    switch (this.customerStateService.currentServiceSelected) {
+      case ECustomerServiceType.TakeAway:
+        if (this.customerStateService.currentPitstopData) {
+          this.pitstopData = {
+            locality: this.customerStateService.currentPitstopData.landmark,
+            name: this.customerStateService.currentPitstopData.pitstop
+          };
+        }
+        break;
+      case ECustomerServiceType.Delivery:
+        if (this.customerStateService.currentDeliveryLocation) {
+          this.deliveryLocation = this.customerStateService.currentDeliveryLocation;
+        }
+        break;
+      default:
+        this.currentRestaurantData = this.customerStateService.currentRestaurantData;
+        break;
     }
 
   }

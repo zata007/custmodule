@@ -6,7 +6,7 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { MatDialog, MatBottomSheet } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
@@ -311,7 +311,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     geocoder.geocode(request, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         const result = results[0];
-        const rsltAdrComponent = result.address_components;
         if (result != null) {
           console.log(result);
           callback(result);
@@ -383,6 +382,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
       isDelivery: true,
       isOrderAhead: false,
     };
+    this.customerStateService.currentDeliveryLocation = this.searchElementRefFrom.nativeElement.value;
     this.dataService.getRestauratData(data).subscribe((res: IResponseGetRestaurantData) => {
       // TODO: Handle no data
       if (res.data && res.data.blData) {

@@ -82,7 +82,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.customerStateService.directionResults$.subscribe((data: google.maps.DirectionsRoute[]) => this.onDirectionResultUpdate(data));
 
     this.customerStateService.pitstopOnEdge$.subscribe((i) => {
-      if (!i.isLocationOnEdge) {
+      if (i.isLocationOnEdge) {
         // Pop from markers list
         const index = this.markers.findIndex(j => j.id === i.pitstopId);
         if (index > -1) {
