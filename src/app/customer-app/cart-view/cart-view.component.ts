@@ -79,6 +79,7 @@ export class CartViewComponent implements OnInit {
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
         totalPrice: 150,
+        addressId: "5e394b0ba8b8c854b6529d37",
         pitstopId: "5e3694f1d2321da3b45e361b" // this.customerStateService.getCurrentPitstopData().id
 
       }
@@ -118,8 +119,6 @@ export class CartViewComponent implements OnInit {
     }
   }
 
-
-
   private getPlaceName(lat, lng, callback: Function) {
     const geocoder = new google.maps.Geocoder();
     const latlng = new google.maps.LatLng(lat, lng);
@@ -139,7 +138,4 @@ export class CartViewComponent implements OnInit {
       }
     });
   }
-
-
-
 }
