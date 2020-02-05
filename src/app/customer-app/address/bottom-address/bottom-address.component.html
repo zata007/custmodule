@@ -4,29 +4,33 @@
   <div class="location-confirm" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="location" fxLayout="column" fxLayoutAlign="space-around">
       <div class="caption">Your Location</div>
-      <div class="head4 bold">Torit Innovation Private Limited</div>
+      <div class="head4 bold">{{data.x}}</div>
     </div>
-    <button mat-stroked-button color="primary">CHANGE</button>
+    <button mat-stroked-button color="primary" (click)="openLink($event)">CHANGE</button>
   </div>
   <mat-divider></mat-divider>
-  <div class="input-area" fxLayout="column">
+  <div class="input-area" fxLayout="column" [formGroup]="addressForm" >
     <mat-form-field>
-      <input matInput placeholder="Complete Address" required>
+      <input matInput placeholder="Address Line 1" (blur)="validate()" formControlName="addLine1" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Floor Number (Optional)">
+      <input matInput placeholder="Address Line 2 (Optional)" (blur)="validate()" formControlName="addLine2">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="How To Reach (Optional)">
+      <input matInput placeholder="Locality" (blur)="validate()" formControlName="locality" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Landmark" (blur)="validate()" formControlName="landmark" required>
     </mat-form-field>
     <label class="bold">Location Type</label>
-    <mat-radio-group aria-label="Location Type">
+    <mat-radio-group aria-label="Location Type" (blur)="validate()" formControlName="addType">
       <mat-radio-button color="primary" value="Residential">Residential</mat-radio-button>
       <mat-radio-button color="primary" value="Work">Work</mat-radio-button>
+      <mat-radio-button color="primary" value="Work">Other</mat-radio-button>
     </mat-radio-group>
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="center">
-    <button class="confirm-button" mat-raised-button color="primary">SAVE ADDRESS</button>
+    <button class="confirm-button" mat-raised-button color="primary" (click)="saveAddress()" [disabled]="!allValidate">SAVE ADDRESS</button>
   </div>
 </div>

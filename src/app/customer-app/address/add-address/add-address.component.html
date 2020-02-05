@@ -11,23 +11,6 @@
       [clickableIcons]="false"
       [styles]="mapStyles"
     >
-      <ng-container *ngIf="canShowDirection">
-        <agm-polyline
-          *ngFor="let polyline of polylines; let i = index"
-          (lineClick)="onPolylineClick(i)"
-          [zIndex]="polyline.zIndex"
-          [strokeColor]="polyline.color"
-        >
-          <agm-polyline-point
-            *ngFor="let point of polyline.path"
-            [latitude]="point.lat"
-            [longitude]="point.lng"
-          >
-          </agm-polyline-point>
-        </agm-polyline>
-
-        <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
-      </ng-container>
       <agm-marker
         *ngIf="customerStateService.selectedLocation.from.lat"
         [latitude]="customerStateService.selectedLocation.from.lat"
@@ -36,27 +19,6 @@
         [iconUrl]="'assets/icons/pin-start.svg'"
         [animation]="'BOUNCE'"
         (dragEnd)="setFromLatLng($event)"
-
-      >
-      </agm-marker>
-      <agm-marker
-        *ngIf="customerStateService.selectedLocation.to.lat"
-        [latitude]="customerStateService.selectedLocation.to.lat"
-        [longitude]="customerStateService.selectedLocation.to.lng"
-        [markerDraggable]="true"
-        [iconUrl]="'assets/icons/pin-end.svg'"
-        [animation]="'BOUNCE'"
-        (dragEnd)="setToLatLng($event)"
-      >
-      </agm-marker>
-
-      <agm-marker
-        *ngFor="let m of markers; let i = index"
-        (markerClick)="clickedMarker(m.label, i)"
-        [latitude]="m.lat"
-        [longitude]="m.lng"
-        [markerDraggable]="m.draggable"
-        [iconUrl]="'assets/icons/marker.gif'"
       >
       </agm-marker>
     </agm-map>
@@ -70,8 +32,7 @@
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="location" fxLayout="column" fxLayoutAlign="space-around">
       <div class="caption">Your Location</div>
-      <div class="head4 bold">Torit Innovation Private Limited</div>
-      <div class="caption">East Rajapur, Kolkata, West Bengal 700075</div>
+      <div class="para bold">{{this.address.x}}</div>
     </div>
     <button mat-stroked-button color="primary">CHANGE</button>
   </div>

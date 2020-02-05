@@ -4,7 +4,7 @@ import { MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData, IRequestPlaceOrder } from 'src/app/shared/models/common-model';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
@@ -18,8 +18,10 @@ import { CustomerStateService } from '../customer-state.service';
 })
 export class CartViewComponent implements OnInit {
 
+  ECustomerServiceType = ECustomerServiceType;
   orderedItems: IMenuData[] = [];
   hasAuthToken = false;
+  selectedLocation = '';
   constructor(
     private location: Location,
     private dataService: DataService,
@@ -27,12 +29,18 @@ export class CartViewComponent implements OnInit {
     private orderService: OrderService,
     private router: Router,
     private commonService: CommonService,
-    private customerStateService: CustomerStateService
-  ){}
+    public customerStateService: CustomerStateService
+  ) {}
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
     this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
+    if (this.customerStateService.selectedLocation.from) {
+      this.getPlaceName(this.customerStateService.selectedLocation.from.lat, this.customerStateService.selectedLocation.from.lng, (res)=>{
+        this.selectedLocation = res.formatted_address;
+      });
+    }
+
   }
   onBackClick() {
     this.customerStateService.setCurrentPage('main');
@@ -64,22 +72,45 @@ export class CartViewComponent implements OnInit {
 
         orderData: this.orderService.cart.map(i => {
           return  {
-            businessLocId: i.apPsBusinessLocId,
-            skuId: i._id,
-            qty: i.skuServes
+            businessLocId: "5e356afe2000b41e6ba0a397", //i.apPsBusinessLocId,
+            skuId: "5e36d6ced2321da3b48fcb41", //i._id,
+            qty: 1 //i.skuServes
           };
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
-        totalPrice: 10,
-        pitstopId: this.customerStateService.getCurrentPitstopData().id
+        totalPrice: 150,
+        addressId: "5e394b0ba8b8c854b6529d37",
+        pitstopId: "5e3694f1d2321da3b45e361b" // this.customerStateService.getCurrentPitstopData().id
 
       }
       this.dataService.placeOrder(data).subscribe(res => {
         this.commonService.paymentInformation = res;
+        const localStorageData = {};
+        switch (this.customerStateService.currentServiceSelected) {
+          case ECustomerServiceType.TakeAway:
+            // tslint:disable-next-line: no-string-literal
+            localStorageData['data'] = {
+              locationData: this.customerStateService.selectedLocation,
+              pitstopData: this.customerStateService.getCurrentPitstopData()
+            };
+            break;
+          case ECustomerServiceType.Delivery:
+            // tslint:disable-next-line: no-string-literal
+            localStorageData['data'] = {
+              locationData: this.customerStateService.selectedLocation,
+              address: 'Ishan Appartments, NewLand road, Bangladesh.', // TODO: pass customer's address
+            };
+            break;
 
+          default:
+            break;
+        }
+        // tslint:disable-next-line: no-string-literal
+        localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
+        localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
         localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
         window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
-        console.log(this.customerStateService.currentServiceSelected);
+
       });
 
     } else {
@@ -88,6 +119,23 @@ export class CartViewComponent implements OnInit {
     }
   }
 
-
-
+  private getPlaceName(lat, lng, callback: Function) {
+    const geocoder = new google.maps.Geocoder();
+    const latlng = new google.maps.LatLng(lat, lng);
+    const request = { location: latlng };
+    geocoder.geocode(request, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK) {
+        const result = results[0];
+        const rsltAdrComponent = result.address_components;
+        const resultLength = rsltAdrComponent.length;
+        if (result != null) {
+          callback(result);
+          // this.address = rsltAdrComponent[resultLength - 8].short_name;
+        } else {
+          callback(result);
+          alert('No address available!');
+        }
+      }
+    });
+  }
 }

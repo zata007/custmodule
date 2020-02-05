@@ -12,6 +12,8 @@ import { ZATAAKSE_JWT_TOKEN } from '../../shared/constants/constants'
 export class ProfileComponent implements OnInit {
 
   data: any = [];
+  basic: any = [];
+  address: any = [];
 
   constructor(
     private location: Location,
@@ -24,7 +26,12 @@ export class ProfileComponent implements OnInit {
     if(typeof localStorage.getItem(ZATAAKSE_JWT_TOKEN) !== "undefined" && localStorage.getItem(ZATAAKSE_JWT_TOKEN) !== null) {
       this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((data: any) => {
         const profile: Array<any> = data.data;
-        console.log(profile);
+        this.data = profile;
+        this.basic = this.data.indDetail.basic;
+        this.address = this.data.indDetail.roles[0].indAddr;
+        console.log(this.address);
+        console.log(this.data);
+        console.log(this.basic.indFirstName);
       });
     } else {
       this.router.navigate(['login-signup']);
@@ -33,6 +40,10 @@ export class ProfileComponent implements OnInit {
 
   onBackClick() {
     this.location.back();
+  }
+
+  addNewAddress() {
+    this.router.navigate(['customer/address/add']);
   }
 
 }

@@ -6,10 +6,10 @@
     <div fxLayoutAlign="center">{{ mapForHeader[selectedService]}}</div>
   </mat-toolbar>
 
-  <div class="map-area" fxFlex="1 1 100%" #mapContainer>
+  <div *ngIf="fromLocation" class="map-area" fxFlex="1 1 100%" #mapContainer>
     <agm-map
-      [latitude]="customerStateService.selectedLocation.from.lat"
-      [longitude]="customerStateService.selectedLocation.from.lng"
+      [latitude]="fromLocation.lat"
+      [longitude]="fromLocation.lng"
       [scrollwheel]="true"
       [zoomControl]="false"
       [streetViewControl]="false"
@@ -18,10 +18,9 @@
       [clickableIcons]="false"
       [styles]="mapStyles"
     >
-      <ng-container *ngIf="false">
+      <ng-container *ngIf="polylines.length">
         <agm-polyline
           *ngFor="let polyline of polylines; let i = index"
-          (lineClick)="onPolylineClick(i)"
           [zIndex]="polyline.zIndex"
           [strokeColor]="polyline.color"
         >
@@ -32,13 +31,11 @@
           >
           </agm-polyline-point>
         </agm-polyline>
-
-        <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
       </ng-container>
       <agm-marker
-        *ngIf="customerStateService.selectedLocation.from.lat"
-        [latitude]="customerStateService.selectedLocation.from.lat"
-        [longitude]="customerStateService.selectedLocation.from.lng"
+        *ngIf="fromLocation.lat"
+        [latitude]="fromLocation.lat"
+        [longitude]="fromLocation.lng"
         [markerDraggable]="false"
         [iconUrl]="'assets/icons/pin-start.svg'"
         [animation]="'DROP'"
@@ -46,9 +43,9 @@
       >
       </agm-marker>
       <agm-marker
-        *ngIf="customerStateService.selectedLocation.to.lat"
-        [latitude]="customerStateService.selectedLocation.to.lat"
-        [longitude]="customerStateService.selectedLocation.to.lng"
+        *ngIf="toLocation.lat"
+        [latitude]="toLocation.lat"
+        [longitude]="toLocation.lng"
         [markerDraggable]="false"
         [iconUrl]="'assets/icons/pin-end.svg'"
         [animation]="'DROP'"
@@ -60,23 +57,26 @@
 
   <div [ngSwitch]="selectedService">
   <div class="message" *ngSwitchCase="ECustomerServiceType.TakeAway">
-    <div class="head4">Proceed to the Zataakse Pitstop to receive your order</div>
-    <div class="head3 bold">Pitstop Name</div>
-    <div class="caption">Pitstop Locality</div>
-    <div fxLayout="row" fxlayoutAlign="flex-end">
+    <div class="para">Proceed to the Zataakse Pitstop to receive your order</div>
+    <div class="head3">{{pitstopData.pitstopData.pitstop}}</div>
+    <div class="caption">{{pitstopData.pitstopData.landmark}}</div>
+    <div fxLayout="row" fxLayoutAlign="flex-end">
       <button mat-raised-button color="primary">NAVIGATE</button>
     </div>
   </div>
   <div  class="message" *ngSwitchCase="ECustomerServiceType.Delivery">
-    <div class="head4">Your order will be delivered to following address:</div>
-    <div class="head4">Customer Address</div>
-    <div fxLayout="row" fxlayoutAlign="flex-end">
-      <button mat-fab color="primary">30:00</button>
+    <div class="para">Your order will be delivered to following address:</div>
+    <div class="head4">{{deliveryData.address}}</div>
+    <div fxLayout="row" fxLayoutAlign="flex-end">
+      <button mat-fab color="primary">{{counterString}}</button>
     </div>
 
   </div>
   <div  class="message" *ngSwitchDefault>
-    <div class="head4">Please enter your tentative time of arrival</div>
+    <div class="para">Please enter your tentative time of arrival</div>
+    <!-- <input [ngxTimepicker]="picker"> -->
+    <!-- <ngx-material-timepicker #picker></ngx-material-timepicker> -->
+
     <mat-form-field>
       <input type="time" matInput placeholder="Add time">
     </mat-form-field>
