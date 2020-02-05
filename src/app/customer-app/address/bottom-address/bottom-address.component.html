@@ -11,19 +11,19 @@
   <mat-divider></mat-divider>
   <div class="input-area" fxLayout="column" [formGroup]="addressForm" >
     <mat-form-field>
-      <input matInput placeholder="Address Line 1" formControlName="addLine1" required>
+      <input matInput placeholder="Address Line 1" (blur)="validate()" formControlName="addLine1" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Address Line 2 (Optional)" formControlName="addLine2">
+      <input matInput placeholder="Address Line 2 (Optional)" (blur)="validate()" formControlName="addLine2">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Locality" formControlName="locality" required>
+      <input matInput placeholder="Locality" (blur)="validate()" formControlName="locality" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Landmark (optional)" formControlName="landmark">
+      <input matInput placeholder="Landmark" (blur)="validate()" formControlName="landmark" required>
     </mat-form-field>
     <label class="bold">Location Type</label>
-    <mat-radio-group aria-label="Location Type" formControlName="addType">
+    <mat-radio-group aria-label="Location Type" (blur)="validate()" formControlName="addType">
       <mat-radio-button color="primary" value="Residential">Residential</mat-radio-button>
       <mat-radio-button color="primary" value="Work">Work</mat-radio-button>
       <mat-radio-button color="primary" value="Work">Other</mat-radio-button>
@@ -31,6 +31,6 @@
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="center">
-    <button class="confirm-button" mat-raised-button color="primary" (click)="saveAddress()">SAVE ADDRESS</button>
+    <button class="confirm-button" mat-raised-button color="primary" (click)="saveAddress()" [disabled]="!allValidate">SAVE ADDRESS</button>
   </div>
 </div>

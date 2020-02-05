@@ -13,6 +13,7 @@ import { DataService } from '../../../shared/services/data.service'
 })
 export class BottomAddressComponent implements OnInit {
   addressForm: FormGroup;
+  allValidate: boolean = false;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
@@ -28,7 +29,15 @@ export class BottomAddressComponent implements OnInit {
       locality: new FormControl(''),
       landmark: new FormControl(''),
       addType: new FormControl('')
-    })
+    });
+
+  }
+
+  validate() {
+    if(this.addressForm['addLine1'].length>2 && this.addressForm['landmark'].length>2 && this.addressForm['locality'].length>2 ) {
+      this.allValidate = true;
+    };
+    console.log('called')
   }
 
   openLink(event: MouseEvent): void {
