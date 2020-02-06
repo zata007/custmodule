@@ -49,6 +49,7 @@ export class CartViewComponent implements OnInit {
 
   ngOnInit() {
     this.orderedItems = this.orderService.getCartData();
+    console.log(this.orderedItems);
     this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
 
     switch (this.customerStateService.currentServiceSelected) {
