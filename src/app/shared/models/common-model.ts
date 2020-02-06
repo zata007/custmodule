@@ -227,6 +227,7 @@ export interface IMenuData {
     original: string;
     thumbnail: string;
   };
+  type: string;
   skuNutrition: string;
   skuCustom: string[];
   skuCombo ?: {

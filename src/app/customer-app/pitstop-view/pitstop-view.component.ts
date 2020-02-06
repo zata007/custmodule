@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { OrderService } from '../order.service';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomAddressComponent } from '../address/bottom-address/bottom-address.component';
 import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component'
 import { EListPageViewType } from 'src/app/shared/constants/constants';
 import { CustomerStateService } from '../customer-state.service';
-import { IMenuData, IResponseGetSkuData, IRequestGetSkuData,
-  IRequestGetRestaurantData, IResponseGetRestaurantData, IRestaurantData } from 'src/app/shared/models/common-model';
-import { Observable } from 'rxjs';
+import { IMenuData, IRestaurantData } from 'src/app/shared/models/common-model';
 import { DataService } from 'src/app/shared/services/data.service';
+import { MatSlideToggleChange } from '@angular/material';
 
 
 @Component({
@@ -32,6 +30,7 @@ export class PitstopViewComponent implements OnInit {
   filteredRestaurants: IRestaurantData[];
   searchTerms = '';
   selectedTab = 0;
+  defaultToggle = false;
 
   constructor(
     private customerStateService: CustomerStateService,
@@ -86,6 +85,15 @@ export class PitstopViewComponent implements OnInit {
       }
     } else {
       this.resetSearch();
+    }
+  }
+
+  onToggle(event: MatSlideToggleChange) {
+    this.defaultToggle = event.checked;
+    if (this.defaultToggle) {
+      this.filteredFoods = this.foods.filter(i => i.type.toLowerCase()==="v");
+    } else if (!this.defaultToggle) {
+      this.filteredFoods = this.foods;
     }
   }
 
