@@ -3,13 +3,15 @@ import { Location } from '@angular/common';
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData, IRequestPlaceOrder, IRestaurantData, IProfileData, IAddressData } from 'src/app/shared/models/common-model';
+import { IMenuData, IRequestPlaceOrder, IRestaurantData, IProfileData, IAddressData, IVehicleData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
-import { AddressListComponent } from './address-list/address-list.component'
+import { AddressListComponent } from './address-list/address-list.component';
+import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component';
 
 @Component({
   selector: 'app-cart-view',
@@ -23,6 +25,7 @@ export class CartViewComponent implements OnInit {
   orderedItems: IMenuData[] = [];
   profileData: IProfileData = null;
   addressData: IAddressData[] = null;
+  vehicleData: IVehicleData[] = null;
   hasAuthToken = false;
   deliveryLocation = '';
   pitstopData = {
@@ -57,6 +60,9 @@ export class CartViewComponent implements OnInit {
             name: this.customerStateService.currentPitstopData.pitstop
           };
         }
+        this.profileData =  localStorage.getItem(ZATAAKSE_PROFILE_DATA) ? JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) : null;
+        this.vehicleData = this.profileData.indDetail.roles[0].indVehicles;
+        console.log(this.vehicleData)
         break;
       case ECustomerServiceType.Delivery:
         if (this.customerStateService.currentDeliveryLocation) {
@@ -181,8 +187,14 @@ export class CartViewComponent implements OnInit {
     });
   }
 
-  addAddress() {
-    this.router.navigate(['customer/address/add']);
+  onVehicleChange(): void {
+    this.bottomSheet.open(VehicleListComponent, {
+      data: this.vehicleData
+    })
+  }
+
+  addVehicle() {
+    this.bottomSheet.open(BottomVehicleComponent)
   }
 
 //   openTime() {

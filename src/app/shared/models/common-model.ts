@@ -349,7 +349,7 @@ export interface IProfileData {
       },
       indMobileNum: string;
       indAddr: IAddressData[];
-      indVehicles: IVehicleData;
+      indVehicles: IVehicleData[];
     }[];
     uniqueId: string;
     basic: {

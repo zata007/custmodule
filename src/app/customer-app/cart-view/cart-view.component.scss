@@ -4,8 +4,9 @@
   width: 100%;
   overflow: auto;
   padding-top: 40px;
+  padding-bottom: 230px;
   mat-toolbar {
-    background: rgba(0,0,0, 0)!important;
+    background: #ffffff !important;
     box-shadow: none;
     padding: 5px;
     position: fixed;
@@ -58,6 +59,7 @@
     left: 0px;
     right: 0px;
     padding: 10px 16px 20px;
+    background-color: #ffffff;
     .order-button {
       height: 55px;
       margin: 30px 16px 0px 16px;
