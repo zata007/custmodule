@@ -13,13 +13,12 @@ import { DataService } from '../../../shared/services/data.service';
 })
 export class BottomVehicleComponent implements OnInit {
   vehicleForm: FormGroup;
-  vehicle: any[] = [];
   vehicleType: string[]= new Array("Hatchback", "Sedan", "MUV", "SUV", "Luxury", "Convertible", "Coupe", "Minivan", "Pickup Truck", "Wagon");
 
   constructor(
     private bottomSheet: MatBottomSheet,
-    private dataService: DataService,    
-    private _bottomSheetRef: MatBottomSheetRef<BottomVehicleComponent>,
+    private dataService: DataService,
+    private bottomSheetRef: MatBottomSheetRef<BottomVehicleComponent>,
     private router: Router,
   ) { }
 
@@ -28,7 +27,7 @@ export class BottomVehicleComponent implements OnInit {
       vehType: new FormControl(''),
       vehbrand: new FormControl(''),
       vehModel: new FormControl(''),
-      vehNum: new FormControl(''),      
+      vehNum: new FormControl(''),
       vehColor: new FormControl('')
     });
   }
@@ -36,13 +35,9 @@ export class BottomVehicleComponent implements OnInit {
   validate() {}
 
   saveVehicle() {
-    this.dataService.manageVehicle(this.vehicleForm.value).subscribe((data: any) =>{
-      console.log(data);
-      this.vehicle.push(data.data.indVehicles);
-      console.log(this.vehicle);
-      this._bottomSheetRef.dismiss();
-      this.router.navigate(['customer/profile'])
-    })
+    this.dataService.manageVehicle(this.vehicleForm.value).subscribe((data) => {
+      this.bottomSheetRef.dismiss(data.data.indVehicles);
+    });
   }
 
 }
