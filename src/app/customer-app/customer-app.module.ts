@@ -42,7 +42,7 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
 import { AddressListComponent } from './cart-view/address-list/address-list.component';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { VehicleListComponent } from './cart-view/vehicle-list/vehicle-list.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +74,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     PitstopRestaurantComponent,
     AfterPaymentComponent,
     AddressListComponent,
+    VehicleListComponent,
   ],
   entryComponents: [
     BillDetailComponent,
@@ -82,7 +83,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     BottomVehicleComponent,
     AddAddressComponent,
     AddVehicleComponent,
-    AddressListComponent
+    AddressListComponent,
+    VehicleListComponent
   ],
   imports: [
     CommonModule,

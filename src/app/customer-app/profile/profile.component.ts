@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants'
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants';
 import { IResponseGetProfileData, IProfileData, IAddressData, IVehicleData } from 'src/app/shared/models/common-model';
 import { MatDialog, MatBottomSheet } from '@angular/material';
-import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component'
+import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component';
 
 @Component({
   selector: 'app-profile',
