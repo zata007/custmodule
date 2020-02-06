@@ -6,7 +6,11 @@
         <img class="thumb mat-elevation-z4" src="{{ item.skuImages[0] ? item.skuImages[0]['thumbnail'] : '../../../assets/img/core/thumb.jpg'}}" alt="" />
         <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
           <div fxLayout="row" fxLayoutAlign="start">
-            <div class="head4 food-name">{{item.skuName}} <img src="../../../assets/icons/non-veg.png" alt=""></div>
+            <div class="head4 food-name">
+              {{item.skuName}}
+              <img *ngIf="item.type==='v'; else nonVeg" src="../../../assets/icons/veg.png" alt="">
+              <ng-template #nonVeg><img src="../../../assets/icons/non-veg.png" alt=""></ng-template>
+            </div>
           </div>
           <div class="restaurant para">{{resName}}</div>
           <div class="description para">{{item.skuDesc}}</div>

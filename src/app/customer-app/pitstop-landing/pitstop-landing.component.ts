@@ -3,9 +3,9 @@ import { CustomerStateService } from '../customer-state.service';
 import { IMenuData, IResponseGetSkuData, IRequestGetSkuData,
    IRequestGetRestaurantData, IResponseGetRestaurantData, IRestaurantData } from 'src/app/shared/models/common-model';
 import { DataService } from 'src/app/shared/services/data.service';
-import { EListPageViewType, ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { Observable } from 'rxjs';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-pitstop-landing',
@@ -20,6 +20,7 @@ export class PitstopLandingComponent implements OnInit {
   resName: string;
   searchTerms = '';
   selectedTab = 0;
+  defaultToggle = false;
 
   constructor(
     private customerStateService: CustomerStateService,
@@ -92,6 +93,15 @@ export class PitstopLandingComponent implements OnInit {
       pitstopLatitude: pitstopData.lat.toString()
     };
     return this.dataService.getSku(data) as any;
+  }
+
+  onToggle(event: MatSlideToggleChange) {
+    this.defaultToggle = event.checked;
+    if (this.defaultToggle) {
+      this.filteredFoods = this.foods.filter(i => i.type.toLowerCase()==="v");
+    } else if (!this.defaultToggle) {
+      this.filteredFoods = this.foods;
+    }
   }
 
 }
