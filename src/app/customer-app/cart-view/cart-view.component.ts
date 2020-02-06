@@ -22,7 +22,7 @@ export class CartViewComponent implements OnInit {
   ECustomerServiceType = ECustomerServiceType;
   orderedItems: IMenuData[] = [];
   profileData: IProfileData = null;
-  addressData: IAddressData = null;
+  addressData: IAddressData[] = null;
   hasAuthToken = false;
   deliveryLocation = '';
   pitstopData = {
@@ -31,6 +31,7 @@ export class CartViewComponent implements OnInit {
   };
   currentRestaurantData: IRestaurantData = null;
   selectedTime: string;
+  selectedLocationForDelivery: IAddressData;
 
   constructor(
     private location: Location,
@@ -61,7 +62,7 @@ export class CartViewComponent implements OnInit {
         if (this.customerStateService.currentDeliveryLocation) {
           this.profileData =  localStorage.getItem(ZATAAKSE_PROFILE_DATA) ? JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) : null;
           this.addressData = this.profileData.indDetail.roles[0].indAddr;
-          console.log(this.addressData)
+          this.selectedLocationForDelivery = this.addressData[0];
           this.deliveryLocation = this.customerStateService.currentDeliveryLocation;
         }
         break;
@@ -169,9 +170,15 @@ export class CartViewComponent implements OnInit {
   }
 
   onAddressChange(): void {
-    this.bottomSheet.open(AddressListComponent, {
+    const addressListRef = this.bottomSheet.open(AddressListComponent, {
       data: this.addressData
-    })
+    });
+
+    addressListRef.afterDismissed().subscribe((data: IAddressData)  => {
+      if (data) {
+        this.selectedLocationForDelivery = data;
+      }
+    });
   }
 
   addAddress() {

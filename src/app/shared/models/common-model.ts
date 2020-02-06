@@ -348,7 +348,7 @@ export interface IProfileData {
         indFingerPrint: string;
       },
       indMobileNum: string;
-      indAddr: IAddressData;
+      indAddr: IAddressData[];
       indVehicles: IVehicleData;
     }[];
     uniqueId: string;
@@ -375,7 +375,7 @@ export interface IAddressData {
   locationLongLat: {
     type: string;
     coordinates: number[];
-  },
+  };
   _id: string;
   addrType: string;
   addrLine1: string;
@@ -386,7 +386,7 @@ export interface IAddressData {
   pincode: string;
   locality: string;
   landmark: string;
-}[];
+}
 
 export interface IVehicleData {
   vehicleId?: string;
@@ -395,7 +395,7 @@ export interface IVehicleData {
   vehModel: string;
   vehNum: string;
   vehColor: string;
-}[];
+}
 
 export interface IResponseGetProfileData {
   message: string;

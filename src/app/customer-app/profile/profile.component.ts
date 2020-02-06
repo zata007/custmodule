@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
   data: IProfileData;
   basic: any = [];
-  address: IAddressData;
+  address: IAddressData[];
   vehicle: IVehicleData;
   mobile: string;
 
