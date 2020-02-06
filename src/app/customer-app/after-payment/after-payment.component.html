@@ -61,7 +61,7 @@
     <div class="head3">{{pitstopData.pitstopData.pitstop}}</div>
     <div class="caption">{{pitstopData.pitstopData.landmark}}</div>
     <div fxLayout="row" fxLayoutAlign="flex-end">
-      <button mat-raised-button color="primary">NAVIGATE</button>
+      <button mat-raised-button color="primary" (click)="navigateToPitstop()">NAVIGATE</button>
     </div>
   </div>
   <div  class="message" *ngSwitchCase="ECustomerServiceType.Delivery">

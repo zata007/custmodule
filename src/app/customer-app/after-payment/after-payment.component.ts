@@ -122,4 +122,9 @@ export class AfterPaymentComponent implements OnInit {
     this.router.navigate(['customer']);
   }
 
+  navigateToPitstop() {
+    const latLng = `${this.pitstopData.pitstopData.lat},${this.pitstopData.pitstopData.lng}`;
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURI(latLng)}&travelmode=driving`);
+  }
+
 }
