@@ -18,7 +18,6 @@ import { reducers, metaReducers } from './reducers';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AgmCoreModule } from '@agm/core';
 import { JoyrideModule } from 'ngx-joyride';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ConnectionServiceModule } from 'ng-connection-service';
 import { SharedModule } from './shared/shared-components/shared.module';
@@ -67,7 +66,6 @@ export function provideConfig() {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxSkeletonLoaderModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SocialLoginModule,
     DeviceDetectorModule.forRoot(),
