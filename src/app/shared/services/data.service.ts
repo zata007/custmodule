@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ILoginData, IMobileLoginData,
-   IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder } from '../models/common-model';
+   IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder, IVehicleData } from '../models/common-model';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../constants/constants';
 import { Socket } from 'ngx-socket-io';
@@ -194,6 +194,17 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
+  manageVehicle(data:IVehicleData): Observable<IVehicleData> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/manageVehicle`;
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      },
+    };
+    return this.putMethod(url, options, data) as any;
+  }
+
   manageAddress(data: {
     addressId?:string,
     x: string,
@@ -229,7 +240,6 @@ export class DataService {
       latitude: data.latitude,
       longitude: data.longitude
     };
-    console.log(resData);
     return this.putMethod(url, options, resData) as any;
   }
 }

@@ -349,7 +349,7 @@ export interface IProfileData {
       },
       indMobileNum: string;
       indAddr: IAddressData;
-      indVehicles: any[];
+      indVehicles: IVehicleData;
     }[];
     uniqueId: string;
     basic: {
@@ -386,6 +386,15 @@ export interface IAddressData {
   pincode: string;
   locality: string;
   landmark: string;
+}[];
+
+export interface IVehicleData {
+  vehicleId?: string;
+  vehType: string;
+  vehbrand: string;
+  vehModel: string;
+  vehNum: string;
+  vehColor: string;
 }[];
 
 export interface IResponseGetProfileData {

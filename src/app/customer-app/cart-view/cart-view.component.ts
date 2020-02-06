@@ -30,6 +30,8 @@ export class CartViewComponent implements OnInit {
     name: ''
   };
   currentRestaurantData: IRestaurantData = null;
+  selectedTime: string;
+
   constructor(
     private location: Location,
     private dataService: DataService,
@@ -38,7 +40,8 @@ export class CartViewComponent implements OnInit {
     private orderService: OrderService,
     private router: Router,
     private commonService: CommonService,
-    public customerStateService: CustomerStateService
+    public customerStateService: CustomerStateService,
+    // private atp: AmazingTimePickerService
   ) {}
 
   ngOnInit() {
@@ -170,5 +173,16 @@ export class CartViewComponent implements OnInit {
       data: this.addressData
     })
   }
+
+  addAddress() {
+    this.router.navigate(['customer/address/add']);
+  }
+
+//   openTime() {
+//     const amazingTimePicker = this.atp.open();
+//     amazingTimePicker.afterClose().subscribe(time => {
+//         this.selectedTime = time;
+//     });
+// }
 
 }

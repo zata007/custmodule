@@ -13,11 +13,11 @@
       <div style="height: 100px;"></div>
     </div>
   </div>
-  <div *ngIf="getTotal() > 0 && !isOrdered" class="place-order-container">
+  <!-- <div *ngIf="getTotal() > 0 && !isOrdered" class="place-order-container">
     <button id="proceed" mat-raised-button color="primary" (click)="placeOrder()">
       Place order ({{"₹" + getTotal()}})
     </button>
-  </div>
+  </div> -->
   <button id="proceed" mat-raised-button color="primary" *ngIf="!canShowPitstopLanding && !(getTotal() > 0 && !isOrdered)"
     (click)="canShowPitstopLanding = true">
     Proceed

@@ -16,6 +16,16 @@
   .address {
     margin: 20px 16px;
     overflow: visible;
+    div {
+      .address-detail {
+        width: 80%;
+        div {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
     .address-box {
       margin: 15px 0;
       width: 100%;
@@ -62,4 +72,9 @@
 
 mat-divider {
   margin-top: 15px !important;
+}
+
+input {
+  background-color: white;
+  border: none;
 }

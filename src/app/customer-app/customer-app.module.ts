@@ -41,8 +41,8 @@ import { MenuListComponent } from './menu-list/menu-list.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { AddressListComponent } from './cart-view/address-list/address-list.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -96,7 +96,6 @@ import { AddressListComponent } from './cart-view/address-list/address-list.comp
     RouterModule.forChild(CustomerAppRoutes),
     SwiperModule,
     FlexLayoutModule,
-    NgxMaterialTimepickerModule
   ],
   bootstrap: [CustomerLayoutComponent],
   providers: [CustomerService, OrderService],

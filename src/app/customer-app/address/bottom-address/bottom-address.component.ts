@@ -13,7 +13,7 @@ import { DataService } from '../../../shared/services/data.service'
 })
 export class BottomAddressComponent implements OnInit {
   addressForm: FormGroup;
-  allValidate: boolean = false;
+  allValidate: boolean = true;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,

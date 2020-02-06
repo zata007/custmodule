@@ -10,7 +10,7 @@
       <div class="name head3 bold">
         {{ basic.indFirstName }}
       </div>
-      <div class="head4 phone">{{ data.indDetail.indMobileNum }}</div>
+      <div class="head4 phone">{{ mobile }}</div>
       <button mat-stroked-button color="primary" class="head4">EDIT</button>
     </div>
   </div>
@@ -25,7 +25,7 @@
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
-      <div class="head4">{{ data.indDetail.indMobileNum }}</div>
+      <div class="head4">{{ mobile }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
@@ -77,6 +77,27 @@
         <button mat-button color="primary">DELETE</button>
       </div>
     </div> -->
+  </mat-card>
+
+  <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="head3 bold">Vehicle</div>
+    <button mat-stroked-button color="primary" (click)="addNewVehicle()">Add New</button>
+  </div>
+  <mat-card fxLayout="column" class="mat-elevation-z4">
+    <div *ngFor="let vehicleItem of vehicle" fxLayout="column" class="address-item">
+      <div fxLayout="row" fxLayoutAlign="start start" class="head4">
+        <img src="../../../assets/img/core/Mask Group 2.svg" alt="">
+        <div class="address-detail">
+          <div class="head4 bold">{{vehicleItem.vehbrand}} {{vehicleItem.vehModel}}</div>
+          <div class="head4">{{vehicleItem.vehNum}}</div>
+        </div>
+      </div>
+      <!-- <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
+        <button mat-button color="primary">EDIT</button>
+        <button mat-button color="primary">DELETE</button>
+      </div> -->
+      <mat-divider [inset]="true"></mat-divider>
+    </div>
   </mat-card>
 
   <div class="head3 bold header">Others</div>

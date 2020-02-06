@@ -3,7 +3,9 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants'
-import { IResponseGetProfileData, IProfileData } from 'src/app/shared/models/common-model';
+import { IResponseGetProfileData, IProfileData, IAddressData, IVehicleData } from 'src/app/shared/models/common-model';
+import { MatDialog, MatBottomSheet } from '@angular/material';
+import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component'
 
 @Component({
   selector: 'app-profile',
@@ -14,12 +16,16 @@ export class ProfileComponent implements OnInit {
 
   data: IProfileData;
   basic: any = [];
-  address: any = [];
+  address: IAddressData;
+  vehicle: IVehicleData;
+  mobile: string;
 
   constructor(
     private location: Location,
     public router: Router,
     private customerService: CustomerService,
+    public dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
   ) { }
 
   ngOnInit() {
@@ -30,10 +36,9 @@ export class ProfileComponent implements OnInit {
         localStorage.setItem(ZATAAKSE_PROFILE_DATA, JSON.stringify(data.data));
         this.data =  data.data;
         this.basic =  data.data.indDetail.basic;
+        this.mobile = this.data.indDetail.indMobileNum
         this.address =  data.data.indDetail.roles[0].indAddr;
-        console.log(this.address);
-        console.log(this.data);
-        console.log(this.basic.indFirstName);
+        this.vehicle = data.data.indDetail.roles[0].indVehicles;
       });
     } else {
       this.router.navigate(['login-signup']);
@@ -46,6 +51,10 @@ export class ProfileComponent implements OnInit {
 
   addNewAddress() {
     this.router.navigate(['customer/address/add']);
+  }
+
+  addNewVehicle(): void {
+    this.bottomSheet.open(BottomVehicleComponent);
   }
 
 }
