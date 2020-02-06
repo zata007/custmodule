@@ -348,22 +348,7 @@ export interface IProfileData {
         indFingerPrint: string;
       },
       indMobileNum: string;
-      indAddr: {
-          locationLongLat: {
-            type: string;
-            coordinates: number[];
-          },
-          _id: string;
-          addrType: string;
-          addrLine1: string;
-          addrLine2: string;
-          city: string;
-          state: string;
-          country: string;
-          pincode: string;
-          locality: string;
-          landmark: string;
-        }[];
+      indAddr: IAddressData;
       indVehicles: any[];
     }[];
     uniqueId: string;
@@ -385,6 +370,23 @@ export interface IProfileData {
     };
   };
 }
+
+export interface IAddressData {
+  locationLongLat: {
+    type: string;
+    coordinates: number[];
+  },
+  _id: string;
+  addrType: string;
+  addrLine1: string;
+  addrLine2: string;
+  city: string;
+  state: string;
+  country: string;
+  pincode: string;
+  locality: string;
+  landmark: string;
+}[];
 
 export interface IResponseGetProfileData {
   message: string;

@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
-import { MatBottomSheet } from '@angular/material';
+import { MatDialog, MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData, IRequestPlaceOrder, IRestaurantData, IProfileData } from 'src/app/shared/models/common-model';
+import { IMenuData, IRequestPlaceOrder, IRestaurantData, IProfileData, IAddressData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
+import { AddressListComponent } from './address-list/address-list.component'
 
 @Component({
   selector: 'app-cart-view',
@@ -21,6 +22,7 @@ export class CartViewComponent implements OnInit {
   ECustomerServiceType = ECustomerServiceType;
   orderedItems: IMenuData[] = [];
   profileData: IProfileData = null;
+  addressData: IAddressData = null;
   hasAuthToken = false;
   deliveryLocation = '';
   pitstopData = {
@@ -31,6 +33,7 @@ export class CartViewComponent implements OnInit {
   constructor(
     private location: Location,
     private dataService: DataService,
+    public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
     private orderService: OrderService,
     private router: Router,
@@ -53,12 +56,13 @@ export class CartViewComponent implements OnInit {
         break;
       case ECustomerServiceType.Delivery:
         if (this.customerStateService.currentDeliveryLocation) {
+          this.profileData =  localStorage.getItem(ZATAAKSE_PROFILE_DATA) ? JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) : null;
+          this.addressData = this.profileData.indDetail.roles[0].indAddr;
+          console.log(this.addressData)
           this.deliveryLocation = this.customerStateService.currentDeliveryLocation;
         }
         break;
       default:
-        this.profileData =  localStorage.getItem(ZATAAKSE_PROFILE_DATA) ? JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) : null;
-        console.log('This is list of add:', this.profileData.indDetail.roles[0]);
         this.currentRestaurantData = this.customerStateService.currentRestaurantData;
         break;
     }
@@ -160,4 +164,11 @@ export class CartViewComponent implements OnInit {
       }
     });
   }
+
+  onAddressChange(): void {
+    this.bottomSheet.open(AddressListComponent, {
+      data: this.addressData
+    })
+  }
+
 }

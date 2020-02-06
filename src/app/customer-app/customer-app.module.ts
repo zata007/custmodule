@@ -42,6 +42,7 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { AddressListComponent } from './cart-view/address-list/address-list.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     RestaurantsListComponent,
     PitstopRestaurantComponent,
     AfterPaymentComponent,
+    AddressListComponent,
   ],
   entryComponents: [
     BillDetailComponent,
@@ -79,7 +81,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     BottomAddressComponent,
     BottomVehicleComponent,
     AddAddressComponent,
-    AddVehicleComponent
+    AddVehicleComponent,
+    AddressListComponent
   ],
   imports: [
     CommonModule,

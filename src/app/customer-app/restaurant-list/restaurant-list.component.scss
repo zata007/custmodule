@@ -1,7 +1,4 @@
-@import '../../../assets/styles/mixins';
 .restaurant-container {
-  height:100vh;
-  overflow: scroll;
   padding-bottom: 30px;
   .head2 {
     text-align: center;
@@ -9,17 +6,6 @@
   }
   .restaurant-item-container {
     overflow: visible;
-    overflow-y: scroll;
-    height: 80vh;
-    overflow: auto;
-
-
-      @include pc {
-        max-height: 71vh;
-      }
-      @include xs-phone {
-        max-height: 80vh;
-      }
     .restaurant-item {
       margin: 5px auto;
       img {

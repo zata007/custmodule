@@ -1,5 +1,5 @@
 <div class="restaurant-container">
-  <div fxLayout="column" fxLayoutAlign="center start" class="restaurant-item-container">
+  <div fxLayout="column" class="restaurant-item-container">
     <ng-container *ngIf="restaurantLists && restaurantLists.length; else noData">
       <div *ngFor="let item of restaurantLists" fxLayout="row" fxLayoutAlign="start center" (click)="onRestaurantClick(item)" class="restaurant-item">
         <img class="thumb mat-elevation-z4" src="https://www.ahstatic.com/photos/5555_rsr001_01_p_1024x768.jpg" alt="" />
