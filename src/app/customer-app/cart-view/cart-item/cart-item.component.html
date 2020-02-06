@@ -5,7 +5,8 @@
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div class="head4 food-name">
           {{data.skuName}}
-          <!-- <img src="../../../../assets/icons/non-veg.png" alt=""> -->
+          <img *ngIf="data.type==='v'; else nonVeg" src="../../../assets/icons/veg.png" alt="">
+          <ng-template #nonVeg><img src="../../../assets/icons/non-veg.png" alt=""></ng-template>
         </div>
       </div>
       <div class="restaurant para">Restaurant</div>
