@@ -200,7 +200,12 @@ export class CartViewComponent implements OnInit {
   }
 
   addVehicle() {
-    this.bottomSheet.open(BottomVehicleComponent);
+    const bottomVehicleRef = this.bottomSheet.open(BottomVehicleComponent);
+    bottomVehicleRef.afterDismissed().subscribe((res: IVehicleData[]) => {
+      if (res) {
+        this.vehicleData = res;
+      }
+    });
   }
 
 //   openTime() {

@@ -194,7 +194,7 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
-  manageVehicle(data:IVehicleData): Observable<IVehicleData> {
+  manageVehicle(data: IVehicleData): Observable<{message: string; data: { indVehicles: IVehicleData[]}}> {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/manageVehicle`;
     const options = {
       headers: {
@@ -206,10 +206,10 @@ export class DataService {
   }
 
   manageAddress(data: {
-    addressId?:string,
+    addressId?: string,
     x: string,
     addType: string,
-    addLine1:string,
+    addLine1: string,
     addLine2: string,
     city: string,
     locality?: string,

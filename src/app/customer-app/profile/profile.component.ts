@@ -54,7 +54,12 @@ export class ProfileComponent implements OnInit {
   }
 
   addNewVehicle(): void {
-    this.bottomSheet.open(BottomVehicleComponent);
+    const bottomVehicleRef = this.bottomSheet.open(BottomVehicleComponent);
+    bottomVehicleRef.afterDismissed().subscribe((res: IVehicleData[]) => {
+      if (res) {
+        this.vehicle = res;
+      }
+    });
   }
 
 }
