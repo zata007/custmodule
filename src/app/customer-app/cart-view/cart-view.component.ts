@@ -35,6 +35,7 @@ export class CartViewComponent implements OnInit {
   currentRestaurantData: IRestaurantData = null;
   selectedTime: string;
   selectedLocationForDelivery: IAddressData;
+  selectedVehicle: IVehicleData;
 
   constructor(
     private location: Location,
@@ -62,7 +63,7 @@ export class CartViewComponent implements OnInit {
         }
         this.profileData =  localStorage.getItem(ZATAAKSE_PROFILE_DATA) ? JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) : null;
         this.vehicleData = this.profileData.indDetail.roles[0].indVehicles;
-        console.log(this.vehicleData)
+        this.selectedVehicle = this.vehicleData[0];
         break;
       case ECustomerServiceType.Delivery:
         if (this.customerStateService.currentDeliveryLocation) {
@@ -188,13 +189,18 @@ export class CartViewComponent implements OnInit {
   }
 
   onVehicleChange(): void {
-    this.bottomSheet.open(VehicleListComponent, {
+    const vehicleListRef = this.bottomSheet.open(VehicleListComponent, {
       data: this.vehicleData
-    })
+    });
+    vehicleListRef.afterDismissed().subscribe((res: IVehicleData) => {
+      if (res) {
+        this.selectedVehicle = res;
+      }
+    });
   }
 
   addVehicle() {
-    this.bottomSheet.open(BottomVehicleComponent)
+    this.bottomSheet.open(BottomVehicleComponent);
   }
 
 //   openTime() {
