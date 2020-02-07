@@ -98,4 +98,15 @@ export class CustomerService {
     };
     return this.httpClient.get(getUrl, { headers });
   }
+
+  getTransactionHistory(token: string, pageNum:string) {
+    const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getTransactionHistory`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      authorization: token.toString()
+    };
+    const params = new HttpParams().set('pageNum', pageNum);
+    return this.httpClient.get(getUrl, { headers, params });
+  }
 }

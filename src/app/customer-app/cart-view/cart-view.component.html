@@ -65,7 +65,7 @@
         <!-- <button mat-button color="primary" (click)="openTime()">ADD TIME</button> -->
         <div fxLayout="column" class="time" fxLayoutAling="flex-end">
           <div class="para">Tentative Time</div>
-          <div><input type="time"></div>
+          <div [formGroup]="form"><input type="time" formControlName="time"></div>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
     </div>
     <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Total payable amount</div>
-      <div class="head2">₹320</div>
+      <div class="head2">{{totalPrice}}</div>
     </div>
     <div class="order-button head4 bold">
       <button mat-raised-button color="primary" (click)="onSubmitClick()"

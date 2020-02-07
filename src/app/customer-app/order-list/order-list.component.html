@@ -1,0 +1,12 @@
+<div class="order-list-component">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="flex-start">
+        <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
+          <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <mat-card *ngFor="let item of listItems" class="order-list">
+        <div class="head4 bold">{{item.orderId}}</div>
+        <div class="head4" fxLayout="row"><p class="bold">Type:</p> {{item.orderType}}</div>
+    </mat-card>
+</div>

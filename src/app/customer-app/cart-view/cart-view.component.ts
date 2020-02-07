@@ -12,6 +12,7 @@ import { CustomerStateService } from '../customer-state.service';
 import { AddressListComponent } from './address-list/address-list.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-cart-view',
@@ -36,6 +37,10 @@ export class CartViewComponent implements OnInit {
   selectedTime: string;
   selectedLocationForDelivery: IAddressData;
   selectedVehicle: IVehicleData;
+  totalPrice: number = 0;
+  orderAheadtime: number;
+  form: FormGroup;
+  time: any;
 
   constructor(
     private location: Location,
@@ -50,7 +55,11 @@ export class CartViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.form = new FormGroup ({
+      time: new FormControl()
+    })
     this.orderedItems = this.orderService.getCartData();
+    this.totalPrice = this.orderService.getTotal();
     this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
 
     switch (this.customerStateService.currentServiceSelected) {
@@ -77,8 +86,8 @@ export class CartViewComponent implements OnInit {
         this.currentRestaurantData = this.customerStateService.currentRestaurantData;
         break;
     }
-
   }
+  
   onBackClick() {
     this.customerStateService.setCurrentPage('main');
     this.location.back();
@@ -109,17 +118,30 @@ export class CartViewComponent implements OnInit {
 
         orderData: this.orderService.cart.map(i => {
           return  {
-            businessLocId: "5e356afe2000b41e6ba0a397", //i.apPsBusinessLocId,
-            skuId: "5e36d6ced2321da3b48fcb41", //i._id,
-            qty: 1 //i.skuServes
+            businessLocId: i.apPsBusinessLocId,
+            skuId: i._id,
+            qty: i.skuServes
           };
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
-        totalPrice: 150,
-        addressId: "5e394b0ba8b8c854b6529d37",
-        pitstopId: "5e3694f1d2321da3b45e361b" // this.customerStateService.getCurrentPitstopData().id
-
+        totalPrice: this.totalPrice
       }
+
+      switch (this.customerStateService.currentServiceSelected) {
+        case ECustomerServiceType.TakeAway:
+          data.pitstopId = this.customerStateService.getCurrentPitstopData().id;
+          data.vehicleId = this.vehicleData['vehicleId'];
+          break;
+        case ECustomerServiceType.Delivery:
+          data.addressId = this.addressData['_id'];
+          break;
+        case ECustomerServiceType.OrderAhead:
+          this.time = this.form.value['time'].split(":");
+          this.orderAheadtime = Number(this.time[0])*60 + Number(this.time[1]);
+          data.time = this.orderAheadtime;
+          break;
+      }
+
       this.dataService.placeOrder(data).subscribe(res => {
         this.commonService.paymentInformation = res;
         const localStorageData = {};
@@ -135,7 +157,7 @@ export class CartViewComponent implements OnInit {
             // tslint:disable-next-line: no-string-literal
             localStorageData['data'] = {
               locationData: this.customerStateService.selectedLocation,
-              address: 'Ishan Appartments, NewLand road, Bangladesh.', // TODO: pass customer's address
+              address: this.addressData, // TODO: pass customer's address
             };
             break;
 
@@ -207,12 +229,4 @@ export class CartViewComponent implements OnInit {
       }
     });
   }
-
-//   openTime() {
-//     const amazingTimePicker = this.atp.open();
-//     amazingTimePicker.afterClose().subscribe(time => {
-//         this.selectedTime = time;
-//     });
-// }
-
 }

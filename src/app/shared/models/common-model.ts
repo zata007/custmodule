@@ -284,6 +284,8 @@ export interface IRequestPlaceOrder {
   ];
   addressId?: string;
   pitstopId?: string;
+  time?: number;
+  vehicleId?: string;
   totalPrice: number;
 }
 

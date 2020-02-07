@@ -12,6 +12,7 @@ import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.compo
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AddAddressComponent } from './address/add-address/add-address.component'
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
+import { OrderListComponent } from "./order-list/order-list.component"
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
@@ -31,6 +32,7 @@ export const CustomerAppRoutes: Routes = [
       { path: 'quick-pickup', component: PreOrderComponent },
       { path: 'order-ahead', component: OrderAheadComponent },
       { path: 'delivery', component: OrderDeliveryComponent},
+      { path:'order-history', component: OrderListComponent },
       { path: 'take-away', component: MapVehicleComponent},
       { path: 'address/add', component: AddAddressComponent},
       { path: '', component: MapVehicleComponent },

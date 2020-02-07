@@ -43,6 +43,7 @@ import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaur
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
 import { AddressListComponent } from './cart-view/address-list/address-list.component';
 import { VehicleListComponent } from './cart-view/vehicle-list/vehicle-list.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { VehicleListComponent } from './cart-view/vehicle-list/vehicle-list.comp
     AfterPaymentComponent,
     AddressListComponent,
     VehicleListComponent,
+    OrderListComponent,
   ],
   entryComponents: [
     BillDetailComponent,

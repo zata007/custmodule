@@ -3,11 +3,16 @@
   overflow-y: scroll;
   height: 100%;
   padding-bottom: 30px;
+  padding-top: 60px;
 
   mat-toolbar {
-    background: rgba(0, 0, 0, 0) !important;
+    background: #ffffff !important;
     box-shadow: none;
     padding: 5px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    left: 0px;
   }
 
   .profile {
