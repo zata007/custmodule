@@ -9,7 +9,7 @@
           <ng-template #nonVeg><img src="../../../assets/icons/non-veg.png" alt=""></ng-template>
         </div>
       </div>
-      <div class="restaurant para">Restaurant</div>
+      <div class="restaurant para">{{data.skuCuisine}}</div>
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div class="price head4">₹{{ data.skuPrice }}</div>
         <div fxLayout="row" fxLayoutAlign="space-between baseline" class="order-action">

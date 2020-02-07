@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData, IRequestPlaceOrder, IRestaurantData, IProfileData, IAddressData, IVehicleData } from 'src/app/shared/models/common-model';
+import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -38,9 +38,11 @@ export class CartViewComponent implements OnInit {
   selectedLocationForDelivery: IAddressData;
   selectedVehicle: IVehicleData;
   totalPrice: number = 0;
+  totalItem: number = 0;
   orderAheadtime: number;
   form: FormGroup;
   time: any;
+  orderData: IOrderData[] = []
 
   constructor(
     private location: Location,
@@ -51,7 +53,6 @@ export class CartViewComponent implements OnInit {
     private router: Router,
     private commonService: CommonService,
     public customerStateService: CustomerStateService,
-    // private atp: AmazingTimePickerService
   ) {}
 
   ngOnInit() {
@@ -59,7 +60,28 @@ export class CartViewComponent implements OnInit {
       time: new FormControl()
     })
     this.orderedItems = this.orderService.getCartData();
+    console.log(this.orderedItems);
+
+    const position = this.customerStateService.getFromLocation();
+    const data = {
+      orderData: this.orderService.cart.map(i => {
+      return  {
+        businessLocId: i.apPsBusinessLocId,
+        skuId: i._id,
+        qty: i.skuServes
+      };
+    }) as any};
+    const fingerprint = this.commonService.fingerPrint;
+    console.log(data);
+
+    this.dataService.addCart(fingerprint, data, position).subscribe((data: any) => {
+      console.log(data);
+    })
+
     this.totalPrice = this.orderService.getTotal();
+    this.orderService.orderCount$.subscribe(res => {
+      this.totalItem = res;
+    });
     this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
 
     switch (this.customerStateService.currentServiceSelected) {
@@ -130,10 +152,10 @@ export class CartViewComponent implements OnInit {
       switch (this.customerStateService.currentServiceSelected) {
         case ECustomerServiceType.TakeAway:
           data.pitstopId = this.customerStateService.getCurrentPitstopData().id;
-          data.vehicleId = this.vehicleData['vehicleId'];
+          data.vehicleId = this.selectedVehicle['_id'];
           break;
         case ECustomerServiceType.Delivery:
-          data.addressId = this.addressData['_id'];
+          data.addressId = this.selectedLocationForDelivery['_id'];
           break;
         case ECustomerServiceType.OrderAhead:
           this.time = this.form.value['time'].split(":");
@@ -157,7 +179,7 @@ export class CartViewComponent implements OnInit {
             // tslint:disable-next-line: no-string-literal
             localStorageData['data'] = {
               locationData: this.customerStateService.selectedLocation,
-              address: this.addressData, // TODO: pass customer's address
+              address: this.selectedLocationForDelivery, // TODO: pass customer's address
             };
             break;
 

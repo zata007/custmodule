@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ILoginData, IMobileLoginData,
+import { ILoginData, IMobileLoginData, IOrderData,
    IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder, IVehicleData } from '../models/common-model';
 import { Observable } from 'rxjs';
-import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../constants/constants';
+import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG } from '../constants/constants';
 import { Socket } from 'ngx-socket-io';
 
 @Injectable({ providedIn: 'root' })
@@ -189,6 +189,20 @@ export class DataService {
       headers: {
         ...this.getOptions(),
         authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      },
+    };
+    return this.putMethod(url, options, data) as any;
+  }
+
+  addCart(fingerprint: string, data: IOrderData, position: {lat: number, lng: number}) {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/addCart`;
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        fingerprint: fingerprint,
+        latitude: position.lat,
+        longitude: position.lng,
+        lan: localStorage.getItem(ZATAAKSE_PREF_LANG)
       },
     };
     return this.putMethod(url, options, data) as any;

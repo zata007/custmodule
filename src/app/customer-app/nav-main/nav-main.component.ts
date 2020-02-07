@@ -12,6 +12,7 @@ import { OrderService } from '../order.service';
 import { MatBottomSheet } from '@angular/material';
 import { CartNotEmptyComponent } from 'src/app/shared/shared-components/cart-not-empty/cart-not-empty.component';
 import { Location } from '@angular/common';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants'
 
 
 @Component({
@@ -20,7 +21,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./nav-main.component.scss']
 })
 export class NavMainComponent implements OnInit, OnDestroy {
+  name: string;
   cartCount = 0;
+  hasAuthToken: boolean = false;
   constructor(
     private breakpointObserver: BreakpointObserver,
     private customerStateService: CustomerStateService,
@@ -43,6 +46,11 @@ export class NavMainComponent implements OnInit, OnDestroy {
     .pipe(map(result => result.matches));
 
   ngOnInit() {
+    this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
+    if(this.hasAuthToken) {
+      const data = localStorage.getItem(ZATAAKSE_PROFILE_DATA);
+      //name add
+    }
     this.headerChangeSubscription = this.customerStateService.currentPage$.subscribe(
       value => {
         this.currentPage = value;

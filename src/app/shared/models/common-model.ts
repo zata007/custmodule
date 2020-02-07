@@ -404,3 +404,11 @@ export interface IResponseGetProfileData {
   message: string;
   data: IProfileData;
 }
+
+export interface IOrderData {
+  orderData: {
+    businessLocId: string;
+    skuId: string;
+    qty: number;
+  };
+}
