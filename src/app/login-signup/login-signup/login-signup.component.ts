@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
 import { SigninOtpComponent } from '../signin-otp/signin-otp.component';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { IMobileLoginData, IResponseLoginSignup, ILoginData, ILoginSignupData, IRequestVerifyOtp } from 'src/app/shared/models/common-model';
+import { IMobileLoginData, IResponseLoginSignup, ILoginData, ILoginSignupData, IRequestVerifyOtp, IResponseGetProfileData } from 'src/app/shared/models/common-model';
 import {
   FacebookLoginProvider,
   AuthService,
@@ -18,7 +18,8 @@ import { IAppState } from 'src/app/store/states/app.states';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'src/app/shared/services/cookie.service';
 import { DataService } from 'src/app/shared/services/data.service';
-import { ZATAAKSE_JWT_TOKEN } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
+import { CustomerService } from 'src/app/customer-app/customer.service';
 
 @Component({
   selector: 'app-login-signup',
@@ -44,6 +45,7 @@ export class LoginSignupComponent implements OnInit {
     private cookieService: CookieService,
     private commonService: CommonService,
     private dataService: DataService,
+    private customerService: CustomerService,
   ) {}
 
   ngOnInit() {}
@@ -77,6 +79,10 @@ export class LoginSignupComponent implements OnInit {
         this.bottomSheet.dismiss();
         const data = { ...res.data.indDetail };
         localStorage.setItem(ZATAAKSE_JWT_TOKEN, data.accessToken);
+        this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((data: IResponseGetProfileData) => {
+          // Store profile data
+          localStorage.setItem(ZATAAKSE_PROFILE_DATA, JSON.stringify(data.data));
+        });
         // data.id = data._id;
         // this.store.dispatch(new SignIn(data));
         // this.cookieService.setUserData(data);
