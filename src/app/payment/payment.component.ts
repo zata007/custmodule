@@ -53,15 +53,16 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate([`customer/order-placed`]);
-    // switch (this.paymentStatus) {
-    //   case PAYMENT_STATUS.COMPLETED:
-    //     this.router.navigate(['customer/order-placed/take-away']);
-    //     break;
+    switch (this.paymentStatus) {
+      case PAYMENT_STATUS.COMPLETED:
+        this.router.navigate([`customer/order-placed/`]);
+        break;
 
-    //   default:
-    //     break;
-    // }
+      default:
+        this.router.navigate([`customer`]);
+        //this.router.navigate([`customer`]);
+        break;
+    }
 
   }
 

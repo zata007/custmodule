@@ -199,9 +199,9 @@ export class DataService {
     const options = {
       headers: {
         ...this.getOptions(),
-        fingerprint: fingerprint,
-        latitude: position.lat,
-        longitude: position.lng,
+        fingerprint,
+        latitude: position.lat + '',
+        longitude: position.lng + '',
         lan: localStorage.getItem(ZATAAKSE_PREF_LANG)
       },
     };
