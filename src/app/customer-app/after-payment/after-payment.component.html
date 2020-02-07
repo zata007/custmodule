@@ -74,10 +74,10 @@
   </div>
   <div  class="message" *ngSwitchCase="ECustomerServiceType.OrderAhead">
     <div class="para">Please enjoy your food to</div>
-    <div class="head3">{{pitstopData.name}}</div>
+    <div class="head3">{{name}} at your provided time</div>
     <!-- <div class="caption">{{pitstopData.time}}</div> -->
     <div fxLayout="row" fxLayoutAlign="flex-end">
-      <button mat-raised-button color="primary" (click)="navigateToPitstop()">NAVIGATE</button>
+      <button mat-raised-button color="primary" (click)="navigateToCustomer()">Okay</button>
     </div>
   </div>
 </div>

@@ -32,6 +32,7 @@ export class AfterPaymentComponent implements OnInit {
   selectedService = ECustomerServiceType.Delivery;
   mapStyles = MAP_STYLES;
   timer : any;
+  name: string;
 
   mapForHeader = {
     [ECustomerServiceType.Delivery] : 'Delivery',
@@ -61,7 +62,7 @@ export class AfterPaymentComponent implements OnInit {
           this.deliveryData = storedData.data;
           break;
           case ECustomerServiceType.TakeAway:
-            this.pitstopData = storedData.data;
+            this.name = JSON.parse(localStorage.getItem(ZATAAKSE_SELECTED_SERVICE)).data.name;
             break;
         default:
           break;
@@ -99,9 +100,10 @@ export class AfterPaymentComponent implements OnInit {
         this.initializeCounterTiming();
         break;
       case ECustomerServiceType.OrderAhead:
-        this.fromLocation = this.pitstopData.locationData.from;
-        this.toLocation = this.pitstopData.locationData.to;
-        this.getRoutes(this.fromLocation, this.toLocation);
+        // this.fromLocation = this.pitstopData.locationData.from;
+        // this.toLocation = this.pitstopData.locationData.to;
+        // this.getRoutes(this.fromLocation, this.toLocation);
+        this.name = JSON.parse(localStorage.getItem(ZATAAKSE_SELECTED_SERVICE)).data.name;
         break;
       default:
         break;
@@ -131,6 +133,10 @@ export class AfterPaymentComponent implements OnInit {
   navigateToPitstop() {
     const latLng = `${this.pitstopData.pitstopData.lat},${this.pitstopData.pitstopData.lng}`;
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURI(latLng)}&travelmode=driving`);
+  }
+
+  navigateToCustomer() {
+    this.router.navigate(['customer']);
   }
 
 }
