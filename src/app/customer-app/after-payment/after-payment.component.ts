@@ -60,6 +60,9 @@ export class AfterPaymentComponent implements OnInit {
           console.log(storedData.data);
           this.deliveryData = storedData.data;
           break;
+          case ECustomerServiceType.TakeAway:
+            this.pitstopData = storedData.data;
+            break;
         default:
           break;
       }
@@ -88,7 +91,6 @@ export class AfterPaymentComponent implements OnInit {
         this.fromLocation = this.pitstopData.locationData.from;
         this.toLocation = this.pitstopData.locationData.to;
         this.getRoutes(this.fromLocation, this.toLocation);
-
         break;
       case ECustomerServiceType.Delivery:
         this.fromLocation = this.deliveryData.locationData.from;
@@ -96,7 +98,11 @@ export class AfterPaymentComponent implements OnInit {
         this.getRoutes(this.fromLocation, this.toLocation);
         this.initializeCounterTiming();
         break;
-
+      case ECustomerServiceType.OrderAhead:
+        this.fromLocation = this.pitstopData.locationData.from;
+        this.toLocation = this.pitstopData.locationData.to;
+        this.getRoutes(this.fromLocation, this.toLocation);
+        break;
       default:
         break;
     }

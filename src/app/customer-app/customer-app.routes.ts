@@ -18,6 +18,7 @@ export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
   { path: 'care', component: CustomerCareComponent },
   { path: 'profile', component: ProfileComponent},
+  { path:'order-history', component: OrderListComponent },
   { path: 'order-placed', component: AfterPaymentComponent },
   {
     path: '',
@@ -32,7 +33,6 @@ export const CustomerAppRoutes: Routes = [
       { path: 'quick-pickup', component: PreOrderComponent },
       { path: 'order-ahead', component: OrderAheadComponent },
       { path: 'delivery', component: OrderDeliveryComponent},
-      { path:'order-history', component: OrderListComponent },
       { path: 'take-away', component: MapVehicleComponent},
       { path: 'address/add', component: AddAddressComponent},
       { path: '', component: MapVehicleComponent },
