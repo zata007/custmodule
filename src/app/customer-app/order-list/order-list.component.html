@@ -4,7 +4,7 @@
           <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
         </button>
     </mat-toolbar>
-    <ng-container *ngIf="listItems else noHistory">
+    <ng-container *ngIf="listItems && listItems.length else noHistory">
       <mat-card *ngFor="let item of listItems" class="order-list">
         <div>
             <div class="para bold order-id">Order Id: {{item.orderId}}</div>
