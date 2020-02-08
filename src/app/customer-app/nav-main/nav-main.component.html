@@ -43,7 +43,7 @@
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/delivery'}" (click)="onNavigate('delivery')">Delivery</button>
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}" (click)="onNavigate('order-ahead')">Order Ahead</button>
       </div>
-      <button type="button" mat-icon-button color="dark"  (click)="onCartClick()">
+      <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"  (click)="onCartClick()">
         <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon>
       </button>
     </mat-toolbar>
@@ -52,7 +52,7 @@
         <button type="button" mat-icon-button color="dark" (click)="onBackClick()">
           <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
         </button>
-        <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"  (click)="onCartClick()">
+        <button type="button" mat-icon-button color="dark"   (click)="onCartClick()">
           <mat-icon aria-label="notification icon" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0">shopping_cart</mat-icon>
         </button>
       </mat-toolbar>
