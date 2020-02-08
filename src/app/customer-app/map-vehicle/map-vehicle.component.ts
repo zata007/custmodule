@@ -157,11 +157,11 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
           this.customerService.setLocationData(this.latitude, this.longitude);
           const current = new google.maps.LatLng(this.latitude, this.longitude);
           // TODO: Refactor make generic implementation for finding places near stadium
-          const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
-          if (this.calculateDistance(Wankhede, current) < 2000) {
-            // TODO: handle stadium logic
-            this.openDialog();
-          }
+          // const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
+          // if (this.calculateDistance(Wankhede, current) < 2000) {
+          //   // TODO: handle stadium logic
+          //   this.openDialog();
+          // }
 
           this.onMapLocationChange();
         });
@@ -345,11 +345,11 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.map.panToBounds(bounds); // # auto-center
     inputToPatch.nativeElement.value = result.formatted_address;
     const latlng = new google.maps.LatLng(currentCords.lat, currentCords.lng);
-    const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
-    if (this.calculateDistance(Wankhede, latlng) < 2000) {
-      // TODO: handle stadium logic
-      this.openDialog();
-    }
+    // const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
+    // if (this.calculateDistance(Wankhede, latlng) < 2000) {
+    //   // TODO: handle stadium logic
+    //   this.openDialog();
+    // }
   }
 
   /**

@@ -363,7 +363,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((result) => {
       // Navigate to page
       if (result) {
-        this.router.navigate(['customer/quick-pickup']);
+        this.goToRestaurant();
       }
       console.log('The dialog was closed', result);
     });
