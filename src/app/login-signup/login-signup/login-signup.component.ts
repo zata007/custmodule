@@ -135,7 +135,15 @@ export class LoginSignupComponent implements OnInit {
       console.log(res, `${type} done`);
       this.userByMobile = res.data;
       this.openVerifyOTP();
-    });
+    }, error => {
+      if (error.error.statusCode === 400) {
+        this.bottomSheet.open(SigninOtpComponent, {
+          data: {
+            isNotRegistered: true,
+            onProceed: (typeInfo) => this.onProceedFromBottomSheet(typeInfo)
+          }
+        });
+      }});
 
     // this.loginService.loginByNumber(num).subscribe(
     //   res => {
@@ -143,15 +151,6 @@ export class LoginSignupComponent implements OnInit {
     //     //this.prelaunchService.setUserId(this.userByMobile.userId);
     //     this.openVerifyOTP();
     //   },
-    //   error => {
-    //     if (error.error.statusCode === 400) {
-    //       this.bottomSheet.open(SigninOtpComponent, {
-    //         data: {
-    //           isNotRegistered: true,
-    //           onProceed: (type) => this.onProceedFromBottomSheet(type)
-    //         }
-    //       });
-    //     }
     //   }
     // );
   }
