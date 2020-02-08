@@ -43,6 +43,7 @@ export class NotServicebleComponent implements OnInit {
     this.mailText = `mailto:partners@zataakse.com?subject=Restaurant-Request&body=name:${this.restaurantData.name}<br> contact:${this.restaurantData.contact}<br> address:${this.restaurantData.address}`;
     window.location.href = this.mailText;
     this.closePage();
-    this.bottomSheet.open(PreRegisterComponent, {});
+    // TODO: Integrate recom restaurant
+   // this.bottomSheet.open(PreRegisterComponent, {});
   }
 }
