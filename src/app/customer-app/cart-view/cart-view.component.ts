@@ -151,7 +151,7 @@ export class CartViewComponent implements OnInit {
           };
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
-        totalPrice: this.totalPrice
+        totalPrice: this.totalPrice + 20
       }
 
       switch (this.customerStateService.currentServiceSelected) {

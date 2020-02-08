@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from '../shared/services/cookie.service';
 import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../shared/constants/constants';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CustomerService {
   locationData = {
     latitude: 0,

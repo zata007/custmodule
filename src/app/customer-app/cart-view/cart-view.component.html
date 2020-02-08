@@ -84,17 +84,17 @@
       <div class="head4">Item Total</div>
       <div class="head4">{{totalItem}}</div>
     </div>
-    <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Applicable Taxes</div>
       <div class="head4">₹20</div>
-    </div>
+    </div> -->
     <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Delivery Charges</div>
       <div class="head4">₹20</div>
     </div>
     <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Total payable amount</div>
-      <div class="head2">{{totalPrice}}</div>
+      <div class="head2">{{totalPrice + 20}}</div>
     </div>
     <div class="order-button head4 bold">
       <button mat-raised-button color="primary" (click)="onSubmitClick()"
