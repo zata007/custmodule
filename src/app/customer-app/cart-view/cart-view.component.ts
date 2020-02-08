@@ -37,12 +37,12 @@ export class CartViewComponent implements OnInit {
   selectedTime: string;
   selectedLocationForDelivery: IAddressData;
   selectedVehicle: IVehicleData;
-  totalPrice = 0;
-  totalItem = 0;
+  totalPrice: number = 0;
+  totalItem: number = 0;
   orderAheadtime: number;
   form: FormGroup;
   time: any;
-  orderData: IOrderData[] = [];
+  orderData: IOrderData[] = []
 
   constructor(
     private location: Location,
@@ -58,7 +58,7 @@ export class CartViewComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup ({
       time: new FormControl()
-    });
+    })
     this.orderedItems = this.orderService.getCartData();
     console.log(this.orderedItems);
 
@@ -76,7 +76,7 @@ export class CartViewComponent implements OnInit {
 
     this.dataService.addCart(fingerprint, data, position).subscribe((data: any) => {
       console.log(data);
-    });
+    })
 
     this.totalPrice = this.orderService.getTotal();
     this.orderService.orderCount$.subscribe(res => {
@@ -152,19 +152,19 @@ export class CartViewComponent implements OnInit {
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
         totalPrice: this.totalPrice
-      };
+      }
 
       switch (this.customerStateService.currentServiceSelected) {
         case ECustomerServiceType.TakeAway:
           data.pitstopId = this.customerStateService.getCurrentPitstopData().id;
-          data.vehicleId = this.selectedVehicle._id;
+          data.vehicleId = this.selectedVehicle['_id'];
           break;
         case ECustomerServiceType.Delivery:
-          data.addressId = this.selectedLocationForDelivery._id;
+          data.addressId = this.selectedLocationForDelivery['_id'];
           break;
         case ECustomerServiceType.OrderAhead:
-          this.time = this.form.value.time.split(':');
-          this.orderAheadtime = Number(this.time[0]) * 60 + Number(this.time[1]);
+          this.time = this.form.value['time'].split(":");
+          this.orderAheadtime = Number(this.time[0])*60 + Number(this.time[1]);
           data.time = this.orderAheadtime;
           break;
       }
