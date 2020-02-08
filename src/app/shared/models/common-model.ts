@@ -412,3 +412,83 @@ export interface IOrderData {
     qty: number;
   };
 }
+
+// export interface ITransactionList {
+//   "_id": "5e3a77fe1ddc8165f337ae53",
+//   "addressId": null,
+//   "pitstopId": {
+//     "_id": "5e3694f1d2321da3b45e361b",
+//     "blPitStopLandmark": "PurbaLok",
+//     "blPitStopLongLat": {
+//       "type": "Point",
+//       "coordinates": [
+//         88.398923,
+//         22.497804
+//       ]
+//     },
+//     "blPitstopDirection": "west",
+//     "blPitstopName": "ZS-KOL-1234567892"
+//   },
+//   "orderStatus": "Payment Pending",
+//   "paymentStatus": "Pending",
+//   "orderId": 20200205133830240,
+//   "orderType": "take-away",
+//   "orderData": [
+//     {
+//       "_id": "5e3a77fe1ddc8165f337ae54",
+//       "businessLocId": {
+//         "_id": "5e356afe2000b41e6ba0a397",
+//         "businessLocName": "Moments"
+//       },
+//       "skuId": {
+//         "_id": "5e36d6ced2321da3b48fcb41",
+//         "skuCuisine": {
+//           "en": "Chinese"
+//         },
+//         "skuCustom": {
+//           "en": [
+//             "test4"
+//           ]
+//         },
+//         "skuDesc": {
+//           "en": "Crispy fried potato longs sprinkled white salt and pepper extra"
+//         },
+//         "skuImages": [],
+//         "skuName": {
+//           "en": "French Toast"
+//         },
+//         "skuNutrition": {
+//           "en": "Carbohydrates, Vitamins"
+//         },
+//         "skuPrice": 150,
+//         "skuQty": {
+//           "en": "Full"
+//         },
+//         "skuRating": 0,
+//         "skuServes": 1,
+//         "skuSpice": 3,
+//         "skuSubType": {
+//           "en": "Starter"
+//         },
+//         "skuType": {
+//           "en": "Starter"
+//         },
+//         "type": {
+//           "en": "nv"
+//         }
+//       },
+//       "qty": 1,
+//       "isTaxIncluded": true,
+//       "skuPrice": 150,
+//       "cgstPercentFlag": false,
+//       "cgst": null,
+//       "sgstPercentFlag": false,
+//       "sgst": null,
+//       "zsPercentFlag": true,
+//       "zsComm": 7.5,
+//       "totalPrice": 150
+//     }
+//   ],
+//   "orderDateTime": "2020-02-05T08:08:30.242Z",
+//   "totalPrice": 150
+// }

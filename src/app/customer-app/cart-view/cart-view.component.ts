@@ -74,9 +74,9 @@ export class CartViewComponent implements OnInit {
     const fingerprint = this.commonService.fingerPrint;
     console.log(data);
 
-    this.dataService.addCart(fingerprint, data, position).subscribe((data: any) => {
-      console.log(data);
-    })
+    // this.dataService.addCart(fingerprint, data, position).subscribe((data: any) => {
+    //   console.log(data);
+    // })
 
     this.totalPrice = this.orderService.getTotal();
     this.orderService.orderCount$.subscribe(res => {
@@ -184,9 +184,16 @@ export class CartViewComponent implements OnInit {
             // tslint:disable-next-line: no-string-literal
             localStorageData['data'] = {
               locationData: this.customerStateService.selectedLocation,
-              address: this.selectedLocationForDelivery, // TODO: pass customer's address
+              address:`${this.selectedLocationForDelivery.addrLine1 + + this.selectedLocationForDelivery.addrLine2 + + this.selectedLocationForDelivery.locality}`, // TODO: pass customer's address
             };
             break;
+            case ECustomerServiceType.OrderAhead:
+              // tslint:disable-next-line: no-string-literal
+              localStorageData['data'] = {
+                name: this.orderedItems[0].skuCuisine,
+                time: this.orderAheadtime
+              };
+              break;
 
           default:
             break;

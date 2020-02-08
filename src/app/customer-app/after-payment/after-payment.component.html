@@ -3,7 +3,7 @@
     <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
       <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
     </button>
-    <div fxLayoutAlign="center">{{ mapForHeader[selectedService]}}</div>
+    <!-- <div fxLayoutAlign="center">{{ mapForHeader[selectedService]}}</div> -->
   </mat-toolbar>
 
   <div *ngIf="fromLocation" class="map-area" fxFlex="1 1 100%" #mapContainer>
@@ -72,18 +72,13 @@
     </div>
 
   </div>
-  <div  class="message" *ngSwitchDefault>
-    <div class="para">Please enter your tentative time of arrival</div>
-    <!-- <input [ngxTimepicker]="picker"> -->
-    <!-- <ngx-material-timepicker #picker></ngx-material-timepicker> -->
-
-    <mat-form-field>
-      <input type="time" matInput placeholder="Add time">
-    </mat-form-field>
-    <div fxLayout="row" fxlayoutAlign="center">
-      <button mat-raised-button color="primary">Submit</button>
+  <div  class="message" *ngSwitchCase="ECustomerServiceType.OrderAhead">
+    <div class="para">Please enjoy your food to</div>
+    <div class="head3">{{name}} at your provided time</div>
+    <!-- <div class="caption">{{pitstopData.time}}</div> -->
+    <div fxLayout="row" fxLayoutAlign="flex-end">
+      <button mat-raised-button color="primary" (click)="navigateToCustomer()">Okay</button>
     </div>
-
   </div>
 </div>
 </div>
