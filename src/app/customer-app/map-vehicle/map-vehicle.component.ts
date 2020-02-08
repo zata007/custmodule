@@ -418,7 +418,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((result) => {
       // Navigate to page
       if (result) {
-        this.router.navigate(['customer/quick-pickup']);
+        this.router.navigate(['customer/delivery']);
       }
       console.log('The dialog was closed', result);
     });
