@@ -143,7 +143,11 @@ export class LoginSignupComponent implements OnInit {
             onProceed: (typeInfo) => this.onProceedFromBottomSheet(typeInfo)
           }
         });
-      }});
+      } else{
+        error = error.json();
+        this.snack.open(error.message);
+      }
+    });
 
     // this.loginService.loginByNumber(num).subscribe(
     //   res => {
