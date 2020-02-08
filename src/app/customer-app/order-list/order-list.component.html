@@ -4,8 +4,8 @@
           <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
         </button>
     </mat-toolbar>
-
-    <mat-card *ngFor="let item of listItems" class="order-list">
+    <ng-container *ngIf="listItems else noHistory">
+      <mat-card *ngFor="let item of listItems" class="order-list">
         <div>
             <div class="para bold order-id">Order Id: {{item.orderId}}</div>
             <div class="para">{{item.orderDateTime.split("T", 1)}}</div>
@@ -16,4 +16,13 @@
         </div>
         <div *ngFor="let name of item.orderData" class="helping"><p>{{name.skuName}}</p></div>
     </mat-card>
+    </ng-container>
+
+    <ng-template #noHistory>
+      <div class="head4">You have not ordered anything yet</div>
+    </ng-template>
+
+
+
+
 </div>
