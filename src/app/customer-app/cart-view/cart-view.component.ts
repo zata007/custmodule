@@ -263,4 +263,7 @@ export class CartViewComponent implements OnInit {
       }
     });
   }
+  onAddAddressClick() {
+    this.router.navigate(['customer/address/add']);
+  }
 }
