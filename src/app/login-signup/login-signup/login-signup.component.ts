@@ -143,8 +143,8 @@ export class LoginSignupComponent implements OnInit {
             onProceed: (typeInfo) => this.onProceedFromBottomSheet(typeInfo)
           }
         });
-      } else{
-        error = error.json();
+      } else {
+        error = JSON.parse(error);
         this.snack.open(error.message);
       }
     });
