@@ -110,7 +110,7 @@ export class AfterPaymentComponent implements OnInit {
     }
   }
 
-  mapReady() {
+  mapReady(evt:any) {
     console.log('map-ready');
   }
 

@@ -48,7 +48,7 @@
 
       <agm-marker
         *ngFor="let m of markers; let i = index"
-        (markerClick)="clickedMarker(m.label, i)"
+        (markerClick)="clickedMarker(m.label)"
         [latitude]="m.lat"
         [longitude]="m.lng"
         [markerDraggable]="m.draggable"

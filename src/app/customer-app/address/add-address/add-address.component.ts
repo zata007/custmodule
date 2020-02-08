@@ -41,20 +41,22 @@ export class AddAddressComponent implements OnInit, OnDestroy {
   lng: number;
   lat: number;
   curLocResDataSubscription: any;
-  address: Array<{
-    x: string;
-    addType: string;
-    addLine1: string;
-    addLine2: string;
-    city: string;
-    locality: string;
-    landmark: string;
-    state: string;
-    country: string;
-    postal: string;
-    latitude: number;
-    longitude: number
-  }> = [];
+  address: any = {};
+
+  // {
+  //   x: string;
+  //   addType: string;
+  //   addLine1: string;
+  //   addLine2: string;
+  //   city: string;
+  //   locality: string;
+  //   landmark: string;
+  //   state: string;
+  //   country: string;
+  //   postal: string;
+  //   latitude: number;
+  //   longitude: number
+  // } = null;
   fromLocation: any;
 
   constructor(
@@ -234,8 +236,6 @@ export class AddAddressComponent implements OnInit, OnDestroy {
     bounds.extend(currentLocation);
 
     this.map.panToBounds(bounds); // # auto-center
-    const latlng = new google.maps.LatLng(currentCords.lat, currentCords.lng);
-    const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
   }
 
   /**

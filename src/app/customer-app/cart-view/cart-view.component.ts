@@ -13,6 +13,7 @@ import { AddressListComponent } from './address-list/address-list.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-cart-view',
@@ -202,7 +203,10 @@ export class CartViewComponent implements OnInit {
         localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
         localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
         localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
-        window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
+        // window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
+        window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`, '_self');
+      }, (errorPlaceOrder) => {
+        console.log(errorPlaceOrder)
 
       });
 

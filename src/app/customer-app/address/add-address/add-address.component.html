@@ -32,7 +32,7 @@
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="location" fxLayout="column" fxLayoutAlign="space-around">
       <div class="caption">Your Location</div>
-      <div class="para bold">{{this.address.x}}</div>
+      <div *ngIf="address" class="para bold">{{address.x}}</div>
     </div>
     <button mat-stroked-button color="primary">CHANGE</button>
   </div>
