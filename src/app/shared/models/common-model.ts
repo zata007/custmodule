@@ -1,3 +1,6 @@
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 export interface ISignUpData {
   fullName: string;
   latitude: number;
@@ -428,6 +431,10 @@ export interface ICartItemInfo {
   totalPrice: number;
 }
 
+// required for AOT compilation
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 export interface ICartViewData {
   orderData: ICartItemInfo[];
   totalPrice: number;

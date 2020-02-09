@@ -9,7 +9,6 @@ import { environment } from '../environments/environment';
 import { SharedComponentsModule } from './shared/shared-components/shared-components.module';
 import { MaterialModule } from './shared/material-module/material.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,16 +26,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { NgrxRouterStoreModule } from './store/reducers/router/ngrx-router.module';
 import { PaymentComponent } from './payment/payment.component';
 import { CustomerStateService } from './customer-app/customer-state.service';
+import { createTranslateLoader } from './shared/models/common-model';
 
-
-// required for AOT compilation
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
 
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
 withCredentials: false,

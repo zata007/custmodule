@@ -9,8 +9,8 @@ import { NotServicebleComponent } from './not-serviceble/not-serviceble.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PreRegisterComponent } from './pre-register/pre-register.component';
-import { createTranslateLoader } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
+import { createTranslateLoader } from '../models/common-model';
 
 
 
