@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData } from 'src/app/shared/models/common-model';
+import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData, IResponseAddCart, ICartViewData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -38,12 +38,11 @@ export class CartViewComponent implements OnInit {
   selectedTime: string;
   selectedLocationForDelivery: IAddressData;
   selectedVehicle: IVehicleData;
-  totalPrice: number = 0;
-  totalItem: number = 0;
   orderAheadtime: number;
   form: FormGroup;
   time: any;
-  orderData: IOrderData[] = []
+  orderData: IOrderData[] = [];
+  cartData: ICartViewData;
 
   constructor(
     private location: Location,
@@ -59,7 +58,7 @@ export class CartViewComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup ({
       time: new FormControl()
-    })
+    });
     this.orderedItems = this.orderService.getCartData();
     console.log(this.orderedItems);
 
@@ -73,18 +72,18 @@ export class CartViewComponent implements OnInit {
       };
     }) as any};
     const fingerprint = this.commonService.fingerPrint;
-    console.log(data);
 
-    // this.dataService.addCart(fingerprint, data, position).subscribe((data: any) => {
-    //   console.log(data);
-    // })
-
-    this.totalPrice = this.orderService.getTotal();
-    this.orderService.orderCount$.subscribe(res => {
-      this.totalItem = res;
+    // TODO: Handle when no data is present
+    this.dataService.addCart(fingerprint, data, position).subscribe((res: IResponseAddCart) => {
+      this.cartData = res.data;
+      this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
+      this.handleAddressVehicleViewData();
+    }, (err)=>{
+      console.log(err);
     });
-    this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
+  }
 
+  handleAddressVehicleViewData() {
     switch (this.customerStateService.currentServiceSelected) {
       case ECustomerServiceType.TakeAway:
         if (this.customerStateService.currentPitstopData) {
@@ -152,7 +151,7 @@ export class CartViewComponent implements OnInit {
           };
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
-        totalPrice: this.totalPrice + 20
+        totalPrice: this.cartData.paybleAmount
       }
 
       switch (this.customerStateService.currentServiceSelected) {
@@ -164,6 +163,7 @@ export class CartViewComponent implements OnInit {
           data.addressId = this.selectedLocationForDelivery['_id'];
           break;
         case ECustomerServiceType.OrderAhead:
+          // TODO: Refactor
           this.time = this.form.value['time'].split(":");
           this.orderAheadtime = Number(this.time[0])*60 + Number(this.time[1]);
           data.time = this.orderAheadtime;

@@ -176,7 +176,7 @@ export interface IBusinessLocData {
 }
 
 export interface IResponseLocationServed {
-  message: 'Success';
+  message: string;
   data: {
     isLocationServed: boolean;
     isLocationKnown: boolean;
@@ -411,6 +411,33 @@ export interface IOrderData {
     skuId: string;
     qty: number;
   };
+}
+
+export interface ICartItemInfo {
+  businessLocId: string;
+  skuId: string;
+  qty: number;
+  isTaxIncluded: boolean;
+  skuPrice: number;
+  cgstPercentFlag: number;
+  cgst: any;
+  sgstPercentFlag: boolean;
+  sgst: any;
+  zsPercentFlag: boolean;
+  zsComm: number;
+  totalPrice: number;
+}
+
+export interface ICartViewData {
+  orderData: ICartItemInfo[];
+  totalPrice: number;
+  deliveryCharges: number;
+  totalTax: number;
+  paybleAmount: number;
+}
+export interface IResponseAddCart {
+  message: string;
+  data: ICartViewData;
 }
 
 // export interface ITransactionList {
