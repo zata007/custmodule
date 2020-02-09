@@ -28,7 +28,8 @@ export class AppComponent implements OnInit {
     this.translationService.addLangs(['en', 'bn']);
     this.translationService.getTranslation('bn').subscribe();
     this.translationService.getTranslation('en').subscribe();
-    if (!localStorage.getItem(ZATAAKSE_JWT_TOKEN) &&localStorage.getItem(ZATAAKSE_PREF_LANG)) {
+    this.translationService.use(localStorage.getItem(ZATAAKSE_PREF_LANG) || 'en').subscribe();
+    if (!localStorage.getItem(ZATAAKSE_JWT_TOKEN) && localStorage.getItem(ZATAAKSE_PREF_LANG)) {
       this.router.navigate(['login-signup']);
       return;
     }
