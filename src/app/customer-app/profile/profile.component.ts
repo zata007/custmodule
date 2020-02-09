@@ -29,16 +29,22 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //Fetching profile details
+    // Fetching profile details
     if (localStorage.getItem(ZATAAKSE_JWT_TOKEN)) {
       this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((data: IResponseGetProfileData) => {
         // Store profile data
         localStorage.setItem(ZATAAKSE_PROFILE_DATA, JSON.stringify(data.data));
         this.data =  data.data;
         this.basic =  data.data.indDetail.basic;
-        this.mobile = this.data.indDetail.indMobileNum
+        this.mobile = this.data.indDetail.indMobileNum;
         this.address =  data.data.indDetail.roles[0].indAddr;
         this.vehicle = data.data.indDetail.roles[0].indVehicles;
+      }, (err) => {
+        // TODO: Handle error for invalid/expired token
+        localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
+        localStorage.removeItem(ZATAAKSE_PROFILE_DATA);
+        this.router.navigate(['login-signup']);
+
       });
     } else {
       this.router.navigate(['login-signup']);
