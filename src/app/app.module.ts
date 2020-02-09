@@ -24,8 +24,6 @@ import { SharedModule } from './shared/shared-components/shared.module';
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
-
-import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { NgrxRouterStoreModule } from './store/reducers/router/ngrx-router.module';
 import { PaymentComponent } from './payment/payment.component';
 import { CustomerStateService } from './customer-app/customer-state.service';
@@ -36,22 +34,13 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
 withCredentials: false,
  query: { authorization: 'wehgfiewrfgierg'} } };
-
-export function provideConfig() {
-  return new AuthServiceConfig([
-    {
-      id: GoogleLoginProvider.PROVIDER_ID,
-      provider: new GoogleLoginProvider(environment.sso.google),
-    },
-    {
-      id: FacebookLoginProvider.PROVIDER_ID,
-      provider: new FacebookLoginProvider(environment.sso.fb),
-    },
-  ]);
-}
 
 @NgModule({
   declarations: [
@@ -67,7 +56,6 @@ export function provideConfig() {
     BrowserAnimationsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    SocialLoginModule,
     DeviceDetectorModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -93,10 +81,6 @@ export function provideConfig() {
     SharedModule
   ],
   providers: [
-    {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig,
-    },
     CustomerStateService
   ],
   bootstrap: [AppComponent]

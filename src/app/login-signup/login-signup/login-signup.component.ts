@@ -1,22 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet, MatSnackBar } from '@angular/material';
 import { SigninOtpComponent } from '../signin-otp/signin-otp.component';
-import { LoginService } from 'src/app/shared/services/login.service';
-import { IMobileLoginData, IResponseLoginSignup, ILoginData, ILoginSignupData, IRequestVerifyOtp, IResponseGetProfileData } from 'src/app/shared/models/common-model';
-import {
-  FacebookLoginProvider,
-  AuthService,
-  SocialUser
-} from 'angularx-social-login';
-// import { PrelaunchService } from 'src/app/pre-launch/prelaunch.service';
+import { IResponseLoginSignup, ILoginSignupData, IRequestVerifyOtp, IResponseGetProfileData } from 'src/app/shared/models/common-model';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/services/common.service';
-import { SignupComponent } from '../signup/signup.component';
 import { ELoginSignup } from '../models';
-import { SignIn } from 'src/app/store/actions/customer.actions';
-import { IAppState } from 'src/app/store/states/app.states';
-import { Store } from '@ngrx/store';
-import { CookieService } from 'src/app/shared/services/cookie.service';
 import { DataService } from 'src/app/shared/services/data.service';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 import { CustomerService } from 'src/app/customer-app/customer.service';
@@ -32,17 +20,12 @@ export class LoginSignupComponent implements OnInit {
   ELoginSignup = ELoginSignup;
   loginMobNumber = null;
   isRegistrationFormValid = false;
-  user: SocialUser;
   userByMobile: ILoginSignupData;
   signupData: any;
   constructor(
     private bottomSheet: MatBottomSheet,
-    private loginService: LoginService,
-    private authService: AuthService,
     private router: Router,
     private snack: MatSnackBar,
-    private store: Store<IAppState>,
-    private cookieService: CookieService,
     private commonService: CommonService,
     private dataService: DataService,
     private customerService: CustomerService,
@@ -59,6 +42,7 @@ export class LoginSignupComponent implements OnInit {
     this.bottomSheet.open(SigninOtpComponent, {
       data: {
         isOtp: true,
+        userId: this.userByMobile.userId,
         onProceed: (otp) => this.verifyLoginOtp(otp),
       }
     });
@@ -75,13 +59,13 @@ export class LoginSignupComponent implements OnInit {
       lan
     };
     this.dataService.verifyOtp(data).subscribe(
-      (res) => {
+      (resVerifyOTP) => {
         this.bottomSheet.dismiss();
-        const data = { ...res.data.indDetail };
+        const data = { ...resVerifyOTP.data.indDetail };
         localStorage.setItem(ZATAAKSE_JWT_TOKEN, data.accessToken);
-        this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((data: IResponseGetProfileData) => {
+        this.customerService.getProfile(localStorage.getItem(ZATAAKSE_JWT_TOKEN)).subscribe((resData: IResponseGetProfileData) => {
           // Store profile data
-          localStorage.setItem(ZATAAKSE_PROFILE_DATA, JSON.stringify(data.data));
+          localStorage.setItem(ZATAAKSE_PROFILE_DATA, JSON.stringify(resData.data));
         });
         // data.id = data._id;
         // this.store.dispatch(new SignIn(data));
@@ -89,7 +73,7 @@ export class LoginSignupComponent implements OnInit {
         // if navigated from cart then navigate back to cart-view page
         this.router.navigate(['customer']);
       },
-      (err) => {
+      () => {
         this.bottomSheet.dismiss();
       }
     );
@@ -102,7 +86,6 @@ export class LoginSignupComponent implements OnInit {
         return;
       case ELoginSignup.Signup:
         this.handleLoginSignupRequest('register');
-        // this.signupComponent.register();
         return;
 
       default:
@@ -143,19 +126,10 @@ export class LoginSignupComponent implements OnInit {
             onProceed: (typeInfo) => this.onProceedFromBottomSheet(typeInfo)
           }
         });
-      } else if(error.error) {
+      } else if (error.error) {
         this.snack.open(error.error.message);
       }
     });
-
-    // this.loginService.loginByNumber(num).subscribe(
-    //   res => {
-    //     this.userByMobile = { ...res.data };
-    //     //this.prelaunchService.setUserId(this.userByMobile.userId);
-    //     this.openVerifyOTP();
-    //   },
-    //   }
-    // );
   }
 
   onProceedFromBottomSheet(type: number) {
@@ -170,14 +144,6 @@ export class LoginSignupComponent implements OnInit {
       default:
         break;
     }
-  }
-
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(res => {
-      this.user = res;
-      // this.prelaunchService.userData = res;
-      this.router.navigate(['pre-launch/landing-page']);
-    });
   }
 
   onSignupDataChange(value: any) {
