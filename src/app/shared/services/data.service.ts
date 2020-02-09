@@ -318,4 +318,22 @@ export class DataService {
     };
     return this.putMethod(url, options, resData) as any;
   }
+
+  resendOTP(userData: {
+    userId: string,
+    pRoleId: string,
+    pRelationId: string
+  },
+            fingerprint: string) {
+    // return this.httpClient.put(`${environment.API_Endpoint}/${API_ENDPOINTS.OA}/${lng}/resendOTP/${userId}`, undefined);
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/resendOTP`;
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        lan: localStorage.getItem(ZATAAKSE_PREF_LANG) || 'en',
+        fingerprint
+      },
+    };
+    return this.putMethod(url, options, userData) as any;
+  }
 }

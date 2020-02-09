@@ -1,3 +1,6 @@
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 export interface ISignUpData {
   fullName: string;
   latitude: number;
@@ -176,7 +179,7 @@ export interface IBusinessLocData {
 }
 
 export interface IResponseLocationServed {
-  message: 'Success';
+  message: string;
   data: {
     isLocationServed: boolean;
     isLocationKnown: boolean;
@@ -429,6 +432,37 @@ export interface IUpdateProfiledata {
   indEmail: String;
   indPushNotify: Boolean;
   indPwd: String;
+}
+
+export interface ICartItemInfo {
+  businessLocId: string;
+  skuId: string;
+  qty: number;
+  isTaxIncluded: boolean;
+  skuPrice: number;
+  cgstPercentFlag: number;
+  cgst: any;
+  sgstPercentFlag: boolean;
+  sgst: any;
+  zsPercentFlag: boolean;
+  zsComm: number;
+  totalPrice: number;
+}
+
+// required for AOT compilation
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+export interface ICartViewData {
+  orderData: ICartItemInfo[];
+  totalPrice: number;
+  deliveryCharges: number;
+  totalTax: number;
+  paybleAmount: number;
+}
+export interface IResponseAddCart {
+  message: string;
+  data: ICartViewData;
 }
 
 // export interface ITransactionList {

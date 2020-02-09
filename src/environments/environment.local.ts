@@ -1,12 +1,8 @@
 export const environment = {
-  production: true,
-  API_Endpoint: 'https://d.z07.xyz',
-  OA_API_Endpoint: 'https://d.z07.xyz/oa',
-  USER_API_Endpoint: 'https://d.z07.xyz/user',
-  SOCKET_API_Endpoint: 'https://d.z07.xyz',
-  ACCESS_API_ENDPOINT: 'https://s.z07.xyz/access',
-  PARAMS_API_ENDPOINT: 'https://s.z07.xyz/params',
-  referralURL: 'https://d.z07.xyz/#/pre-launch/main/',
+  production: false,
+  API_Endpoint: 'https://s.z07.xyz',
+  SOCKET_API_Endpoint: 'https://s.z07.xyz',
+  referralURL: 'https://s.z07.xyz/#/pre-launch/main/',
   mapApiKey: 'AIzaSyB9rjY3fL8F0OUcy1ubyFnAVl96FhbadVY',
   pushNotifyKeys: {
     publicKey: 'BMLM_MOg0aQQThjidH5CkW9I4VyIdjA_pRWDnMAlmQR1_jHiDU3E7SP-V7125EY22SGq-941VxEi8ahKKpl7boE',

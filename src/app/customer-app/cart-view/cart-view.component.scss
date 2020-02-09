@@ -1,3 +1,4 @@
+@import '../../../assets/styles/mixins';
 .cartview-container{
   position: absolute;
   height: 100%;
@@ -9,11 +10,21 @@
     background: #ffffff !important;
     box-shadow: none;
     padding: 5px;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
+  }
+  .cart-items{
+    position: relative;
+    height: auto;;
+    max-height: 305px;
+    overflow: auto;
+    z-index: 0;
+    @include pc{
+      max-height: 185px;
+    }
   }
   .address {
     margin: 20px 16px;
@@ -47,7 +58,7 @@
       }
     }
   }
-  .note {    
+  .note {
     margin: 25px 16px;
     overflow: visible;
   }
@@ -55,12 +66,13 @@
     margin: 20px 16px;
   }
   .bill-detail {
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
     padding: 10px 16px 20px;
     background-color: #ffffff;
+    z-index: 1;
     .order-button {
       height: 55px;
       margin: 30px 16px 0px 16px;

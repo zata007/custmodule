@@ -6,12 +6,14 @@ import { LoginSignupComponent } from './login-signup/login-signup.component';
 import { MaterialModule } from '../shared/shared-components/material.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { SigninOtpComponent } from './signin-otp/signin-otp.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserFeedbackComponent } from './user-feedback/user-feedback.component';
 import { LoginSignupContainerComponent } from './login-signup-container.component';
 import { SuccessfulRegistrationComponent } from './successful-registration/successful-registration.component';
+import { HttpClient } from '@angular/common/http';
+import { createTranslateLoader } from '../shared/models/common-model';
 
 @NgModule({
   declarations: [LoginSignupComponent,
@@ -27,7 +29,14 @@ import { SuccessfulRegistrationComponent } from './successful-registration/succe
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslateModule.forChild(),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      },
+      isolate: false
+  }),
     LoginSignupRoutingModule
   ],
   entryComponents: [SigninOtpComponent]

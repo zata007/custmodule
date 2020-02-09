@@ -10,11 +10,11 @@
             <div class="para bold order-id">Order Id: {{item.orderId}}</div>
             <div class="para">{{item.orderDateTime.split("T", 1)}}</div>
         </div>
+        <div *ngFor="let orderItem of item.orderData" class="helping"><p>{{orderItem.skuId.skuName.en}},</p></div>
         <div class="para" fxLayout="row" fxLayout="row" fxLayoutAlign="space-between">
             <div class="bold">Type: {{item.orderType}}</div>
             <div>Total: ₹{{item.totalPrice}}</div>
         </div>
-        <div *ngFor="let name of item.orderData" class="helping"><p>{{name.skuName}}</p></div>
     </mat-card>
     </ng-container>
 

@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   API_Endpoint: 'https://s.z07.xyz',
   SOCKET_API_Endpoint: 'https://s.z07.xyz',
   referralURL: 'https://s.z07.xyz/#/pre-launch/main/',
