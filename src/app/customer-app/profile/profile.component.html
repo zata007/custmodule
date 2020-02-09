@@ -5,13 +5,15 @@
     </button>
   </mat-toolbar>
   <div fxLayout="row" class="profile">
-    <img class="profile-img" src="../../../assets/img/core/user.png" alt="">
+    <div class="profile-img" fxLayout="row" fxLayoutAlign="center flex-start">
+      <img  src="../../../assets/img/core/user.png" alt="">
+    </div>
     <div fxLayout="column" class="profile-detail">
       <div class="name head3 bold">
         {{ basic.indFirstName }}
       </div>
       <div class="head4 phone">{{ mobile }}</div>
-      <!-- <button mat-stroked-button color="primary" class="head4">EDIT</button> -->
+      <button mat-stroked-button color="primary" class="head4" (click)="onNavigate()">EDIT</button>
     </div>
   </div>
   <div class="header" fxLayout="row" fxLayoutAlign="space-between center">

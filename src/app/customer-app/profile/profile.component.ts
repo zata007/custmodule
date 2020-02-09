@@ -62,4 +62,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  onNavigate() { this.router.navigate(['customer/profile/edit']); }
+
 }

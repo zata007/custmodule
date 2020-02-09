@@ -44,6 +44,7 @@ import { AfterPaymentComponent } from './after-payment/after-payment.component';
 import { AddressListComponent } from './cart-view/address-list/address-list.component';
 import { VehicleListComponent } from './cart-view/vehicle-list/vehicle-list.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { OrderListComponent } from './order-list/order-list.component';
     AddressListComponent,
     VehicleListComponent,
     OrderListComponent,
+    EditProfileComponent,
   ],
   entryComponents: [
     BillDetailComponent,

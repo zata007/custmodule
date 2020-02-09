@@ -413,6 +413,24 @@ export interface IOrderData {
   };
 }
 
+export interface IUpdateProfiledata {
+  indFirstName: String;
+  indLastName: String;
+  indDob: String;
+  indGender: String;
+  indFoodPref: String;
+  indLanPref: String;
+  indPic: {
+      picId: String;
+      imageName: String;
+      image: File;
+      tags: String[];
+    }[];
+  indEmail: String;
+  indPushNotify: Boolean;
+  indPwd: String;
+}
+
 // export interface ITransactionList {
 //   "_id": "5e3a77fe1ddc8165f337ae53",
 //   "addressId": null,
