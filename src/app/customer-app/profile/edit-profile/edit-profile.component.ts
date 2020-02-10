@@ -15,9 +15,9 @@ export class EditProfileComponent implements OnInit {
   profile : IProfileData;
   image: any;
   langs: Array<{value: String; viewValue: String}> = [
-    {value: "en", viewValue: "English"},
-    {value: "hn", viewValue: "Hindi"},
-    {value: "bn", viewValue: "Bengali"}
+    {value: 'en', viewValue: 'English'},
+    {value: 'hn', viewValue: 'Hindi'},
+    {value: 'bn', viewValue: 'Bengali'}
   ]
   profileForm: FormGroup;
   updateProfile: IUpdateProfiledata;
@@ -44,21 +44,21 @@ export class EditProfileComponent implements OnInit {
     if(this.profile.indDetail.basic.indPic) {
       this.image = this.profile.indDetail.basic.indPic[0].thumbnail;
     } else {
-      this.image = "../../../assets/img/core/user.png";
+      this.image = '../../../assets/img/core/user.png';
     }
   }
 
   onSelectFile(event) {
-    if (event.target.files && event.target.files[0]) {      
-      this.selectedImage = event.target.files[0]
-      var reader = new FileReader();
+    if (event.target.files && event.target.files[0]) {
+      this.selectedImage = event.target.files[0];
+      let reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: Event) => {
         this.image = reader.result;
       }
     }
   }
-  
+
   onBackClick() {
     this.location.back();
   }
@@ -71,9 +71,9 @@ export class EditProfileComponent implements OnInit {
       ]
     }
     this.dataService.updateProfile(this.updateProfile).subscribe((data) => {
-      console.log("success");
-      this.router.navigate(['customer/profile'])
-    })
+      console.log('success');
+      this.router.navigate(['customer/profile']);
+    });
   }
 
 }

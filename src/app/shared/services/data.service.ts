@@ -39,11 +39,11 @@ import {
 export class DataService {
   lan = '';
   fingerprint = '';
-  paymentStatus$ = this.socket.fromEvent < {
+  paymentStatus$ = this.socket.fromEvent<{
     _id: string,
     paymentStatus: string
-  } > ('getOrderPaymentStatus');
-  constructor(private httpClient: HttpClient, private socket: Socket) {}
+  }>('getOrderPaymentStatus');
+  constructor(private httpClient: HttpClient, private socket: Socket) { }
 
   getOptions() {
     return {
@@ -75,11 +75,11 @@ export class DataService {
     return this.postMethod('cS/sendPushNotification', subscription);
   }
 
-  putMethod(url: string, options: any, data ? : any) {
+  putMethod(url: string, options: any, data?: any) {
     return this.httpClient.put(url, data, options);
   }
 
-  loginByNumber(data: ILoginData): Observable < any > {
+  loginByNumber(data: ILoginData): Observable<any> {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/userLogin`;
     const options = {
       headers: this.getOptions()
@@ -92,7 +92,7 @@ export class DataService {
     lan: string
     latitude: number
     longitude: number
-  }): Observable < any > {
+  }): Observable<any> {
     const options: any = {
       headers: {
         'Content-Type': 'application/json',
@@ -212,7 +212,7 @@ export class DataService {
 
 
 
-  verifyOtp(data: IRequestVerifyOtp): Observable < any > {
+  verifyOtp(data: IRequestVerifyOtp): Observable<any> {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/verifyOTP`;
     const options = {
       headers: {
@@ -226,7 +226,7 @@ export class DataService {
     return this.putMethod(url, options, data);
   }
 
-  placeOrder(data: IRequestPlaceOrder): Observable < IResponsePlaceOrder > {
+  placeOrder(data: IRequestPlaceOrder): Observable<IResponsePlaceOrder> {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/placeAnOrder`;
     const options = {
       headers: {
@@ -237,16 +237,15 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
-  updateProfile(data: IUpdateProfiledata): Observable < IProfileData > {
+  updateProfile(data: IUpdateProfiledata): Observable<IProfileData> {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/updateProfile`;
     const options = {
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',        
         authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
       }
-    }
-    return this.putMethod(url, options, data) as any;
+    };
+    const d = this.getFormData(data, null, null);
+    return this.putMethod(url, options, d) as any;
   }
 
   addCart(fingerprint: string, data: IOrderData, position: {
@@ -266,11 +265,11 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
-  manageVehicle(data: IVehicleData): Observable < {
-    message: string;data: {
+  manageVehicle(data: IVehicleData): Observable<{
+    message: string; data: {
       indVehicles: IVehicleData[]
     }
-  } > {
+  }> {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/manageVehicle`;
     const options = {
       headers: {
@@ -282,14 +281,14 @@ export class DataService {
   }
 
   manageAddress(data: {
-    addressId ? : string,
+    addressId?: string,
     x: string,
     addType: string,
     addLine1: string,
     addLine2: string,
     city: string,
-    locality ? : string,
-    landmark ? : string,
+    locality?: string,
+    landmark?: string,
     state: string,
     country: string,
     postal: string,
@@ -324,7 +323,7 @@ export class DataService {
     pRoleId: string,
     pRelationId: string
   },
-            fingerprint: string) {
+    fingerprint: string) {
     // return this.httpClient.put(`${environment.API_Endpoint}/${API_ENDPOINTS.OA}/${lng}/resendOTP/${userId}`, undefined);
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/resendOTP`;
     const options = {
@@ -335,5 +334,38 @@ export class DataService {
       },
     };
     return this.putMethod(url, options, userData) as any;
+  }
+
+  // takes a {} object and returns a FormData object
+  getFormData(obj, form, namespace) {
+
+    let fd = form || new FormData();
+    let formKey;
+
+    for (let property in obj) {
+      if (obj.hasOwnProperty(property)) {
+
+        if (namespace) {
+          formKey = namespace + '[' + property + ']';
+        } else {
+          formKey = property;
+        }
+
+        // if the property is an object, but not a File,
+        // use recursivity.
+        if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
+
+          this.getFormData(obj[property], fd, property);
+
+        } else {
+
+          // if it's a string or a File object
+          fd.append(formKey, obj[property]);
+        }
+
+      }
+    }
+
+    return fd;
   }
 }

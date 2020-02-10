@@ -417,21 +417,21 @@ export interface IOrderData {
 }
 
 export interface IUpdateProfiledata {
-  indFirstName: String;
-  indLastName: String;
-  indDob: String;
-  indGender: String;
-  indFoodPref: String;
-  indLanPref: String;
+  indFirstName: string;
+  indLastName: string;
+  indDob: string;
+  indGender: string;
+  indFoodPref: string;
+  indLanPref: string;
   indPic: {
-      picId: String;
-      imageName: String;
+      picId: string;
+      imageName: string;
       image: File;
-      tags: String[];
+      tags: string[];
     }[];
-  indEmail: String;
-  indPushNotify: Boolean;
-  indPwd: String;
+  indEmail: string;
+  indPushNotify: boolean;
+  indPwd: string;
 }
 
 export interface ICartItemInfo {
