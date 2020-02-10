@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone, TemplateRef, OnDestro
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../../customer-state.service';
 import { CustomerService } from '../../customer.service';
@@ -69,6 +70,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
     private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -120,6 +122,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
         this.markers.push(cardLocation);
       });
     });
+
   }
 
   ngOnDestroy() {
@@ -328,5 +331,9 @@ export class AddAddressComponent implements OnInit, OnDestroy {
     this.bottomSheet.open(BottomAddressComponent, {
       data: this.address
     });
+  }
+
+  onBackClick() {
+    this.location.back();
   }
 }

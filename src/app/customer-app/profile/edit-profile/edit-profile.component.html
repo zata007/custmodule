@@ -1,0 +1,57 @@
+<div class="edit-profile-container">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="flex-start">
+    <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
+      <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div fxLayout="row" class="profile">
+    <div class="profile-img" fxLayout="row" fxLayoutAlign="center flex-start">
+      <img src="{{image}}" alt="">
+    </div>
+    <div>
+      <input type='file' (change)="onSelectFile($event)" #fileInput hidden>
+      <button mat-stroked-button color="primary" class="head4" (click)="fileInput.click()">CHANGE PHOTO</button>
+    </div>
+  </div>
+  <mat-card class="profile-detail" [formGroup]="profileForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="Jhon" value="{{this.profile.indDetail.basic.indFirstName ? this.profile.indDetail.basic.indFirstName :''}}" formControlName='indFirstName'>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Doe" value="{{this.profile.indDetail.basic.indLastName ? this.profile.indDetail.basic.indLastname :''}}" formControlName='indLastName'>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="mail@example.com" value="{{this.profile.indDetail.roles[0].indEmail ? this.profile.indDetail.roles[0].indEmail :''}}" formControlName='indEmail'>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput type="datetime-local" value="{{this.profile.indDetail.basic.indDob ? this.profile.indDetail.basic.indDob : ''}}" formControlName='indDob'>
+    </mat-form-field>
+    <label id="gender" color="primary">Gender</label>
+    <mat-radio-group aria-labelledby="Gender" fxLayout="row" fxLayoutAlign="flex-start" formControlName='indGender'>
+      <mat-radio-button color="primary" value="male" checked="{{this.profile.indDetail.basic.indGender == 'male'}}">Male</mat-radio-button>
+      <mat-radio-button color="primary" value="female" checked="{{this.profile.indDetail.basic.indGender == 'female'}}">Female</mat-radio-button>
+      <mat-radio-button color="primary" value="transgender" checked="{{this.profile.indDetail.basic.indGender == 'transgender'}}">Transgender</mat-radio-button>
+    </mat-radio-group>
+    <label id="food" color="primary">Food Preference</label>
+    <mat-radio-group aria-labelledby="Food" fxLayout="row" fxLayoutAlign="flex-start" formControlName='indFoodPref'>
+      <mat-radio-button color="accent" value="v" checked="{{this.profile.indDetail.basic.indFoodPref == 'v'}}">Vegetarian</mat-radio-button>
+      <mat-radio-button color="primary" value="nv" checked="{{this.profile.indDetail.basic.indFoodPref == 'nv'}}">Non-vegetarian</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field>
+      <mat-label>Language Preferences</mat-label>
+      <mat-select value="{{this.profile.indDetail.basic.indLanPref}}" formControlName='indLanPref'>
+        <mat-option *ngFor="let lang of langs" [value]="lang.value">
+          {{lang.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
+  <div class="buttons" fxLayout="row" fxLayoutAlign="space-around">
+      <button mat-raised-button color="primary" (click)="onSubmit()">SUBMIT</button>
+      <button mat-button (click)="onBackClick()">CANCEL</button>
+  </div>
+</div>

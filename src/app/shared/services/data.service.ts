@@ -1,18 +1,49 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ILoginData, IMobileLoginData, IOrderData,
-   IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder, IVehicleData } from '../models/common-model';
-import { Observable } from 'rxjs';
-import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG } from '../constants/constants';
-import { Socket } from 'ngx-socket-io';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  HttpClient
+} from '@angular/common/http';
+import {
+  environment
+} from 'src/environments/environment';
+import {
+  ILoginData,
+  IMobileLoginData,
+  IOrderData,
+  IUpdateProfiledata,
+  IRequestRegister,
+  IRequestGetRestaurantData,
+  IRequestGetSkuData,
+  IRequestVerifyOtp,
+  IRequestPlaceOrder,
+  IResponsePlaceOrder,
+  IVehicleData,
+  IProfileData
+} from '../models/common-model';
+import {
+  Observable
+} from 'rxjs';
+import {
+  API_ENDPOINTS,
+  ZATAAKSE_JWT_TOKEN,
+  ZATAAKSE_PREF_LANG
+} from '../constants/constants';
+import {
+  Socket
+} from 'ngx-socket-io';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class DataService {
   lan = '';
   fingerprint = '';
-  paymentStatus$ = this.socket.fromEvent<{ _id: string, paymentStatus: string }>('getOrderPaymentStatus');
-  constructor(private httpClient: HttpClient, private socket: Socket) { }
+  paymentStatus$ = this.socket.fromEvent < {
+    _id: string,
+    paymentStatus: string
+  } > ('getOrderPaymentStatus');
+  constructor(private httpClient: HttpClient, private socket: Socket) {}
 
   getOptions() {
     return {
@@ -44,11 +75,11 @@ export class DataService {
     return this.postMethod('cS/sendPushNotification', subscription);
   }
 
-  putMethod(url: string, options: any, data?: any) {
+  putMethod(url: string, options: any, data ? : any) {
     return this.httpClient.put(url, data, options);
   }
 
-  loginByNumber(data: ILoginData): Observable<any> {
+  loginByNumber(data: ILoginData): Observable < any > {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/userLogin`;
     const options = {
       headers: this.getOptions()
@@ -61,7 +92,7 @@ export class DataService {
     lan: string
     latitude: number
     longitude: number
-  }): Observable<any> {
+  }): Observable < any > {
     const options: any = {
       headers: {
         'Content-Type': 'application/json',
@@ -69,13 +100,16 @@ export class DataService {
         fingerprint: data.fingerprint,
         lan: data.lan,
         latitude: data.latitude.toString(),
-        longitude: data.longitude.toString()  // 22.484977, 88.384863
+        longitude: data.longitude.toString() // 22.484977, 88.384863
       },
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/isLocationServed`, options);
   }
 
-  checkServiceAvailable(data: { fingerprint: string, lan: string }) {
+  checkServiceAvailable(data: {
+    fingerprint: string,
+    lan: string
+  }) {
     const options = {
       headers: {
         ...this.getOptions(),
@@ -86,7 +120,12 @@ export class DataService {
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/checkInternet`, options);
   }
 
-  getPlatformParams(data: { fingerprint: string, lan: string, latitude: number, longitude: number }) {
+  getPlatformParams(data: {
+    fingerprint: string,
+    lan: string,
+    latitude: number,
+    longitude: number
+  }) {
     const options = {
       headers: {
         ...this.getOptions(),
@@ -154,7 +193,11 @@ export class DataService {
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getSku`, options);
   }
 
-  registerLogin(data: { fingerprint: string, lan: string, data: IRequestRegister }) {
+  registerLogin(data: {
+    fingerprint: string,
+    lan: string,
+    data: IRequestRegister
+  }) {
     const options = {
       headers: {
         ...this.getOptions(),
@@ -169,7 +212,7 @@ export class DataService {
 
 
 
-  verifyOtp(data: IRequestVerifyOtp): Observable<any> {
+  verifyOtp(data: IRequestVerifyOtp): Observable < any > {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/verifyOTP`;
     const options = {
       headers: {
@@ -183,7 +226,7 @@ export class DataService {
     return this.putMethod(url, options, data);
   }
 
-  placeOrder(data: IRequestPlaceOrder): Observable<IResponsePlaceOrder> {
+  placeOrder(data: IRequestPlaceOrder): Observable < IResponsePlaceOrder > {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/placeAnOrder`;
     const options = {
       headers: {
@@ -194,7 +237,22 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
-  addCart(fingerprint: string, data: IOrderData, position: {lat: number, lng: number}) {
+  updateProfile(data: IUpdateProfiledata): Observable < IProfileData > {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/updateProfile`;
+    const options = {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',        
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      }
+    }
+    return this.putMethod(url, options, data) as any;
+  }
+
+  addCart(fingerprint: string, data: IOrderData, position: {
+    lat: number,
+    lng: number
+  }) {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/addCart`;
     const options = {
       headers: {
@@ -208,7 +266,11 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
-  manageVehicle(data: IVehicleData): Observable<{message: string; data: { indVehicles: IVehicleData[]}}> {
+  manageVehicle(data: IVehicleData): Observable < {
+    message: string;data: {
+      indVehicles: IVehicleData[]
+    }
+  } > {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/manageVehicle`;
     const options = {
       headers: {
@@ -220,14 +282,14 @@ export class DataService {
   }
 
   manageAddress(data: {
-    addressId?: string,
+    addressId ? : string,
     x: string,
     addType: string,
     addLine1: string,
     addLine2: string,
     city: string,
-    locality?: string,
-    landmark?: string,
+    locality ? : string,
+    landmark ? : string,
     state: string,
     country: string,
     postal: string,

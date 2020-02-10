@@ -416,6 +416,24 @@ export interface IOrderData {
   };
 }
 
+export interface IUpdateProfiledata {
+  indFirstName: String;
+  indLastName: String;
+  indDob: String;
+  indGender: String;
+  indFoodPref: String;
+  indLanPref: String;
+  indPic: {
+      picId: String;
+      imageName: String;
+      image: File;
+      tags: String[];
+    }[];
+  indEmail: String;
+  indPushNotify: Boolean;
+  indPwd: String;
+}
+
 export interface ICartItemInfo {
   businessLocId: string;
   skuId: string;
