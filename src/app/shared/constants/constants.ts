@@ -30,3 +30,13 @@ export enum EListPageViewType {
   FoodList = 'foodList',
   RestaurantList =  'restaurantList'
 }
+
+export const PAYMENT_STATUS = {
+  PENDING : 'Pending',
+  COMPLETED : 'Completed',
+  ERROR : 'Error',
+  HOLD : 'Hold',
+  FAILED: 'Failed',
+  INVALID: 'Invalid',
+  ABANDONED: 'Abandoned'
+};

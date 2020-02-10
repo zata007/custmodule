@@ -4,7 +4,7 @@ import { MatDialog, MatBottomSheet } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData, IResponseAddCart, ICartViewData } from 'src/app/shared/models/common-model';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA, PAYMENT_STATUS } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
@@ -12,8 +12,8 @@ import { CustomerStateService } from '../customer-state.service';
 import { AddressListComponent } from './address-list/address-list.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { error } from 'protractor';
+import {FormControl, FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart-view',
@@ -43,6 +43,8 @@ export class CartViewComponent implements OnInit {
   time: any;
   orderData: IOrderData[] = [];
   cartData: ICartViewData;
+  windowChildIntervalRef = null;
+  windowObjectReference: Window = null;
 
   constructor(
     private location: Location,
@@ -203,10 +205,17 @@ export class CartViewComponent implements OnInit {
         localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
         localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
         localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
-        // window.location.replace( `${res.data.billdeskUrl}?msg=${res.data.msg}`);
-        window.open(`${res.data.billdeskUrl}?msg=${res.data.msg}`, '_self');
+        // window features
+        if (!this.windowObjectReference) {
+          this.handlePaymentWindowLogic(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
+        } else {
+          this.windowObjectReference.close();
+          this.handlePaymentWindowLogic(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
+        }
+        // TODO: Add loader
+
       }, (errorPlaceOrder) => {
-        console.log(errorPlaceOrder)
+        console.log(errorPlaceOrder);
 
       });
 
@@ -215,6 +224,43 @@ export class CartViewComponent implements OnInit {
       this.router.navigate(['login-signup']);
     }
   }
+
+  handlePaymentWindowLogic(url: string) {
+    const strWindowFeatures = 'toolbar=no, menubar=no, width=500';
+    this.windowObjectReference = window.open(url, 'Zataakse_Payment', strWindowFeatures);
+    this.windowObjectReference.focus();
+    this.windowChildIntervalRef = setInterval(() => {
+      this.checkPaymentWindowChildCloseStatus(this.windowObjectReference);
+    }, 500);
+    window.addEventListener('message', this.paymentMessageHandler);
+  }
+
+  paymentMessageHandler(event: MessageEvent) {
+    if (!event.origin.includes(environment.paymentUrl)) {
+      return;
+    }
+    this.windowObjectReference.close();
+    switch (event.data) {
+      case PAYMENT_STATUS.COMPLETED:
+        this.orderService.clearCart();
+        this.router.navigate([`customer/order-placed`]);
+        break;
+
+      default:
+        this.router.navigate([`customer`]);
+        // this.router.navigate([`customer`]);
+        break;
+    }
+  }
+
+  checkPaymentWindowChildCloseStatus(child) {
+    if (child.closed) {
+        console.log('payment window is closed');
+        window.removeEventListener('message', this.paymentMessageHandler);
+        this.windowObjectReference = null;
+        clearInterval(this.windowChildIntervalRef);
+    }
+}
 
   private getPlaceName(lat, lng, callback: Function) {
     const geocoder = new google.maps.Geocoder();
