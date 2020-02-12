@@ -19,6 +19,7 @@ export class PitstopRestaurantComponent implements OnInit {
   searchTerms = '';
   selectedTab = 0;
   path = sessionStorage.getItem('path');
+  isLoading = true;
 
   constructor(
     private customerStateService: CustomerStateService,
@@ -30,16 +31,19 @@ export class PitstopRestaurantComponent implements OnInit {
     this.getRestaurants().subscribe(res => {
       this.restaurants = res.data.blData;
       this.filteredRestaurants = this.restaurants;
+      this.isLoading = false;
     });
   }
 
   onSearchKeyUp(searchTerm: string) {
     if (searchTerm.length > 2) {
       // TODO: Find selected tab and filter data
+      this.isLoading = true;
       this.filteredRestaurants = this.restaurants.filter(i => i.displayName.toLowerCase().includes(searchTerm.toLowerCase()));
     } else {
       this.resetSearch();
     }
+    this.isLoading = false;
   }
 
   resetSearch() {
