@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { IProfileData, IUpdateProfiledata } from '../../../shared/models/common-model';
 import { ZATAAKSE_PROFILE_DATA } from '../../../shared/constants/constants';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { DataService } from '../../../shared/services/data.service'
 
 @Component({
@@ -31,9 +31,9 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profileForm = new FormGroup ({
-      indFirstName: new FormControl(''),
+      indFirstName: new FormControl('', [Validators.required]),
       indLastName: new FormControl(''),
-      indEmail: new FormControl(''),
+      indEmail: new FormControl('', [Validators.required, Validators.email]),
       indDob: new FormControl(''),
       indGender: new FormControl(''),
       indFoodPref: new FormControl(''),
@@ -46,6 +46,10 @@ export class EditProfileComponent implements OnInit {
     } else {
       this.image = '../../../assets/img/core/user.png';
     }
+  }
+
+  get email() {
+    return this.profileForm.get('indEmail');
   }
 
   onSelectFile(event) {

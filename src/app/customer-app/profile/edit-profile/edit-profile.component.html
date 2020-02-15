@@ -20,15 +20,21 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Doe" value="{{this.profile.indDetail.basic.indLastName ? this.profile.indDetail.basic.indLastname :''}}" formControlName='indLastName'>
+      <input matInput placeholder="Doe" value="{{this.profile.indDetail.basic.indLastName ? this.profile.indDetail.basic.indLastName :''}}" formControlName='indLastName'>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="mail@example.com" value="{{this.profile.indDetail.roles[0].indEmail ? this.profile.indDetail.roles[0].indEmail :''}}" formControlName='indEmail'>
+      <input matInput type="email" placeholder="mail@example.com" value="{{this.profile.indDetail.roles[0].indEmail ? this.profile.indDetail.roles[0].indEmail :''}}" formControlName='indEmail'>
+      <!-- <mat-error *ngIf="email.errors.email && !email.errors.required">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="email.errors.required">
+        Email is <strong>required</strong>
+      </mat-error> -->
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Date of Birth</mat-label>
-      <input matInput type="datetime-local" value="{{this.profile.indDetail.basic.indDob ? this.profile.indDetail.basic.indDob : ''}}" formControlName='indDob'>
+      <input matInput type="date" value="{{this.profile.indDetail.basic.indDob ? this.profile.indDetail.basic.indDob : ''}}" formControlName='indDob'>
     </mat-form-field>
     <label id="gender" color="primary">Gender</label>
     <mat-radio-group aria-labelledby="Gender" fxLayout="row" fxLayoutAlign="flex-start" formControlName='indGender'>
@@ -43,7 +49,7 @@
     </mat-radio-group>
     <mat-form-field>
       <mat-label>Language Preferences</mat-label>
-      <mat-select value="{{this.profile.indDetail.basic.indLanPref}}" formControlName='indLanPref'>
+      <mat-select value="{{this.profile.indDetail.basic.indLanPref ? this.profile.indDetail.basic.indLanPref : null}}" formControlName='indLanPref'>
         <mat-option *ngFor="let lang of langs" [value]="lang.value">
           {{lang.viewValue}}
         </mat-option>
