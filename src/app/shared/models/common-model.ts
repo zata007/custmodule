@@ -338,6 +338,7 @@ export interface IProfileData {
     indCountryCode: string;
     indMobileNum: string;
     roles: {
+      indEmail?: String;
       indEmailNotify: boolean;
       indMobileNotify: boolean;
       _id: string;

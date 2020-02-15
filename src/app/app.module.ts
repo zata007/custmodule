@@ -27,11 +27,12 @@ import { NgrxRouterStoreModule } from './store/reducers/router/ngrx-router.modul
 import { PaymentComponent } from './payment/payment.component';
 import { CustomerStateService } from './customer-app/customer-state.service';
 import { createTranslateLoader } from './shared/models/common-model';
+import { LOCAL_STORAGE_FINGERPRINT } from './shared/constants/constants'
 
 
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
 withCredentials: false,
- query: { authorization: 'wehgfiewrfgierg'} } };
+ query: { authorization: localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)} } };
 
 @NgModule({
   declarations: [
