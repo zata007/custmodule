@@ -1,52 +1,20 @@
+// 
+
 .cart-item-container {
-  padding: 10px 16px;
-  width: 100%;
-  .food-item {
-    width: 100%;
+  padding: 0px 16px;
+  .food-name {
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     img {
-      width: 100px;
-      height: auto;
-      border-radius: 10px;
-      z-index: 100;
-    }
-    .details {
-      width: 85%;
-      min-height: 125px;
-      border-radius: 5px;
-      margin-left: -15%;
-      padding: 10px 10px 10px 20%;
-      background-color: #ffffff;
-      div {
-        .food-name {
-          font-weight: bold;
-          line-height: 1.2;
-          margin-bottom: 7px;
-          img {
-            width: 20px;
-            height: 20px;
-          }
-        }
-      }
-      .restaurant {
-        line-height: 1;
-        margin-bottom: 5px;
-      }
-      .description {
-        color: #717171;
-        line-height: 1.21;
-        margin-bottom: 10px;
-      }
-      div {
-        width: 100%;
-        .order-action {
-          text-align: center;
-          border: 1px solid orange;
-          padding: auto 5px;
-          .counter {
-            vertical-align: middle;
-          }
-        }
-      }
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
     }
   }
+}
+
+.mat-divider {
+  margin: 5px 16px !important;
 }

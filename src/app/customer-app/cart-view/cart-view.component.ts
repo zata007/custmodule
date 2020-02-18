@@ -313,6 +313,13 @@ export class CartViewComponent implements OnInit {
       }
     });
   }
+
+  openBillDetail() {
+    this.bottomSheet.open(BillDetailComponent, {
+      data: this.cartData
+    });
+  }
+
   onAddAddressClick() {
     this.router.navigate(['customer/address/add']);
   }

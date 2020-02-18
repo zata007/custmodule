@@ -16,6 +16,14 @@
     </div>
   </div> -->
   <div *ngIf="cartData" class="bill-detail mat-elevation-z4">
+    <div class="coupon" fxLayout="row" fxLayoutAlign="space-between center">
+      <img src="../../../assets/icons/discount.svg" alt="">
+      <mat-form-field appearance="standard">
+        <mat-label>Apply Coupon</mat-label>
+        <input matInput placeholder="Zataakse">
+      </mat-form-field>
+      <button mat-stroked-button color="primary"> APPLY</button>
+    </div>
     <div [ngSwitch]="customerStateService.currentServiceSelected">
       <div *ngSwitchCase="ECustomerServiceType.TakeAway">
         <div class="address">
@@ -93,14 +101,14 @@
 
       </div>
     </div>
-    <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Item Total</div>
       <div class="head4">₹{{cartData.totalPrice}}</div>
     </div>
-    <!-- <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Applicable Taxes</div>
       <div class="head4">₹20</div>
-    </div> -->
+    </div>
     <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Delivery Charges</div>
       <div class="head4">₹{{cartData.deliveryCharges}}</div>
@@ -108,10 +116,10 @@
     <div class="amount" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="head4">Total payable amount</div>
       <div class="head2">₹{{cartData.paybleAmount}}</div>
-    </div>
-    <div class="order-button head4 bold">
-      <button mat-raised-button color="primary" [disabled]="" (click)="onSubmitClick()"
-        class="head4 bold">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</button>
+    </div> -->
+    <div fxLayout="row" class="order-button">
+      <div class="para bold" (click)="openBillDetail()">Total Payble Amount<br/>₹{{cartData.paybleAmount}}<a>(Bill details)</a></div>
+      <div class="head4 bold" (click)="onSubmitClick()" fxLayout="row" fxLayoutAlign="center center">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</div>
     </div>
   </div>
 </div>
