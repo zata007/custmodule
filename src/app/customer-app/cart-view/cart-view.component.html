@@ -28,18 +28,18 @@
       <div *ngSwitchCase="ECustomerServiceType.TakeAway">
         <div class="address">
           <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
-            <div class="head2 bold">Take Delivery at</div>
+            <div class="head4 bold">Take Delivery at</div>
           </div>
           <mat-card class="address-box mat-elevation-z4">
-            <div class="head2 bold">{{pitstopData.name}}</div>
-            <div class="head4">{{pitstopData.locality}}</div>
+            <div class="para bold">{{pitstopData.name}}</div>
+            <div class="para">{{pitstopData.locality}}</div>
           </mat-card>
           <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
-            <div class="head2 bold">Vehicle</div>
+            <div class="head4 bold">Vehicle</div>
           </div>
           <mat-card *ngIf="selectedVehicle else addVehicleTemplate" class="address-box mat-elevation-z4">
-            <div class="head2 bold">{{selectedVehicle.vehbrand}} {{selectedVehicle.vehModel}}</div>
-            <div class="head4">{{selectedVehicle.vehNum}}</div>
+            <div class="para bold">{{selectedVehicle.vehbrand}} {{selectedVehicle.vehModel}}</div>
+            <div class="para">{{selectedVehicle.vehNum}}</div>
             <mat-divider [inset]="true"></mat-divider>
             <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
               <button mat-button color="primary" (click)="onVehicleChange()">CHANGE</button>
@@ -48,7 +48,7 @@
           </mat-card>
           <ng-template #addVehicleTemplate>
             <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
-              <div class="head4">You can add vehicle information in profile section</div>
+              <div class="para">You can add vehicle information in profile section</div>
             </div>
           </ng-template>
         </div>
@@ -57,12 +57,12 @@
       <div *ngSwitchCase="ECustomerServiceType.Delivery">
         <div class="address">
           <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
-            <div class="head2 bold">Delivery Location</div>
+            <div class="head4 bold">Delivery Location</div>
             <!-- <div mat-button color="primary" class="head2 primary-color">Add New</div> -->
           </div>
           <mat-card *ngIf="selectedLocationForDelivery else addLocationTemplate" class="address-box mat-elevation-z4">
-            <div class="head3 bold">{{selectedLocationForDelivery.addrType}}</div>
-            <div class="head4">{{selectedLocationForDelivery.addrLine1}} {{selectedLocationForDelivery.addrLine2}}
+            <div class="para bold">{{selectedLocationForDelivery.addrType}}</div>
+            <div class="para">{{selectedLocationForDelivery.addrLine1}} {{selectedLocationForDelivery.addrLine2}}
               {{selectedLocationForDelivery.locality}} {{selectedLocationForDelivery.city}}</div>
             <mat-divider [inset]="true"></mat-divider>
             <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
@@ -82,14 +82,14 @@
       <div *ngSwitchCase="ECustomerServiceType.OrderAhead">
         <div class="address">
           <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
-            <div class="head2 bold">Order At</div>
+            <div class="para bold">Order At</div>
             <!-- <div mat-button color="primary" class="head2 primary-color">Add New</div> -->
           </div>
           <div *ngIf="currentRestaurantData" class="address-box mat-elevation-z4" fxLayout="row"
             fxLayoutAlign="space-between center">
             <div class="address-detail" fxLayout="column">
-              <div class="head2 bold">{{currentRestaurantData.displayName}}</div>
-              <div class="head4">{{currentRestaurantData.locality}}</div>
+              <div class="para bold">{{currentRestaurantData.displayName}}</div>
+              <div class="para">{{currentRestaurantData.locality}}</div>
             </div>
             <!-- <button mat-button color="primary" (click)="openTime()">ADD TIME</button> -->
             <div fxLayout="column" class="time" fxLayoutAling="flex-end">
@@ -118,7 +118,7 @@
       <div class="head2">₹{{cartData.paybleAmount}}</div>
     </div> -->
     <div fxLayout="row" class="order-button">
-      <div class="para bold" (click)="openBillDetail()">Total Payble Amount<br/>₹{{cartData.paybleAmount}}<a>(Bill details)</a></div>
+      <div class="para bold" (click)="openBillDetail()">Total Payble Amount<br/><p class="price">₹{{cartData.paybleAmount}}</p><p>(Bill details)</p></div>
       <div class="head4 bold" (click)="onSubmitClick()" fxLayout="row" fxLayoutAlign="center center">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</div>
     </div>
   </div>

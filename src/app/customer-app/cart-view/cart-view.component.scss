@@ -40,7 +40,7 @@
       }
     }
     .address-box {
-      margin: 15px 0;
+      margin: 5px 0;
       width: 100%;
       padding: 10px 10px 0px 10px;
       position: relative;
@@ -79,12 +79,12 @@
     .coupon {
       margin: -15px 0px -25px;  
       img {
-        height: 40px;
-        width: 40px;
+        height: 30px;
+        width: 30px;
         margin-right: 5px;
       }
       mat-form-field {
-        width: calc(100% - 150px)
+        width: calc(100% - 120px)
       }
     }
     .order-button {
@@ -95,9 +95,15 @@
         height: 100%;
         width: 50%;
         margin: 0px;
-        a {
-          text-decoration: underline;
-          color: #0000ff;
+        .price {
+          font-size: 1.3em;
+        }
+        p {
+          display: inline;
+          &:last-child {
+            text-decoration: underline;
+            color: #0000ff;
+          }
         }
         &:nth-child(2) {
           background-color: #ff3823;
