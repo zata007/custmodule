@@ -102,7 +102,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     });
     this.customerStateService.setCurrentPage('main');
     // set google maps defaults
-    this.zoom = 11.5;
+    this.zoom = 13;
 
     // create search FormControl
     this.searchControl = new FormControl();

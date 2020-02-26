@@ -22,17 +22,17 @@
   <mat-card fxLayout="column" class="mat-elevation-z4">
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 4.svg" alt="">
-      <div class="head4">{{ basic.indFirstName }}</div>
+      <div class="head4">{{ basic.indFirstName ? basic.indFirstName+" "+basic.indLastName : "Jhon Doe" }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
-      <div class="head4">{{ mobile }}</div>
+      <div class="head4">{{ mobile ? mobile: "Your Mobile Number" }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 6.svg" alt="">
-      <div class="head4">Mail</div>
+      <div class="head4">{{ basic.indEmail ? basic.indEmail : "Your Email" }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
