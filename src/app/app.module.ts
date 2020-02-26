@@ -32,7 +32,9 @@ import { LOCAL_STORAGE_FINGERPRINT } from './shared/constants/constants'
 
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
 withCredentials: false,
- query: { authorization: localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)} } };
+  query: { authorization: 'gdfeduegdgdugd3gdugduygudgeudguedguegduegd'}
+ //query: { authorization: localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)}
+} };
 
 @NgModule({
   declarations: [

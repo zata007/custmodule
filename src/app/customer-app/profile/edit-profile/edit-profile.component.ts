@@ -20,7 +20,7 @@ export class EditProfileComponent implements OnInit {
     {value: 'bn', viewValue: 'Bengali'}
   ]
   profileForm: FormGroup;
-  updateProfile: IUpdateProfiledata;
+  updateProfile: any = [];
   selectedImage: File;
 
   constructor(
@@ -48,10 +48,6 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  get email() {
-    return this.profileForm.get('indEmail');
-  }
-
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       this.selectedImage = event.target.files[0];
@@ -60,6 +56,12 @@ export class EditProfileComponent implements OnInit {
       reader.onload = (event: Event) => {
         this.image = reader.result;
       }
+      this.updateProfile = {
+        ...this.updateProfile,
+        indPic: [
+          {image: this.selectedImage}
+        ]
+      }
     }
   }
 
@@ -67,13 +69,57 @@ export class EditProfileComponent implements OnInit {
     this.location.back();
   }
 
-  onSubmit() {
-    this.updateProfile = {
-      ...this.profileForm.value,
-      indPic: [
-        {image: this.selectedImage}
-      ]
+  firstNameChange() {
+    this.updateProfile ={
+      ...this.updateProfile,
+      indFirstName: this.profileForm.value['indFirstName']
     }
+  }
+
+  lastNameChange () {
+    this.updateProfile ={
+      ...this.updateProfile,
+      indLastName: this.profileForm.value['indLastName']
+    }
+  }
+
+  emailChange() {
+    this.updateProfile ={
+      ...this.updateProfile,
+      indEmail: this.profileForm.value['indEmail']
+    }
+  }
+
+  dobChange() {
+    this.updateProfile ={
+      ...this.updateProfile,
+      indDob: this.profileForm.value['indDob']
+    }
+  }
+
+  genderChange() {
+    this.updateProfile ={
+      ...this.updateProfile,
+      indGender: this.profileForm.value['indGender']
+    }
+  }
+
+  foodchange() {
+    this.updateProfile ={
+      ...this.updateProfile,
+      indFoodPref: this.profileForm.value['indFoodPref']
+    }
+  }
+
+  langChange() {
+    this.updateProfile ={
+      ...this.updateProfile,
+      indLanPref: this.profileForm.value['indLanPref']
+    }
+  }
+
+  onSubmit() {    
+    console.log(this.updateProfile)
     this.dataService.updateProfile(this.updateProfile).subscribe((data) => {
       console.log('success');
       this.router.navigate(['customer/profile']);

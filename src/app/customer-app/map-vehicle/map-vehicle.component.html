@@ -112,12 +112,15 @@
     (itemClicked)="gotoPitstop()"
   ></card-slider>
   <button
-    mat-raised-button
+    fxLayout= "column"
+    fxLayoutAlign="center center"
+    mat-fab
     color="primary"
     *ngIf="canShowDirection && !canShowPitstops"
     (click)="onRouteSelected($event)"
   >
-    Confirm Route
+    <p>Order</p>
+    <mat-icon>done</mat-icon>
   </button>
 </div>
 

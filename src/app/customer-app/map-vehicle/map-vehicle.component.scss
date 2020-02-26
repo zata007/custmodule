@@ -77,12 +77,13 @@
     }
   }
   button {
-    width: 90%;
+    // width: 90%;
     border: none;
     left: 50%;
     position: relative;
     transform: translateX(-50%);
     margin-top: 20px;
+    overflow: hidden;
   }
 }
 
