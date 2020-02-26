@@ -42,7 +42,7 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    window.parent.postMessage(this.paymentStatus, '*');
+    parent.postMessage(this.paymentStatus, '*');
   }
 
 }

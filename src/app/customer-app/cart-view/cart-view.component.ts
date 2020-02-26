@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
-import { MatDialog, MatBottomSheet } from '@angular/material';
+import { MatDialog, MatBottomSheet, MatSnackBar } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData, IResponseAddCart, ICartViewData } from 'src/app/shared/models/common-model';
@@ -55,6 +55,7 @@ export class CartViewComponent implements OnInit {
     private router: Router,
     private commonService: CommonService,
     public customerStateService: CustomerStateService,
+    private snackbar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -215,7 +216,11 @@ export class CartViewComponent implements OnInit {
         // TODO: Add loader
 
       }, (errorPlaceOrder) => {
+        this.snackbar.open(errorPlaceOrder.error.message);
+        this.hasAuthToken = false;
+        localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
         console.log(errorPlaceOrder);
+        this.router.navigate(['login-signup']);
 
       });
 
@@ -236,6 +241,8 @@ export class CartViewComponent implements OnInit {
   }
 
   paymentMessageHandler(event: MessageEvent) {
+    console.log('event Origin:', event.origin );
+    console.log('environmentURL', environment.paymentUrl);
     if (!event.origin.includes(environment.paymentUrl)) {
       return;
     }
