@@ -64,6 +64,9 @@ export class CartViewComponent implements OnInit {
     });
     this.orderedItems = this.orderService.getCartData();
     console.log(this.orderedItems);
+    if (!this.orderedItems.length) {
+      this.router.navigate(['customer']);
+    }
 
     const position = this.customerStateService.getFromLocation();
     const data = {
@@ -155,7 +158,7 @@ export class CartViewComponent implements OnInit {
         }) as any,
         orderType: this.customerStateService.currentServiceSelected,
         totalPrice: this.cartData.paybleAmount
-      }
+      };
 
       switch (this.customerStateService.currentServiceSelected) {
         case ECustomerServiceType.TakeAway:

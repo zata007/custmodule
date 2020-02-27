@@ -119,7 +119,7 @@
     </div> -->
     <div fxLayout="row" class="order-button">
       <div class="para bold" (click)="openBillDetail()">Total Payble Amount<br/><p class="price">₹{{cartData.paybleAmount}}</p><p>(Bill details)</p></div>
-      <div class="head4 bold" (click)="onSubmitClick()" fxLayout="row" fxLayoutAlign="center center">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</div>
+      <div class="head4 bold" style="user-select: none;" (click)="onSubmitClick()" fxLayout="row" fxLayoutAlign="center center">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</div>
     </div>
   </div>
 </div>
