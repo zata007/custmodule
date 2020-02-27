@@ -42,8 +42,10 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('trying to send message to parent',parent)
-    parent.postMessage(this.paymentStatus, '*');
+    const data = {
+      paymentStatus: this.paymentStatus,
+    };
+    window.opener.postMessage(data, '*');
   }
 
 }

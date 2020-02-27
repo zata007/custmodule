@@ -240,17 +240,19 @@ export class CartViewComponent implements OnInit {
     this.windowChildIntervalRef = setInterval(() => {
       this.checkPaymentWindowChildCloseStatus(this.windowObjectReference);
     }, 500);
-    window.addEventListener('message', this.paymentMessageHandler);
+    window.addEventListener('message', this.paymentMessageHandler.bind(this));
   }
 
   paymentMessageHandler(event: MessageEvent) {
     console.log('event Origin:', event.origin );
     console.log('environmentURL', environment.paymentUrl);
-    if (!event.origin.includes(environment.paymentUrl)) {
+    if (!event.origin.includes(environment.paymentUrl) && !(event.data && event.data.paymentStatus) ) {
       return;
     }
-    this.windowObjectReference.close();
-    switch (event.data) {
+    if (this.windowObjectReference) {
+      this.windowObjectReference.close();
+    }
+    switch (event.data.paymentStatus) {
       case PAYMENT_STATUS.COMPLETED:
         this.orderService.clearCart();
         this.router.navigate([`customer/order-placed`]);
@@ -266,9 +268,10 @@ export class CartViewComponent implements OnInit {
   checkPaymentWindowChildCloseStatus(child) {
     if (child.closed) {
         console.log('payment window is closed');
-        window.removeEventListener('message', this.paymentMessageHandler);
+        window.removeEventListener('message', this.paymentMessageHandler.bind(this));
         this.windowObjectReference = null;
         clearInterval(this.windowChildIntervalRef);
+        // TODO: Perform task if payment is closed
     }
 }
 
