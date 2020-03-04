@@ -20,6 +20,7 @@ export interface Marker {
   label?: string;
   draggable?: boolean;
   id?: string;
+  image?: string;
 }
 
 export interface ILoginData {

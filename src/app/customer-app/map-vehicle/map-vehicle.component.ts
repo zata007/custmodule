@@ -227,6 +227,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
           ...this.customerStateService.getLocationData()
         }).subscribe((data: any) => {
           const pitstops: Array<any> = data.data;
+          console.log(pitstops);
 
           // check if pitstop is on the edge.
           // TODO: Remove !
@@ -250,6 +251,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
               landmark: i.blPitStopLandmark,
               label: index + '',
               id: i._id,
+              image: i.blPitStopPic[0].thumbnail
             };
             this.markers.push(pitstopMarker);
             this.customerStateService.isPitStopOnEdge(pitstopMarker.id, pitstopMarker.lat, pitstopMarker.lng);
