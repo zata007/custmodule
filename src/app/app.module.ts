@@ -28,6 +28,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { CustomerStateService } from './customer-app/customer-state.service';
 import { createTranslateLoader } from './shared/models/common-model';
 import { LOCAL_STORAGE_FINGERPRINT } from './shared/constants/constants'
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 
 
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
@@ -75,7 +76,8 @@ withCredentials: false,
     SharedModule
   ],
   providers: [
-    CustomerStateService
+    CustomerStateService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1200}}
   ],
   bootstrap: [AppComponent]
 })

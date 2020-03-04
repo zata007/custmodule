@@ -210,12 +210,17 @@ export class DataService {
     return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/registerLogin`, data.data, options);
   }
 
-  recommendRest(requestObj: {fingerprint: string, lan: string, data: { restName: string, mobileNum: string,  restAddr: string }}) {
+  recommendRest(requestObj: {fingerprint: string, lan: string,
+    latitude: number,
+    longitude: number,
+     data: { restName: string, mobileNum: string,  restAddr: string }}) {
     const options = {
       headers: {
         ...this.getOptions(),
         fingerprint: requestObj.fingerprint,
         lan: requestObj.lan,
+        latitude: requestObj.latitude.toString(),
+        longitude: requestObj.longitude.toString()
       }
     };
 
