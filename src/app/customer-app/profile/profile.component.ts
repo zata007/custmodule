@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
   address: IAddressData[];
   vehicle: IVehicleData[];
   mobile: string;
+  email: String;
+  notification: boolean;
 
   constructor(
     private location: Location,
@@ -36,9 +38,12 @@ export class ProfileComponent implements OnInit {
         localStorage.setItem(ZATAAKSE_PROFILE_DATA, JSON.stringify(data.data));
         this.data =  data.data;
         this.basic =  data.data.indDetail.basic;
-        this.mobile = this.data.indDetail.indMobileNum;
+        this.mobile = data.data.indDetail.indMobileNum;
+        this.email = data.data.indDetail.roles[0].indEmail;
         this.address =  data.data.indDetail.roles[0].indAddr;
         this.vehicle = data.data.indDetail.roles[0].indVehicles;
+        this.notification = data.data.indDetail.roles[0].deviceId.indPushNotify;
+        console.log(this.data)
       }, (err) => {
         // TODO: Handle error for invalid/expired token
         localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
