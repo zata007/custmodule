@@ -8,10 +8,10 @@
     <div>Delivery Fee</div>
     <div class="rate bold">₹{{data.deliveryCharges}}</div>
   </div>
-  <!-- <div class="bill-split">
+  <div class="bill-split" fxLayout="row" fxLayoutAlign="space-between center">
     <div>Taxes</div>
-    <div class="rate">₹20</div>
-  </div> -->
+    <div class="rate">₹{{data.totalTax}}</div>
+  </div>
   <mat-divider></mat-divider>
   <div class="bill-split" fxLayout="row" fxLayoutAlign="space-between center">
     <h3>Total</h3>
