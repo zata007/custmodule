@@ -5,6 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { IMenuData } from 'src/app/shared/models/common-model';
 import { CartNotEmptyComponent } from 'src/app/shared/shared-components/cart-not-empty/cart-not-empty.component';
 import { MatBottomSheet } from '@angular/material';
+import { CustomerStateService } from '../customer-state.service';
+import { ECustomerServiceType } from '../../shared/constants/constants'
 
 @Component({
   selector: 'app-menu-list',
@@ -14,6 +16,7 @@ import { MatBottomSheet } from '@angular/material';
 export class MenuListComponent implements OnInit {
 
   cartCount: number;
+  ECustomerServiceType = ECustomerServiceType;
 
   @Input() foods: IMenuData[] = [];
   @Input() resName: string;
@@ -21,7 +24,8 @@ export class MenuListComponent implements OnInit {
     private orderService: OrderService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private customerStateService: CustomerStateService,
     ) {
     this.matIconRegistry.addSvgIcon('svg-minus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/minus.svg'));
     this.matIconRegistry.addSvgIcon('svg-plus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/plus.svg'));
@@ -37,16 +41,20 @@ export class MenuListComponent implements OnInit {
     this.orderService.removeFromCart(item);
   }
   addToCart(item: IMenuData) {
-    if((this.cartCount>0 && this.orderService.getCartData()[0].apPsBusinessLocId == item.apPsBusinessLocId) || this.cartCount == 0) {
+    if(this.customerStateService.currentServiceSelected == ECustomerServiceType.TakeAway) {
       this.orderService.addToCart({...item});
     } else {
-      const cartNotEmptyRef = this.bottomSheet.open(CartNotEmptyComponent);
-      cartNotEmptyRef.afterDismissed().subscribe(res => {
-        if (res) {
-          this.orderService.clearCart();
-          this.orderService.addToCart({...item});
-        }
-      });
+      if((this.cartCount>0 && this.orderService.getCartData()[0].apPsBusinessLocId == item.apPsBusinessLocId) || this.cartCount == 0) {
+        this.orderService.addToCart({...item});
+      } else {
+        const cartNotEmptyRef = this.bottomSheet.open(CartNotEmptyComponent);
+        cartNotEmptyRef.afterDismissed().subscribe(res => {
+          if (res) {
+            this.orderService.clearCart();
+            this.orderService.addToCart({...item});
+          }
+        });
+      }
     }
   }
 
