@@ -3,6 +3,8 @@ import { OrderService } from '../order.service';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IMenuData } from 'src/app/shared/models/common-model';
+import { CartNotEmptyComponent } from 'src/app/shared/shared-components/cart-not-empty/cart-not-empty.component';
+import { MatBottomSheet } from '@angular/material';
 
 @Component({
   selector: 'app-menu-list',
@@ -11,21 +13,41 @@ import { IMenuData } from 'src/app/shared/models/common-model';
 })
 export class MenuListComponent implements OnInit {
 
+  cartCount: number;
+
   @Input() foods: IMenuData[] = [];
   @Input() resName: string;
-  constructor(private orderService: OrderService, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(
+    private orderService: OrderService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    private bottomSheet: MatBottomSheet
+    ) {
     this.matIconRegistry.addSvgIcon('svg-minus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/minus.svg'));
     this.matIconRegistry.addSvgIcon('svg-plus', this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/plus.svg'));
    }
 
   ngOnInit() {
+    this.orderService.orderCount$.subscribe(res => {
+      this.cartCount = res;
+    });
   }
 
   removeFromCart(item: IMenuData) {
     this.orderService.removeFromCart(item);
   }
   addToCart(item: IMenuData) {
-    this.orderService.addToCart({...item});
+    if((this.cartCount>0 && this.orderService.getCartData()[0].apPsBusinessLocId == item.apPsBusinessLocId) || this.cartCount == 0) {
+      this.orderService.addToCart({...item});
+    } else {
+      const cartNotEmptyRef = this.bottomSheet.open(CartNotEmptyComponent);
+      cartNotEmptyRef.afterDismissed().subscribe(res => {
+        if (res) {
+          this.orderService.clearCart();
+          this.orderService.addToCart({...item});
+        }
+      });
+    }
   }
 
   isAddedToCart(item: IMenuData) {
