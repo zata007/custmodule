@@ -28,6 +28,7 @@ export class CartViewComponent implements OnInit {
   profileData: IProfileData = null;
   addressData: IAddressData[] = null;
   vehicleData: IVehicleData[] = null;
+  notToProvideVehicle = false;
   hasAuthToken = false;
   deliveryLocation = '';
   pitstopData = {
@@ -163,7 +164,11 @@ export class CartViewComponent implements OnInit {
       switch (this.customerStateService.currentServiceSelected) {
         case ECustomerServiceType.TakeAway:
           data.pitstopId = this.customerStateService.getCurrentPitstopData().id;
-          data.vehicleId = this.selectedVehicle['_id'];
+          if (!this.notToProvideVehicle) {
+            data.vehicleId =  this.selectedVehicle['_id'];
+          } else {
+            delete data.vehicleId;
+          }
           break;
         case ECustomerServiceType.Delivery:
           data.addressId = this.selectedLocationForDelivery['_id'];
@@ -219,11 +224,14 @@ export class CartViewComponent implements OnInit {
         // TODO: Add loader
 
       }, (errorPlaceOrder) => {
+        if (errorPlaceOrder.statusCode !== 400) {
+
+          this.hasAuthToken = false;
+          localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
+          console.log(errorPlaceOrder);
+          this.router.navigate(['login-signup']);
+        }
         this.snackbar.open(errorPlaceOrder.error.message);
-        this.hasAuthToken = false;
-        localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
-        console.log(errorPlaceOrder);
-        this.router.navigate(['login-signup']);
 
       });
 
