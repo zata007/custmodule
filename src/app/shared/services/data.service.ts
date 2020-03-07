@@ -19,7 +19,8 @@ import {
   IRequestPlaceOrder,
   IResponsePlaceOrder,
   IVehicleData,
-  IProfileData
+  IProfileData,
+  IReqAddressData
 } from '../models/common-model';
 import {
   Observable
@@ -299,21 +300,7 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
-  manageAddress(data: {
-    addressId?: string,
-    x: string,
-    addType: string,
-    addLine1: string,
-    addLine2: string,
-    city: string,
-    locality?: string,
-    landmark?: string,
-    state: string,
-    country: string,
-    postal: string,
-    latitude: number,
-    longitude: number
-  }) {
+  manageAddress(data: IReqAddressData) {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/manageAddress`;
     const options = {
       headers: {
@@ -321,20 +308,8 @@ export class DataService {
         authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
       },
     };
-    const resData = {
-      addrType: data.addType,
-      addrLine1: data.addLine1,
-      addrLine2: data.addLine2,
-      city: data.city,
-      locality: data.locality,
-      landmark: data.landmark,
-      state: data.state,
-      country: data.country,
-      pincode: data.postal,
-      latitude: data.latitude,
-      longitude: data.longitude
-    };
-    return this.putMethod(url, options, resData) as any;
+
+    return this.putMethod(url, options, data) as any;
   }
 
   resendOTP(userData: {

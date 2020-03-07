@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA, BottomSheetDismissMode } from '../../shared/constants/constants';
 import { IResponseGetProfileData, IProfileData, IAddressData, IVehicleData } from 'src/app/shared/models/common-model';
-import { MatDialog, MatBottomSheet } from '@angular/material';
+import { MatDialog, MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component';
+import { BottomAddressComponent } from '../address/bottom-address/bottom-address.component';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +22,8 @@ export class ProfileComponent implements OnInit {
   mobile: string;
   email: String;
   notification: boolean;
+  bottomAddressComponent: MatBottomSheetRef;
+  bottomVehicleComponent: MatBottomSheetRef<BottomVehicleComponent, any>;
 
   constructor(
     private location: Location,
@@ -74,5 +77,33 @@ export class ProfileComponent implements OnInit {
   }
 
   onNavigate() { this.router.navigate(['customer/profile/edit']); }
+
+  editAddress(data: IAddressData) {
+    this.bottomAddressComponent =  this.bottomSheet.open(BottomAddressComponent, {
+      data
+    });
+
+    this.bottomAddressComponent.afterDismissed().subscribe((res: {actionType: BottomSheetDismissMode, closeData: any}) => {
+      if (res && res.actionType === BottomSheetDismissMode.DataUpdated) {
+        this.address = res.closeData.indAddr;
+      }
+    });
+
+  }
+
+  editVehicle(data: IVehicleData) {
+    this.bottomVehicleComponent =  this.bottomSheet.open(BottomVehicleComponent, {
+      data : {
+        ...data,
+        vehicleId: data._id
+      }
+    });
+
+    this.bottomVehicleComponent.afterDismissed().subscribe((res: IVehicleData[]) => {
+      if (res) {
+        this.vehicle = res;
+      }
+    });
+  }
 
 }

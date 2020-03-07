@@ -66,7 +66,7 @@ export class SigninOtpComponent implements OnInit {
       userId : this.data.userId
     },
       essentialParams.fingerprint).subscribe((d: any) => {
-      this.matSnackBar.open(d.message);
+      this.matSnackBar.open(d.message, '', {duration: 2000});
     });
   }
 

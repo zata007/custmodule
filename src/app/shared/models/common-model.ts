@@ -394,9 +394,26 @@ export interface IAddressData {
   pincode: string;
   locality: string;
   landmark: string;
+  formattedAddress?: string;
+}
+
+export interface IReqAddressData {
+  addressId: string;
+  addrType: string;
+  addrLine1: string;
+  addrLine2: string;
+  city: string;
+  locality: string;
+  landmark: string;
+  state: string;
+  country: string;
+  pincode: string;
+  latitude: string;
+  longitude: string;
 }
 
 export interface IVehicleData {
+  _id?: string;
   vehicleId?: string;
   vehType: string;
   vehbrand: string;

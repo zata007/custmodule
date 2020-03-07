@@ -40,3 +40,8 @@ export const PAYMENT_STATUS = {
   INVALID: 'Invalid',
   ABANDONED: 'Abandoned'
 };
+
+export enum BottomSheetDismissMode {
+  Close,
+  DataUpdated
+}
