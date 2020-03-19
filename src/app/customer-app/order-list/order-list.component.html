@@ -10,7 +10,7 @@
             <div class="para bold order-id">Order Id: {{item.orderId}}</div>
             <div class="para">{{item.orderDateTime.split("T", 1)}}</div>
         </div>
-        <div *ngFor="let orderItem of item.orderData" class="helping"><p>{{orderItem.skuId ? orderItem.skuId.skuName.en : null}}</p></div>
+        <div *ngFor="let orderItem of item.orderData" class="helping" fxLayout="row"><p class="bold">{{orderItem.businessLocId.businessLocName}}:&nbsp;</p> <p>{{orderItem.skuId ? orderItem.skuId.skuName.en : null}}</p></div>
         <div class="para" fxLayout="row" fxLayout="row" fxLayoutAlign="space-between">
             <div class="bold">Type: {{item.orderType}}</div>
             <div>Total: ₹{{item.totalPrice}}</div>
@@ -19,7 +19,7 @@
     </ng-container>
 
     <ng-template #noHistory>
-      <div class="head4">You have not ordereRd anything yet</div>
+      <div class="head4">You have not ordered anything yet</div>
     </ng-template>
 
 
