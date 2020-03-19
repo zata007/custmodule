@@ -12,7 +12,11 @@
               <ng-template #nonVeg><img src="../../../assets/icons/non-veg.png" alt=""></ng-template>
             </div>
           </div>
-          <div class="restaurant para">{{resName}}</div>
+          <div class="restaurant para">{{item.skuCuisine}}</div>
+          <div class="restaurant rate" fxLayout="row" fxLayoutAlign="flex-start center">
+            <img src="../../../assets/icons/star.svg" alt="">
+            <p>{{item.skuRating}}</p>
+          </div>
           <div class="description para">{{item.skuDesc}}</div>
           <div fxLayout="row" fxLayoutAlign="space-between">
             <div class="price head4">₹{{ item.totalPrice }}</div>
