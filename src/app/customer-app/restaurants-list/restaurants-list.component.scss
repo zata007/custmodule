@@ -27,9 +27,10 @@
       }
       .details {
         width: 85%;
-        height: 120px;
+        min-height: 120px;
         border-radius: 5px;
         margin-left: -20%;
+        padding-top: 10px;
         padding-left: 23%;
         padding-right: 10px;
         .restaurant-name {
@@ -38,6 +39,9 @@
         }
         .restaurant {
           line-height: 1.21;
+        }
+        .distance {
+          font-size: 0.7em;
         }
         .other-info {
           width: 100%;

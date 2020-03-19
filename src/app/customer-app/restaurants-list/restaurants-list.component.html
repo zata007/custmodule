@@ -6,6 +6,7 @@
         <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
           <div class="head4 restaurant-name">{{item.displayName}}</div>
           <div class="restaurant para">{{item.locality}}</div>
+          <div class="distance">{{(item.distance).toFixed(2)}} kms</div>
           <br />
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="space-around center" class="other-info">
