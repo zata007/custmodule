@@ -41,9 +41,7 @@ export class MenuListComponent implements OnInit {
     this.orderService.removeFromCart(item);
   }
   addToCart(item: IMenuData) {
-    if(this.customerStateService.currentServiceSelected == ECustomerServiceType.TakeAway) {
-      this.orderService.addToCart({...item});
-    } else {
+    if(this.customerStateService.currentServiceSelected == ECustomerServiceType.OrderAhead) {
       if((this.cartCount>0 && this.orderService.getCartData()[0].apPsBusinessLocId == item.apPsBusinessLocId) || this.cartCount == 0) {
         this.orderService.addToCart({...item});
       } else {
@@ -55,6 +53,8 @@ export class MenuListComponent implements OnInit {
           }
         });
       }
+    } else {      
+      this.orderService.addToCart({...item});
     }
   }
 
