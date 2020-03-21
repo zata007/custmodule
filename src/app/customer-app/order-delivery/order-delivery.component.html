@@ -64,6 +64,14 @@
         [iconUrl]="'assets/icons/marker.gif'"
       >
       </agm-marker>
+
+      <agm-marker
+      *ngFor="let m of addressMarkers; let i = index"
+      (markerClick)="clickedMarker(m.label)"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [iconUrl]="m.markerUrl"
+    ></agm-marker>
     </agm-map>
   </div>
 </div>

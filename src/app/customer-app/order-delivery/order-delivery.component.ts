@@ -9,13 +9,15 @@ import { GeoLocationService } from 'src/app/shared/services/geo-location.service
 import { MatDialog } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
-import { IRequestGetRestaurantData, IResponseGetRestaurantData } from 'src/app/shared/models/common-model';
+import { IRequestGetRestaurantData, IResponseGetRestaurantData, IProfileData } from 'src/app/shared/models/common-model';
 import { DataService } from 'src/app/shared/services/data.service';
+import { ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 interface Marker {
   lat: number;
   lng: number;
   label?: string;
   draggable?: boolean;
+  markerUrl?: string;
 }
 
 @Component({
@@ -42,6 +44,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
   mapStyles = MAP_STYLES;
 
   markers: Marker[] = [];
+  addressMarkers: Marker[] = [];
   isSubmitRequestVisible: boolean;
   bounds: google.maps.LatLngBounds = null;
   map: google.maps.Map;
@@ -63,6 +66,19 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // TODO: Update logic if user is first time visitor then only we should show onboarding
+
+    const profileData = JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) as IProfileData;
+    profileData.indDetail.roles[0].indAddr.forEach(i => {
+      const data = {lat: i.locationLongLat.coordinates[0], lng: i.locationLongLat.coordinates[1], markerUrl: null };
+      if (i.addrType.toLowerCase() === 'residential') {
+        data.markerUrl = 'assets/icons/house.svg';
+      } else if (i.addrType.toLowerCase() === 'work') {
+        data.markerUrl = 'assets/icons/flat.svg';
+      } else {
+        data.markerUrl = 'assets/icons/house.svg';
+      }
+      this.addressMarkers.push(data);
+    });
 
     // Patch map data,
     // set google maps defaults
