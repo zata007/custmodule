@@ -55,6 +55,14 @@
         [iconUrl]="'assets/icons/marker.gif'"
       >
       </agm-marker>
+      <agm-marker
+        *ngFor="let m of addressMarkers; let i = index"
+        (markerClick)="clickedMarker(m.label)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [iconUrl]="m.markerUrl"
+      >
+      </agm-marker>
     </agm-map>
   </div>
 </div>
@@ -62,5 +70,3 @@
 <div class="swiper-parent-container">
   <button mat-raised-button color="primary" *ngIf="customerStateService.selectedLocation.from.lat" (click)="goToRestaurant()">Confirm Location</button>
 </div>
-
-
