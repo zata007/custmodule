@@ -1,10 +1,10 @@
-<div class="cross">
-  <button mat-icon-button aria-label="close" (click)="closePage()">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
 <ng-template id="bottom2" #requestSubmit>
-  <div class="head2 bold heading" style="margin-top: 20px; text-align: center;">Recommend a Restaurant</div>
+  <div fxlayout="row" fxLayoutAlign="space-between">
+    <div class="head2 bold heading" style="margin-top: 20px; text-align: center;">Recommend a Restaurant</div>
+    <button mat-icon-button aria-label="close" (click)="closePage()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <div fxLayout="column" fxLayoutAlign="space-between stretch">
     <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
       <mat-form-field appearance="standard" style="width: 100%;">
@@ -34,6 +34,11 @@
 </ng-template>
 <div>
   <ng-container class="bottom1" *ngIf="!isSubmitRequestVisible; else requestSubmit">
+    <div fxlayout="row" fxLayoutAlign="flex-end">
+      <button mat-icon-button aria-label="close" (click)="closePage()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
     <div fxLayout="column" fxLayoutAlign="space-between stretch" class="content-area" style="padding: 20px;">
       <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
         <div class="head4 bold">

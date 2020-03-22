@@ -29,6 +29,7 @@ import { CustomerStateService } from './customer-app/customer-state.service';
 import { createTranslateLoader } from './shared/models/common-model';
 import { LOCAL_STORAGE_FINGERPRINT } from './shared/constants/constants'
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { SuccessSnackbarComponent } from './shared/shared-components/success-snackbar/success-snackbar.component';
 
 
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
@@ -42,6 +43,7 @@ withCredentials: false,
     AppComponent,
     LandingPageComponent,
     PaymentComponent,
+    SuccessSnackbarComponent,
   ],
   imports: [
     MaterialModule,

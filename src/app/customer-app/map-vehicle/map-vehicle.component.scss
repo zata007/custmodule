@@ -57,8 +57,19 @@
 
 .swiper-parent-container {
   position: absolute;
-  bottom: 100px;
+  bottom: 0px;
   width: 100%;
+  .below-card {
+    background-color: #ffffff;
+    padding: 10px;
+    margin: 0px;
+    .title {
+      padding: 0px 0px 10px 0px;
+    }
+    .padding10 {
+      padding: 10px 0px;
+    }
+  }
 
   .no-pitstop {
     width: 100%;
@@ -82,7 +93,7 @@
     left: 50%;
     position: relative;
     transform: translateX(-50%);
-    margin-top: 20px;
+    margin-top: 0px;
     overflow: hidden;
   }
 }

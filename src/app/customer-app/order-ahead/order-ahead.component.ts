@@ -75,7 +75,7 @@ export class OrderAheadComponent implements OnInit {
 
     this.customerStateService.setCurrentPage('main');
     // set google maps defaults
-    this.zoom = 13;
+    this.zoom = 11.5;
 
     // create search FormControl
     this.searchControl = new FormControl();
