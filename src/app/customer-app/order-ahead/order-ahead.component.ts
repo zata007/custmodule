@@ -64,7 +64,7 @@ export class OrderAheadComponent implements OnInit {
     // Patch map data,
     const profileData = JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) as IProfileData;
     profileData.indDetail.roles[0].indAddr.forEach(i => {
-      const data = {lat: i.locationLongLat.coordinates[0], lng: i.locationLongLat.coordinates[1], markerUrl: null };
+      const data = {lat: i.locationLongLat.coordinates[1], lng: i.locationLongLat.coordinates[0], markerUrl: null };
       if (i.addrType.toLowerCase() === 'residential') {
         data.markerUrl = 'assets/icons/house.svg';
       } else if (i.addrType.toLowerCase() === 'work') {
