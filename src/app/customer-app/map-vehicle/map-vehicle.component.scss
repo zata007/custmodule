@@ -87,14 +87,9 @@
       margin: 0 auto;
     }
   }
-  button {
-    // width: 90%;
-    border: none;
-    left: 50%;
-    position: relative;
-    transform: translateX(-50%);
-    margin-top: 0px;
-    overflow: hidden;
+  .confirm-btn {
+    width: 90%;
+    margin: 0 auto;
   }
 }
 
