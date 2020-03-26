@@ -45,6 +45,7 @@ import { AddressListComponent } from './cart-view/address-list/address-list.comp
 import { VehicleListComponent } from './cart-view/vehicle-list/vehicle-list.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { EssentialsComponent } from './essentials/essentials.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     VehicleListComponent,
     OrderListComponent,
     EditProfileComponent,
+    EssentialsComponent,
   ],
   entryComponents: [
     BillDetailComponent,
