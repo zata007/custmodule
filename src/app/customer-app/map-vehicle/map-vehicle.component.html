@@ -1,4 +1,4 @@
-<div class="vehicle-location-container" fxLayout="column">
+<div *ngIf="!development" class="vehicle-location-container" fxLayout="column">
   <div class="input-area">
     <div class="search-element">
       <input class="from zat-input" placeholder="Origin" autocorrect="off" autocapitalize="off" spellcheck="off"
@@ -75,7 +75,7 @@
 </div>
 
 <!-- Swiper -->
-<div class="swiper-parent-container">
+<div *ngIf="!development" class="swiper-parent-container">
   <card-slider
     *ngIf="canShowPitstops"
     [data]="markers"
@@ -97,7 +97,13 @@
     </div>
     <button class="confirm-btn" fxLayout="column" fxLayoutAlign="center center" mat-flat-button color="primary" (click)="onRouteSelected($event)">Order</button>
   </div>
+</div>
 
+<div *ngIf="development">
+  <div class="dialog-container" fxLayout="column" fxLayoutAlign="center center">
+    <div class="head3">Hi, due to COVID19 our services are temporarilly suspended, however you can order essentials goods from your near by shops</div>
+    <button mat-raised-button color="primary" (click)="orderEssentials()">Order Essentials</button>
+  </div>
 </div>
 
 <!-- Swiper End -->

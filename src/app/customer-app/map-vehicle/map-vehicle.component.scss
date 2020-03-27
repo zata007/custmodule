@@ -178,3 +178,14 @@ input[type=search]::search-cancel-button {
   -webkit-appearance: searchfield-cancel-button;
   font-size: 1.5em;
 }
+
+.dialog-container {
+  padding: 20% 16px;
+  div.head3 {
+    text-align: justify;
+  }
+  button {
+      width: 80%;
+      margin-top: 15px;
+  }
+}

@@ -35,6 +35,7 @@ export class OrderAheadComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   locationFetched: boolean;
+  development: boolean = true;
 
   // TODO: Move this value to const file.
   mapStyles = MAP_STYLES;
@@ -358,5 +359,9 @@ export class OrderAheadComponent implements OnInit {
         this.router.navigate(['customer/pitstop-restaurant']);
       }
     });
+  }
+
+  orderEssentials() {
+    this.router.navigate(['customer/essentials']);
   }
 }

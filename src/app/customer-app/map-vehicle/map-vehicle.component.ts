@@ -15,8 +15,6 @@ import { ZATAAKSE_PREF_LANG, ECustomerServiceType } from '../../shared/constants
 import { IResponseLocationServed, IRequestGetRestaurantData, IResponseGetRestaurantData, Marker } from 'src/app/shared/models/common-model';
 import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 
-import { EssentialDialogComponent } from '../essentials/essential-dialog/essential-dialog.component'
-
 @Component({
   selector: 'app-map-vehicle',
   templateUrl: './map-vehicle.component.html',
@@ -38,6 +36,7 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   public searchControl: FormControl;
   public zoom: number;
   locationFetched: boolean;
+  development: boolean = true;
 
   // TODO: Move this value to const file.
   mapStyles = MAP_STYLES;
@@ -65,9 +64,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
-    this.dialog.open(EssentialDialogComponent);
-
     // Patch map data,
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
       if (hasCompleted) {
@@ -454,5 +450,9 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
     this.getPlaceName(event.coords.lat, event.coords.lng, (result) => {
       this.patchLocationToInput({ lat: toLocation.lat, lng: toLocation.lng }, this.searchElementRefTo, result);
     });
+  }
+
+  orderEssentials() {
+    this.router.navigate(['customer/essentials']);
   }
 }
