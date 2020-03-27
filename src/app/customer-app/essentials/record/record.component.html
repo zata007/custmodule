@@ -1,9 +1,22 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="flex-start center">
+  <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
+    <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+  </button>
+</mat-toolbar>
+
 <div class="recorder-container" fxLayout="column" fxLayoutAlign="center center">
-    <div class="head4 bold title">Say the product names with the quantities</div>
-    <div class="image {{this.clicked?'clicked':null}}" (click)="onMicClick()">
-        <img src="../../../../assets/icons/mic.svg" alt="">
-    </div>
-    <audio controls></audio>
+  <div class="head4 bold title">Say the product names with the quantities</div>
+  <div class="image {{this.clicked?'clicked':null}}" (click)="onMicClick()">
+    <img src="../../../../assets/icons/mic.svg" alt="">
+  </div>
+  <audio controls></audio>
+  <div class="head2 bold">OR</div>
+  <div class="image" (click)="fileInput.click()">
+    <img src="../../../../assets/icons/photograph.svg" alt="">
+  </div>
+  <input type='file' accept="image/*" #fileInput hidden>
+  <div class="button" fxLayout="column" fxLayoutAlign="center center">
     <button mat-flat-button color="primary">SUBMIT</button>
     <button mat-button color="primary">CANCEL</button>
+  </div>
 </div>

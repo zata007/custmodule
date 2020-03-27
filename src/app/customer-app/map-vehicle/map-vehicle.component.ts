@@ -15,6 +15,8 @@ import { ZATAAKSE_PREF_LANG, ECustomerServiceType } from '../../shared/constants
 import { IResponseLocationServed, IRequestGetRestaurantData, IResponseGetRestaurantData, Marker } from 'src/app/shared/models/common-model';
 import { RestaurantListComponent } from '../restaurant-list/restaurant-list.component';
 
+import { EssentialDialogComponent } from '../essentials/essential-dialog/essential-dialog.component'
+
 @Component({
   selector: 'app-map-vehicle',
   templateUrl: './map-vehicle.component.html',
@@ -63,6 +65,9 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+
+    this.dialog.open(EssentialDialogComponent);
+
     // Patch map data,
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
       if (hasCompleted) {

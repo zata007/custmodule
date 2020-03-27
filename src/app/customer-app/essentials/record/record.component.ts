@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-record',
@@ -8,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class RecordComponent implements OnInit {
   clicked: boolean = false;
 
-  constructor() { }
+  constructor(
+    private location: Location
+  ) { }
 
   ngOnInit() {
   }
 
   onMicClick() {
     this.clicked = this.clicked ? false: true;
+  }
+
+  onBackClick() {
+    this.location.back();
   }
 
 }

@@ -1,4 +1,6 @@
 .recorder-container {
+    padding: 0px 16px;
+
     .title {
         margin-top: 10px;
     }
@@ -19,9 +21,21 @@
     }
     audio {
         margin: 5px;
+        margin-bottom: 15px;
     }
-    button {
-        width: 90%;
-        margin: 5px
+    .button {
+        width: 100%;
+        position: absolute;
+        bottom: 10px;
+        right: 0px;
+        left: 0px;
+        button {
+            width: 90%;
+            margin: 5px
+        }
     }
+}
+
+mat-toolbar {
+    padding: 0px;
 }
