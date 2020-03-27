@@ -5,18 +5,27 @@
 </mat-toolbar>
 
 <div class="recorder-container" fxLayout="column" fxLayoutAlign="center center">
-  <div class="head4 bold title">Say the product names with the quantities</div>
-  <div class="image {{this.clicked?'clicked':null}}" (click)="onMicClick()">
-    <img src="../../../../assets/icons/mic.svg" alt="">
+  <div *ngIf="audioShown" class="audio"  fxLayout="column" fxLayoutAlign="center center">
+    <div class="head4 title">Say the product names with the quantities</div>
+    <div class="image {{this.clicked?'clicked':null}}" (click)="onMicClick()">
+      <img src="../../../../assets/icons/mic.svg" alt="">
+    </div>
+    <audio controls></audio>
   </div>
-  <audio controls></audio>
-  <div class="head2 bold">OR</div>
-  <div class="image" (click)="fileInput.click()">
-    <img src="../../../../assets/icons/photograph.svg" alt="">
-  </div>
-  <input type='file' accept="image/*" #fileInput hidden>
-  <div class="button" fxLayout="column" fxLayoutAlign="center center">
-    <button mat-flat-button color="primary">SUBMIT</button>
-    <button mat-button color="primary">CANCEL</button>
+  <div *ngIf="photoShown && audioShown" class="head2 bold">OR</div>
+  <div *ngIf="photoShown" class="photo" fxLayout="column" fxLayoutAlign="center center">
+    <div class="head4">Write the products name and quantities and take a photo</div>
+    <div *ngIf="image" class="image-taken" fxLayout="column" fxLayoutAlign="center center">
+      <img src="{{image}}" alt="">
+      <mat-icon color="primary" (click)="cancelPhoto()">cancel</mat-icon>
+    </div>
+    <div fxLayout="row" fxLayoutA="center center" class="image" (click)="fileInput.click()">
+      <img src="../../../../assets/icons/photograph.svg" alt="">
+    </div>
+    <input type='file' accept="image/*" (change)="onSelectFile($event)" #fileInput hidden>
+    <div class="button" fxLayout="column" fxLayoutAlign="center center">
+      <button mat-flat-button color="primary">SUBMIT</button>
+      <button mat-button color="primary">CANCEL</button>
+    </div>
   </div>
 </div>
