@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RecordComponent } from './record/record.component';
+import { MatDialog, MatBottomSheet, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-essentials',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EssentialsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
+  ) { }
 
   ngOnInit() {
+  }
+
+  onRecord() {
+    const record = this.bottomSheet.open(RecordComponent);
   }
 
 }

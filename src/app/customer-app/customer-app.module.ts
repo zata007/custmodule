@@ -46,6 +46,7 @@ import { VehicleListComponent } from './cart-view/vehicle-list/vehicle-list.comp
 import { OrderListComponent } from './order-list/order-list.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { EssentialsComponent } from './essentials/essentials.component';
+import { RecordComponent } from './essentials/record/record.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { EssentialsComponent } from './essentials/essentials.component';
     OrderListComponent,
     EditProfileComponent,
     EssentialsComponent,
+    RecordComponent,
   ],
   entryComponents: [
     BillDetailComponent,
@@ -90,7 +92,8 @@ import { EssentialsComponent } from './essentials/essentials.component';
     AddAddressComponent,
     AddVehicleComponent,
     AddressListComponent,
-    VehicleListComponent
+    VehicleListComponent,
+    RecordComponent
   ],
   imports: [
     CommonModule,

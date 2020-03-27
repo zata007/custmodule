@@ -1,0 +1,27 @@
+.recorder-container {
+    .title {
+        margin-top: 10px;
+    }
+    div {
+        margin-bottom: 10px;
+    }
+    .image {
+        height: 55px;
+        border-radius: 50%;
+        padding: 10px;
+        img {
+            height: 100%;
+            width: auto;
+        }
+    }
+    .clicked {
+        background-color: #0f8115;
+    }
+    audio {
+        margin: 5px;
+    }
+    button {
+        width: 90%;
+        margin: 5px
+    }
+}

@@ -171,7 +171,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
     });
   }
 
-  clickedMarker(label: string, index: number) {
+  clickedMarker(label: string, index?: number) {
     this.selectedLabel = label;
     this.selectedIndex = index;
   }
