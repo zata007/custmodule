@@ -7,9 +7,9 @@
 
 <div class="recorder-container" fxLayout="column" fxLayoutAlign="center center">
   <div *ngIf="!hasRecorded && !previewMode" class="audio"  fxLayout="column" fxLayoutAlign="center center">
-    <div class="head4 title">Say the product names with the quantities</div>
-    <div class="image {{hasRecordingStarted?'clicked':null}}" (click)="onMicClick()">
-      <img src="../../../../assets/icons/mic.svg" alt="">
+    <div class="head4 title">Say the product names with the quantities in 1 minute</div>
+    <div class="image clicked" (click)="onMicClick()" fxLayout="row" fxLayoutAlign="center center">
+      <img src="{{hasRecordingStarted ?'../../../../assets/icons/stop.svg':'../../../../assets/icons/play.svg'}}" alt="">
     </div>
   </div>
   <div *ngIf="!previewMode && !hasRecordingStarted" class="head2 bold">OR</div>

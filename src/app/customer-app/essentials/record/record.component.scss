@@ -9,15 +9,16 @@
     }
     .image {
         height: 55px;
+        width: 55px;
         border-radius: 50%;
         padding: 10px;
         img {
-            height: 100%;
+            height: 70%;
             width: auto;
         }
     }
     .clicked {
-        background-color: #0f8115;
+        background-color: #ff3823;
     }
     audio {
         margin: 5px;
