@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerStateService } from '../../customer-state.service';
 import { OrderService } from '../../order.service';
+import { ECustomerServiceType } from 'src/app/shared/constants/constants';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-record',
@@ -21,6 +22,7 @@ export class RecordComponent implements OnInit {
   audioUrl: string;
   businessId: any;
   businessName: any;
+  audioBlob: Blob;
 
 
   constructor(
@@ -33,6 +35,9 @@ export class RecordComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
+      if (!params.id) {
+        this.router.navigate(['customer']);
+      }
       this.businessId = params.id;
       this.businessName = params.name;
   });
@@ -59,8 +64,8 @@ export class RecordComponent implements OnInit {
         this.mediaRecorder.addEventListener('stop', () => {
           console.log('stopped done');
           stream.getTracks().forEach(t => t.stop());
-          const audioBlob = new Blob(audioChunks);
-          this.audioUrl = URL.createObjectURL(audioBlob);
+          this.audioBlob = new Blob(audioChunks);
+          this.audioUrl = URL.createObjectURL(this.audioBlob);
           this.recordedAudio = new Audio(this.audioUrl);
           // TODO: This recorded audio can be sent to backend
           this.hasRecorded = true;
@@ -77,9 +82,14 @@ export class RecordComponent implements OnInit {
   }
 
   onSaveClick() {
-    this.customerStateService.updateCurrentService('order-ahead');
-    //this.orderService.
-
+    this.customerStateService.updateCurrentService(ECustomerServiceType.Essential);
+    // Set data to be used in cart-view page
+    this.customerStateService.currentEssentialServiceData = {
+      displayName: this.businessName,
+      id: this.businessId,
+      file: this.hasRecorded ?  new Blob([this.audioBlob], { type: 'audio/wav' }) : this.selectedImage, // TODO: Attach file
+      isRecording: this.hasRecorded
+    };
     this.router.navigate(['customer/cart-view']);
   }
 

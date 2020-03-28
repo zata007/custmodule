@@ -20,7 +20,8 @@ import {
   IResponsePlaceOrder,
   IVehicleData,
   IProfileData,
-  IReqAddressData
+  IReqAddressData,
+  IRequestPlaceOrderForEssential
 } from '../models/common-model';
 import {
   Observable
@@ -255,6 +256,21 @@ export class DataService {
       },
     };
     return this.putMethod(url, options, data) as any;
+  }
+
+  placeOrderForEssential(data: IRequestPlaceOrderForEssential): Observable<any> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/placeAnOrder`;
+    const options = {
+      headers: {
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      }
+    };
+    const formData = new FormData();
+    formData.append('file', data.file);
+    formData.append('orderType', data.orderType);
+    formData.append('businessLocId', data.businessLocId);
+    formData.append('paymentMode', data.paymentMode);
+    return this.putMethod(url, options, formData) as any;
   }
 
   updateProfile(data: IUpdateProfiledata): Observable<IProfileData> {

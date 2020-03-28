@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatDialog, MatBottomSheet, MatSnackBar } from '@angular/material';
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
-import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData, IResponseAddCart, ICartViewData } from 'src/app/shared/models/common-model';
+import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData, IResponseAddCart, ICartViewData, IRequestPlaceOrderForEssential, IEssentialProductData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA, PAYMENT_STATUS } from 'src/app/shared/constants/constants';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -46,6 +46,8 @@ export class CartViewComponent implements OnInit {
   cartData: ICartViewData;
   windowChildIntervalRef = null;
   windowObjectReference: Window = null;
+  currentEssentialServiceData: IEssentialProductData;
+  essentialPaymentMode = 'Cash On Delivery';
 
   constructor(
     private location: Location,
@@ -65,7 +67,7 @@ export class CartViewComponent implements OnInit {
     });
     this.orderedItems = this.orderService.getCartData();
     console.log(this.orderedItems);
-    if (!this.orderedItems.length) {
+    if (!this.orderedItems.length && this.customerStateService.currentServiceSelected !== ECustomerServiceType.Essential) {
       this.router.navigate(['customer']);
     }
 
@@ -116,6 +118,9 @@ export class CartViewComponent implements OnInit {
           this.deliveryLocation = this.customerStateService.currentDeliveryLocation;
         }
         break;
+      case ECustomerServiceType.Essential:
+        this.currentEssentialServiceData = this.customerStateService.currentEssentialServiceData;
+        break;
       default:
         this.currentRestaurantData = this.customerStateService.currentRestaurantData;
         break;
@@ -149,7 +154,6 @@ export class CartViewComponent implements OnInit {
     if (this.hasAuthToken) {
       // TODO place order.
       const data: IRequestPlaceOrder = {
-
         orderData: this.orderService.cart.map(i => {
           return  {
             businessLocId: i.apPsBusinessLocId,
@@ -173,6 +177,7 @@ export class CartViewComponent implements OnInit {
         case ECustomerServiceType.Delivery:
           data.addressId = this.selectedLocationForDelivery['_id'];
           break;
+        case ECustomerServiceType.Essential:
         case ECustomerServiceType.OrderAhead:
           // TODO: Refactor
           this.time = this.form.value['time'].split(":");
@@ -181,59 +186,88 @@ export class CartViewComponent implements OnInit {
           break;
       }
 
-      this.dataService.placeOrder(data).subscribe(res => {
-        this.commonService.paymentInformation = res;
-        const localStorageData = {};
-        switch (this.customerStateService.currentServiceSelected) {
-          case ECustomerServiceType.TakeAway:
-            // tslint:disable-next-line: no-string-literal
-            localStorageData['data'] = {
-              locationData: this.customerStateService.selectedLocation,
-              pitstopData: this.customerStateService.getCurrentPitstopData()
-            };
-            break;
-          case ECustomerServiceType.Delivery:
-            // tslint:disable-next-line: no-string-literal
-            localStorageData['data'] = {
-              locationData: this.customerStateService.selectedLocation,
-              address:`${this.selectedLocationForDelivery.addrLine1 + + this.selectedLocationForDelivery.addrLine2 + + this.selectedLocationForDelivery.locality}`, // TODO: pass customer's address
-            };
-            break;
-            case ECustomerServiceType.OrderAhead:
+      if (this.customerStateService.currentServiceSelected !== ECustomerServiceType.Essential) {
+        this.dataService.placeOrder(data).subscribe(res => {
+          this.commonService.paymentInformation = res;
+          const localStorageData = {};
+          switch (this.customerStateService.currentServiceSelected) {
+            case ECustomerServiceType.TakeAway:
               // tslint:disable-next-line: no-string-literal
               localStorageData['data'] = {
-                name: this.orderedItems[0].skuCuisine,
-                time: this.orderAheadtime
+                locationData: this.customerStateService.selectedLocation,
+                pitstopData: this.customerStateService.getCurrentPitstopData()
               };
               break;
+            case ECustomerServiceType.Delivery:
+              // tslint:disable-next-line: no-string-literal
+              localStorageData['data'] = {
+                locationData: this.customerStateService.selectedLocation,
+                address:`${this.selectedLocationForDelivery.addrLine1 + + this.selectedLocationForDelivery.addrLine2 + + this.selectedLocationForDelivery.locality}`, // TODO: pass customer's address
+              };
+              break;
+              case ECustomerServiceType.OrderAhead:
+                // tslint:disable-next-line: no-string-literal
+                localStorageData['data'] = {
+                  name: this.orderedItems[0].skuCuisine,
+                  time: this.orderAheadtime
+                };
+                break;
 
-          default:
-            break;
-        }
-        // tslint:disable-next-line: no-string-literal
-        localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
-        localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
-        localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
-        // window features
-        if (!this.windowObjectReference) {
-          this.handlePaymentWindowLogic(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
-        } else {
-          this.windowObjectReference.close();
-          this.handlePaymentWindowLogic(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
-        }
-        // TODO: Add loader
+            default:
+              break;
+          }
+          // tslint:disable-next-line: no-string-literal
+          localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
+          localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
+          localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
+          // window features
+          if (!this.windowObjectReference) {
+            this.handlePaymentWindowLogic(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
+          } else {
+            this.windowObjectReference.close();
+            this.handlePaymentWindowLogic(`${res.data.billdeskUrl}?msg=${res.data.msg}`);
+          }
+          // TODO: Add loader
 
-      }, (errorPlaceOrder) => {
-        if (errorPlaceOrder.statusCode !== 400) {
+        }, (errorPlaceOrder) => {
+          if (errorPlaceOrder.statusCode !== 400) {
 
-          this.hasAuthToken = false;
-          localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
-          console.log(errorPlaceOrder);
-          this.router.navigate(['login-signup']);
-        }
-        this.snackbar.open(errorPlaceOrder.error.message);
+            this.hasAuthToken = false;
+            localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
+            console.log(errorPlaceOrder);
+            this.router.navigate(['login-signup']);
+          }
+          this.snackbar.open(errorPlaceOrder.error.message);
 
-      });
+        });
+      } else{
+        const essentialData: IRequestPlaceOrderForEssential = {
+          businessLocId: this.currentEssentialServiceData.id,
+          file: this.currentEssentialServiceData.file,
+          orderType: 'order-ahead',
+          paymentMode: this.essentialPaymentMode,
+        };
+        this.dataService.placeOrderForEssential(essentialData).subscribe(res => {
+          this.commonService.paymentInformation = res;
+          const localStorageData = {};
+          // tslint:disable-next-line: no-string-literal
+          localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
+          localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
+          localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
+          this.customerStateService.setOrderId(res.data.orderId);
+          this.router.navigate(['/customer/order-detail']);
+        }, (errorPlaceOrder) => {
+          if (errorPlaceOrder.statusCode !== 400) {
+            this.hasAuthToken = false;
+           // localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
+            console.log(errorPlaceOrder);
+            //this.router.navigate(['login-signup']);
+          }
+          this.snackbar.open(errorPlaceOrder.error.message);
+        });
+      }
+
+
 
     } else {
       // Goto login-signup
