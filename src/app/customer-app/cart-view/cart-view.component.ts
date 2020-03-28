@@ -178,6 +178,7 @@ export class CartViewComponent implements OnInit {
           data.addressId = this.selectedLocationForDelivery['_id'];
           break;
         case ECustomerServiceType.Essential:
+          break;
         case ECustomerServiceType.OrderAhead:
           // TODO: Refactor
           this.time = this.form.value['time'].split(":");
