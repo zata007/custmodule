@@ -3,7 +3,7 @@ import { CustomerStateService } from '../../customer-state.service';
 import { CustomerService } from '../../customer.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { ZATAAKSE_JWT_TOKEN } from '../../../shared/constants/constants'
+import { ZATAAKSE_JWT_TOKEN, ECustomerServiceType } from '../../../shared/constants/constants'
 
 
 @Component({
@@ -32,7 +32,12 @@ export class OrderDetailComponent implements OnInit {
   }
 
   onBackClick() {
-    this.location.back();
+    if (this.customerStateservice.currentServiceSelected === ECustomerServiceType.Essential) {
+      this.router.navigate(['customer']);
+    } else{
+      this.location.back();
+    }
+
   }
 
   goToFile() {
