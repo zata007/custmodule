@@ -71,7 +71,9 @@ export class RecordComponent implements OnInit {
         }, {once: true});
       });
     }
-
+    setTimeout(() => {
+      this.mediaRecorder.stop();
+    }, 61000);
   }
 
   onSaveClick() {
