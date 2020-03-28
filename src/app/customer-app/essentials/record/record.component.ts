@@ -61,6 +61,12 @@ export class RecordComponent implements OnInit {
           audioChunks.push(event.data);
         });
 
+        const recorderTimeoutRef =  setTimeout(() => {
+          if (this.mediaRecorder.state !== 'inactive') {
+            this.mediaRecorder.stop();
+          }
+        }, 61000);
+
         this.mediaRecorder.addEventListener('stop', () => {
           console.log('stopped done');
           stream.getTracks().forEach(t => t.stop());
@@ -76,9 +82,7 @@ export class RecordComponent implements OnInit {
         }, {once: true});
       });
     }
-    setTimeout(() => {
-      this.mediaRecorder.stop();
-    }, 61000);
+
   }
 
   onSaveClick() {
