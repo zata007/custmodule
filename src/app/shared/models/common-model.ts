@@ -293,6 +293,13 @@ export interface IRequestPlaceOrder {
   vehicleId?: string;
   totalPrice: number;
 }
+export interface IRequestPlaceOrderForEssential {
+  orderType: string;
+  businessLocId: string;
+  file: File;
+  time?: number;
+  paymentMode: string;
+}
 
 export interface IResponsePlaceOrder {
   message: string;
@@ -564,3 +571,10 @@ export interface IResponseAddCart {
 //   "orderDateTime": "2020-02-05T08:08:30.242Z",
 //   "totalPrice": 150
 // }
+
+export interface IEssentialProductData {
+  displayName: string;
+  isRecording: boolean;
+  file: any;
+  id: string;
+}

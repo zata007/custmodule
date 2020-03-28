@@ -24,6 +24,7 @@ export enum ECustomerServiceType {
   TakeAway = 'take-away',
   Delivery = 'delivery',
   OrderAhead = 'order-ahead',
+  Essential = 'essential'
 }
 
 export enum EListPageViewType {
