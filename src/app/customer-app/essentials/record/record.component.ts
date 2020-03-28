@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerStateService } from '../../customer-state.service';
+import { OrderService } from '../../order.service';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-record',
@@ -16,13 +19,24 @@ export class RecordComponent implements OnInit {
   hasRecordingStarted = false;
   recordedAudio: HTMLAudioElement;
   audioUrl: string;
+  businessId: any;
+  businessName: any;
 
 
   constructor(
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute,
+    private customerStateService: CustomerStateService,
+    private router: Router,
+    private orderService: OrderService
   ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.businessId = params.id;
+      this.businessName = params.name;
+  });
+
   }
 
   onMicClick() {
@@ -58,6 +72,13 @@ export class RecordComponent implements OnInit {
       });
     }
 
+  }
+
+  onSaveClick() {
+    this.customerStateService.updateCurrentService('order-ahead');
+    //this.orderService.
+
+    this.router.navigate(['customer/cart-view']);
   }
 
   onRecordingClear() {

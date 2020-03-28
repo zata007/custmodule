@@ -32,7 +32,7 @@
     <agm-map
         [latitude]="lat"
         [longitude]="lng"
-        [scrollwheel]="true" 
+        [scrollwheel]="true"
         [zoomControl]="false"
         [streetViewControl]="false"
         (mapReady)="mapReady($event)"
@@ -51,11 +51,14 @@
 
       <agm-marker
         *ngFor="let m of markers; let i = index"
-        (markerClick)="clickedMarker(m.label)"
+        (markerClick)="clickedEssentialMarker(m.id, infowindow)"
         [latitude]="m.lat"
         [longitude]="m.lng"
         [markerDraggable]="m.draggable"
         [iconUrl]="'assets/icons/marker.gif'">
+        <agm-info-window #infowindow  [disableAutoPan]="false">
+          <strong style="cursor: pointer;" (click)="clickedOnEssentialWindow(m)">{{m.name}}</strong>
+        </agm-info-window>
       </agm-marker>
       <agm-marker
         *ngFor="let m of addressMarkers; let i = index"
