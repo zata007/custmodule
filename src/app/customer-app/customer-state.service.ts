@@ -47,6 +47,7 @@ export class CustomerStateService {
   locationSelectionCompleted$ = new Subject<boolean>();
   directionResults$ = this.socket.fromEvent('getDirectionsResult');
   pitstopOnEdge$ = this.socket.fromEvent<{isLocationOnEdge: boolean, pitstop: number[], pitstopId: string}>('checkLocationOnEdgeResult');
+  orderId: string;
 
   initState() {
     if (this.hasLocationData()) {
@@ -198,5 +199,13 @@ export class CustomerStateService {
       this.selectedLocation.from.lng &&
       this.selectedLocation.to.lng
     );
+  }
+
+  setOrderId(id: string) {
+    this.orderId = id;
+  }
+
+  getOrderId() {
+    return this.orderId;
   }
 }

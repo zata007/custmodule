@@ -1,4 +1,4 @@
-<div *ngIf="!development" class="vehicle-location-container" fxLayout="column">
+<!-- <div *ngIf="!development" class="vehicle-location-container" fxLayout="column">
   <div class="input-area">
     <div class="search-element">
       <input class="from zat-input" placeholder="Origin" autocorrect="off" autocapitalize="off" spellcheck="off"
@@ -42,8 +42,8 @@
           </agm-polyline-point>
         </agm-polyline>
 
-        <!-- <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
-      </ng-container>
+         <agm-direction [origin]="selectedPath.from" [travelMode]="'DRIVING'" [destination]="selectedPath.to"></agm-direction> -->
+      <!--</ng-container>
       <agm-marker
         *ngIf="customerStateService.selectedLocation.from.lat"
         [latitude]="customerStateService.selectedLocation.from.lat"
@@ -74,7 +74,6 @@
   </div>
 </div>
 
-<!-- Swiper -->
 <div *ngIf="!development" class="swiper-parent-container">
   <card-slider
     *ngIf="canShowPitstops"
@@ -97,7 +96,7 @@
     </div>
     <button class="confirm-btn" fxLayout="column" fxLayoutAlign="center center" mat-flat-button color="primary" (click)="onRouteSelected($event)">Order</button>
   </div>
-</div>
+</div> -->
 
 <div *ngIf="development">
   <div class="dialog-container" fxLayout="column" fxLayoutAlign="center center">
@@ -107,4 +106,4 @@
 </div>
 
 <!-- Swiper End -->
-<div class="overlay"></div>
+<!-- <div class="overlay"></div> -->

@@ -10,10 +10,11 @@ import { GeoLocationService } from 'src/app/shared/services/geo-location.service
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
-import { IRequestGetRestaurantData, IResponseGetRestaurantData, IProfileData } from 'src/app/shared/models/common-model';
+import { IRequestGetRestaurantData, IResponseGetRestaurantData, IProfileData, IResponsePlatformParams, IResponseLocationServed } from 'src/app/shared/models/common-model';
 import { DataService } from 'src/app/shared/services/data.service';
-import { ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
-import { RecordComponent } from './record/record.component';
+import { ZATAAKSE_PREF_LANG } from 'src/app/shared/constants/constants';
+import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
+
 interface Marker {
   lat: number;
   lng: number;
@@ -38,6 +39,8 @@ export class EssentialsComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   locationFetched: boolean;
+  latitude: number;
+  longitude: number
 
   // TODO: Move this value to const file.
   mapStyles = MAP_STYLES;
@@ -67,18 +70,56 @@ export class EssentialsComponent implements OnInit {
 
   ngOnInit() {
     // Patch map data,
-    const profileData = JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) as IProfileData;
-    profileData.indDetail.roles[0].indAddr.forEach(i => {
-      const data = {lat: i.locationLongLat.coordinates[1], lng: i.locationLongLat.coordinates[0], markerUrl: null };
-      if (i.addrType.toLowerCase() === 'residential') {
-        data.markerUrl = 'assets/icons/house.svg';
-      } else if (i.addrType.toLowerCase() === 'work') {
-        data.markerUrl = 'assets/icons/flat.svg';
-      } else {
-        data.markerUrl = 'assets/icons/house.svg';
-      }
-      this.addressMarkers.push(data);
-    });
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          this.commonService.setUserLocation(latitude, longitude);
+          // Get Platform params
+          // TODO: GET /params/getPlatformParams
+          this.dataService.getPlatformParams({
+              ...this.commonService.getRequestEssentialParams()
+            }).subscribe((res: IResponsePlatformParams) => {
+              // TODO: Save Params
+              this.commonService.setPlatformParams(res.data);
+              console.log(res);
+            });
+          // Get current location's restaurant info.
+          this.customerStateService.setFromLocation({ lat: latitude, lng: longitude }, true);
+          this.dataService.checkZataakseServiceAvailable({
+        fingerprint: this.commonService.fingerPrint,
+        lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
+        latitude,
+        longitude
+      })
+      .subscribe((res: IResponseLocationServed) => {
+        this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
+        if (res.data && res.data.isLocationServed) {
+            // TODO: DO Nothing
+          } else {
+            this.bottomSheet.open(NotServicebleComponent, {
+              data: {
+                location: this.searchElementRefFrom.nativeElement.value,
+                name: "shop"
+              }
+            });
+          }
+        },
+        err => {
+          // TODO: Handle Error.
+        }
+      );
+
+        },
+        error => {
+          // User blocked location
+          // LocationPopupComponent
+          console.log(error);
+        }
+      );
+    }
+    
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
       if (hasCompleted) {
         // TODO: DO work once location completed.

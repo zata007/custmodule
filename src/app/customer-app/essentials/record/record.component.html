@@ -30,4 +30,5 @@
     <button mat-flat-button color="primary">SUBMIT</button>
     <button mat-button color="primary" (click)="onCancelClick()">CANCEL</button>
   </div>
+  <div *ngIf="uploadedImg || hasRecorded" class="head3 bold submit-text">Submit or Cancel for new entry</div>
 </div>

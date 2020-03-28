@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router'
 import { CustomerService } from '../customer.service';
 import { CustomerStateService } from '../customer-state.service';
 import { ZATAAKSE_JWT_TOKEN } from '../../shared/constants/constants'
@@ -16,6 +17,7 @@ export class OrderListComponent implements OnInit {
     private customerService: CustomerService,
     private location: Location,
     public customerStateService: CustomerStateService,
+    private router: Router,
   ){}
 
   ngOnInit() {
@@ -28,6 +30,11 @@ export class OrderListComponent implements OnInit {
   onBackClick() {
     this.customerStateService.setCurrentPage('main');
     this.location.back();
+  }
+
+  goOrderDetail(id) {
+    this.customerStateService.setOrderId(id);
+    this.router.navigate(['/customer/order-detail'])
   }
 
 }

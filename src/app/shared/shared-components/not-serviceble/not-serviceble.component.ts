@@ -14,6 +14,7 @@ export class NotServicebleComponent implements OnInit {
   isSubmitRequestVisible = false;
   location = '';
   mailText = '';
+  name = '';
   restaurantData = {
     name: '',
     contact: '',
@@ -28,6 +29,7 @@ export class NotServicebleComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {
     this.location = data.location;
+    this.name = data.name
   }
 
   ngOnInit() {}

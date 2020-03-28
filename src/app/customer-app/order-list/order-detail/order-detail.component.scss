@@ -1,0 +1,15 @@
+.order-detail-container {
+    padding: 10px 16px 20px;
+    overflow-y: scroll;
+    height: 100%;
+    mat-divider {
+        margin: 10px 0px;
+    }
+    .head3 {
+        margin: 0px 0px 15px;
+    }
+}
+
+mat-toolbar {
+    padding: 0px;
+}

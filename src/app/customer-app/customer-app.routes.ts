@@ -15,7 +15,8 @@ import { AfterPaymentComponent } from './after-payment/after-payment.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { EssentialsComponent } from './essentials/essentials.component';
-import { RecordComponent } from './essentials/record/record.component'
+import { RecordComponent } from './essentials/record/record.component';
+import { OrderDetailComponent } from './order-list/order-detail/order-detail.component'
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
@@ -27,6 +28,7 @@ export const CustomerAppRoutes: Routes = [
   { path: 'profile/edit', component: EditProfileComponent},
   { path: 'essentials', component: EssentialsComponent},
   { path: 'essentials/record', component: RecordComponent},
+  { path: 'order-detail', component: OrderDetailComponent},
   {
     path: '',
     component: CustomerLayoutComponent,
