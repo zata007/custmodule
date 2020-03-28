@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone, TemplateRef } from '@
 import { FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import { MapsAPILoader } from '@agm/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
@@ -23,6 +23,14 @@ interface Marker {
   markerUrl?: string;
 }
 
+interface EssentialMarker {
+  lat: number;
+  lng: number;
+  name: string;
+  draggable?: boolean;
+  id: string;
+}
+
 @Component({
   selector: 'app-essentials',
   templateUrl: './essentials.component.html',
@@ -34,6 +42,7 @@ export class EssentialsComponent implements OnInit {
   @ViewChild('requestSubmit', {static: false}) requestSubmit: TemplateRef<any>;
   // initial center position for the map
   selectedLabel = 'A';
+  selectedEssentialStore = null;
 
 
   public searchControl: FormControl;
@@ -45,7 +54,7 @@ export class EssentialsComponent implements OnInit {
   // TODO: Move this value to const file.
   mapStyles = MAP_STYLES;
 
-  markers: Marker[] = [];
+  markers: EssentialMarker[] = [];
   addressMarkers: Marker[] = [];
   isSubmitRequestVisible: boolean;
   bounds: google.maps.LatLngBounds = null;
@@ -53,6 +62,7 @@ export class EssentialsComponent implements OnInit {
   lng: number;
   lat: number;
   curLocResDataSubscription: any;
+  previousInfoWindow: any;
 
   constructor(
     private location: Location,
@@ -144,10 +154,13 @@ export class EssentialsComponent implements OnInit {
 
     this.curLocResDataSubscription =  this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
       this.markers = [];
+      console.log('Esssential', resData);
       resData.filter(i => i.blOrderAhead).forEach((i) => {
-        const cardLocation = {
+        const cardLocation: EssentialMarker = {
           lat: i.businessLocationCoord[1],
           lng: i.businessLocationCoord[0],
+          id: i._id,
+          name: i.displayName,
         };
         this.markers.push(cardLocation);
       });
@@ -226,6 +239,25 @@ export class EssentialsComponent implements OnInit {
 
   clickedMarker(label: string) {
     this.selectedLabel = label;
+  }
+
+  clickedOnEssentialWindow(data: EssentialMarker) {
+    console.log(data);
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+          id: data.id,
+          name: data.name
+      }
+  };
+    this.router.navigate(['customer/essentials/record'], navigationExtras);
+  }
+
+  clickedEssentialMarker(id: string, infowindow: any) {
+    this.selectedEssentialStore = id;
+    if (this.previousInfoWindow) {
+      this.previousInfoWindow.close();
+  }
+    this.previousInfoWindow = infowindow;
   }
 
   onSlideChange(value: Marker) {

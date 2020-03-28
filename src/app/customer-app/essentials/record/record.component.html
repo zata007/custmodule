@@ -2,6 +2,7 @@
   <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
     <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
   </button>
+  <div>{{businessName}}</div>
 </mat-toolbar>
 
 <div class="recorder-container" fxLayout="column" fxLayoutAlign="center center">
@@ -27,7 +28,7 @@
       <img src="{{uploadedImg}}" alt="">
       <mat-icon color="primary" (click)="cancelPhoto()">cancel</mat-icon>
     </div>
-    <button mat-flat-button color="primary">SUBMIT</button>
+    <button mat-flat-button color="primary" (click)="onSaveClick()">SUBMIT</button>
     <button mat-button color="primary" (click)="onCancelClick()">CANCEL</button>
   </div>
   <div *ngIf="uploadedImg || hasRecorded" class="head3 bold submit-text">Submit or Cancel for new entry</div>

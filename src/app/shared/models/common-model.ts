@@ -177,6 +177,7 @@ export interface IBusinessLocData {
   businessLocationCoord: Array < number > ;
   distance: number;
   coDoingBusinessAs: string;
+  displayName: string;
 }
 
 export interface IResponseLocationServed {
