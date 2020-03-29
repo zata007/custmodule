@@ -42,7 +42,7 @@
     .address-box {
       margin: 5px 0;
       width: 100%;
-      padding: 10px 10px 0px 10px;
+      padding: 10px 10px 10px 10px;
       position: relative;
       border-radius: 4px;
       .mat-divider {
@@ -110,6 +110,18 @@
           color: #ffffff;
           margin-right: -16px;
         }
+      }
+    }
+  }
+  .essential-service {
+    margin-top: 15px;
+    .image {
+      width: 50%;
+      height: auto;
+      margin-top: 20px;
+      img {
+        width: 100%;
+        height: auto;
       }
     }
   }

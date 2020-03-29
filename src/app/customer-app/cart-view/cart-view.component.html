@@ -8,6 +8,14 @@
     <app-cart-item *ngFor="let item of orderedItems" [data]="item" (addUnit)="onAddUnit(item)"
       (removeUnit)="onRemoveUnit(item)" (removeItem)="removeItemFromCart(item)"></app-cart-item>
   </div>
+  <div *ngIf="customerStateService.currentServiceSelected == ECustomerServiceType.Essential" class="essential-service" fxLayout="column" fxLayoutAlign="center center">
+    <div class="head3 bold">
+      Ordering Essential Goods
+    </div>
+    <div class="image">
+      <img src="../../../assets/icons/groceries.svg" alt="">
+    </div>
+  </div>
 
   <!-- <div class="note">
     <div class="note-head" fxLayout="row" fxLayoutAlign="space-between">
@@ -105,13 +113,14 @@
       <div *ngSwitchCase="ECustomerServiceType.Essential">
         <div class="address">
           <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
-            <div class="para bold">Order At</div>
+            <div class="head4">Order At</div>
+            <div class="head4 bold">{{currentEssentialServiceData.displayName}}</div>
             <!-- <div mat-button color="primary" class="head2 primary-color">Add New</div> -->
           </div>
           <div *ngIf="currentEssentialServiceData" class="address-box mat-elevation-z4" fxLayout="row"
             fxLayoutAlign="space-between center">
             <div class="address-detail" fxLayout="column">
-              <div class="para bold">{{currentEssentialServiceData.displayName}}</div>
+              <div class="para bold">Select payment Mode</div>
               <!-- <div fxLayout="column" class="time" fxLayoutAling="flex-end">
                 <div class="para">Tentative Time</div>
                 <div [formGroup]="form"><input type="time" formControlName="time"></div>
@@ -145,9 +154,12 @@
       <div class="head4">Total payable amount</div>
       <div class="head2">₹{{cartData.paybleAmount}}</div>
     </div> -->
-    <div fxLayout="row" class="order-button">
-      <div *ngIf="customerStateService.currentServiceSelected !== ECustomerServiceType.Essential" class="para bold" (click)="openBillDetail()">Total Payble Amount<br/><p class="price">₹{{cartData.paybleAmount}}</p><p>(Bill details)</p></div>
+    <div *ngIf="customerStateService.currentServiceSelected !== ECustomerServiceType.Essential" fxLayout="row" class="order-button">
+      <div class="para bold" (click)="openBillDetail()">Total Payble Amount<br/><p class="price">₹{{cartData.paybleAmount}}</p><p>(Bill details)</p></div>
       <div class="head4 bold" style="user-select: none;" (click)="onSubmitClick()" fxLayout="row" fxLayoutAlign="center center">{{this.hasAuthToken ?'PLACE ORDER':'Login/Signup And Continue'}}</div>
+    </div>
+    <div *ngIf="customerStateService.currentServiceSelected == ECustomerServiceType.Essential" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" (click)="onSubmitClick()" style="width: 90%">Place Order</button>
     </div>
   </div>
 </div>

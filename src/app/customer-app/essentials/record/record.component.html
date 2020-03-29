@@ -15,8 +15,8 @@
   <div *ngIf="!previewMode && !hasRecordingStarted" class="head2 bold">OR</div>
   <div *ngIf="!previewMode && !hasRecordingStarted" class="photo" fxLayout="column" fxLayoutAlign="center center">
     <div class="head4">Write the products name and quantities and take a photo</div>
-    <div fxLayout="row" fxLayoutA="center center" class="image" (click)="fileInput.click()">
-      <img src="../../../../assets/icons/photograph.svg" alt="">
+    <div fxLayout="row" fxLayoutAlign="center center" class="image clicked" (click)="fileInput.click()">
+      <img src="../../../../assets/icons/photo.svg" alt="">
     </div>
     <input type='file' accept="image/*" (change)="onSelectFile($event)" #fileInput hidden>
   </div>
