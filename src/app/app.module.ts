@@ -9,7 +9,6 @@ import { environment } from '../environments/environment';
 import { SharedComponentsModule } from './shared/shared-components/shared-components.module';
 import { MaterialModule } from './shared/material-module/material.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,47 +17,33 @@ import { reducers, metaReducers } from './reducers';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AgmCoreModule } from '@agm/core';
 import { JoyrideModule } from 'ngx-joyride';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ConnectionServiceModule } from 'ng-connection-service';
 import { SharedModule } from './shared/shared-components/shared.module';
 
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
-
-import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { NgrxRouterStoreModule } from './store/reducers/router/ngrx-router.module';
 import { PaymentComponent } from './payment/payment.component';
 import { CustomerStateService } from './customer-app/customer-state.service';
+import { createTranslateLoader } from './shared/models/common-model';
+import { LOCAL_STORAGE_FINGERPRINT } from './shared/constants/constants'
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { SuccessSnackbarComponent } from './shared/shared-components/success-snackbar/success-snackbar.component';
 
-
-// required for AOT compilation
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
 
 const socketConfig: SocketIoConfig = { url: environment.SOCKET_API_Endpoint, options: { path: '/user/socket',
 withCredentials: false,
- query: { authorization: 'wehgfiewrfgierg'} } };
-
-export function provideConfig() {
-  return new AuthServiceConfig([
-    {
-      id: GoogleLoginProvider.PROVIDER_ID,
-      provider: new GoogleLoginProvider(environment.sso.google),
-    },
-    {
-      id: FacebookLoginProvider.PROVIDER_ID,
-      provider: new FacebookLoginProvider(environment.sso.fb),
-    },
-  ]);
-}
+  query: { authorization: 'gdfeduegdgdugd3gdugduygudgeudguedguegduegd'}
+ //query: { authorization: localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)}
+} };
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     PaymentComponent,
+    SuccessSnackbarComponent,
   ],
   imports: [
     MaterialModule,
@@ -67,9 +52,7 @@ export function provideConfig() {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxSkeletonLoaderModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    SocialLoginModule,
     DeviceDetectorModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -95,11 +78,8 @@ export function provideConfig() {
     SharedModule
   ],
   providers: [
-    {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig,
-    },
-    CustomerStateService
+    CustomerStateService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1200}}
   ],
   bootstrap: [AppComponent]
 })

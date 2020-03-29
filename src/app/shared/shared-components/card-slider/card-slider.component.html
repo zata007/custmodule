@@ -4,7 +4,7 @@
       <div *ngFor="let item of data" class="swiper-slide" (click)="onItemClick(item)">
         <div fxLayout="column" class="pitstop-container">
           <div class="image">
-            <img src="../../../../assets/img/core/restaurant.jpg" alt="">
+            <img src="{{item.image ? item.image : '../../../../assets/img/core/restaurant.jpg'}}" alt="">
           </div>
           <div fxLayout="column"fxLayoutAlign="start" class="info">
             <div class="name head5 bold">{{item.pitstop}}</div>

@@ -27,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatTooltipModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatStepperModule
   ],
   exports: [
     MatButtonModule,
@@ -90,6 +92,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSnackBarModule,
     MatTabsModule,
     MatSlideToggleModule,
+    MatStepperModule
   ],
   declarations: [],
 })

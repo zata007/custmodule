@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from '../shared/services/cookie.service';
 import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../shared/constants/constants';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CustomerService {
   locationData = {
     latitude: 0,
@@ -95,6 +95,30 @@ export class CustomerService {
       'Content-Type': 'application/json',
       Accept: 'application/json',
       authorization: token.toString()
+    };
+    return this.httpClient.get(getUrl, { headers });
+  }
+
+  getTransactionHistory(token: string, pageNum:string, orderId?: string) {
+    const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getTransactionHistory`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      authorization: token.toString()
+    };
+    const params = orderId ? new HttpParams().set('pageNum', pageNum).set('orderId', orderId) : new HttpParams().set('pageNum', pageNum);
+    return this.httpClient.get(getUrl, { headers, params });
+  }
+
+  getSampleFile(token: string, location: {lat: number, lng: number}, lan: string) {
+    const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getSampleFile`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      fingerprint: token.toString(),
+      latitude: location.lat.toString(),
+      longitude: location.lng.toString(),
+      lan: lan
     };
     return this.httpClient.get(getUrl, { headers });
   }

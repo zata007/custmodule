@@ -24,7 +24,7 @@ export class PreRegisterComponent implements OnInit {
         indCountryCode: '91',
         pRoleId: params.interfaceData[0].pRoleId,
         pRelationId: params.interfaceData[0].pRelationId,
-        pInterface: 'customer',
+        pInterface: params.interfaceData[0]._id,
         reqType: 'register'
       }
     }).subscribe(res => {

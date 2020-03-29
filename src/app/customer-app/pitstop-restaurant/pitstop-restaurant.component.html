@@ -3,7 +3,7 @@
     <input class="zat-input" type="text" [(ngModel)]="searchTerms" (keyup)="onSearchKeyUp(searchTerms)"
       placeholder="🔍 Search for your carvings">
   </div>
-  <div class="scroll-item">
-    <restaurants-list [restaurantLists] = "filteredRestaurants"></restaurants-list>
+  <div class="scroll-item list">
+    <restaurants-list *ngIf="!isLoading" [restaurantLists] = "filteredRestaurants"></restaurants-list>
   </div>
 </div>

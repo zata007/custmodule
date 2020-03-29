@@ -1,13 +1,20 @@
 .bottom-address-container {
-    padding-top: 10px;
-    padding-bottom: 50px;;
-    h3 {
-        margin: 20px auto;
-        text-align: center;
+    padding: 10px 0px;
+    .input-area {
+        width: 100%;
+        mat-form-field {
+          input::placeholder {
+              overflow: visible;
+          }
+        }
     }
-    div {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
+
+    div button.confirm-button {
+        margin-top: 10px;
+        border-radius: 4px;
     }
+}
+
+mat-divider {
+    margin: 10px 0px;
 }

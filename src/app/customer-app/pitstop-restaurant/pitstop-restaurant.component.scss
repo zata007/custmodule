@@ -3,7 +3,7 @@
 .pitstop-restaurant-container {
     width: 100%;
     padding: 0px 16px;
-  
+
     .input-area {
       .zat-input {
         width: 100%;
@@ -12,26 +12,19 @@
       }
     }
     .scroll-item {
-      overflow-y: scroll;
-      overflow-x: visible;
+      overflow: auto;
       margin-top: 20px;
       @include phone {
-        height: calc(100vh - 198px);
+        height: calc(100vh - 124px);
       }
       @include xs-phone {
-        height: calc(100vh - 194px);
+        height: calc(100vh - 120px);
       }
       @include tablet {
-        height: calc(100vh - 204px);
+        height: calc(100vh - 130px);
       }
       @include pc {
-        height: calc(100vh - 206px);
+        height: calc(100vh - 132px);
       }
     }
-  }
-
-  .mat-tab-body-content .ng-trigger .ng-trigger-translateTab {
-    height: 100vh !important;
-    overflow: scroll !important;
-    padding-bottom: 20px !important;
   }

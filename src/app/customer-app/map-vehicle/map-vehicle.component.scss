@@ -57,8 +57,19 @@
 
 .swiper-parent-container {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   width: 100%;
+  .below-card {
+    background-color: #ffffff;
+    padding: 10px;
+    margin: 0px;
+    .title {
+      padding: 0px 0px 10px 0px;
+    }
+    .padding10 {
+      padding: 10px 0px;
+    }
+  }
 
   .no-pitstop {
     width: 100%;
@@ -76,13 +87,9 @@
       margin: 0 auto;
     }
   }
-  button {
+  .confirm-btn {
     width: 90%;
-    border: none;
-    left: 50%;
-    position: relative;
-    transform: translateX(-50%);
-    margin-top: 20px;
+    margin: 0 auto;
   }
 }
 
@@ -170,4 +177,15 @@ input[type=search]::-o-search-cancel-button {
 input[type=search]::search-cancel-button {
   -webkit-appearance: searchfield-cancel-button;
   font-size: 1.5em;
+}
+
+.dialog-container {
+  padding: 20% 16px;
+  div.head3 {
+    text-align: justify;
+  }
+  button {
+      width: 80%;
+      margin-top: 15px;
+  }
 }

@@ -1,4 +1,4 @@
-<div class="vehicle-location-container">
+<!-- <div *ngIf="!development" class="vehicle-location-container">
   <div class="input-area">
     <div
       class="search-element"
@@ -48,19 +48,32 @@
 
       <agm-marker
         *ngFor="let m of markers; let i = index"
-        (markerClick)="clickedMarker(m.label, i)"
+        (markerClick)="clickedMarker(m.label)"
         [latitude]="m.lat"
         [longitude]="m.lng"
         [markerDraggable]="m.draggable"
         [iconUrl]="'assets/icons/marker.gif'"
       >
       </agm-marker>
+      <agm-marker
+        *ngFor="let m of addressMarkers; let i = index"
+        (markerClick)="clickedMarker(m.label)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [iconUrl]="m.markerUrl"
+      >
+      </agm-marker>
     </agm-map>
   </div>
 </div>
 
-<div class="swiper-parent-container">
+<div *ngIf="!development" class="swiper-parent-container">
   <button mat-raised-button color="primary" *ngIf="customerStateService.selectedLocation.from.lat" (click)="goToRestaurant()">Confirm Location</button>
+</div> -->
+
+<div *ngIf="development">
+  <div class="dialog-container" fxLayout="column" fxLayoutAlign="center center">
+    <div class="head3">Hi, due to COVID19 our services are temporarilly suspended, however you can order essentials goods from your near by shops</div>
+    <button mat-raised-button color="primary" (click)="orderEssentials()">Order Essentials</button>
+  </div>
 </div>
-
-

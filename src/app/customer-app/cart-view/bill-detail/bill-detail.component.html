@@ -1,19 +1,20 @@
 <div class="bill-detail-container">
   <div class="title"><h3>Bill Details</h3></div>
-  <div class="bill-split">
+  <div class="bill-split" fxLayout="row" fxLayoutAlign="space-between center">
     <div>Sub Total</div>
-    <div class="rate">₹200</div>
+    <div class="rate bold">₹{{data.totalPrice}}</div>
   </div>
-  <div class="bill-split">
+  <div class="bill-split" fxLayout="row" fxLayoutAlign="space-between center">
     <div>Delivery Fee</div>
-    <div class="rate">₹200</div>
+    <div class="rate bold">₹{{data.deliveryCharges}}</div>
   </div>
-  <div class="bill-split">
+  <div class="bill-split" fxLayout="row" fxLayoutAlign="space-between center">
     <div>Taxes</div>
-    <div class="rate">₹200</div>
+    <div class="rate">₹{{data.totalTax}}</div>
   </div>
-  <div class="bill-split">
+  <mat-divider></mat-divider>
+  <div class="bill-split" fxLayout="row" fxLayoutAlign="space-between center">
     <h3>Total</h3>
-    <div class="rate">₹600</div>
+    <div class="rate bold">₹{{data.paybleAmount}}</div>
   </div>
 </div>

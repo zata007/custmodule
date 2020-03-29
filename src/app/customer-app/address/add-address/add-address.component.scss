@@ -1,11 +1,49 @@
+@import './../../../../assets/styles/mixins';
+@import './../../../../assets/styles/variable';
+
 .add-address-container {
   box-shadow: none;
   padding: 0px;
   position: relative;
   max-height: 100vh;
 
+  mat-toolbar {
+    background: #ffffff !important;
+    box-shadow: none;
+    padding: 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    left: 0px;    
+    z-index: 1000;
+    overflow: hidden;
+    .input-area {
+      .search-element {
+        position: relative;
+        background-color: $color-background-light;
+        padding: 10px;
+        width: calc(100vw - 50px);
+        input {
+          position: relative;
+          width: 100%;
+          padding: 15px 0 15px 14px;
+          margin-bottom: 10px;
+          font-size: 0.8rem;
+          &:last-child{
+            margin-bottom: 0;
+          }
+  
+          &:active,
+          &:focus {
+             outline: none;
+          }
+        }
+      }
+    }
+  }
+
   agm-map {
-    height: calc(100vh - 256px);
+    height: calc(100vh - 176px);
     z-index: 0;
   }
 }
@@ -13,7 +51,7 @@
 .location-confirm {
   padding: 10px 16px;
   .location {
-    width: 70%;
+    width: 100%;
     div {
       white-space: nowrap;
       overflow: hidden;

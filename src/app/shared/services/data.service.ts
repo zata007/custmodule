@@ -1,17 +1,50 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ILoginData, IMobileLoginData,
-   IRequestRegister, IRequestGetRestaurantData, IRequestGetSkuData, IRequestVerifyOtp, IRequestPlaceOrder, IResponsePlaceOrder } from '../models/common-model';
-import { Observable } from 'rxjs';
-import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../constants/constants';
-import { Socket } from 'ngx-socket-io';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  HttpClient
+} from '@angular/common/http';
+import {
+  environment
+} from 'src/environments/environment';
+import {
+  ILoginData,
+  IMobileLoginData,
+  IOrderData,
+  IUpdateProfiledata,
+  IRequestRegister,
+  IRequestGetRestaurantData,
+  IRequestGetSkuData,
+  IRequestVerifyOtp,
+  IRequestPlaceOrder,
+  IResponsePlaceOrder,
+  IVehicleData,
+  IProfileData,
+  IReqAddressData,
+  IRequestPlaceOrderForEssential
+} from '../models/common-model';
+import {
+  Observable
+} from 'rxjs';
+import {
+  API_ENDPOINTS,
+  ZATAAKSE_JWT_TOKEN,
+  ZATAAKSE_PREF_LANG
+} from '../constants/constants';
+import {
+  Socket
+} from 'ngx-socket-io';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class DataService {
   lan = '';
   fingerprint = '';
-  paymentStatus$ = this.socket.fromEvent<{ _id: string, paymentStatus: string }>('getOrderPaymentStatus');
+  paymentStatus$ = this.socket.fromEvent<{
+    _id: string,
+    paymentStatus: string
+  }>('getOrderPaymentStatus');
   constructor(private httpClient: HttpClient, private socket: Socket) { }
 
   getOptions() {
@@ -69,13 +102,16 @@ export class DataService {
         fingerprint: data.fingerprint,
         lan: data.lan,
         latitude: data.latitude.toString(),
-        longitude: data.longitude.toString()  // 22.484977, 88.384863
+        longitude: data.longitude.toString() // 22.484977, 88.384863
       },
     };
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/isLocationServed`, options);
   }
 
-  checkServiceAvailable(data: { fingerprint: string, lan: string }) {
+  checkServiceAvailable(data: {
+    fingerprint: string,
+    lan: string
+  }) {
     const options = {
       headers: {
         ...this.getOptions(),
@@ -86,7 +122,12 @@ export class DataService {
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/checkInternet`, options);
   }
 
-  getPlatformParams(data: { fingerprint: string, lan: string, latitude: number, longitude: number }) {
+  getPlatformParams(data: {
+    fingerprint: string,
+    lan: string,
+    latitude: number,
+    longitude: number
+  }) {
     const options = {
       headers: {
         ...this.getOptions(),
@@ -154,7 +195,11 @@ export class DataService {
     return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getSku`, options);
   }
 
-  registerLogin(data: { fingerprint: string, lan: string, data: IRequestRegister }) {
+  registerLogin(data: {
+    fingerprint: string,
+    lan: string,
+    data: IRequestRegister
+  }) {
     const options = {
       headers: {
         ...this.getOptions(),
@@ -165,6 +210,25 @@ export class DataService {
 
     // POST /access/user/registerLogin
     return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/registerLogin`, data.data, options);
+  }
+
+  recommendRest(requestObj: {fingerprint: string, lan: string,
+    latitude: number,
+    longitude: number,
+     data: { restName: string, mobileNum: string,  restAddr: string }}) {
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        fingerprint: requestObj.fingerprint,
+        lan: requestObj.lan,
+        latitude: requestObj.latitude.toString(),
+        longitude: requestObj.longitude.toString()
+      }
+    };
+
+    // POST /access/user/registerLogin
+    return this.httpClient.post(`${environment.API_Endpoint}/${API_ENDPOINTS.USER}/recommendRest`, requestObj.data, options);
+
   }
 
 
@@ -194,21 +258,65 @@ export class DataService {
     return this.putMethod(url, options, data) as any;
   }
 
-  manageAddress(data: {
-    addressId?:string,
-    x: string,
-    addType: string,
-    addLine1:string,
-    addLine2: string,
-    city: string,
-    locality?: string,
-    landmark?: string,
-    state: string,
-    country: string,
-    postal: string,
-    latitude: number,
-    longitude: number
+  placeOrderForEssential(data: IRequestPlaceOrderForEssential): Observable<any> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/placeAnOrder`;
+    const options = {
+      headers: {
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      }
+    };
+    const formData = new FormData();
+    formData.append('file', data.file);
+    formData.append('orderType', data.orderType);
+    formData.append('businessLocId', data.businessLocId);
+    formData.append('paymentMode', data.paymentMode);
+    return this.putMethod(url, options, formData) as any;
+  }
+
+  updateProfile(data: IUpdateProfiledata): Observable<IProfileData> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/updateProfile`;
+    const options = {
+      headers: {
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      }
+    };
+    const d = this.getFormData(data, null, null);
+    return this.putMethod(url, options, d) as any;
+  }
+
+  addCart(fingerprint: string, data: IOrderData, position: {
+    lat: number,
+    lng: number
   }) {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/addCart`;
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        fingerprint,
+        latitude: position.lat + '',
+        longitude: position.lng + '',
+        lan: localStorage.getItem(ZATAAKSE_PREF_LANG)
+      },
+    };
+    return this.putMethod(url, options, data) as any;
+  }
+
+  manageVehicle(data: IVehicleData): Observable<{
+    message: string; data: {
+      indVehicles: IVehicleData[]
+    }
+  }> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/manageVehicle`;
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      },
+    };
+    return this.putMethod(url, options, data) as any;
+  }
+
+  manageAddress(data: IReqAddressData) {
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/manageAddress`;
     const options = {
       headers: {
@@ -216,20 +324,58 @@ export class DataService {
         authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
       },
     };
-    const resData = {
-      addrType: data.addType,
-      addrLine1: data.addLine1,
-      addrLine2: data.addLine2,
-      city: data.city,
-      locality: data.locality,
-      landmark: data.landmark,
-      state: data.state,
-      country: data.country,
-      pincode: data.postal,
-      latitude: data.latitude,
-      longitude: data.longitude
+
+    return this.putMethod(url, options, data) as any;
+  }
+
+  resendOTP(userData: {
+    userId: string,
+    pRoleId: string,
+    pRelationId: string
+  },
+    fingerprint: string) {
+    // return this.httpClient.put(`${environment.API_Endpoint}/${API_ENDPOINTS.OA}/${lng}/resendOTP/${userId}`, undefined);
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/resendOTP`;
+    const options = {
+      headers: {
+        ...this.getOptions(),
+        lan: localStorage.getItem(ZATAAKSE_PREF_LANG) || 'en',
+        fingerprint
+      },
     };
-    console.log(resData);
-    return this.putMethod(url, options, resData) as any;
+    return this.putMethod(url, options, userData) as any;
+  }
+
+  // takes a {} object and returns a FormData object
+  getFormData(obj, form, namespace) {
+
+    let fd = form || new FormData();
+    let formKey;
+
+    for (let property in obj) {
+      if (obj.hasOwnProperty(property)) {
+
+        if (namespace) {
+          formKey = namespace + '[' + property + ']';
+        } else {
+          formKey = property;
+        }
+
+        // if the property is an object, but not a File,
+        // use recursivity.
+        if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
+
+          this.getFormData(obj[property], fd, property);
+
+        } else {
+
+          // if it's a string or a File object
+          fd.append(formKey, obj[property]);
+        }
+
+      }
+    }
+
+    return fd;
   }
 }

@@ -1,19 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ZATAAKSE_PAYMENT_TOKEN } from '../shared/constants/constants';
+import { ZATAAKSE_PAYMENT_TOKEN, PAYMENT_STATUS } from '../shared/constants/constants';
 import { DataService } from '../shared/services/data.service';
 import { IResponsePlaceOrder } from '../shared/models/common-model';
 import { Router } from '@angular/router';
-
-const PAYMENT_STATUS = {
-  PENDING : 'Pending',
-  COMPLETED : 'Completed',
-  ERROR : 'Error',
-  HOLD : 'Hold',
-  FAILED: 'Failed',
-  INVALID: 'Invalid',
-  ABANDONED: 'Abandoned'
-};
-
 
 @Component({
   selector: 'app-payment',
@@ -53,16 +42,10 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate([`customer/order-placed`]);
-    // switch (this.paymentStatus) {
-    //   case PAYMENT_STATUS.COMPLETED:
-    //     this.router.navigate(['customer/order-placed/take-away']);
-    //     break;
-
-    //   default:
-    //     break;
-    // }
-
+    const data = {
+      paymentStatus: this.paymentStatus,
+    };
+    window.opener.postMessage(data, '*');
   }
 
 }

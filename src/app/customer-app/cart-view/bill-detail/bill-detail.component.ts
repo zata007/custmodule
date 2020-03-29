@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-bill-detail',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
+  ) { }
 
   ngOnInit() {
   }

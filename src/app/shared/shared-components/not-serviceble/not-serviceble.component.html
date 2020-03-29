@@ -1,28 +1,28 @@
-<div class="cross">
-  <button mat-icon-button aria-label="close" (click)="closePage()">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
 <ng-template id="bottom2" #requestSubmit>
-  <div class="head2 bold heading" style="margin-top: 20px; text-align: center;">Recommend a Restaurant</div>
+  <div fxlayout="row" fxLayoutAlign="space-between">
+    <div class="head2 bold heading" style="margin-top: 20px; text-align: center;">Recommend a {{data.name == "shop" ? "Shop/Store" : "Restaurant"}}</div>
+    <button mat-icon-button aria-label="close" (click)="closePage()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <div fxLayout="column" fxLayoutAlign="space-between stretch">
     <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
       <mat-form-field appearance="standard" style="width: 100%;">
         <mat-icon matPrefix style="width: 35px;">business</mat-icon>
-        <mat-label>Restaurant Name</mat-label>
+        <mat-label>{{data.name == "shop" ? "Shop/Store" : "Restaurant"}} Name</mat-label>
         <input matInput [(ngModel)]="restaurantData.name"  required>
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
       <mat-form-field appearance="standard" style="width: 100%;">
-        <mat-label>Restaurant Contact</mat-label>
+        <mat-label>{{data.name == "shop" ? "Shop/Store" : "Restaurant"}} Contact</mat-label>
         <mat-icon matPrefix style="width: 35px;">call</mat-icon>
         <input matInput [(ngModel)]="restaurantData.contact"  required>
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start start" class="flex-inline">
       <mat-form-field appearance="standard" style="width: 100%;">
-        <mat-label>Restaurant Address</mat-label>
+        <mat-label>{{data.name == "shop" ? "Shop/Store" : "Restaurant"}} Address</mat-label>
         <mat-icon matPrefix style="width: 35px;">near_me</mat-icon>
         <input matInput [(ngModel)]="restaurantData.address" >
       </mat-form-field>
@@ -34,6 +34,11 @@
 </ng-template>
 <div>
   <ng-container class="bottom1" *ngIf="!isSubmitRequestVisible; else requestSubmit">
+    <div fxlayout="row" fxLayoutAlign="flex-end">
+      <button mat-icon-button aria-label="close" (click)="closePage()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
     <div fxLayout="column" fxLayoutAlign="space-between stretch" class="content-area" style="padding: 20px;">
       <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
         <div class="head4 bold">
@@ -44,7 +49,7 @@
         </div>
         <br />
         <div class="head4" style="text-align: center;">
-          Want to recommend a food joint?
+          Want to recommend a {{data.name}}?
         </div>
       </div>
       <br />

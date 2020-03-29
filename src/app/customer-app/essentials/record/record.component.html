@@ -1,0 +1,41 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="flex-start center">
+  <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
+    <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
+  </button>
+  <div>{{businessName}}</div>
+</mat-toolbar>
+
+<div class="recorder-container" fxLayout="column" fxLayoutAlign="center center">
+  <div *ngIf="!hasRecorded && !previewMode" class="audio"  fxLayout="column" fxLayoutAlign="center center">
+    <div class="head4 title">Say the product names with the quantities in 1 minute</div>
+    <div class="image clicked" (click)="onMicClick()" fxLayout="row" fxLayoutAlign="center center">
+      <img src="{{hasRecordingStarted ?'../../../../assets/icons/stop.svg':'../../../../assets/icons/play.svg'}}" alt="">
+    </div>
+  </div>
+  <div *ngIf="!previewMode && !hasRecordingStarted" fxLayout="row" fxLayoutAlign="center center">
+    <button mat-stroked-button color="primary" (click)="seeSample(audio)">Check sample</button>
+  </div>
+  <div *ngIf="!previewMode && !hasRecordingStarted" class="head2 bold">OR</div>
+  <div *ngIf="!previewMode && !hasRecordingStarted" class="photo" fxLayout="column" fxLayoutAlign="center center">
+    <div class="head4">Write the products name and quantities and take a photo</div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="image clicked" (click)="fileInput.click()">
+      <img src="../../../../assets/icons/photo.svg" alt="">
+    </div>
+    <input type='file' accept="image/*" (change)="onSelectFile($event)" #fileInput hidden>
+    <div *ngIf="!previewMode && !hasRecordingStarted" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-stroked-button color="primary" (click)="seeSample(image)">Check sample</button>
+    </div>
+  </div>
+  <div *ngIf="previewMode" class="button" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="hasRecorded" class="recorded-msg">
+      <audio #recordedPlayer controls></audio>
+    </div>
+    <div *ngIf="uploadedImg" class="image-taken" fxLayout="column" fxLayoutAlign="center center">
+      <img src="{{uploadedImg}}" alt="">
+      <mat-icon color="primary" (click)="cancelPhoto()">cancel</mat-icon>
+    </div>
+    <button mat-flat-button color="primary" (click)="onSaveClick()">SUBMIT</button>
+    <button mat-button color="primary" (click)="onCancelClick()">CANCEL</button>
+  </div>
+  <div *ngIf="uploadedImg || hasRecorded" class="head3 bold submit-text">Submit or Cancel for new entry</div>
+</div>

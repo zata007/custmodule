@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
-import { IBusinessLocData, IMenuData, Marker } from '../shared/models/common-model';
+import { IBusinessLocData, IMenuData, Marker, IRestaurantData, IEssentialProductData } from '../shared/models/common-model';
 import { ECustomerServiceType } from '../shared/constants/constants';
 
 class ISelectedPathData {
@@ -23,6 +23,9 @@ enum CustomerPages {
 })
 export class CustomerStateService {
   currentPitstopData: Marker;
+  currentDeliveryLocation: any;
+  currentRestaurantData: IRestaurantData = null;
+  public currentEssentialServiceData: IEssentialProductData;
   constructor(private socket: Socket) {}
   selectedLocation: ISelectedPathData = {
     from: { lat: 0, lng: 0 },
@@ -44,7 +47,8 @@ export class CustomerStateService {
 
   locationSelectionCompleted$ = new Subject<boolean>();
   directionResults$ = this.socket.fromEvent('getDirectionsResult');
-  pitstopOnEdge$ = this.socket.fromEvent<{isLocationOnEdge: boolean, pitstop: number[]}>('checkLocationOnEdgeResult');
+  pitstopOnEdge$ = this.socket.fromEvent<{isLocationOnEdge: boolean, pitstop: number[], pitstopId: string}>('checkLocationOnEdgeResult');
+  orderId: string;
 
   initState() {
     if (this.hasLocationData()) {
@@ -115,11 +119,12 @@ export class CustomerStateService {
     this.socket.emit('getDirections', JSON.stringify(data));
   }
 
-  isPitStopOnEdge(lat: number, lng: number) {
+  isPitStopOnEdge(id: string, lat: number, lng: number) {
     const data = {
+      pitstopId: id,
       pitstop: [lng, lat],
       polyline: encodeURI(this.selectedRoute.overview_polyline['points']) ,
-      tolerance: 0.001,
+      tolerance: 1000,
     };
 
     console.log('emited', data)
@@ -195,5 +200,13 @@ export class CustomerStateService {
       this.selectedLocation.from.lng &&
       this.selectedLocation.to.lng
     );
+  }
+
+  setOrderId(id: string) {
+    this.orderId = id;
+  }
+
+  getOrderId() {
+    return this.orderId;
   }
 }

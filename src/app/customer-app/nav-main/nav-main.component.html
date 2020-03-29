@@ -7,13 +7,13 @@
     [mode]="'over'"
   >
     <mat-toolbar matRipple>
-      <img src="https://image.flaticon.com/icons/png/512/64/64572.png" class="photo" />
-      <div class="name head3">Jhon Doe</div>
+      <img src="../../../assets/icons/120.png" class="photo" />
+      <div class="name head3">Zataakse</div>
     </mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list class="main-list">
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Profile')"> <mat-icon>account_circle</mat-icon>My Profile </a>
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>commute</mat-icon>Car Details </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderList')"> <mat-icon>history</mat-icon>Order History</a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>local_offer</mat-icon>Coupons </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>share</mat-icon>Refer </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Care')"> <mat-icon>record_voice_over</mat-icon>Customer Care </a>
@@ -43,7 +43,7 @@
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/delivery'}" (click)="onNavigate('delivery')">Delivery</button>
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}" (click)="onNavigate('order-ahead')">Order Ahead</button>
       </div>
-      <button type="button" mat-icon-button color="dark"  (click)="onCartClick()">
+      <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"  (click)="onCartClick()">
         <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon>
       </button>
     </mat-toolbar>
@@ -52,7 +52,7 @@
         <button type="button" mat-icon-button color="dark" (click)="onBackClick()">
           <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
         </button>
-        <button type="button" mat-icon-button color="dark" (click)="onCartClick()">
+        <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"   (click)="onCartClick()">
           <mat-icon aria-label="notification icon" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0">shopping_cart</mat-icon>
         </button>
       </mat-toolbar>

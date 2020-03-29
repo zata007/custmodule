@@ -1,15 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-//import { PrelaunchService } from 'src/app/pre-launch/prelaunch.service';
 import { IAppState } from 'src/app/store/states/app.states';
-import { Store, select } from '@ngrx/store';
-import { signUpData } from 'src/app/store/selectors/prelaunch.selectors';
-import { take } from 'rxjs/operators';
-import { SignUpData, Register } from 'src/app/store/actions/prelaunch.actions';
+import { Store } from '@ngrx/store';
+import { SignUpData } from 'src/app/store/actions/prelaunch.actions';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { MatSnackBar, MatBottomSheet } from '@angular/material';
-import { SigninOtpComponent } from '../signin-otp/signin-otp.component';
 
 @Component({
   selector: 'app-signup',
@@ -21,19 +17,14 @@ export class SignupComponent implements OnInit {
   registrationForm: FormGroup;
   isAgreed: boolean;
   constructor(
-    //private prelaunchService: PrelaunchService,
     private store: Store<IAppState>,
-    private router: Router,
-    private commonService: CommonService,
-    private matSnackBar: MatSnackBar,
-    private bottomSheet: MatBottomSheet
-    ) { }
+    private router: Router    ) { }
 
   ngOnInit() {
     this.registrationForm = new FormGroup({
-      firstName: new FormControl(''),
+      // firstName: new FormControl(''),
       lastName: new FormControl(''),
-      email: new FormControl(''),
+      // email: new FormControl(''),
       referalCode: new FormControl(''),
       mobileNumber: new FormControl('', Validators.pattern('^[0-9]{10}$')),
     });

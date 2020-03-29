@@ -41,7 +41,14 @@ import { MenuListComponent } from './menu-list/menu-list.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { AddressListComponent } from './cart-view/address-list/address-list.component';
+import { VehicleListComponent } from './cart-view/vehicle-list/vehicle-list.component';
+import { OrderListComponent } from './order-list/order-list.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { EssentialsComponent } from './essentials/essentials.component';
+import { RecordComponent } from './essentials/record/record.component';
+import { EssentialDialogComponent } from './essentials/essential-dialog/essential-dialog.component';
+import { OrderDetailComponent } from './order-list/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +79,14 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     RestaurantsListComponent,
     PitstopRestaurantComponent,
     AfterPaymentComponent,
+    AddressListComponent,
+    VehicleListComponent,
+    OrderListComponent,
+    EditProfileComponent,
+    EssentialsComponent,
+    RecordComponent,
+    EssentialDialogComponent,
+    OrderDetailComponent,
   ],
   entryComponents: [
     BillDetailComponent,
@@ -79,7 +94,10 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     BottomAddressComponent,
     BottomVehicleComponent,
     AddAddressComponent,
-    AddVehicleComponent
+    AddVehicleComponent,
+    AddressListComponent,
+    VehicleListComponent,
+    EssentialDialogComponent
   ],
   imports: [
     CommonModule,
@@ -93,7 +111,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     RouterModule.forChild(CustomerAppRoutes),
     SwiperModule,
     FlexLayoutModule,
-    NgxMaterialTimepickerModule
   ],
   bootstrap: [CustomerLayoutComponent],
   providers: [CustomerService, OrderService],

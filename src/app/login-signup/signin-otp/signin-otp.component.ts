@@ -1,13 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatSnackBar } from '@angular/material';
-//import { PrelaunchService } from 'src/app/pre-launch/prelaunch.service';
 import { ELoginSignup } from '../models';
+import { DataService } from 'src/app/shared/services/data.service';
+import { CommonService } from 'src/app/shared/services/common.service';
 
 export interface ISigninOtpComponentData {
   isNotRegistered: boolean;
   isFailed: boolean;
   isAlreadyRegistered: boolean;
   isOtp: boolean;
+  userId: string;
   onProceed: (type: any) => void;
 }
 
@@ -24,7 +26,8 @@ export class SigninOtpComponent implements OnInit {
   isOtp = false;
   constructor(
     private matSnackBar: MatSnackBar,
-    //private prelaunchService: PrelaunchService,
+    private dataService: DataService,
+    private commonService: CommonService,
     private bottomSheetRef: MatBottomSheetRef<SigninOtpComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: ISigninOtpComponentData
   ) {
@@ -55,9 +58,16 @@ export class SigninOtpComponent implements OnInit {
   }
 
   resendOTP() {
-    // this.prelaunchService.resendOTP().subscribe((d: any) => {
-    //   this.matSnackBar.open(d.message);
-    // });
+    const essentialParams = this.commonService.getRequestEssentialParams();
+    const params = this.commonService.getPlatformParams();
+    this.dataService.resendOTP({
+      pRoleId: params.interfaceData[0].pRoleId,
+      pRelationId: params.interfaceData[0].pRelationId,
+      userId : this.data.userId
+    },
+      essentialParams.fingerprint).subscribe((d: any) => {
+      this.matSnackBar.open(d.message, '', {duration: 2000});
+    });
   }
 
   getHeaderText(): string {

@@ -3,12 +3,12 @@
     <h1>Let's Get Started</h1>
   </div>
   <div class="login-area" [formGroup]="registrationForm">
-    <div class="flex-inline">
+    <!-- <div class="flex-inline">
       <mat-icon color="primary" style="width: 35px;">account_circle</mat-icon>
       <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
         <input matInput placeholder="Full Name" formControlName="firstName" required>
       </mat-form-field>
-    </div>
+    </div> -->
     <div class="flex-inline">
       <mat-icon color="primary" style="width: 35px;">call</mat-icon>
       <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
@@ -17,14 +17,14 @@
           (blur)="tooltipNum.hide()" formControlName="mobileNumber" maxlength="10" required>
       </mat-form-field>
     </div>
-    <div class="flex-inline">
+    <!-- <div class="flex-inline">
       <mat-icon color="primary" style="width: 35px;">email</mat-icon>
       <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
         <input matInput #tooltip="matTooltip" matTooltip="{{ 'LANDING_PAGE.EMAIL_TOOLTIP' | translate }}" [email]="true"
           placeholder="{{ 'LANDING_PAGE.EMAIL' | translate }}" formControlName="email" (focus)="tooltip.show()"
           (blur)="tooltip.hide()">
       </mat-form-field>
-    </div>
+    </div> -->
     <div class="flex-inline">
       <mat-icon color="primary" style="width: 35px;">local_offer</mat-icon>
       <mat-form-field appearance="standard" style="width: calc(100% - 45px);">

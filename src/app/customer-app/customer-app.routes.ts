@@ -12,12 +12,23 @@ import { PitstopLandingComponent } from './pitstop-landing/pitstop-landing.compo
 import { PitstopRestaurantComponent } from './pitstop-restaurant/pitstop-restaurant.component';
 import { AddAddressComponent } from './address/add-address/add-address.component'
 import { AfterPaymentComponent } from './after-payment/after-payment.component';
+import { OrderListComponent } from './order-list/order-list.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { EssentialsComponent } from './essentials/essentials.component';
+import { RecordComponent } from './essentials/record/record.component';
+import { OrderDetailComponent } from './order-list/order-detail/order-detail.component'
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
   { path: 'care', component: CustomerCareComponent },
   { path: 'profile', component: ProfileComponent},
+  { path:'order-history', component: OrderListComponent },
   { path: 'order-placed', component: AfterPaymentComponent },
+  { path: 'address/add', component: AddAddressComponent},
+  { path: 'profile/edit', component: EditProfileComponent},
+  { path: 'essentials', component: EssentialsComponent},
+  { path: 'essentials/record', component: RecordComponent},
+  { path: 'order-detail', component: OrderDetailComponent},
   {
     path: '',
     component: CustomerLayoutComponent,
@@ -32,7 +43,6 @@ export const CustomerAppRoutes: Routes = [
       { path: 'order-ahead', component: OrderAheadComponent },
       { path: 'delivery', component: OrderDeliveryComponent},
       { path: 'take-away', component: MapVehicleComponent},
-      { path: 'address/add', component: AddAddressComponent},
       { path: '', component: MapVehicleComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

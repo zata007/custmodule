@@ -1,6 +1,7 @@
 @import "./assets/styles/variable";
 @import "./assets/styles/themes";
 @import "./assets/styles/mixins";
+@import "./assets/styles/loader";
 
 // @import url("https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Muli:400,500,600,700|Poppins:400,500,600,700&display=swap');
@@ -258,3 +259,8 @@ body {
 .mat-tab-nav-bar, .mat-tab-header {
   border-bottom: none !important;
 }
+
+.mat-input-element, .mat-select{
+  min-height: 24px;
+}
+

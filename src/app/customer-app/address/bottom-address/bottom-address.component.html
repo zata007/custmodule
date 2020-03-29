@@ -1,20 +1,20 @@
-<div class="bottom-address-container" fxLayout="column">  
+<div class="bottom-address-container" fxLayout="column">
   <div class="head3 bold">Enter location details</div>
   <mat-divider></mat-divider>
   <div class="location-confirm" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="location" fxLayout="column" fxLayoutAlign="space-around">
       <div class="caption">Your Location</div>
-      <div class="head4 bold">{{data.x}}</div>
+      <div class="head4 bold">{{data.formattedAddress}}</div>
     </div>
     <button mat-stroked-button color="primary" (click)="openLink($event)">CHANGE</button>
   </div>
   <mat-divider></mat-divider>
   <div class="input-area" fxLayout="column" [formGroup]="addressForm" >
     <mat-form-field>
-      <input matInput placeholder="Address Line 1" (blur)="validate()" formControlName="addLine1" required>
+      <input matInput placeholder="Address Line 1" (blur)="validate()" formControlName="addrLine1" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Address Line 2 (Optional)" (blur)="validate()" formControlName="addLine2">
+      <input matInput placeholder="Address Line 2 (Optional)" (blur)="validate()" formControlName="addrLine2">
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Locality" (blur)="validate()" formControlName="locality" required>
@@ -23,10 +23,10 @@
       <input matInput placeholder="Landmark" (blur)="validate()" formControlName="landmark" required>
     </mat-form-field>
     <label class="bold">Location Type</label>
-    <mat-radio-group aria-label="Location Type" (blur)="validate()" formControlName="addType">
+    <mat-radio-group aria-label="Location Type" (blur)="validate()" formControlName="addrType">
       <mat-radio-button color="primary" value="Residential">Residential</mat-radio-button>
-      <mat-radio-button color="primary" value="Work">Work</mat-radio-button>
-      <mat-radio-button color="primary" value="Work">Other</mat-radio-button>
+      <mat-radio-button color="primary" value="work">Work</mat-radio-button>
+      <mat-radio-button color="primary" value="other">Other</mat-radio-button>
     </mat-radio-group>
   </div>
   <mat-divider></mat-divider>

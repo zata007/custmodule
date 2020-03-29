@@ -2,14 +2,15 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone, TemplateRef, OnDestro
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../../customer-state.service';
 import { CustomerService } from '../../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
 import { MatDialog, MatBottomSheet } from '@angular/material';
 import { MAP_STYLES } from '../../map-vehicle/map-consts';
-import { BottomAddressComponent } from "../bottom-address/bottom-address.component"
-import { Marker } from 'src/app/shared/models/common-model';
+import { BottomAddressComponent } from '../bottom-address/bottom-address.component';
+import { Marker, IAddressData } from 'src/app/shared/models/common-model';
 
 
 @Component({
@@ -41,20 +42,22 @@ export class AddAddressComponent implements OnInit, OnDestroy {
   lng: number;
   lat: number;
   curLocResDataSubscription: any;
-  address: Array<{
-    x: string;
-    addType: string;
-    addLine1: string;
-    addLine2: string;
-    city: string;
-    locality: string;
-    landmark: string;
-    state: string;
-    country: string;
-    postal: string;
-    latitude: number;
-    longitude: number
-  }> = [];
+  address: IAddressData = {} as IAddressData;
+
+  // {
+  //   x: string;
+  //   addType: string;
+  //   addLine1: string;
+  //   addLine2: string;
+  //   city: string;
+  //   locality: string;
+  //   landmark: string;
+  //   state: string;
+  //   country: string;
+  //   postal: string;
+  //   latitude: number;
+  //   longitude: number
+  // } = null;
   fromLocation: any;
 
   constructor(
@@ -67,6 +70,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
     private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -112,12 +116,15 @@ export class AddAddressComponent implements OnInit, OnDestroy {
         const cardLocation = {
           lat: i.businessLocationCoord[1],
           lng: i.businessLocationCoord[0],
-        };        
-        this.address['latitude'] = cardLocation.lat;
-        this.address['longitude'] = cardLocation.lng;
+        };
+        this.address.locationLongLat = {
+          coordinates: [cardLocation.lat, cardLocation.lng],
+          type : ''
+        }  ;
         this.markers.push(cardLocation);
       });
     });
+
   }
 
   ngOnDestroy() {
@@ -232,10 +239,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
     const bounds = new google.maps.LatLngBounds();
     const currentLocation = new google.maps.LatLng(currentCords.lat, currentCords.lng);
     bounds.extend(currentLocation);
-
     this.map.panToBounds(bounds); // # auto-center
-    const latlng = new google.maps.LatLng(currentCords.lat, currentCords.lng);
-    const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
   }
 
   /**
@@ -253,22 +257,26 @@ export class AddAddressComponent implements OnInit, OnDestroy {
         const result = results[0];
         const rsltAdrComponent = result.address_components;
         const resultLength = rsltAdrComponent.length;
-        this.address['x'] = result.formatted_address;
+        this.address.formattedAddress = result.formatted_address;
+        this.address.locationLongLat = {
+          coordinates: [ lat, lng],
+          type: 'point'
+        };
         if (results != null) {
           console.log(results[0]);
           for(let i of rsltAdrComponent) {
             switch(i.types[0]) {
-              case "postal_code":
-                this.address['postal'] = i.long_name;
+              case 'postal_code':
+                this.address.pincode = i.long_name;
                 break;
-              case "country":
-                this.address['country'] = i.long_name;
+              case 'country':
+                this.address.country = i.long_name;
                 break;
-              case "administrative_area_level_1":
-                this.address['state']= i.long_name;
+              case 'administrative_area_level_1':
+                this.address.state = i.long_name;
                 break;
-              case "locality":
-                this.address['city'] = i.long_name;
+              case 'locality':
+                this.address.city = i.long_name;
                 break;
               default:
                 break;
@@ -316,8 +324,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
       lat: event.coords.lat,
       lng: event.coords.lng,
     };
-    this.address['latitude'] = event.coords.lat;
-    this.address['longitude'] = event.coords.lng;
+
     this.customerStateService.setFromLocation({ ...this.fromLocation }, true);
     this.getPlaceName(event.coords.lat, event.coords.lng, (result) => {
       this.patchLocationToInput({ lat: this.fromLocation.lat, lng: this.fromLocation.lng }, this.searchElementRefFrom, result);
@@ -328,5 +335,9 @@ export class AddAddressComponent implements OnInit, OnDestroy {
     this.bottomSheet.open(BottomAddressComponent, {
       data: this.address
     });
+  }
+
+  onBackClick() {
+    this.location.back();
   }
 }
