@@ -22,7 +22,7 @@ export class RecordComponent implements OnInit {
   audioUrl: string;
   businessId: any;
   businessName: any;
-  audioBlob: Blob;
+  audioChunks: any;
 
 
   constructor(
@@ -53,7 +53,7 @@ export class RecordComponent implements OnInit {
      navigator.mediaDevices.getUserMedia({ audio: true, video: false })
       .then(stream => {
         this.hasRecordingStarted = true;
-        this.mediaRecorder = new MediaRecorder(stream);
+        this.mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm'});
         this.mediaRecorder.start();
 
         const audioChunks = [];
@@ -70,8 +70,8 @@ export class RecordComponent implements OnInit {
         this.mediaRecorder.addEventListener('stop', () => {
           console.log('stopped done');
           stream.getTracks().forEach(t => t.stop());
-          this.audioBlob = new Blob(audioChunks);
-          this.audioUrl = URL.createObjectURL(this.audioBlob);
+          this.audioChunks = audioChunks;
+          this.audioUrl = URL.createObjectURL(new Blob(audioChunks));
           this.recordedAudio = new Audio(this.audioUrl);
           // TODO: This recorded audio can be sent to backend
           this.hasRecorded = true;
@@ -88,10 +88,11 @@ export class RecordComponent implements OnInit {
   onSaveClick() {
     this.customerStateService.updateCurrentService(ECustomerServiceType.Essential);
     // Set data to be used in cart-view page
+    const recording = new Blob([this.audioChunks], {type: 'audio/wav'});
     this.customerStateService.currentEssentialServiceData = {
       displayName: this.businessName,
       id: this.businessId,
-      file: this.hasRecorded ?  new Blob([this.audioBlob], { type: 'audio/wav' }) : this.selectedImage, // TODO: Attach file
+      file: this.hasRecorded ?  recording : this.selectedImage, // TODO: Attach file
       isRecording: this.hasRecorded
     };
     this.router.navigate(['customer/cart-view']);

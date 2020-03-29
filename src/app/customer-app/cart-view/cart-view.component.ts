@@ -254,8 +254,10 @@ export class CartViewComponent implements OnInit {
           // tslint:disable-next-line: no-string-literal
           localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
           localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
-          localStorage.setItem(ZATAAKSE_PAYMENT_TOKEN, JSON.stringify(res));
           this.customerStateService.setOrderId(res.data.orderId);
+          this.snackbar.open('Order placed', 'success', {
+            duration: 4000,
+          });
           this.router.navigate(['/customer/order-detail']);
         }, (errorPlaceOrder) => {
           if (errorPlaceOrder.statusCode !== 400) {
