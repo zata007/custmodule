@@ -258,7 +258,6 @@ export class CartViewComponent implements OnInit {
           this.snackbar.open('Order placed', 'success', {
             duration: 4000,
           });
-          this.snackbar.open('Order Placed ')
           this.router.navigate(['/customer/order-detail']);
         }, (errorPlaceOrder) => {
           if (errorPlaceOrder.statusCode !== 400) {
