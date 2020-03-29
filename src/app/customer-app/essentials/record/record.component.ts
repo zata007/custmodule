@@ -88,11 +88,12 @@ export class RecordComponent implements OnInit {
   onSaveClick() {
     this.customerStateService.updateCurrentService(ECustomerServiceType.Essential);
     // Set data to be used in cart-view page
-    const recording = new Blob([this.audioChunks], {type: 'audio/wav'});
+    const recording = new Blob(this.audioChunks, {type: 'audio'});
+    const recordingFile = new File([recording],'test.wav',{type:'audio/wav'});
     this.customerStateService.currentEssentialServiceData = {
       displayName: this.businessName,
       id: this.businessId,
-      file: this.hasRecorded ?  recording : this.selectedImage, // TODO: Attach file
+      file: this.hasRecorded ?  recordingFile : this.selectedImage, // TODO: Attach file
       isRecording: this.hasRecorded
     };
     this.router.navigate(['customer/cart-view']);
