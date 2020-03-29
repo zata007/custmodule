@@ -12,6 +12,9 @@
       <img src="{{hasRecordingStarted ?'../../../../assets/icons/stop.svg':'../../../../assets/icons/play.svg'}}" alt="">
     </div>
   </div>
+  <div *ngIf="!previewMode && !hasRecordingStarted" fxLayout="row" fxLayoutAlign="center center">
+    <button mat-stroked-button color="primary" (click)="seeSample('https://s3.ap-south-1.amazonaws.com/zataakse-backend/order/AUD/original/file_example_WAV_1MG.wav')">Check sample</button>
+  </div>
   <div *ngIf="!previewMode && !hasRecordingStarted" class="head2 bold">OR</div>
   <div *ngIf="!previewMode && !hasRecordingStarted" class="photo" fxLayout="column" fxLayoutAlign="center center">
     <div class="head4">Write the products name and quantities and take a photo</div>
@@ -19,6 +22,9 @@
       <img src="../../../../assets/icons/photo.svg" alt="">
     </div>
     <input type='file' accept="image/*" (change)="onSelectFile($event)" #fileInput hidden>
+    <div *ngIf="!previewMode && !hasRecordingStarted" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-stroked-button color="primary" (click)="seeSample('https://s3.ap-south-1.amazonaws.com/zataakse-backend/sku/IMG/original/Vegroll.jpg')">Check sample</button>
+    </div>
   </div>
   <div *ngIf="previewMode" class="button" fxLayout="column" fxLayoutAlign="center center">
     <div *ngIf="hasRecorded" class="recorded-msg">
