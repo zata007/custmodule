@@ -29,14 +29,12 @@ export class PaymentComponent implements OnInit {
     this.dataService.paymentStatus$.subscribe((res) => {
       if (res) {
         this.paymentStatus = res.paymentStatus;
-        console.log(res);
       }
     });
    }
 
   ngOnInit() {
     const paymentItem: IResponsePlaceOrder = JSON.parse(localStorage.getItem(ZATAAKSE_PAYMENT_TOKEN));
-    console.log('Navigated after payment', paymentItem);
     const msg = paymentItem.data.msg.split('|');
     this.dataService.getOrderStatus(msg[1]);
   }

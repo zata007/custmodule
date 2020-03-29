@@ -93,7 +93,6 @@ export class EssentialsComponent implements OnInit {
             }).subscribe((res: IResponsePlatformParams) => {
               // TODO: Save Params
               this.commonService.setPlatformParams(res.data);
-              console.log(res);
             });
           // Get current location's restaurant info.
           this.customerStateService.setFromLocation({ lat: latitude, lng: longitude }, true);
@@ -129,7 +128,7 @@ export class EssentialsComponent implements OnInit {
         }
       );
     }
-    
+
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
       if (hasCompleted) {
         // TODO: DO work once location completed.
@@ -154,7 +153,6 @@ export class EssentialsComponent implements OnInit {
 
     this.curLocResDataSubscription =  this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
       this.markers = [];
-      console.log('Esssential', resData);
       resData.filter(i => i.blOrderAhead).forEach((i) => {
         const cardLocation: EssentialMarker = {
           lat: i.businessLocationCoord[1],
@@ -242,7 +240,6 @@ export class EssentialsComponent implements OnInit {
   }
 
   clickedOnEssentialWindow(data: EssentialMarker) {
-    console.log(data);
     const navigationExtras: NavigationExtras = {
       queryParams: {
           id: data.id,
@@ -359,7 +356,6 @@ export class EssentialsComponent implements OnInit {
         const result = results[0];
         const rsltAdrComponent = result.address_components;
         if (result != null) {
-          console.log(result);
           callback(result);
           // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
@@ -412,7 +408,6 @@ export class EssentialsComponent implements OnInit {
       if (result) {
         this.goToRestaurant();
       }
-      console.log('The dialog was closed', result);
     });
   }
 

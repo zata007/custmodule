@@ -118,10 +118,8 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  onSubmit() {    
-    console.log(this.updateProfile)
+  onSubmit() {
     this.dataService.updateProfile(this.updateProfile).subscribe((data) => {
-      console.log('success');
       this.router.navigate(['customer/profile']);
     });
   }

@@ -66,7 +66,6 @@ export class CartViewComponent implements OnInit {
       time: new FormControl()
     });
     this.orderedItems = this.orderService.getCartData();
-    console.log(this.orderedItems);
     if (!this.orderedItems.length && this.customerStateService.currentServiceSelected !== ECustomerServiceType.Essential) {
       this.router.navigate(['customer']);
     }
@@ -289,8 +288,6 @@ export class CartViewComponent implements OnInit {
   }
 
   paymentMessageHandler(event: MessageEvent) {
-    console.log('event Origin:', event.origin );
-    console.log('environmentURL', environment.paymentUrl);
     if (!event.origin.includes(environment.paymentUrl) && !(event.data && event.data.paymentStatus) ) {
       return;
     }
@@ -312,7 +309,6 @@ export class CartViewComponent implements OnInit {
 
   checkPaymentWindowChildCloseStatus(child) {
     if (child.closed) {
-        console.log('payment window is closed');
         window.removeEventListener('message', this.paymentMessageHandler.bind(this));
         this.windowObjectReference = null;
         clearInterval(this.windowChildIntervalRef);

@@ -12,7 +12,6 @@ export class LoginSignupContainerComponent implements OnInit {
   constructor(private translate: TranslateService, private dataService: DataService, private commonService: CommonService) { }
 
   ngOnInit() {
-    console.log(this.translate);
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         position => {

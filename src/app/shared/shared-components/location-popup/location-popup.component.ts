@@ -19,7 +19,6 @@ export class LocationPopupComponent implements OnInit {
   }
 
   gotoHelpForLocation() {
-    console.log('goto help');
     this.bottomSheetRef.dismiss();
     this.openDialog();
   }

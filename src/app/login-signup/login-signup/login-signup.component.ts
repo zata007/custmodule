@@ -115,7 +115,6 @@ export class LoginSignupComponent implements OnInit {
 
       }
     }).subscribe((res: IResponseLoginSignup) => {
-      console.log(res, `${type} done`);
       this.userByMobile = res.data;
       this.openVerifyOTP();
     }, error => {

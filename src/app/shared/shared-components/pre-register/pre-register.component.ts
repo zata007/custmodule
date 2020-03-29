@@ -28,7 +28,6 @@ export class PreRegisterComponent implements OnInit {
         reqType: 'register'
       }
     }).subscribe(res => {
-      console.log(res, 'register done');
     });
 
   }
