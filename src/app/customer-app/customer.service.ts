@@ -109,4 +109,17 @@ export class CustomerService {
     const params = orderId ? new HttpParams().set('pageNum', pageNum).set('orderId', orderId) : new HttpParams().set('pageNum', pageNum);
     return this.httpClient.get(getUrl, { headers, params });
   }
+
+  getSampleFile(token: string, location: {lat: number, lng: number}, lan: string) {
+    const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getSampleFile`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      fingerprint: token.toString(),
+      latitude: location.lat.toString(),
+      longitude: location.lng.toString(),
+      lan: lan
+    };
+    return this.httpClient.get(getUrl, { headers });
+  }
 }

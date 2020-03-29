@@ -29,6 +29,7 @@ export class LoginSignupComponent implements OnInit {
     private commonService: CommonService,
     private dataService: DataService,
     private customerService: CustomerService,
+    private snackbar: MatSnackBar,
   ) {}
 
   ngOnInit() {}
@@ -72,6 +73,8 @@ export class LoginSignupComponent implements OnInit {
         // this.cookieService.setUserData(data);
         // if navigated from cart then navigate back to cart-view page
         this.router.navigate(['customer']);
+      }, (err) => {
+        this.snackbar.open('Check OTP again');
       },
       () => {
         this.bottomSheet.dismiss();

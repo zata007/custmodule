@@ -3,7 +3,10 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerStateService } from '../../customer-state.service';
 import { OrderService } from '../../order.service';
+import { CustomerService } from '../../customer.service'
 import { ECustomerServiceType } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG } from '../../../shared/constants/constants'
+import { ISampleFile } from '../../../shared/models/common-model'
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-record',
@@ -23,6 +26,8 @@ export class RecordComponent implements OnInit {
   businessId: any;
   businessName: any;
   audioChunks: any;
+  audio: string;
+  image: string;
 
 
   constructor(
@@ -30,7 +35,8 @@ export class RecordComponent implements OnInit {
     private route: ActivatedRoute,
     private customerStateService: CustomerStateService,
     private router: Router,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private customerService: CustomerService,
   ) { }
 
   ngOnInit() {
@@ -40,7 +46,20 @@ export class RecordComponent implements OnInit {
       }
       this.businessId = params.id;
       this.businessName = params.name;
-  });
+    });
+
+    this.customerService.getSampleFile(
+      localStorage.getItem(ZATAAKSE_JWT_TOKEN),
+      this.customerStateService.getFromLocation(),
+      localStorage.getItem(ZATAAKSE_PREF_LANG)).
+      subscribe((res: ISampleFile) => {
+        console.log(res)
+        if(res && res.data) {
+          this.audio = res.data.audio,
+          this.image = res.data.image
+          console.log(this.audio, this.image)
+        }
+    })
 
   }
 
