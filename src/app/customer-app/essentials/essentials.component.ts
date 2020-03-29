@@ -107,12 +107,14 @@ export class EssentialsComponent implements OnInit {
         if (res.data && res.data.isLocationServed) {
             // TODO: DO Nothing
           } else {
-            this.bottomSheet.open(NotServicebleComponent, {
-              data: {
-                location: this.searchElementRefFrom.nativeElement.value,
-                name: "shop"
-              }
-            });
+            setTimeout(()=> {
+              this.bottomSheet.open(NotServicebleComponent, {
+                data: {
+                  location: this.searchElementRefFrom.nativeElement.value,
+                  name: "shop"
+                }
+              });
+            }, 2000)
           }
         },
         err => {

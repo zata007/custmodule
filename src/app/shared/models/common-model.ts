@@ -578,3 +578,11 @@ export interface IEssentialProductData {
   file: any;
   id: string;
 }
+
+export interface ISampleFile {
+  message: string,
+  data: {
+    audio: string,
+    image: string
+  }
+}
