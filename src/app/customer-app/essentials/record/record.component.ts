@@ -145,4 +145,8 @@ export class RecordComponent implements OnInit {
     this.uploadedImg = null;
   }
 
+  seeSample(link: string) {
+    window.open(link);
+  }
+
 }
