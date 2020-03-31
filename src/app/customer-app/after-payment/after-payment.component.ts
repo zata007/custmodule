@@ -58,7 +58,6 @@ export class AfterPaymentComponent implements OnInit {
           this.pitstopData = storedData.data;
           break;
         case ECustomerServiceType.Delivery:
-          console.log(storedData.data);
           this.deliveryData = storedData.data;
           break;
           case ECustomerServiceType.TakeAway:
@@ -111,7 +110,6 @@ export class AfterPaymentComponent implements OnInit {
   }
 
   mapReady(evt:any) {
-    console.log('map-ready');
   }
 
   private getRoutes(from, to) {

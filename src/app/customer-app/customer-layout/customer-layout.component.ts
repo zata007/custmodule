@@ -31,7 +31,6 @@ export class CustomerLayoutComponent implements OnInit {
             }).subscribe((res: IResponsePlatformParams) => {
               // TODO: Save Params
               this.commonService.setPlatformParams(res.data);
-              console.log(res);
             });
           // Get current location's restaurant info.
           this.customerStateService.setFromLocation({ lat: latitude, lng: longitude }, true);

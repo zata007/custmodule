@@ -37,7 +37,6 @@ export class CardSliderComponent implements OnInit {
   }
 
   onItemClick(item: any) {
-    console.log(item);
     this.itemClicked.emit(item);
   }
 }

@@ -34,8 +34,6 @@ export class BottomAddressComponent implements OnInit {
       addrType: new FormControl('')
     });
 
-    console.log(this.data);
-
     if (this.data) {
       this.addressForm.patchValue({
         ...this.data,
@@ -52,7 +50,6 @@ export class BottomAddressComponent implements OnInit {
     ) {
       this.allValidate = true;
     }
-    console.log('called');
   }
 
   openLink(event: MouseEvent): void {
@@ -61,7 +58,6 @@ export class BottomAddressComponent implements OnInit {
   }
 
   saveAddress() {
-    console.log(this.data);
     const formvalues: IReqAddressData = {
       city: this.data.city,
       country: this.data.country,
@@ -74,7 +70,6 @@ export class BottomAddressComponent implements OnInit {
     this.dataService
       .manageAddress(formvalues)
       .subscribe((data: any) => {
-        console.log(formvalues);
         this.bottomSheetRef.dismiss({actionType: BottomSheetDismissMode.DataUpdated , closeData: data.data});
         this.router.navigate(['customer/profile']);
       });

@@ -79,6 +79,5 @@ export class PreOrderComponent implements OnInit {
   }
 
   public onIndexChange(index: number) {
-    console.log('Swiper index: ', index);
   }
 }

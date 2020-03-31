@@ -96,7 +96,6 @@ export class RecordComponent implements OnInit {
         }, 61000);
 
         this.mediaRecorder.addEventListener('stop', () => {
-          console.log('stopped done');
           stream.getTracks().forEach(t => t.stop());
           this.audioChunks = audioChunks;
           this.audioUrl = URL.createObjectURL(new Blob(audioChunks));

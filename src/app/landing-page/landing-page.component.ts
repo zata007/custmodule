@@ -105,7 +105,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
         // }
         if (res.data && res.data.status) {
           // TODO: Success and proceed
-          console.log(res);
         } else {
           // TODO: Show popup for no service
         }

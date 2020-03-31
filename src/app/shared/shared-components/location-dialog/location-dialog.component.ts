@@ -132,7 +132,6 @@ export class LocationDialogComponent implements OnInit {
   constructor(private deviceService: DeviceDetectorService, private bottomRef: MatBottomSheetRef<LocationDialogComponent>) {}
 
   ngOnInit() {
-    console.log('hello `Home` component');
     this.deviceInfo = this.deviceService.getDeviceInfo();
     this.selectedBrowser = this.stepsMap[this.deviceInfo.browser];
   }

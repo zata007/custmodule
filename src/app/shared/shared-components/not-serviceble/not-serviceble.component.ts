@@ -55,7 +55,6 @@ export class NotServicebleComponent implements OnInit {
       restName: this.restaurantData.name,
     }}).subscribe(res => {
       this.closePage();
-      console.log('Restaurant Recom');
     }, (err) => {
       this.snackbar.open(err.error.message);
     });

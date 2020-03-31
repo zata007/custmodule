@@ -263,7 +263,6 @@ export class AddAddressComponent implements OnInit, OnDestroy {
           type: 'point'
         };
         if (results != null) {
-          console.log(results[0]);
           for(let i of rsltAdrComponent) {
             switch(i.types[0]) {
               case 'postal_code':
@@ -282,9 +281,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
                 break;
             }
           }
-          console.log(this.address);
         } else {
-          console.log(results);
           alert('No address available!');
         }
       }

@@ -39,7 +39,6 @@ export class PitstopLandingComponent implements OnInit {
     this.getFoodList().subscribe(res => {
       this.foods = res.data.skuData;
       this.filteredFoods = this.foods;
-      console.log(this.filteredFoods);
     });
 
     this.getRestaurants().subscribe(res => {
