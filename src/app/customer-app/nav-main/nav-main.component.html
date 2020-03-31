@@ -14,11 +14,11 @@
     <mat-nav-list class="main-list">
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Profile')"> <mat-icon>account_circle</mat-icon>My Profile </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderList')"> <mat-icon>history</mat-icon>Order History</a>
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>local_offer</mat-icon>Coupons </a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderStatus')"> <mat-icon>shopping_cart</mat-icon>Check Order Status</a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>share</mat-icon>Refer </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Care')"> <mat-icon>record_voice_over</mat-icon>Customer Care </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>settings</mat-icon>Settings </a>
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Partner')"> <mat-icon>exit_to_app</mat-icon>Partner</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Language')"> <mat-icon>language</mat-icon>Language</a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{isLoggedIn? 'Logout' : 'Login'}} </a>
     </mat-nav-list>
     <mat-nav-list class="rule-list">

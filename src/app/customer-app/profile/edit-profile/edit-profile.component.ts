@@ -17,7 +17,9 @@ export class EditProfileComponent implements OnInit {
   langs: Array<{value: String; viewValue: String}> = [
     {value: 'en', viewValue: 'English'},
     {value: 'hn', viewValue: 'Hindi'},
-    {value: 'bn', viewValue: 'Bengali'}
+    {value: 'bn', viewValue: 'Bengali'},
+    {value: 'mr', viewValue: 'Marathi'},
+    {value: 'gu', viewValue: 'Bengali'}
   ]
   profileForm: FormGroup;
   updateProfile: any = [];

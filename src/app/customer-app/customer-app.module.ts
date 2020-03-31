@@ -49,6 +49,8 @@ import { EssentialsComponent } from './essentials/essentials.component';
 import { RecordComponent } from './essentials/record/record.component';
 import { EssentialDialogComponent } from './essentials/essential-dialog/essential-dialog.component';
 import { OrderDetailComponent } from './order-list/order-detail/order-detail.component';
+import { OrderStatusComponent } from './order-status/order-status.component';
+import { LanguageComponent } from './language/language.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,8 @@ import { OrderDetailComponent } from './order-list/order-detail/order-detail.com
     RecordComponent,
     EssentialDialogComponent,
     OrderDetailComponent,
+    OrderStatusComponent,
+    LanguageComponent,
   ],
   entryComponents: [
     BillDetailComponent,

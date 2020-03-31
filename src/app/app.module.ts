@@ -60,22 +60,22 @@ withCredentials: false,
           useFactory: createTranslateLoader,
           deps: [HttpClient]
       }
-  }),
-  SocketIoModule.forRoot(socketConfig),
-  AgmCoreModule.forRoot({ apiKey: environment.mapApiKey, libraries: ['places', 'geometry'] }),
-  JoyrideModule.forRoot(),
-  SharedComponentsModule,
-  ConnectionServiceModule,
-  StoreModule.forRoot(reducers, {
-    metaReducers,
-    runtimeChecks: {
-      strictStateImmutability: true,
-      strictActionImmutability: true
-    }
-  }),
-  !environment.production ? StoreDevtoolsModule.instrument() : [],
-  NgrxRouterStoreModule,
-    SharedModule
+    }),
+    SocketIoModule.forRoot(socketConfig),
+    AgmCoreModule.forRoot({ apiKey: environment.mapApiKey, libraries: ['places', 'geometry'] }),
+    JoyrideModule.forRoot(),
+    SharedComponentsModule,
+    ConnectionServiceModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    NgrxRouterStoreModule,
+    SharedModule,
   ],
   providers: [
     CustomerStateService,

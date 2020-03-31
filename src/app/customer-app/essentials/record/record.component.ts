@@ -5,7 +5,7 @@ import { CustomerStateService } from '../../customer-state.service';
 import { OrderService } from '../../order.service';
 import { CustomerService } from '../../customer.service'
 import { ECustomerServiceType } from 'src/app/shared/constants/constants';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG } from '../../../shared/constants/constants'
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG, LOCAL_STORAGE_FINGERPRINT } from '../../../shared/constants/constants'
 import { ISampleFile } from '../../../shared/models/common-model'
 declare var MediaRecorder: any;
 @Component({
@@ -28,6 +28,7 @@ export class RecordComponent implements OnInit {
   audioChunks: any;
   audio: string;
   image: string;
+  position: {lat: number; lng: number };
 
 
   constructor(
@@ -46,20 +47,28 @@ export class RecordComponent implements OnInit {
       }
       this.businessId = params.id;
       this.businessName = params.name;
+      this.position = {
+        lat: params.lat,
+        lng: params.lng
+      }
     });
 
-    this.customerService.getSampleFile(
-      localStorage.getItem(ZATAAKSE_JWT_TOKEN),
-      this.customerStateService.getFromLocation(),
-      localStorage.getItem(ZATAAKSE_PREF_LANG)).
-      subscribe((res: ISampleFile) => {
-        console.log(res)
-        if(res && res.data) {
-          this.audio = res.data.audio,
-          this.image = res.data.image
-          console.log(this.audio, this.image)
-        }
-    })
+    if(localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)) {
+      this.customerService.getSampleFile(
+        localStorage.getItem(LOCAL_STORAGE_FINGERPRINT),
+        this.position,
+        localStorage.getItem(ZATAAKSE_PREF_LANG)).
+        subscribe((res: ISampleFile) => {
+          console.log(res)
+          if(res && res.data) {
+            this.audio = res.data.audio,
+            this.image = res.data.image
+            console.log(this.audio, this.image)
+          }
+      });
+    } else {
+      this.router.navigate(['/login-signup']);
+    }
 
   }
 

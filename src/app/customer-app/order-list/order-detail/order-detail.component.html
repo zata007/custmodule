@@ -39,15 +39,15 @@
         </mat-horizontal-stepper> -->
     </div>
     <mat-divider></mat-divider>
-    <div class="merch">
+    <div class="merch" *ngIf="data.businessLocId">
         <div class="head4 bold">Merchant Details</div>
         <div class="head4">{{data.businessLocId.businessLocName}}</div>
     </div>
-    <mat-divider></mat-divider>
-    <div class="file" fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="primary" (click)="goToFile()">Open Attached File</button>
+    <mat-divider *ngIf="data.businessLocId"></mat-divider>
+    <div class="file" fxLayout="row" fxLayoutAlign="center center" *ngIf="data.file">
+        <button mat-stroked-button color="primary" (click)="goToFile()">Open Attached File</button>
     </div>
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="data.file"></mat-divider>
     <div class="payment" fxLayout="column">
         <div class="head4 bold">Payment Summary</div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -58,5 +58,14 @@
             <div class="para">Payment method</div>
             <div class="para">{{data.paymentMode}}</div>
         </div>
+    </div>
+
+    <div *ngIf="data.orderStatus == 'Completed' ? false : (data.orderStatus == 'Failed' ? false : true)">
+      <div class="status-btn" fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary">Check current Status</button>
+      </div>
+      <div *ngIf="timer" class="timer head2 bold" fxLayout="row" fxLayout="center center">
+        <!-- <countdown #cd [config]="{leftTime: 600}" (event)="handleEvent({left: 10})"></countdown> -->
+      </div>
     </div>
 </div>

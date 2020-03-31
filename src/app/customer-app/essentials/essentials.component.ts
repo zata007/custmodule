@@ -7,7 +7,7 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { MatDialog, MatBottomSheet } from '@angular/material';
+import { MatDialog, MatBottomSheet, MatSnackBar } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { IRequestGetRestaurantData, IResponseGetRestaurantData, IProfileData, IResponsePlatformParams, IResponseLocationServed } from 'src/app/shared/models/common-model';
@@ -75,7 +75,8 @@ export class EssentialsComponent implements OnInit {
     private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
     private dataService: DataService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -106,7 +107,9 @@ export class EssentialsComponent implements OnInit {
       .subscribe((res: IResponseLocationServed) => {
         this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
         if (res.data && res.data.isLocationServed) {
-            // TODO: DO Nothing
+            this.snackbar.open('Select the particular store', 'Close', {
+              duration: 5000,
+            });
           } else {
             setTimeout(()=> {
               this.bottomSheet.open(NotServicebleComponent, {
@@ -248,7 +251,9 @@ export class EssentialsComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       queryParams: {
           id: data.id,
-          name: data.name
+          name: data.name,
+          lat: data.lat,
+          lng: data.lng
       }
   };
     this.router.navigate(['customer/essentials/record'], navigationExtras);

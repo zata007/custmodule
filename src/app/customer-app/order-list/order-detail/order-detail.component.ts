@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerStateService } from '../../customer-state.service';
 import { CustomerService } from '../../customer.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { ZATAAKSE_JWT_TOKEN, ECustomerServiceType } from '../../../shared/constants/constants'
+import { ZATAAKSE_JWT_TOKEN, ECustomerServiceType } from '../../../shared/constants/constants';
 
 
 @Component({
