@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerStateService } from '../../customer-state.service';
@@ -13,7 +13,7 @@ declare var MediaRecorder: any;
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.scss']
 })
-export class RecordComponent implements OnInit {
+export class RecordComponent implements OnInit, OnDestroy {
   @ViewChild('recordedPlayer', {static: false}) recordedPlayer: ElementRef;
   selectedImage: File;
   uploadedImg: any = null;
@@ -29,6 +29,8 @@ export class RecordComponent implements OnInit {
   audio: string;
   image: string;
   position: {lat: number; lng: number };
+  recordingRemaining = 0;
+  recordingIntervalRef: any;
 
 
   constructor(
@@ -72,10 +74,15 @@ export class RecordComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.recordingIntervalRef);
+  }
+
   onMicClick() {
     if (this.hasRecordingStarted) {
       // need to stop and save
       this.mediaRecorder.stop();
+      clearInterval(this.recordingIntervalRef);
     } else {
       // start recording
      navigator.mediaDevices.getUserMedia({ audio: true, video: false })
@@ -83,17 +90,22 @@ export class RecordComponent implements OnInit {
         this.hasRecordingStarted = true;
         this.mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm'});
         this.mediaRecorder.start();
+        this.recordingRemaining = 60;
+        this.recordingIntervalRef = setInterval(() => {
+          this.recordingRemaining -= 1;
+          if (this.recordingRemaining < 1) {
+            // clear interval and stop recording
+            if (this.mediaRecorder.state !== 'inactive') {
+              this.mediaRecorder.stop();
+            }
+            clearInterval(this.recordingIntervalRef);
+          }
+        }, 1000);
 
         const audioChunks = [];
         this.mediaRecorder.addEventListener('dataavailable', event => {
           audioChunks.push(event.data);
         });
-
-        const recorderTimeoutRef =  setTimeout(() => {
-          if (this.mediaRecorder.state !== 'inactive') {
-            this.mediaRecorder.stop();
-          }
-        }, 61000);
 
         this.mediaRecorder.addEventListener('stop', () => {
           stream.getTracks().forEach(t => t.stop());

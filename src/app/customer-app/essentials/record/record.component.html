@@ -11,6 +11,7 @@
     <div class="image {{hasRecordingStarted ? 'clicked' : null }}" (click)="onMicClick()" fxLayout="row" fxLayoutAlign="center center">
       <img src="{{hasRecordingStarted ?'../../../../assets/icons/stop.svg':'../../../../assets/icons/play.svg'}}" alt="">
     </div>
+    <div *ngIf="hasRecordingStarted" class="recording-remaining">{{recordingRemaining}}sec</div>
     <div *ngIf="!previewMode && !hasRecordingStarted" fxLayout="row" fxLayoutAlign="center center">
       <button mat-stroked-button color="primary" (click)="seeSample(audio)">Check sample</button>
     </div>
