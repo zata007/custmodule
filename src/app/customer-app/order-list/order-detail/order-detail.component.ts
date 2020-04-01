@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { CustomerStateService } from '../../customer-state.service';
 import { CustomerService } from '../../customer.service';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ZATAAKSE_JWT_TOKEN, ECustomerServiceType } from '../../../shared/constants/constants';
 
 
@@ -14,11 +14,15 @@ import { ZATAAKSE_JWT_TOKEN, ECustomerServiceType } from '../../../shared/consta
 export class OrderDetailComponent implements OnInit, OnDestroy {
   data: any;
   getUpdatedDataIntervalRef: any;
+  canShowTimer =  false;
+  timer = (60 * 10) - 1; // sec
+  timerRef: any;
 
   constructor(
     private customerStateservice: CustomerStateService,
     private location: Location,
     private router: Router,
+    private route: ActivatedRoute,
     private customerService: CustomerService,
   ) { }
 
@@ -30,13 +34,25 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
     .subscribe((data: any) => {
       this.data = data.data.data[0];
       console.log(this.data);
-      // TODO: Add timer logic
-      this.initGetStatusInterval();
+    });
+
+    this.route.queryParams.subscribe(params => {
+      if (params.comingFromCart) {
+        this.canShowTimer = true;
+        this.timerRef = setInterval(() => {
+          this.timer -= 1;
+          if (this.timer < 1) {
+            clearInterval(this.timerRef);
+          }
+        }, 1000);
+        this.initGetStatusInterval();
+      }
     });
   }
 
   ngOnDestroy(): void {
     clearInterval(this.getUpdatedDataIntervalRef);
+    clearInterval(this.timerRef);
   }
 
   onBackClick() {

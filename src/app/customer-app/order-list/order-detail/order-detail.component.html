@@ -19,6 +19,7 @@
     <div class="stepper" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="head3 bold">Order Status</div>
         <div class="head3">{{data.orderStatus}}</div>
+        <div *ngIf="canShowTimer" class="waiting-status">{{ (timer/60).toFixed()  + 'min'}}</div>
         <!-- <mat-horizontal-stepper labelPosition="bottom">
             <mat-step label="Step 1" state="phone">
               <p></p>

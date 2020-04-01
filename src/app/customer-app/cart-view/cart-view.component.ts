@@ -5,7 +5,7 @@ import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { OrderService } from '../order.service';
 import { IMenuData, IRequestPlaceOrder, IOrderData, IRestaurantData, IProfileData, IAddressData, IVehicleData, IResponseAddCart, ICartViewData, IRequestPlaceOrderForEssential, IEssentialProductData } from 'src/app/shared/models/common-model';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PAYMENT_TOKEN, ZATAAKSE_SELECTED_SERVICE, ECustomerServiceType, ZATAAKSE_PROFILE_DATA, PAYMENT_STATUS } from 'src/app/shared/constants/constants';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
@@ -257,7 +257,12 @@ export class CartViewComponent implements OnInit {
           this.snackbar.open('Order placed', 'success', {
             duration: 4000,
           });
-          this.router.navigate(['/customer/order-detail']);
+          const navigationExtras: NavigationExtras = {
+            queryParams: {
+                comingFromCart: true,
+            }
+        };
+          this.router.navigate(['/customer/order-detail'], navigationExtras);
         }, (errorPlaceOrder) => {
           if (errorPlaceOrder.statusCode !== 400) {
             this.hasAuthToken = false;
