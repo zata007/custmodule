@@ -80,6 +80,8 @@ export class NavMainComponent implements OnInit, OnDestroy {
         if (this.isLoggedIn) {
           this.store.dispatch(new SignIn(null));
           this.cookieService.setUserData(null);
+          localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
+          localStorage.removeItem(ZATAAKSE_PROFILE_DATA);
           // Remove user and navigate to Login page.
         }
         this.router.navigate(['login-signup']);

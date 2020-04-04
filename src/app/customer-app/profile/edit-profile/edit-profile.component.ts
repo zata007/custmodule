@@ -5,6 +5,7 @@ import { IProfileData, IUpdateProfiledata } from '../../../shared/models/common-
 import { ZATAAKSE_PROFILE_DATA } from '../../../shared/constants/constants';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { DataService } from '../../../shared/services/data.service'
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-edit-profile',
@@ -28,7 +29,8 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private location: Location,
     private dataService: DataService,
-    public router: Router
+    public router: Router,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -122,7 +124,10 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit() {
     this.dataService.updateProfile(this.updateProfile).subscribe((data) => {
+      this.snackbar.open('Saved Successfully');
       this.router.navigate(['customer/profile']);
+    }, (err)=>{
+      this.snackbar.open(err.error.message);
     });
   }
 

@@ -22,7 +22,7 @@
   <mat-card fxLayout="column" class="mat-elevation-z4">
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 4.svg" alt="">
-      <div class="head4">{{ basic.indFirstName ? basic.indFirstName+" "+basic.indLastName : "Jhon Doe" }}</div>
+      <div class="head4">{{ basic.indFirstName ? basic.indFirstName+" "+basic.indLastName : "Name" }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
@@ -61,7 +61,7 @@
       </div>
       <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
         <button mat-button color="primary" (click)="editAddress(addressItem)">EDIT</button>
-        <button mat-button color="primary">DELETE</button>
+        <!-- <button mat-button color="primary">DELETE</button> -->
       </div>
       <mat-divider [inset]="true"></mat-divider>
     </div>
@@ -82,7 +82,7 @@
       </div>
       <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
         <button mat-button color="primary" (click)="editVehicle(vehicleItem)">EDIT</button>
-        <button mat-button color="primary">DELETE</button>
+        <!-- <button mat-button color="primary">DELETE</button> -->
       </div>
       <mat-divider [inset]="true"></mat-divider>
     </div>
