@@ -217,26 +217,6 @@ export class EssentialsComponent implements OnInit {
         });
       });
 
-      const autocompleteTo = autocomplete;
-
-      autocompleteTo.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // get the place result
-          const place: google.maps.places.PlaceResult = autocompleteTo.getPlace();
-          // verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          this.customerService.setSelectedPlace(place, false);
-          const toLocation = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          };
-          this.customerStateService.setFromLocation({ ...toLocation }, false);
-          this.onMapLocationChange();
-        });
-      });
     });
   }
 
@@ -269,7 +249,33 @@ export class EssentialsComponent implements OnInit {
   }
 
   onMapLocationChange() {
-    this.markers = [];
+    this.dataService.checkZataakseServiceAvailable({
+      fingerprint: this.commonService.fingerPrint,
+      lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
+      latitude: this.lat,
+      longitude: this.lng,
+    })
+    .subscribe((res: IResponseLocationServed) => {
+      this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
+      if (res.data && res.data.isLocationServed) {
+          this.snackbar.open('Select the particular store', 'Close', {
+            duration: 5000,
+          });
+        } else {
+          setTimeout(()=> {
+            this.bottomSheet.open(NotServicebleComponent, {
+              data: {
+                location: this.searchElementRefFrom.nativeElement.value,
+                name: "shop"
+              }
+            });
+          }, 2000)
+        }
+      },
+      err => {
+        // TODO: Handle Error.
+      }
+    );
   }
 
 
