@@ -95,7 +95,7 @@ $zataakse-theme: mat-light-theme(mat-palette($zataakse-primary-color), mat-palet
   .snack-container {
     .mat-card {
       margin: 10px 10px 0 10px;
-      border-radius: 19px;
+      border-radius: 4px;
       box-shadow: none;
     }
   }
@@ -135,8 +135,8 @@ $zataakse-theme: mat-light-theme(mat-palette($zataakse-primary-color), mat-palet
   //   overflow: visible;
   // }
   .mat-card {
-    margin: 10px 10px 0 10px;
-    border-radius: 19px;
+    margin: 10px 0px;
+    border-radius: 4px;
   }
   .mat-card.mat-card-accent {
     background-color: $accent;

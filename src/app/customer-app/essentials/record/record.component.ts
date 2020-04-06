@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerStateService } from '../../customer-state.service';
 import { OrderService } from '../../order.service';
 import { CustomerService } from '../../customer.service'
 import { ECustomerServiceType } from 'src/app/shared/constants/constants';
-import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG } from '../../../shared/constants/constants'
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG, LOCAL_STORAGE_FINGERPRINT } from '../../../shared/constants/constants'
 import { ISampleFile } from '../../../shared/models/common-model'
 declare var MediaRecorder: any;
 @Component({
@@ -13,7 +13,7 @@ declare var MediaRecorder: any;
   templateUrl: './record.component.html',
   styleUrls: ['./record.component.scss']
 })
-export class RecordComponent implements OnInit {
+export class RecordComponent implements OnInit, OnDestroy {
   @ViewChild('recordedPlayer', {static: false}) recordedPlayer: ElementRef;
   selectedImage: File;
   uploadedImg: any = null;
@@ -28,6 +28,9 @@ export class RecordComponent implements OnInit {
   audioChunks: any;
   audio: string;
   image: string;
+  position: {lat: number; lng: number };
+  recordingRemaining = 0;
+  recordingIntervalRef: any;
 
 
   constructor(
@@ -46,27 +49,40 @@ export class RecordComponent implements OnInit {
       }
       this.businessId = params.id;
       this.businessName = params.name;
+      this.position = {
+        lat: params.lat,
+        lng: params.lng
+      }
     });
 
-    this.customerService.getSampleFile(
-      localStorage.getItem(ZATAAKSE_JWT_TOKEN),
-      this.customerStateService.getFromLocation(),
-      localStorage.getItem(ZATAAKSE_PREF_LANG)).
-      subscribe((res: ISampleFile) => {
-        console.log(res)
-        if(res && res.data) {
-          this.audio = res.data.audio,
-          this.image = res.data.image
-          console.log(this.audio, this.image)
-        }
-    })
+    if(localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)) {
+      this.customerService.getSampleFile(
+        localStorage.getItem(LOCAL_STORAGE_FINGERPRINT),
+        this.position,
+        localStorage.getItem(ZATAAKSE_PREF_LANG)).
+        subscribe((res: ISampleFile) => {
+          console.log(res)
+          if(res && res.data) {
+            this.audio = res.data.audio,
+            this.image = res.data.image
+            console.log(this.audio, this.image)
+          }
+      });
+    } else {
+      this.router.navigate(['/login-signup']);
+    }
 
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.recordingIntervalRef);
   }
 
   onMicClick() {
     if (this.hasRecordingStarted) {
       // need to stop and save
       this.mediaRecorder.stop();
+      clearInterval(this.recordingIntervalRef);
     } else {
       // start recording
      navigator.mediaDevices.getUserMedia({ audio: true, video: false })
@@ -74,20 +90,24 @@ export class RecordComponent implements OnInit {
         this.hasRecordingStarted = true;
         this.mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm'});
         this.mediaRecorder.start();
+        this.recordingRemaining = 60;
+        this.recordingIntervalRef = setInterval(() => {
+          this.recordingRemaining -= 1;
+          if (this.recordingRemaining < 1) {
+            // clear interval and stop recording
+            if (this.mediaRecorder.state !== 'inactive') {
+              this.mediaRecorder.stop();
+            }
+            clearInterval(this.recordingIntervalRef);
+          }
+        }, 1000);
 
         const audioChunks = [];
         this.mediaRecorder.addEventListener('dataavailable', event => {
           audioChunks.push(event.data);
         });
 
-        const recorderTimeoutRef =  setTimeout(() => {
-          if (this.mediaRecorder.state !== 'inactive') {
-            this.mediaRecorder.stop();
-          }
-        }, 61000);
-
         this.mediaRecorder.addEventListener('stop', () => {
-          console.log('stopped done');
           stream.getTracks().forEach(t => t.stop());
           this.audioChunks = audioChunks;
           this.audioUrl = URL.createObjectURL(new Blob(audioChunks));

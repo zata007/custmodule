@@ -7,7 +7,7 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerStateService } from '../customer-state.service';
 import { CustomerService } from '../customer.service';
 import { GeoLocationService } from 'src/app/shared/services/geo-location.service';
-import { MatDialog, MatBottomSheet } from '@angular/material';
+import { MatDialog, MatBottomSheet, MatSnackBar } from '@angular/material';
 import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { IRequestGetRestaurantData, IResponseGetRestaurantData, IProfileData, IResponsePlatformParams, IResponseLocationServed } from 'src/app/shared/models/common-model';
@@ -75,7 +75,8 @@ export class EssentialsComponent implements OnInit {
     private geoLocationService: GeoLocationService,
     public dialog: MatDialog,
     private dataService: DataService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -93,7 +94,6 @@ export class EssentialsComponent implements OnInit {
             }).subscribe((res: IResponsePlatformParams) => {
               // TODO: Save Params
               this.commonService.setPlatformParams(res.data);
-              console.log(res);
             });
           // Get current location's restaurant info.
           this.customerStateService.setFromLocation({ lat: latitude, lng: longitude }, true);
@@ -106,7 +106,9 @@ export class EssentialsComponent implements OnInit {
       .subscribe((res: IResponseLocationServed) => {
         this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
         if (res.data && res.data.isLocationServed) {
-            // TODO: DO Nothing
+            this.snackbar.open('Select the particular store', 'Close', {
+              duration: 5000,
+            });
           } else {
             setTimeout(()=> {
               this.bottomSheet.open(NotServicebleComponent, {
@@ -131,7 +133,7 @@ export class EssentialsComponent implements OnInit {
         }
       );
     }
-    
+
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
       if (hasCompleted) {
         // TODO: DO work once location completed.
@@ -156,7 +158,6 @@ export class EssentialsComponent implements OnInit {
 
     this.curLocResDataSubscription =  this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
       this.markers = [];
-      console.log('Esssential', resData);
       resData.filter(i => i.blOrderAhead).forEach((i) => {
         const cardLocation: EssentialMarker = {
           lat: i.businessLocationCoord[1],
@@ -216,26 +217,6 @@ export class EssentialsComponent implements OnInit {
         });
       });
 
-      const autocompleteTo = autocomplete;
-
-      autocompleteTo.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // get the place result
-          const place: google.maps.places.PlaceResult = autocompleteTo.getPlace();
-          // verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          this.customerService.setSelectedPlace(place, false);
-          const toLocation = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          };
-          this.customerStateService.setFromLocation({ ...toLocation }, false);
-          this.onMapLocationChange();
-        });
-      });
     });
   }
 
@@ -244,11 +225,12 @@ export class EssentialsComponent implements OnInit {
   }
 
   clickedOnEssentialWindow(data: EssentialMarker) {
-    console.log(data);
     const navigationExtras: NavigationExtras = {
       queryParams: {
           id: data.id,
-          name: data.name
+          name: data.name,
+          lat: data.lat,
+          lng: data.lng
       }
   };
     this.router.navigate(['customer/essentials/record'], navigationExtras);
@@ -267,7 +249,33 @@ export class EssentialsComponent implements OnInit {
   }
 
   onMapLocationChange() {
-    this.markers = [];
+    this.dataService.checkZataakseServiceAvailable({
+      fingerprint: this.commonService.fingerPrint,
+      lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
+      latitude: this.lat,
+      longitude: this.lng,
+    })
+    .subscribe((res: IResponseLocationServed) => {
+      this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
+      if (res.data && res.data.isLocationServed) {
+          this.snackbar.open('Select the particular store', 'Close', {
+            duration: 5000,
+          });
+        } else {
+          setTimeout(()=> {
+            this.bottomSheet.open(NotServicebleComponent, {
+              data: {
+                location: this.searchElementRefFrom.nativeElement.value,
+                name: "shop"
+              }
+            });
+          }, 2000)
+        }
+      },
+      err => {
+        // TODO: Handle Error.
+      }
+    );
   }
 
 
@@ -361,7 +369,6 @@ export class EssentialsComponent implements OnInit {
         const result = results[0];
         const rsltAdrComponent = result.address_components;
         if (result != null) {
-          console.log(result);
           callback(result);
           // this.address = rsltAdrComponent[resultLength - 8].short_name;
         } else {
@@ -414,7 +421,6 @@ export class EssentialsComponent implements OnInit {
       if (result) {
         this.goToRestaurant();
       }
-      console.log('The dialog was closed', result);
     });
   }
 

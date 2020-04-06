@@ -20,7 +20,6 @@ import { Marker, IAddressData } from 'src/app/shared/models/common-model';
 })
 export class AddAddressComponent implements OnInit, OnDestroy {
   @ViewChild('searchFrom', { static: false }) public searchElementRefFrom: ElementRef;
-  @ViewChild('searchTo', { static: false }) public searchElementRefTo: ElementRef;
   @ViewChild('requestSubmit', { static: false }) requestSubmit: TemplateRef<any>;
   // initial center position for the map
   public latitude = 19.125956;
@@ -166,29 +165,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
           const Wankhede = new google.maps.LatLng(18.938792, 72.825802);
 
           this.onMapLocationChange();
-        });
-      });
-      const autocompleteTo = new google.maps.places.Autocomplete(this.searchElementRefTo.nativeElement, {
-        types: ['establishment'],
-        componentRestrictions: { country: 'ind' },
-      });
-
-      autocompleteTo.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // get the place result
-          const place: google.maps.places.PlaceResult = autocompleteTo.getPlace();
-          // verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          this.customerService.setSelectedPlace(place, false);
-          const toLocation = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          };
-          this.customerStateService.setFromLocation({ ...toLocation }, false);
-          this.onMapLocationChange();
+          this.setFromLatLng({ coords: fromLocation});
         });
       });
     });
@@ -217,12 +194,6 @@ export class AddAddressComponent implements OnInit, OnDestroy {
       this.getPlaceName(this.lat, this.lng, (result: google.maps.GeocoderResult) => {
         this.patchLocationToInput({ lat: this.lat, lng: this.lng }, this.searchElementRefFrom, result);
       });
-      if (this.customerStateService.hasLocationData()) {
-        this.getPlaceName(selectedLocation.to.lat, selectedLocation.to.lng, (result: google.maps.GeocoderResult) => {
-          this.patchLocationToInput({ lat: selectedLocation.to.lat, lng: selectedLocation.to.lng }, this.searchElementRefTo, result);
-        });
-      }
-
     } else {
       const sub = this.geoLocationService.getPosition().subscribe((val) => {
         this.lat = val.coords.latitude;
@@ -263,7 +234,6 @@ export class AddAddressComponent implements OnInit, OnDestroy {
           type: 'point'
         };
         if (results != null) {
-          console.log(results[0]);
           for(let i of rsltAdrComponent) {
             switch(i.types[0]) {
               case 'postal_code':
@@ -282,9 +252,7 @@ export class AddAddressComponent implements OnInit, OnDestroy {
                 break;
             }
           }
-          console.log(this.address);
         } else {
-          console.log(results);
           alert('No address available!');
         }
       }

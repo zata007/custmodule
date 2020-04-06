@@ -16,6 +16,7 @@
             height: 70%;
             width: auto;
         }
+        background-color: #37aa14;
     }
     .clicked {
         background-color: #ff3823;
@@ -46,6 +47,10 @@
 
 mat-toolbar {
     padding: 0px;
+}
+
+mat-card {
+    border-radius: 4px;
 }
 
 .image-taken {

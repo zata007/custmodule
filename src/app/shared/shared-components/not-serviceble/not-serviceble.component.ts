@@ -53,9 +53,9 @@ export class NotServicebleComponent implements OnInit {
       mobileNum: this.restaurantData.contact,
       restAddr: this.restaurantData.address,
       restName: this.restaurantData.name,
-    }}).subscribe(res => {
+    }}).subscribe((res:any) => {
       this.closePage();
-      console.log('Restaurant Recom');
+      this.snackbar.open(res.message);
     }, (err) => {
       this.snackbar.open(err.error.message);
     });

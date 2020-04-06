@@ -127,7 +127,6 @@ export class CustomerStateService {
       tolerance: 1000,
     };
 
-    console.log('emited', data)
     this.socket.emit('checkLocationOnEdge', data, (e)=>{console.log(e)});
   }
 

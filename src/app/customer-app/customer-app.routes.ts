@@ -16,7 +16,9 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { EssentialsComponent } from './essentials/essentials.component';
 import { RecordComponent } from './essentials/record/record.component';
-import { OrderDetailComponent } from './order-list/order-detail/order-detail.component'
+import { OrderDetailComponent } from './order-list/order-detail/order-detail.component';
+import { OrderStatusComponent } from './order-status/order-status.component';
+import { LanguageComponent } from './language/language.component';
 
 export const CustomerAppRoutes: Routes = [
   { path: 'cart-view', component: CartViewComponent },
@@ -29,20 +31,22 @@ export const CustomerAppRoutes: Routes = [
   { path: 'essentials', component: EssentialsComponent},
   { path: 'essentials/record', component: RecordComponent},
   { path: 'order-detail', component: OrderDetailComponent},
+  { path: 'order-status', component: OrderStatusComponent},
+  { path: 'language', component: LanguageComponent},
   {
     path: '',
     component: CustomerLayoutComponent,
     pathMatch: 'prefix',
     children: [
-      { path: 'pitstop-landing', component: PitstopLandingComponent },
-      { path: 'pitstop-restaurant', component: PitstopRestaurantComponent },
-      { path: 'pitstop/:openType', component: PitstopViewComponent },
-      { path: 'pitstop', component: PitstopViewComponent },
-      { path: 'quick-preorder', component: PreOrderComponent },
-      { path: 'quick-pickup', component: PreOrderComponent },
-      { path: 'order-ahead', component: OrderAheadComponent },
-      { path: 'delivery', component: OrderDeliveryComponent},
-      { path: 'take-away', component: MapVehicleComponent},
+      // { path: 'pitstop-landing', component: PitstopLandingComponent },
+      // { path: 'pitstop-restaurant', component: PitstopRestaurantComponent },
+      // { path: 'pitstop/:openType', component: PitstopViewComponent },
+      // { path: 'pitstop', component: PitstopViewComponent },
+      // { path: 'quick-preorder', component: PreOrderComponent },
+      // { path: 'quick-pickup', component: PreOrderComponent },
+      // { path: 'order-ahead', component: OrderAheadComponent },
+      // { path: 'delivery', component: OrderDeliveryComponent},
+      // { path: 'take-away', component: MapVehicleComponent},
       { path: '', component: MapVehicleComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

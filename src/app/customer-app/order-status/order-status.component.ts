@@ -7,11 +7,11 @@ import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constant
 import { IResponseGetProfileData } from 'src/app/shared/models/common-model';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.scss']
+  selector: 'app-order-status',
+  templateUrl: './order-status.component.html',
+  styleUrls: ['../order-list/order-list.component.scss']
 })
-export class OrderListComponent implements OnInit {
+export class OrderStatusComponent implements OnInit {
   listItems: any;
 
   constructor(
@@ -38,6 +38,7 @@ export class OrderListComponent implements OnInit {
 
     this.customerService.getTransactionHistory(localStorage.getItem(ZATAAKSE_JWT_TOKEN), "1").subscribe((data: any) => {
       this.listItems = data.data.data;
+      console.log(this.listItems);
     });
   }
 

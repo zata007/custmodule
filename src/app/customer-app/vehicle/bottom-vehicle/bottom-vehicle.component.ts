@@ -5,6 +5,7 @@ import { AddVehicleComponent } from '../../vehicle/add-vehicle/add-vehicle.compo
 import { FormGroup, FormControl } from '@angular/forms';
 import { IVehicleData } from '../../../shared/models/common-model';
 import { DataService } from '../../../shared/services/data.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-bottom-vehicle',
@@ -23,19 +24,28 @@ export class BottomVehicleComponent implements OnInit {
     private dataService: DataService,
     private bottomSheetRef: MatBottomSheetRef<BottomVehicleComponent>,
     private router: Router,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
-    this.vehicleForm = new FormGroup ({
-      vehicleId: new FormControl(),
-      vehType: new FormControl(''),
-      vehbrand: new FormControl(''),
-      vehModel: new FormControl(''),
-      vehNum: new FormControl(''),
-      vehColor: new FormControl('')
-    });
     if (this.data) {
+      this.vehicleForm = new FormGroup ({
+        vehicleId: new FormControl(),
+        vehType: new FormControl(''),
+        vehbrand: new FormControl(''),
+        vehModel: new FormControl(''),
+        vehNum: new FormControl(''),
+        vehColor: new FormControl('')
+      });
       this.vehicleForm.patchValue({...this.data});
+    } else {
+      this.vehicleForm = new FormGroup ({
+        vehType: new FormControl(''),
+        vehbrand: new FormControl(''),
+        vehModel: new FormControl(''),
+        vehNum: new FormControl(''),
+        vehColor: new FormControl('')
+      });
     }
   }
 
@@ -44,6 +54,9 @@ export class BottomVehicleComponent implements OnInit {
   saveVehicle() {
     this.dataService.manageVehicle(this.vehicleForm.value).subscribe((data) => {
       this.bottomSheetRef.dismiss(data.data.indVehicles);
+      this.snackbar.open('Saved successfully');
+    }, (err)=>{
+      this.snackbar.open(err.error.message);
     });
   }
 

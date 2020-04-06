@@ -42,7 +42,6 @@ export class PitstopViewComponent implements OnInit {
     private dataService: DataService
   ) {
     this.customerStateService.currentSkuData$.subscribe(data => {
-      console.log(data);
       this.foods = data.skuData;
       this.resName = data.resName;
       this.filteredFoods = this.foods;

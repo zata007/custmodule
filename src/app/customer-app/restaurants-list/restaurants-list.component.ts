@@ -30,7 +30,6 @@ export class RestaurantsListComponent implements OnInit {
 
   onRestaurantClick(item: IRestaurantData) {
     // TODO: Goto page.
-    console.log(item, this.openedFrom);
     this.customerStateService.currentRestaurantData = item;
 
     const data: IRequestGetSkuData = {

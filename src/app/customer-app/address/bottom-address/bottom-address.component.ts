@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { MAT_BOTTOM_SHEET_DATA } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatSnackBar } from '@angular/material';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataService } from '../../../shared/services/data.service';
@@ -21,25 +21,31 @@ export class BottomAddressComponent implements OnInit {
     public data: IAddressData,
     private bottomSheetRef: MatBottomSheetRef<BottomAddressComponent>,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    this.addressForm = new FormGroup({
-      addressId: new FormControl(),
-      addrLine1: new FormControl(''),
-      addrLine2: new FormControl(''),
-      locality: new FormControl(''),
-      landmark: new FormControl(''),
-      addrType: new FormControl('')
-    });
-
-    console.log(this.data);
-
     if (this.data) {
+      this.addressForm = new FormGroup({
+        addressId: new FormControl(),
+        addrLine1: new FormControl(''),
+        addrLine2: new FormControl(''),
+        locality: new FormControl(''),
+        landmark: new FormControl(''),
+        addrType: new FormControl('')
+      });
       this.addressForm.patchValue({
         ...this.data,
         addressId: this.data._id
+      });
+    } else {
+      this.addressForm = new FormGroup({
+        addrLine1: new FormControl(''),
+        addrLine2: new FormControl(''),
+        locality: new FormControl(''),
+        landmark: new FormControl(''),
+        addrType: new FormControl('')
       });
     }
   }
@@ -52,7 +58,6 @@ export class BottomAddressComponent implements OnInit {
     ) {
       this.allValidate = true;
     }
-    console.log('called');
   }
 
   openLink(event: MouseEvent): void {
@@ -61,7 +66,6 @@ export class BottomAddressComponent implements OnInit {
   }
 
   saveAddress() {
-    console.log(this.data);
     const formvalues: IReqAddressData = {
       city: this.data.city,
       country: this.data.country,
@@ -71,12 +75,12 @@ export class BottomAddressComponent implements OnInit {
       longitude: this.data.locationLongLat && this.data.locationLongLat.coordinates[1].toString(),
       ...this.addressForm.value
     };
-    this.dataService
-      .manageAddress(formvalues)
-      .subscribe((data: any) => {
-        console.log(formvalues);
+    this.dataService.manageAddress(formvalues).subscribe((data: any) => {
         this.bottomSheetRef.dismiss({actionType: BottomSheetDismissMode.DataUpdated , closeData: data.data});
         this.router.navigate(['customer/profile']);
+        this.snackbar.open('Successfully saved');
+      }, (err)=>{
+        this.snackbar.open(err.error.message);
       });
   }
 }
