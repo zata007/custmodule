@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <div *ngIf="data.orderStatus == 'Completed' ? false : (data.orderStatus == 'Failed' ? false : true)">
+    <div *ngIf="data.orderStatus == 'Pending' ? true : false">
       <div class="status-btn" fxLayout="row" fxLayoutAlign="center center">
         <button mat-raised-button color="primary">Check current Status</button>
       </div>
