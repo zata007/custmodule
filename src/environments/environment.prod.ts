@@ -1,12 +1,16 @@
 export const environment = {
   production: true,
-  API_Endpoint: 'https://z07.xyz:8001',
+  API_Endpoint: 'https://s.z07.xyz',
   SOCKET_API_Endpoint: 'https://s.z07.xyz',
-  referralURL: 'https://z07.xyz/#/pre-launch/main/',
-  paymentUrl: 'https://z07.xyz',
+  referralURL: 'https://s.z07.xyz/#/pre-launch/main/',
   mapApiKey: 'AIzaSyB9rjY3fL8F0OUcy1ubyFnAVl96FhbadVY',
+  paymentUrl: 'http://localhost',
   pushNotifyKeys: {
-    publicKey: 'BB0X1vjLPXA3v1trZR9KKOC3EqNT_V__Liv5jP32Ywl7snyWz61aClgeaevS3Lp9QjxGvuaWWBnAWJnr4xAzyaU',
-    privateKey: 'PuGlNnf-xd167xVMg17lJH7vq3sENZM9c8oTrT_F_14',
+    publicKey: 'BMLM_MOg0aQQThjidH5CkW9I4VyIdjA_pRWDnMAlmQR1_jHiDU3E7SP-V7125EY22SGq-941VxEi8ahKKpl7boE',
+    privateKey: 'Zye3OquXF4C34tN6N-V237YYFaVroktHhxbj0v7t0ls',
+  },
+  sso: {
+    google: '24984653661-06sld27dqqfqme78kes840qrc06ggs33.apps.googleusercontent.com',
+    fb: '2551119675116311',
   },
 };

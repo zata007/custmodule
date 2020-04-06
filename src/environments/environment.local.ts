@@ -4,6 +4,7 @@ export const environment = {
   SOCKET_API_Endpoint: 'https://s.z07.xyz',
   referralURL: 'https://s.z07.xyz/#/pre-launch/main/',
   mapApiKey: 'AIzaSyB9rjY3fL8F0OUcy1ubyFnAVl96FhbadVY',
+  paymentUrl: 'http://localhost',
   pushNotifyKeys: {
     publicKey: 'BMLM_MOg0aQQThjidH5CkW9I4VyIdjA_pRWDnMAlmQR1_jHiDU3E7SP-V7125EY22SGq-941VxEi8ahKKpl7boE',
     privateKey: 'Zye3OquXF4C34tN6N-V237YYFaVroktHhxbj0v7t0ls',
