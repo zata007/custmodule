@@ -6,7 +6,7 @@
     "VERIFY":"Verify",
     "LANDING_PAGE":{
       "TAG_LINE" : "Zataakse...",
-      "REGISTRATION_TITLE" : "Register",
+      "REGISTRATION_TITLE" : "रजिस्टर",
       "AGREEMENT_TEXT" : "I agree to ",
       "FIRST_NAME":"First Name",
       "LAST_NAME":"Last Name",
@@ -20,7 +20,7 @@
       "ORDER_NOW": "Order Now"
     },
     "MAIN_PAGE":{
-      "CAROUSAL_MSG_1": "<br><span>Stuck in Traffic – <b>Everyday</b> ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>is for you ...<br><br/>Order Food & Beverages  and have them delivered at a pit-stop on your route</span>",
+      "CAROUSAL_MSG_1": "<br><span>हर दिन <b>ट्रैफिक</b> में फंसना ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>आपके लिए है ...<br><br/>फूड एंड बेवरेज का ऑर्डर करें और उन्हें अपने रूट पर एक गड्ढे पर रोक दें</span>",
       "CAROUSAL_MSG_2": "<br><span>If this is your <b>daily view ...</b><br/><span><h1 class='head1'>Zataakse</h1></span><span>is to rescue ...</span><br/><br/><span>Order that <strong>sandwich..</strong> or <strong>juice..</strong> or <strong>coffee..</strong> that you always wanted to try</span>",
       "CAROUSAL_MSG_3": "<br><span>Within <b>10-15 minutes </b>on your <b>route</b> at</span><br><span><h1 class='head1'>Zataakse</h1></span><span>Pit-Stop ... </span><br/><br/><span>Have your favourites delivered to your <b> vehicle</b> and <b>keep moving</b></span>",
       "CAROUSAL_MSG_4": "<br><span>Get Coupons worth Upto</span><br/><h3 class='head1'>₹200/-</h3><span>On Successful Registration</span>",
