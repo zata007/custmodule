@@ -18,7 +18,7 @@
   </mat-card>
   <mat-card *ngIf="!previewMode && !hasRecordingStarted" class="photo" fxLayout="column" fxLayoutAlign="center center">
     <div class="head4">Write the products name and quantities and take a photo</div>
-    <div fxLayout="row" fxLayoutAlign="center center" class="image {{hasRecordingStarted ? 'clicked' : null }}" (click)="fileInput.click()">
+    <div fxLayout="row" fxLayoutAlign="center center" class="image {{hasRecordingStarted ? 'clicked' : null }}" (click)="compress()">
       <img src="../../../../assets/icons/photo.svg" alt="">
     </div>
     <input type='file' accept="image/*" (change)="onSelectFile($event)" #fileInput hidden>
