@@ -7,6 +7,9 @@ import { CustomerService } from '../../customer.service'
 import { ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG, LOCAL_STORAGE_FINGERPRINT } from '../../../shared/constants/constants'
 import { ISampleFile } from '../../../shared/models/common-model'
+import { Ng2ImgMaxService } from 'ng2-img-max';
+import { MatSnackBar } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 declare var MediaRecorder: any;
 @Component({
   selector: 'app-record',
@@ -28,9 +31,11 @@ export class RecordComponent implements OnInit, OnDestroy {
   audioChunks: any;
   audio: string;
   image: string;
+  imageFile: File;
   position: {lat: number; lng: number };
   recordingRemaining = 0;
   recordingIntervalRef: any;
+  imagePreview: any;
 
 
   constructor(
@@ -40,6 +45,9 @@ export class RecordComponent implements OnInit, OnDestroy {
     private router: Router,
     private orderService: OrderService,
     private customerService: CustomerService,
+    private snackBar: MatSnackBar,
+    private ng2ImgMax: Ng2ImgMaxService,
+    public sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -154,13 +162,27 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
-      this.selectedImage = event.target.files[0];
+      this.imageFile = event.target.files[0];
+      this.ng2ImgMax.compressImage(this.imageFile, 0.075).subscribe(
+        result => {
+          this.uploadedImg = new File([result], result.name);
+        },
+        error => {
+          this.snackBar.open('Failed! Upload the file again')
+        }
+      );
       const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(this.imageFile);
       reader.onload = (event: Event) => {
-        this.uploadedImg = reader.result;
+        this.imagePreview = reader.result;
         this.previewMode = true;
       };
+      // const reader = new FileReader();
+      // reader.readAsDataURL(event.target.files[0]);
+      // reader.onload = (event: Event) => {
+      //   this.uploadedImg = reader.result;
+      //   this.previewMode = true;
+      // };
     }
   }
 

@@ -51,6 +51,7 @@ import { EssentialDialogComponent } from './essentials/essential-dialog/essentia
 import { OrderDetailComponent } from './order-list/order-detail/order-detail.component';
 import { OrderStatusComponent } from './order-status/order-status.component';
 import { LanguageComponent } from './language/language.component';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { LanguageComponent } from './language/language.component';
     RouterModule.forChild(CustomerAppRoutes),
     SwiperModule,
     FlexLayoutModule,
+    Ng2ImgMaxModule,
   ],
   bootstrap: [CustomerLayoutComponent],
   providers: [CustomerService, OrderService],
