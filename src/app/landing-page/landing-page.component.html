@@ -48,12 +48,14 @@
 <div *ngIf="canShowLanguagePanel" class="language-container">
 <div class="language-content" fxLayout="column" fxLayoutAlign="space-between none">
   <h3>{{'MAIN_PAGE.SELECT_LANGUAGE'| translate}}</h3>
-  <mat-select #lanSelector appearance="standard" placeholder="Select Language" (selectionChange)="onLanguageChange($event.value)">
-    <mat-option value="en">English</mat-option>
-    <mat-option value="hi">Hindi</mat-option>
-    <mat-option value="bn">Bengali</mat-option>
+  <mat-select #lanSelector placeholder="Select Language" (selectionChange)="onLanguageChange($event.value)">
+    <mat-option value="en">English  -  अंग्रेज़ी</mat-option>
+    <mat-option value="hi">Hindi    -  हिन्दी</mat-option>
+    <mat-option value="mr">Marathi  -  मराठी</mat-option>
+    <mat-option value="bn">Bengali  -  বাংলা</mat-option>
   </mat-select>
-  <button mat-raised-button (click)="onLanguageSelected(lanSelector.value)">{{'MAIN_PAGE.GET_STARTED' | translate}}</button>
+  <br><br>
+  <button mat-button-raised (click)="onLanguageSelected(lanSelector.value)">{{'MAIN_PAGE.GET_STARTED' | translate}}</button>
 </div>
 
 </div>
