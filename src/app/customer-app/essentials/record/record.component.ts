@@ -218,7 +218,7 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   compressFile(image, fileName) {
     this.imageCompress
-      .compressFile(image, DOC_ORIENTATION.NotDefined, 50, 50)
+      .compressFile(image, DOC_ORIENTATION.NotDefined, 100, 30)
       .then((result) => {
         // create file from byte
         // call method that creates a blob from dataUri
@@ -227,6 +227,7 @@ export class RecordComponent implements OnInit, OnDestroy {
           type: 'image/jpeg',
         });
         this.uploadedImg = imageFile;
+        console.log(this.uploadedImg)
       });
   }
 
@@ -237,7 +238,7 @@ export class RecordComponent implements OnInit, OnDestroy {
     for (let i = 0; i < byteString.length; i++) {
       int8Array[i] = byteString.charCodeAt(i);
     }
-    const blob = new Blob([int8Array], { type: 'image/jpeg' });
+    const blob = new Blob([int8Array], { type: 'image' });
     return blob;
   }
 }
