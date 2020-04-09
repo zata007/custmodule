@@ -1,12 +1,12 @@
 {
-    "NEXT":"आगे",
-    "OKAY": "ठीक है",
-    "RESEND_OTP":"ओटीपी पुनः भेजें",
-    "TERMS":"नियम और शर्तें",
+    "NEXT":"Next",
+    "OKAY": "Okay",
+    "RESEND_OTP":"Resend OTP",
+    "TERMS":"terms and conditions",
     "VERIFY":"Verify",
     "LANDING_PAGE":{
       "TAG_LINE" : "Zataakse...",
-      "REGISTRATION_TITLE" : "रजिस्टर",
+      "REGISTRATION_TITLE" : "Register",
       "AGREEMENT_TEXT" : "I agree to ",
       "FIRST_NAME":"First Name",
       "LAST_NAME":"Last Name",
@@ -17,11 +17,10 @@
       "TOP_TEXT" : "Get upto ₹200 on Succesful Registration",
       "REFERAL_CODE":"Referal Code (Optional)",
       "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
-      "ORDER_NOW": "आर्डर करे"
+      "ORDER_NOW": "Order Now"
     },
     "MAIN_PAGE":{
-      "CAROUSAL_MSG_1": "<br><span>ट्रैफिक जैम – <b>हररोज</b> ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>आपके लिए है ...<br><br/>खाद्य और पेय खरीदे और फिर have them delivered at a pit-stop on your route</span>",
-      "CAROUSAL_MSG_1": "<br><span>हर दिन <b>ट्रैफिक</b> में फंसना ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>आपके लिए है ...<br><br/>फूड एंड बेवरेज का ऑर्डर करें और उन्हें अपने रूट पर एक गड्ढे पर रोक दें</span>",
+      "CAROUSAL_MSG_1": "<br><span>Stuck in Traffic – <b>Everyday</b> ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>is for you ...<br><br/>Order Food & Beverages  and have them delivered at a pit-stop on your route</span>",
       "CAROUSAL_MSG_2": "<br><span>If this is your <b>daily view ...</b><br/><span><h1 class='head1'>Zataakse</h1></span><span>is to rescue ...</span><br/><br/><span>Order that <strong>sandwich..</strong> or <strong>juice..</strong> or <strong>coffee..</strong> that you always wanted to try</span>",
       "CAROUSAL_MSG_3": "<br><span>Within <b>10-15 minutes </b>on your <b>route</b> at</span><br><span><h1 class='head1'>Zataakse</h1></span><span>Pit-Stop ... </span><br/><br/><span>Have your favourites delivered to your <b> vehicle</b> and <b>keep moving</b></span>",
       "CAROUSAL_MSG_4": "<br><span>Get Coupons worth Upto</span><br/><h3 class='head1'>₹200/-</h3><span>On Successful Registration</span>",
@@ -29,11 +28,11 @@
       "EXCITING_LAUNCH_OFFER":"Exciting Launch Offers",
       "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
       "OFFER_NEAR_ME":"Seems you have disabled location for Zataakse, please allow location permissionto use Zataakse",
-      "NEED_LOCATION_FOR_OFFER": "झटाकसे को आपके लिए सर्वोत्तम विकल्प खोजने के लिए आपके स्थान की जानकारी तक पहुँच की आवश्यकता है ! <br>स्थान साझा करने के लिए संकेत दिए जाने पर कृपया स्वीकार <b>Accept</b> करें चुनें",
+      "NEED_LOCATION_FOR_OFFER": "आपल्यासाठी सर्वोत्तम पर्याय शोधण्यासाठी झटाकसेला आपल्या वर्तमान स्थान माहितीची आवश्यकता आहे. <br>कृपया स्थान सामायिक करण्यासाठी सूचित केल्यास स्वीकार <b>Accept</b> निवडा.",
       "TERMS": "Terms & Conditions",
       "ENABLE": "Steps to enable location",
       "SELECT_LANGUAGE":"Language / भाषा",
-      "GET_STARTED": "आगे"
+      "GET_STARTED": "पुढे"
     },
     "SNACK_PAGE":{
       "QUESTION_1":{

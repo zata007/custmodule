@@ -250,8 +250,6 @@ export class CartViewComponent implements OnInit {
         this.dataService.placeOrderForEssential(essentialData).subscribe(res => {
           this.commonService.paymentInformation = res;
           const localStorageData = {};
-          this.customerStateService.currentEssentialServiceData = null;
-          this.customerStateService.currentServiceSelected = null;
           // tslint:disable-next-line: no-string-literal
           localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
           localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));

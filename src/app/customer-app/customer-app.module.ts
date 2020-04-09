@@ -51,7 +51,7 @@ import { EssentialDialogComponent } from './essentials/essential-dialog/essentia
 import { OrderDetailComponent } from './order-list/order-detail/order-detail.component';
 import { OrderStatusComponent } from './order-status/order-status.component';
 import { LanguageComponent } from './language/language.component';
-import { NgxImageCompressService } from 'ngx-image-compress';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
