@@ -1,7 +1,10 @@
 .location-popup-content-area{
   display: flex;
   flex-flow: column;
-  padding: 30px;
+  justify-content: center;
+  img {
+    margin: auto;
+  }
   .content{
     padding: 10px;
     line-height: 150%;
