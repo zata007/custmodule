@@ -17,7 +17,6 @@ declare var MediaRecorder: any;
 })
 export class RecordComponent implements OnInit, OnDestroy {
   @ViewChild('recordedPlayer', {static: false}) recordedPlayer: ElementRef;
-  selectedImage: File;
   uploadedImg: any = null;
   mediaRecorder = null;
   hasRecorded = false;
@@ -141,7 +140,7 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.customerStateService.currentEssentialServiceData = {
       displayName: this.businessName,
       id: this.businessId,
-      file: this.hasRecorded ?  recordingFile : this.selectedImage, // TODO: Attach file
+      file: this.hasRecorded ?  recordingFile : this.uploadedImg, // TODO: Attach file
       isRecording: this.hasRecorded
     };
     this.router.navigate(['customer/cart-view']);
@@ -163,9 +162,7 @@ export class RecordComponent implements OnInit, OnDestroy {
     } else {
       this.cancelPhoto();
     }
-
     this.resetState();
-
   }
 
   resetState() {
@@ -174,7 +171,6 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.hasRecordingStarted = false;
     this.mediaRecorder = null;
     this.uploadedImg = null;
-    this.selectedImage = null;
   }
 
   cancelPhoto() {
@@ -197,29 +193,27 @@ export class RecordComponent implements OnInit, OnDestroy {
       reader.readAsDataURL(this.imageFile);
     }
   }
-
+  
   compressFile(image, fileName) {
     this.imageCompress.compressFile(image, DOC_ORIENTATION.NotDefined, 100, 20)
       .then((result) => {
         // create file from byte
         // call method that creates a blob from dataUri
         const imageBlob = this.dataURItoBlob(result.split(',')[1]);
-        const imageFile = new File([imageBlob], fileName, {
-          type: 'image/jpeg',
-        });
+        const imageFile = new File([imageBlob], fileName, {type: 'image/jpeg'});
         this.uploadedImg = imageFile;
-        console.log(this.uploadedImg)
+        console.log(imageFile)
       });
   }
-
-  dataURItoBlob(dataURI) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
+  
+    dataURItoBlob(dataURI) {
+      const byteString = window.atob(dataURI);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: 'image' });
+      return blob;
     }
-    const blob = new Blob([int8Array], { type: 'image' });
-    return blob;
-  }
 }

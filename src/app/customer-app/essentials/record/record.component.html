@@ -30,12 +30,12 @@
     <div *ngIf="hasRecorded" class="recorded-msg">
       <audio #recordedPlayer controls></audio>
     </div>
-    <div *ngIf="uploadedImg" class="image-taken" fxLayout="column" fxLayoutAlign="center center">
-      <img src="{{uploadedImg}}" alt="">
+    <div *ngIf="imagePreview" class="image-taken" fxLayout="column" fxLayoutAlign="center center">
+      <img src="{{imagePreview}}" alt="">
       <mat-icon color="primary" (click)="cancelPhoto()">cancel</mat-icon>
     </div>
     <button mat-flat-button color="primary" (click)="onSaveClick()">SUBMIT</button>
     <button mat-button color="primary" (click)="onCancelClick()">CANCEL</button>
   </div>
-  <div *ngIf="uploadedImg || hasRecorded" class="head3 bold submit-text">Submit or Cancel for new entry</div>
+  <div *ngIf="previewMode || hasRecorded" class="head3 bold submit-text">Submit or Cancel for new entry</div>
 </div>

@@ -63,7 +63,7 @@
 
     <div *ngIf="data.orderStatus == 'Pending' ? true : false">
       <div class="status-btn" fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="primary">Check current Status</button>
+        <button mat-raised-button color="primary" (click)="checkOrderStatus()">Check current Status</button>
       </div>
       <div *ngIf="timer" class="timer head2 bold" fxLayout="row" fxLayout="center center">
         <!-- <countdown #cd [config]="{leftTime: 600}" (event)="handleEvent({left: 10})"></countdown> -->
