@@ -218,7 +218,7 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   compressFile(image, fileName) {
     this.imageCompress
-      .compressFile(image, DOC_ORIENTATION.NotDefined, 100, 30)
+      .compressFile(image, DOC_ORIENTATION.NotDefined, 100, 20)
       .then((result) => {
         // create file from byte
         // call method that creates a blob from dataUri

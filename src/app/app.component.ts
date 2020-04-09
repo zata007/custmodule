@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     this.translationService.getTranslation('en').subscribe();
     this.translationService.use(localStorage.getItem(ZATAAKSE_PREF_LANG) || 'en').subscribe();
     if (!localStorage.getItem(ZATAAKSE_JWT_TOKEN) && localStorage.getItem(ZATAAKSE_PREF_LANG)) {
-      this.router.navigate(['login-signup']);
+      this.router.navigate(['customer']);
       return;
     }
     this.connectionService.monitor().subscribe((isConnected) => {
