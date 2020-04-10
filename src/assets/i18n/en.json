@@ -11,7 +11,7 @@
     "FIRST_NAME":"First Name",
     "LAST_NAME":"Last Name",
     "EMAIL":"Email",
-    "PHONE":"Phone",
+    "PHONE":"Your mobile number",
     "EMAIL_TOOLTIP":"You will receive offers and gifts on this email.",
     "MOBILE_TOOLTIP" :"You will receive OTP on this mobile number.",
     "TOP_TEXT" : "Get upto ₹200 on Succesful Registration",
