@@ -6,9 +6,9 @@
 </mat-toolbar>
 
 <div class="recorder-container">
-  <!-- <div *ngIf="!previewMode && !hasRecorded" class="store">
+  <div *ngIf="!previewMode && !hasRecorded" class="store image-taken" fxLayout="column" fxLayoutAlign="center center">
     <img [src]="photo" alt="">
-  </div> -->
+  </div>
   <mat-card *ngIf="!hasRecorded && !previewMode" class="audio"  fxLayout="column" fxLayoutAlign="center center">
     <div class="head4 bold">Voice Order</div>
     <div class="head4">Press this green button to start recording your order in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>. Check sample order</div>
