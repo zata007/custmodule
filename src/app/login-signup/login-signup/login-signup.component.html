@@ -3,6 +3,7 @@
     <img src="assets/img/core/cornerIllustration.png" alt="">
   </div>
   <mat-card matRipple class="slider-content-container mat-elevation-z8">
+    <br>
     <div class="component-container" [ngClass]="{ selected: selected === ELoginSignup.Login }">
         <app-login (numberUpdate)="onLoginNumberUpdate($event)"></app-login>
     </div>

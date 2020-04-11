@@ -1,11 +1,11 @@
 <div class="login-container">
   <div class="header">
-    <h1>Welcome Back?</h1>
+    <h1>Welcome</h1>
   </div>
   <div class="login-area">
     <div class="flex-inline">
-        <mat-icon color="primary" style="width: 40px;">call</mat-icon>
-        <mat-form-field appearance="standard" style="width: calc(100% - 45px);">
+        
+        <mat-form-field appearance="standard" style="width: calc(100% - 40px); font-size: 1.2em;">
             <input #numberField placeholder="{{ 'LANDING_PAGE.PHONE' | translate }}"
             #tooltipNum="matTooltip"
             matTooltip="{{ 'LANDING_PAGE.MOBILE_TOOLTIP' | translate }}"
@@ -14,6 +14,7 @@
             maxlength="10"
             required matInput (keyup)="numberUpdate.next(numberField.value)" >
         </mat-form-field>
+        <mat-icon color="primary" style="width: 40px; margin-left: 10px; margin-right: 10px;">call</mat-icon>
     </div>
   </div>
   <!-- <div class="login-oauth">
