@@ -6,6 +6,9 @@
 </mat-toolbar>
 
 <div class="recorder-container" fxLayout="column" fxLayoutAlign="center center">
+  <div *ngIf="!previewMode && !hasRecorded" class="store">
+    <img [src]="photo" alt="">
+  </div>
   <mat-card *ngIf="!hasRecorded && !previewMode" class="audio"  fxLayout="column" fxLayoutAlign="center center">
     <div class="head4 title">Say the product names with the quantities in 1 minute</div>
     <div class="image {{hasRecordingStarted ? 'clicked' : null }}" (click)="onMicClick()" fxLayout="row" fxLayoutAlign="center center">

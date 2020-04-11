@@ -173,6 +173,14 @@ export interface IBusinessLocData {
   blOrderAhead: boolean;
   blDelivery: boolean;
   blDineIn: boolean;
+  images: {
+    imageName: string;
+    original: string;
+    thumbnail: string;
+    _id: string;
+    updatedAt: string;
+    createdAt: string;
+  }[]
   blDeliveryRadius: number;
   businessLocationCoord: Array < number > ;
   distance: number;

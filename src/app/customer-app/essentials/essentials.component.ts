@@ -29,6 +29,7 @@ interface EssentialMarker {
   name: string;
   draggable?: boolean;
   id: string;
+  photo?: string;
 }
 
 @Component({
@@ -164,6 +165,7 @@ export class EssentialsComponent implements OnInit {
           lng: i.businessLocationCoord[0],
           id: i._id,
           name: i.displayName,
+          photo: i.images[0].thumbnail,
         };
         this.markers.push(cardLocation);
       });
@@ -230,7 +232,8 @@ export class EssentialsComponent implements OnInit {
           id: data.id,
           name: data.name,
           lat: data.lat,
-          lng: data.lng
+          lng: data.lng,
+          photo: data.photo
       }
   };
     this.router.navigate(['customer/essentials/record'], navigationExtras);

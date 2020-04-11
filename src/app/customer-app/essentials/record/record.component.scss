@@ -1,5 +1,9 @@
 .recorder-container {
-    padding: 0px 16px;
+    padding: 0px 16px 30px;
+    height: calc(100vh - 60px);
+    overflow: scroll;
+    position: absolute;
+    top: 60px;
 
     .title {
         margin-top: 10px;
@@ -47,6 +51,7 @@
 
 mat-toolbar {
     padding: 0px;
+    margin-bottom: 10px;
 }
 
 mat-card {

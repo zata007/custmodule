@@ -34,6 +34,7 @@ export class RecordComponent implements OnInit, OnDestroy {
   recordingIntervalRef: any;
   imagePreview: any;
   imageFile:any;
+  photo: string;
 
 
   constructor(
@@ -57,6 +58,7 @@ export class RecordComponent implements OnInit, OnDestroy {
         lat: params.lat,
         lng: params.lng
       }
+      this.photo = params.photo;
     });
 
     if(localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)) {
