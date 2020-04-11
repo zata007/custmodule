@@ -5,28 +5,30 @@
   <div>{{businessName}}</div>
 </mat-toolbar>
 
-<div class="recorder-container" fxLayout="column" fxLayoutAlign="center center">
-  <div *ngIf="!previewMode && !hasRecorded" class="store">
+<div class="recorder-container">
+  <!-- <div *ngIf="!previewMode && !hasRecorded" class="store">
     <img [src]="photo" alt="">
-  </div>
+  </div> -->
   <mat-card *ngIf="!hasRecorded && !previewMode" class="audio"  fxLayout="column" fxLayoutAlign="center center">
-    <div class="head4 title">Say the product names with the quantities in 1 minute</div>
+    <div class="head4 bold">Voice Order</div>
+    <div class="head4">Press this green button to start recording your order in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>. Check sample order</div>
     <div class="image {{hasRecordingStarted ? 'clicked' : null }}" (click)="onMicClick()" fxLayout="row" fxLayoutAlign="center center">
       <img src="{{hasRecordingStarted ?'../../../../assets/icons/stop.svg':'../../../../assets/icons/play.svg'}}" alt="">
     </div>
     <div *ngIf="hasRecordingStarted" class="recording-remaining">{{recordingRemaining}}sec</div>
     <div *ngIf="!previewMode && !hasRecordingStarted" fxLayout="row" fxLayoutAlign="center center">
-      <button mat-stroked-button color="primary" (click)="seeSample(audio)">Check sample</button>
+      <button mat-stroked-button color="primary" (click)="seeSample(audio)">Sample Voice Order</button>
     </div>
   </mat-card>
   <mat-card *ngIf="!previewMode && !hasRecordingStarted" class="photo" fxLayout="column" fxLayoutAlign="center center">
-    <div class="head4">Write the products name and quantities and take a photo</div>
+    <div class="head4 bold">Picture Order</div>
+    <div class="head4">Press this green button to click a picture of your order list in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b></div>
     <div fxLayout="row" fxLayoutAlign="center center" class="image {{hasRecordingStarted ? 'clicked' : null }}" (click)="fileInput.click()">
       <img src="../../../../assets/icons/photo.svg" alt="">
     </div>
     <input type='file' accept="image/*" (change)="onSelectFile($event)" #fileInput hidden>
     <div *ngIf="!previewMode && !hasRecordingStarted" fxLayout="row" fxLayoutAlign="center center">
-      <button mat-stroked-button color="primary" (click)="seeSample(image)">Check sample</button>
+      <button mat-stroked-button color="primary" (click)="seeSample(image)">Sample Picture Order</button>
     </div>
   </mat-card>
   <div *ngIf="previewMode" class="button" fxLayout="column" fxLayoutAlign="center center">
@@ -35,10 +37,10 @@
     </div>
     <div *ngIf="imagePreview" class="image-taken" fxLayout="column" fxLayoutAlign="center center">
       <img src="{{imagePreview}}" alt="">
-      <mat-icon color="primary" (click)="cancelPhoto()">cancel</mat-icon>
     </div>
-    <button mat-flat-button color="primary" (click)="onSaveClick()">SUBMIT</button>
-    <button mat-button color="primary" (click)="onCancelClick()">CANCEL</button>
+    <button mat-flat-button color="primary" (click)="onSaveClick()">Send Order</button>
+    <button *ngIf="hasRecorded" mat-button color="primary" (click)="onCancelClick()">Cancel to record your order again</button>
+    <button *ngIf="imagePreview" mat-button color="primary" (click)="onCancelClick()">Cancel to click image again</button>
   </div>
   <div *ngIf="previewMode || hasRecorded" class="head3 bold submit-text">Submit or Cancel for new entry</div>
 </div>

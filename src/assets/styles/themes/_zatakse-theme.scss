@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900&display=swap');
 
-@font-face {font-family: "ITC Eras";
-  src: url("//db.onlinewebfonts.com/t/457055c70a9c98aa64002f05d6652edc.eot");
-  src: url("//db.onlinewebfonts.com/t/457055c70a9c98aa64002f05d6652edc.eot?#iefix") format("embedded-opentype"),
-  url("//db.onlinewebfonts.com/t/457055c70a9c98aa64002f05d6652edc.woff2") format("woff2"),
-  url("//db.onlinewebfonts.com/t/457055c70a9c98aa64002f05d6652edc.woff") format("woff"),
-  url("//db.onlinewebfonts.com/t/457055c70a9c98aa64002f05d6652edc.ttf") format("truetype"),
-  url("//db.onlinewebfonts.com/t/457055c70a9c98aa64002f05d6652edc.svg#ITC Eras") format("svg");
-}
-
 @import '~@angular/material/theming';
 ////////////////////////////////////////////////////////////////////
 // zataakse (138 lines)
@@ -166,5 +157,9 @@ $zataakse-theme: mat-light-theme(mat-palette($zataakse-primary-color), mat-palet
     .ball-loader-ball{
       background-color :$primary !important;
     }
+  }
+
+  .mat-toolbar {
+    background-color: rgba(0,0,0,0)!important;
   }
 }

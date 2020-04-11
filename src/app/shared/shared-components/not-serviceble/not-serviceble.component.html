@@ -1,9 +1,7 @@
 <ng-template id="bottom2" #requestSubmit>
-  <div fxlayout="row" fxLayoutAlign="space-between">
-    <div class="head2 bold heading" style="margin-top: 20px; text-align: center;">Recommend a {{data.name == "shop" ? "Shop/Store" : "Restaurant"}}</div>
-    <button mat-icon-button aria-label="close" (click)="closePage()">
-      <mat-icon>close</mat-icon>
-    </button>
+  <div fxlayout="column">
+    <div class="head2 bold heading">Recommend a Merchant</div>
+    <div class="para">You may refer merchants at your location by providing their business name and mobile number</div>
   </div>
   <div fxLayout="column" fxLayoutAlign="space-between stretch">
     <div fxLayout="row" fxLayoutAlign="start baseline" class="flex-inline" style="margin-bottom: -20px;">
@@ -34,28 +32,41 @@
 </ng-template>
 <div>
   <ng-container class="bottom1" *ngIf="!isSubmitRequestVisible; else requestSubmit">
-    <div fxlayout="row" fxLayoutAlign="flex-end">
-      <button mat-icon-button aria-label="close" (click)="closePage()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="space-between stretch" class="content-area" style="padding: 20px;">
-      <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
-        <div class="head4 bold">
-         Not servicing:
-        </div>
-        <div class="para">
-          <mat-icon>near_me</mat-icon> {{location}}
+    <div *ngIf="message">
+      <div fxLayout="column" fxLayoutAlign="space-between stretch" class="content-area" style="padding: 20px;">
+        <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
+          <div class="head4 bold">
+            We are not serving at this location:
+          </div>
+          <div class="para">
+            <mat-icon>near_me</mat-icon> {{location}}
+          </div>
+          <br />
+          <div class="head4" style="text-align: center;">
+            Want to recommend a {{data.name}}?
+          </div>
         </div>
         <br />
-        <div class="head4" style="text-align: center;">
-          Want to recommend a {{data.name}}?
-        </div>
+        <button mat-raised-button color="primary" (click)="then()">
+          Proceed
+        </button>
       </div>
-      <br />
-      <button mat-raised-button color="primary" (click)="proceed()">
-        Recommend
-      </button>
+    </div>
+    <div *ngIf="!message">
+      <div fxLayout="column" fxLayoutAlign="space-between stretch" class="content-area" style="padding: 20px;">
+        <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
+          <div class="head4 bold">
+            Chage Location:
+          </div>
+          <div class="head4">
+            You may enter your location in the address bar above.
+          </div>
+        </div>
+        <br />
+        <button mat-raised-button color="primary" (click)="proceed()">
+          Recommend
+        </button>
+      </div>
     </div>
   </ng-container>
 </div>

@@ -173,6 +173,7 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.hasRecordingStarted = false;
     this.mediaRecorder = null;
     this.uploadedImg = null;
+    this.imagePreview = null;
   }
 
   cancelPhoto() {
