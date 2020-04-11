@@ -70,7 +70,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     }
     this.sliderIntervalRef = setInterval(() => {
       this.selected((this.selectedIndex + 1) % this.data.length);
-    }, 2500);
+    }, 10000);
   }
 
   ngOnDestroy() {
