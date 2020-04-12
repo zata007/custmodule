@@ -1,4 +1,5 @@
 <app-splash-screen></app-splash-screen>
+
 <div class="zataakse-slider-container">
   <div class="skip" fxLayout="row" fxLayoutColumn="space-between center">
     <div class="lang-selection">
@@ -34,7 +35,7 @@
       </div>
     </div>
     <div class="img-container" [ngClass]="{ selected: 3 == selectedIndex }">
-      <img class="gift" [src]="'assets/img/core/gift.png'" alt="{{ data[3].alt }}" />
+      <img class="gift" [src]="'assets/img/core/waiting-in-line.jpeg'" alt="{{ data[3].alt }}" />
       <div class="text-content">
         <div class="head4" [innerHTML]="data[3].text | translate"></div>
         <!-- <div class="aditional-txt" [innerHTML]="'MAIN_PAGE.CAROUSAL_MSG_3' | translate"></div> -->

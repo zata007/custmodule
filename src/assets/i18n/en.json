@@ -42,10 +42,10 @@
     "ORDER_NOW": "Order Now"
   },
   "MAIN_PAGE":{
-    "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span>Order food, beverages, groceries from merchants <b>on your route</b> and have them <b>delivered in your car / vehicle</b></span>",
-    "CAROUSAL_MSG_2": "<h1 class='head1 logo'>Zataakse</h1><br /><span>Order food, beverages, groceries from merchants <b>near by</b> and have them <b>delivered at your address</b></span>",
-    "CAROUSAL_MSG_3": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Order ahead</b> before you reach the restaurant, fast food joint or store to <b>avoid queue and your order shall be ready when you reach</b></span>",
-    "CAROUSAL_MSG_4": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Order essential goods</b> from nearby shop during lockdown to <b>avoid queue and maintain social distancing</b></span>",
+    "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Takeaway</b><br /><br />Order food, beverages, groceries from merchants <b>on your route</b> and have them <b>delivered in your car / vehicle</b></span>",
+    "CAROUSAL_MSG_2": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Delivery</b><br /><br />Order food, beverages, groceries from merchants <b>near by</b> and have them <b>delivered at your address</b></span>",
+    "CAROUSAL_MSG_3": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Order Ahead</b><br /><br /><b>Order ahead</b> before you reach the restaurant, fast food joint or store to <b>avoid queue and your order shall be ready when you reach</b></span>",
+    "CAROUSAL_MSG_4": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Essential Goods</b><br /><br /><b>Order essential goods</b> from nearby shop during lockdown to <b>avoid queue and maintain social distancing</b></span>",
     "CAROUSAL_MSG_5": "<br><span>Rs. 50/- On Registration <br> Rs. 50/- On per successful referral </span>",
     "EXCITING_LAUNCH_OFFER":"Exciting Launch Offers",
     "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
