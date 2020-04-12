@@ -42,19 +42,19 @@
     <div fxLayout="column" fxLayoutAlign="space-between stretch" class="content-area" style="padding: 20px;">
       <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap.xs="10px">
         <div class="head4 bold">
-         Not servicing:
+        {{"NOT_SERVICING" | translate}}:
         </div>
         <div class="para">
           <mat-icon>near_me</mat-icon> {{location}}
         </div>
         <br />
         <div class="head4" style="text-align: center;">
-          Want to recommend a {{data.name}}?
+          {{"WANT_TO_RECOM" | translate}} {{data.name}}?
         </div>
       </div>
       <br />
       <button mat-raised-button color="primary" (click)="proceed()">
-        Recommend
+        {{"RECOMENDED"| translate}}
       </button>
     </div>
   </ng-container>

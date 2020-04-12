@@ -4,6 +4,24 @@
   "RESEND_OTP":"Resend OTP",
   "TERMS":"terms and conditions",
   "VERIFY":"Verify",
+  "ESSENTIAL_SERVICE_TITLE": "Essential Services",
+  "PROVIDE_YOUR_LOCATION" : "Provide your delivery location",
+  "CHECK_SAMPLE": "Check sample",
+  "ORDER_ESSENTIAL" : "Order Essentials",
+  "ORDER_TYPE": "Order type",
+  "ORDER_DATE_TIME" : "Order Date/Time",
+  "ORDER_STATUS": "Order Status",
+  "RECOMENDED": "Recommend",
+  "CANCEL": "CANCEL",
+  "SUBMIT": "SUBMIT",
+  "NOT_SERVICING": "Not servicing",
+  "WANT_TO_RECOM": "Want to recommend a",
+  "MERCHANT_DETAILS": "Merchant Details",
+  "OPEN_ATTACH_FILE": "Open Attached File",
+  "PAYMENT_SUM" : "Payment Summary",
+  "PAYMENT_METHOD" : "Payment method",
+  "TOTAL_AMMOUNT": "Total Amount",
+  "CHECK_CURRENT_STATUS": "Check current Status",
   "LANDING_PAGE":{
     "TAG_LINE" : "Zataakse...",
     "REGISTRATION_TITLE" : "Register",
@@ -78,6 +96,13 @@
     "PLEASE_ENTER_OTP":"Please Enter the OTP <br>received on {{userMobileNumber}}",
     "CONGRATS_REGISTRATION":"Congrats!! Registration Successful",
     "EMAILED_COUPAN_CODE": "Rs. 50/- Coupoun code has emailed<br>to your email address !"
+
+  },
+  "ESSENTIAL_SERVICE":{
+    "SERVICE_SUSPENDED" : "Hi, due to COVID19 our services are temporarilly suspended, however you can order essentials goods from your near by shops",
+    "SAY_THE_PRODUCT_NAME" : "Say the product names with the quantities in 1 minute",
+    "WRITE_PRODUCT_AND_QUANTITY": "Write the products name and quantities and take a photo",
+    "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel for new entry"
 
   }
 }

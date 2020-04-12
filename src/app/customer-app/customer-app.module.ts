@@ -52,6 +52,7 @@ import { OrderDetailComponent } from './order-list/order-detail/order-detail.com
 import { OrderStatusComponent } from './order-status/order-status.component';
 import { LanguageComponent } from './language/language.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     RouterModule.forChild(CustomerAppRoutes),
     SwiperModule,
     FlexLayoutModule,
+    TranslateModule.forChild()
   ],
   bootstrap: [CustomerLayoutComponent],
   providers: [CustomerService, OrderService, NgxImageCompressService],

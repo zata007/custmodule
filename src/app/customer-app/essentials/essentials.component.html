@@ -3,7 +3,7 @@
     <button mat-button color="primary" type="button" mat-icon-button (click)="onBackClick()">
       <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
     </button>
-    <div class="head3 bold">Essential Services</div>
+    <div class="head3 bold">{{"ESSENTIAL_SERVICE_TITLE" | translate}}</div>
     <div></div>
   </mat-toolbar>
   <div class="input-area">
@@ -20,12 +20,12 @@
     </div>
     <ng-template #customContent>
       <div style="border-radius: 10px">
-        Provide your delivery location
+        {{"PROVIDE_YOUR_LOCATION" | translate}}
       </div>
     </ng-template>
     <ng-template #counter> </ng-template>
     <ng-template #doneButton>
-      <button mat-raised-button color="primary" (click)="onOnboardingCompletion()">Okay</button>
+      <button mat-raised-button color="primary" (click)="onOnboardingCompletion()">{{"OKAY" | translate}}</button>
     </ng-template>
   </div>
   <div class="map-area">
