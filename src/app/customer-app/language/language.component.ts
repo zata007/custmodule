@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../shared/services/data.service';
 import { IProfileData } from '../../shared/models/common-model';
-import { ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants';
+import { ZATAAKSE_PROFILE_DATA, ZATAAKSE_PREF_LANG } from '../../shared/constants/constants';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./language.component.scss']
 })
 export class LanguageComponent implements OnInit {
-  profile : IProfileData;
+  profile : IProfileData = null;
   selectedLanguage: string;
   updateProfile: any = [];
   profileForm: FormGroup;
@@ -35,7 +35,9 @@ export class LanguageComponent implements OnInit {
       language: new FormControl(''),
     })
 
-    this.profile = JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA));
+    if(localStorage.getItem(ZATAAKSE_PROFILE_DATA)) {
+      this.profile = JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA));
+    }
   }
 
   onBackClick() {
@@ -46,9 +48,14 @@ export class LanguageComponent implements OnInit {
     this.updateProfile = {
       indLanPref: this.profileForm.value['language']
     }
-    this.dataService.updateProfile(this.updateProfile).subscribe((res:any) => {
-      this.snackBar.open(res.message)
-    });
+
+    localStorage.setItem(ZATAAKSE_PREF_LANG, this.updateProfile.indLanPref);
+
+    if(this.profile) {
+      this.dataService.updateProfile(this.updateProfile).subscribe((res:any) => {
+        this.snackBar.open(res.message)
+      });
+    }
   }
 
 }

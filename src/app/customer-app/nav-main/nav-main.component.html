@@ -50,7 +50,8 @@
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}" (click)="onNavigate('order-ahead')">Order Ahead</button>
       </div>
       <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"  (click)="onCartClick()">
-        <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon>
+        <!-- <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon> -->
+        <mat-icon color="dark" (click)="onSideNavClick('Language')">language</mat-icon>
       </button>
     </mat-toolbar>
     <ng-template #other>
