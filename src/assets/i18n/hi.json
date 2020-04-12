@@ -1,39 +1,68 @@
 {
+
     "NEXT":"आगे",
     "OKAY": "ठीक है",
     "RESEND_OTP":"ओटीपी पुनः भेजें",
     "TERMS":"नियम और शर्तें",
-    "VERIFY":"Verify",
+    "VERIFY":"जाँचे ले ",
+    "ESSENTIAL_SERVICE_TITLE": "अति आवश्यक सेवाएं",
+    "PROVIDE_YOUR_LOCATION" : "आपकी लोकेशन बताये",
+    "CHECK_SAMPLE": "उदाहरण",
+    "SAMPLE_VOICE_ORDER": "उदाहरण आर्डर",
+    "SEND_ORDER": "आर्डर करे",
+    "PICTURE_ORDER": "पिक्चर आर्डर",
+    "ORDER_ESSENTIAL" : "अति आवश्यक आर्डर",
+    "ORDER_TYPE": "आर्डर वर्ग",
+    "ORDER_DATE_TIME" : "आर्डर दिनांक/समय",
+    "ORDER_STATUS": "आर्डर स्थिति",
+    "RECOMENDED": "सुझाव",
+    "CANCEL": "रद्द करें",
+    "SUBMIT": "भेजे",
+    "NOT_SERVICING": "सेवाएं उपलब्ध नही",
+    "WANT_TO_RECOM": "सुझाव देना चाहेंगे",
+    "MERCHANT_DETAILS": "जानकारी",
+    "OPEN_ATTACH_FILE": "फाइल चेक करे",
+    "PAYMENT_SUM" : "पेमेंट संक्षेप",
+    "PAYMENT_METHOD" : "पेमेंट तरीका",
+    "TOTAL_AMMOUNT": "कुल रकम",
+    "CHECK_CURRENT_STATUS": "वर्तमान स्थिति जांचे",
+    "VOICE_ORDER": "वौइस् आर्डर",
+
+
     "LANDING_PAGE":{
-      "TAG_LINE" : "Zataakse...",
+      "TAG_LINE" : "झटाकसे",
       "REGISTRATION_TITLE" : "रजिस्टर",
-      "AGREEMENT_TEXT" : "I agree to ",
-      "FIRST_NAME":"First Name",
-      "LAST_NAME":"Last Name",
-      "EMAIL":"Email",
-      "PHONE":"Phone",
-      "EMAIL_TOOLTIP":"You will receive offers and gifts on this email.",
-      "MOBILE_TOOLTIP" :"You will receive OTP on this mobile number.",
-      "TOP_TEXT" : "Get upto ₹200 on Succesful Registration",
-      "REFERAL_CODE":"Referal Code (Optional)",
-      "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
+      "AGREEMENT_TEXT" : "मुझे स्वीकार है",
+      "FIRST_NAME":"पहला नाम",
+      "LAST_NAME":"परिवार का नाम",
+      "EMAIL":"ईमेल",
+      "PHONE":"फ़ोन",
+      "EMAIL_TOOLTIP":"ऑफर्स और गिफ्ट्स आपके ईमेल पर भेजे जाएंगे",
+      "MOBILE_TOOLTIP" :"इस मोबाइल नंबर पर OTP भेजा जाएगा",
+      "TOP_TEXT" : "सही पंजीकरण पर ₹200 तक के उपहार पाए",
+      "REFERAL_CODE":"रेफेरल कोड (ऐच्छिक)",
+      "TOOLTIP_COMPLETE_ALL_FIELDS":"कृपया सभी आवश्यक फ़ील्ड पूर्ण करें",
       "ORDER_NOW": "आर्डर करे"
     },
+
+
     "MAIN_PAGE":{
-      "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span>सफर के दौरान आपके <b>रास्ते में</b> आनेवाले दुकानों से खानपान या किराना आर्डर कर्रें और आपके <b>वाहन में डिलीवरी</b> पाए </span>",
-      "CAROUSAL_MSG_2": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>अड़ोस पड़ोस</b> के दुकानों से खानपान या किराना आर्डर करे और अपने <b>पते पर डिलीवरी</b> पाय </span>",
-      "CAROUSAL_MSG_3": "<h1 class='head1 logo'>Zataakse</h1><br /><span>रेस्टोरेंट, फास्ट फ़ूड जॉइंट या दुकानों पर <b>पहुंचने से पहले आर्डर अहेड</b> करिये और <b>लाइन से बचे</b> तथा आप के पहोचने तक <b>आपका आर्डर तैयार</b> पाय </span>",
-      "CAROUSAL_MSG_4": "<h1 class='head1 logo'>Zataakse</h1><br /><span>लॉक डाउन के दौरान <b>अति आवश्यक सामान</b>, आस पास के दुकानों से आसानी मंगाए। <b>कतार से बचे और सोशिअल डिस्टेंस बनाये रखे। </b></span>",
-      "CAROUSAL_MSG_5": "<br><span>Rs. 50/- On Registration <br> Rs. 50/- On per successful referral </span>",
+      "CAROUSAL_MSG_1": "<h1 class='head1 logo'>झटाकसे</h1><br /><span><b>टेकअवे</b><br /><br />सफर के दौरान आपके <b>रास्ते में</b> आनेवाले दुकानों से खानपान या किराना सामान आर्डर कर्रें और आपके <b>वाहन में डिलीवरी</b> पाए |</span>",
+      "CAROUSAL_MSG_2": "<h1 class='head1 logo'>झटाकसे</h1><br /><span><b>डिलीवरी</b><br /><br />आस पास</b> के दुकानों से खानपान या किराना सामान आर्डर करे और अपने <b>पते पर डिलीवरी</b> पाए |</span>",
+      "CAROUSAL_MSG_3": "<h1 class='head1 logo'>झटाकसे</h1><br /><span><b>आर्डर अहेड</b><br /><br />रेस्टोरेंट, फास्ट फ़ूड जॉइंट या दुकानों पर पहुंचने से पहले <b>आर्डर अहेड</b> करिये और <b>लाइन से बचिए !</b> आप के पहोचने पर <b>आपका आर्डर तैयार</b> पाए |</span>",
+      "CAROUSAL_MSG_4": "<h1 class='head1 logo'>झटाकसे</h1><br /><span><b>अति आवश्यक चीज़े</b><br /><br />लॉक डाउन के दौरान <b>अति आवश्यक सामान</b>, आस पास के दुकानों से आसानी मंगाए। <b>कतार से बचे और सोशिअल डिस्टेंस बनाये रखे | </b></span>",
+      "CAROUSAL_MSG_5": "<br><span>Rs. 50/- On Registration <br> Rs. 50/- per successful referral </span>",
       "EXCITING_LAUNCH_OFFER":"Exciting Launch Offers",
       "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
-      "OFFER_NEAR_ME":"Seems you have disabled location for Zataakse, please allow location permissionto use Zataakse",
-      "NEED_LOCATION_FOR_OFFER": "झटाकसे को आपके लिए सर्वोत्तम विकल्प खोजने के लिए आपके स्थान की जानकारी तक पहुँच की आवश्यकता है ! <br>स्थान साझा करने के लिए संकेत दिए जाने पर कृपया स्वीकार <b>Accept</b> करें चुनें",
-      "TERMS": "Terms & Conditions",
-      "ENABLE": "Steps to enable location",
+      "OFFER_NEAR_ME":"आपकी लोकेशन सेवा बंद है। कृपया झटाकसे को लोकेशन जानने की अनुमति दे।  ",
+      "NEED_LOCATION_FOR_OFFER": "झटाकसे को आपके लिए सर्वोत्तम विकल्प खोजने के लिए आपके स्थान की जानकारी की आवश्यकता है ! <br><br>स्थान साझा करने के लिए संकेत दिए जाने पर कृपया स्वीकार (<b>Allow</b>) करें चुनें |<br>",
+      "TERMS": "नियम और शर्तें",
+      "ENABLE": "स्थान सक्षम करने के लिए कदम",
       "SELECT_LANGUAGE":"Language / भाषा",
       "GET_STARTED": "आगे"
     },
+    
+    
     "SNACK_PAGE":{
       "QUESTION_1":{
         "LABEL":"How do you commute everyday ?",
@@ -75,10 +104,30 @@
         "LABEL_D":"Mughlai",
         "LABEL_E":"Street food / Local cuisine"
       },
-      "PLEASE_ENTER_OTP":"Please Enter the OTP <br>received on {{userMobileNumber}}",
-      "CONGRATS_REGISTRATION":"Congrats!! Registration Successful",
-      "EMAILED_COUPAN_CODE": "Rs. 50/- Coupoun code has emailed<br>to your email address !"
   
-    }
+  
+      "PLEASE_ENTER_OTP":"कृपया {{userMobileNumber}}पे <br>SMS में प्राप्त  OTP दर्ज करें",
+      "CONGRATS_REGISTRATION":"बधाई !!! पंजीकरण सफल",
+      "EMAILED_COUPAN_CODE": "Rs. 50/- कूपन कोड <br>आपके ईमेल पर भेजा गया है ।!"
+  
+    },
+
+    "ESSENTIAL_SERVICE":{
+      "SERVICE_SUSPENDED" : "Hi, due to COVID19 our services are temporarilly suspended, however you can order essentials goods from your near by shops",
+      "SAY_THE_PRODUCT_NAME" : "Say the product names with the quantities in 1 minute",
+      "WRITE_PRODUCT_AND_QUANTITY": "Write the products name and quantities and take a photo",
+      "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel for new entry",
+      "PRESS_THE_GREEN_BTN": "इस हरे बटन को दबाएं to start recording your order in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>. Check sample order",
+      "PRESS_THE_GREEN_BTN_PIC": "इस हरे बटन को दबाएं to click a picture of your order list in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>",
+      "CANCEL_TO_RECORD": "रद्द करेंrecord your order again",
+      "CANCEL_TO_SCAN": "रद्द करें click image again",
+      "SUBMIT_OR_CANCEL_ENTRY": "भेजे or रद्द करें for new entry"
+  
+    },
+
+  "Zataakse regular services have been suspended due to lockdown":"झटाकसे की नियमित सेवाएं, लॉक डाउन का कारण रद की गयी है।",
+  "You can order essentials goods from merchants near you, by recording a voice message or clicking picture of item list. Check samples.":"आपकी आवाज़ में सामान की आर्डर रिकॉर्ड कर या आपकी सामान की लिस्ट की तस्वीर खींच कर - आर्डर करे| उदाहरण देखे | "
+
+
   }
   

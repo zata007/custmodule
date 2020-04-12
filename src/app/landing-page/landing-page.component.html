@@ -15,6 +15,7 @@
       <mat-icon color="primary">arrow_forward</mat-icon>
     </button>
   </div>
+
   <mat-card matRipple class="slider-content-container mat-elevation-z8" (swipe)="onSwipe($event)">
     <div class="img-container" [ngClass]="{ selected: 0 == selectedIndex }">
       <img [src]="data[0].img" alt="{{ data[0].alt }}" />
