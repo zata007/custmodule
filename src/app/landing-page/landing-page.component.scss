@@ -7,9 +7,18 @@
   overflow: hidden;
   background-color: #ffffff;
   .skip {
+    width: 100vw;
+    padding: 0px 5px;
     display: flex;
-    justify-content: flex-end;
-    margin-right: 90px;
+    justify-content: space-between;
+    align-items: center;
+    .lang-selection {
+      width: 45%;
+    }
+    .order-btn {
+      margin: 0px;
+      padding: 0px;
+    }
   }
   .slider-content-container {
     position: relative;

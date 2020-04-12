@@ -6,10 +6,10 @@
 <div class="language-change-container" [formGroup]="profileForm">
     <label id="Lang" color="primary">Language Preference</label>
     <mat-radio-group aria-labelledby="Lang" fxLayout="column" fxLayoutAlign="flex-start" formControlName='language' (change)="language()">
-        <mat-radio-button color="accent" value="en" checked="{{profile.indDetail.basic.indFoodPref == 'en'}}">English</mat-radio-button>
-        <mat-radio-button color="accent" value="hi" checked="{{profile.indDetail.basic.indFoodPref == 'hi'}}">Hindi</mat-radio-button>
-        <mat-radio-button color="accent" value="bn" checked="{{profile.indDetail.basic.indFoodPref == 'bn'}}">Bengali</mat-radio-button>
-        <mat-radio-button color="accent" value="mr" checked="{{profile.indDetail.basic.indFoodPref == 'mr'}}">Marathi</mat-radio-button>
-        <mat-radio-button color="accent" value="gu" checked="{{profile.indDetail.basic.indFoodPref == 'gu'}}">Gujrati</mat-radio-button>
+        <mat-radio-button color="accent" value="en">English</mat-radio-button>
+        <mat-radio-button color="accent" value="hi">Hindi</mat-radio-button>
+        <mat-radio-button color="accent" value="bn">Bengali</mat-radio-button>
+        <mat-radio-button color="accent" value="mr">Marathi</mat-radio-button>
+        <mat-radio-button color="accent" value="gu">Gujrati</mat-radio-button>
     </mat-radio-group>
 </div>
