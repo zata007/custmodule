@@ -66,4 +66,7 @@ mat-card {
         max-width: 100%;
         max-height: 100%;
     }
+    @media(min-width: 678px) {
+        height: 300px;
+    }
 }

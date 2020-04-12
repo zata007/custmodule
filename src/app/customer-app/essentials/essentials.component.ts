@@ -77,7 +77,7 @@ export class EssentialsComponent implements OnInit {
     public dialog: MatDialog,
     private dataService: DataService,
     private bottomSheet: MatBottomSheet,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
   ) {}
 
   ngOnInit() {
