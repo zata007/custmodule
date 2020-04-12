@@ -15,6 +15,7 @@ export class NotServicebleComponent implements OnInit {
   location = '';
   mailText = '';
   name = '';
+  message: boolean = true;
   restaurantData = {
     name: '',
     contact: '',
@@ -44,6 +45,10 @@ export class NotServicebleComponent implements OnInit {
 
   proceed(){
     this.isSubmitRequestVisible = true;
+  }
+
+  then() {
+    this.message = false;
   }
 
   mailMe() {

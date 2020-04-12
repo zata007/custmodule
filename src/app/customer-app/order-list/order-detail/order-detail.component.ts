@@ -79,11 +79,11 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
     window.open(this.data.file);
   }
 
-  checkOrderStatus() {
-    this.customerService.getTransactionHistory(localStorage.getItem(ZATAAKSE_JWT_TOKEN), '1', this.customerStateservice.getOrderId())
-    .subscribe((data: any) => {
-      this.data = data.data.data[0];
-    })
+  checkOrderStatus() {	
+    this.customerService.getTransactionHistory(localStorage.getItem(ZATAAKSE_JWT_TOKEN), '1', this.customerStateservice.getOrderId())	
+    .subscribe((data: any) => {	
+      this.data = data.data.data[0];	
+    })	
   }
 
 }

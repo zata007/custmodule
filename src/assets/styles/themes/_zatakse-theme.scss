@@ -158,4 +158,8 @@ $zataakse-theme: mat-light-theme(mat-palette($zataakse-primary-color), mat-palet
       background-color :$primary !important;
     }
   }
+
+  .mat-toolbar {
+    background-color: rgba(0,0,0,0)!important;
+  }
 }

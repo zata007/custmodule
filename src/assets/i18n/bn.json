@@ -22,13 +22,13 @@
   "MAIN_PAGE":{
     "CAROUSAL_MSG_1": "<br><b>প্রতিদিন</b> <h5>ট্রাফিকে আটকে থাকেন?</h5><br><h4>আপনার জন্য এসে গেছে - </h4> <h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><br><h5><strong>খাবার</strong> এবং <strong>পানীয়</strong> order করুন এবং <strong>ডেলিভারি পেয়ে যান</strong> আপনার নির্ধারিত রুটের কোন <strong>pit-stop এ</strong></h5>",
     "CAROUSAL_MSG_2": "<br><h5>যদি আপনি <b>প্রতিদিন এই অবস্থায় থাকেন</b><br><br>আপনার জন্য এসে গেলো<br><h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse...</strong></h1><br><h5> যেই লোভনীয় <strong>খাবার  আপনার পছন্দ,</strong> সেটাই অর্ডার দিন</h5>",
-    "CAROUSAL_MSG_3": "<br><h5>আপনার <b>রুটে</b> পরবর্তী <b>১০-১৫ মিনিটের</b> মধ্যে একটি</h5><br><h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><h4>পিট স্টপে </h4><br><h5>ডেলিভারি পেয়ে যান আর <b>রওনা দিন</b> আপনার <b>গন্তব্য স্থানে</b></h5>",
+    "CAROUSAL_MSG_3": "<br><h5>আপনার <b>রুটে</b> পরবর্তী <b>১০-১৫ মিনিটের</b> মধ্যে একটি</h5><br><h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><br><h4>পিট স্টপে </h4><br><h5>ডেলিভারি পেয়ে যান আর <b>রওনা দিন</b> আপনার <b>গন্তব্য স্থানে</b></h5>",
     "CAROUSAL_MSG_4": "<br><h5>সেই <b>জলখাবারের দোকানের</b> পাশ দিয়ে আপনি </b>প্রতিদিন যাতায়াত করেন? </h5><br><h1 style=\"font-family: 'ITC Eras';\"><strong>Zataakse</strong></h1><h4>তে </h4><br><h5>তারা এখন আপনার <b>গাড়িতে</b> খাবার পৌঁছে দিচ্ছে</h5>",
     "EXCITING_LAUNCH_OFFER":"আকর্ষণীয় অফার",
     "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
     "OFFER_NEAR_ME":"আপনার কাছাকাছি অফার সন্ধান করতে আপনার অবস্থান প্রয়োজন",
     "TERMS": "চুক্তি ও শর্তাবলী",
-    "SELECT_LANGUAGE":"আপনার ভাষা বেছে নিন",
+    "SELECT_LANGUAGE":"Language / ভাষা",
     "GET_STARTED": "এবার শুরু করা যাক"
   },
   "SNACK_PAGE":{

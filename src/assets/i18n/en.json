@@ -6,7 +6,10 @@
   "VERIFY":"Verify",
   "ESSENTIAL_SERVICE_TITLE": "Essential Services",
   "PROVIDE_YOUR_LOCATION" : "Provide your delivery location",
-  "CHECK_SAMPLE": "Check sample",
+  "CHECK_SAMPLE": "Sample Picture Order",
+  "SAMPLE_VOICE_ORDER": "Sample Voice Order",
+  "SEND_ORDER": "Send Order",
+  "PICTURE_ORDER": "Picture Order",
   "ORDER_ESSENTIAL" : "Order Essentials",
   "ORDER_TYPE": "Order type",
   "ORDER_DATE_TIME" : "Order Date/Time",
@@ -22,6 +25,7 @@
   "PAYMENT_METHOD" : "Payment method",
   "TOTAL_AMMOUNT": "Total Amount",
   "CHECK_CURRENT_STATUS": "Check current Status",
+  "VOICE_ORDER": "Voice Order",
   "LANDING_PAGE":{
     "TAG_LINE" : "Zataakse...",
     "REGISTRATION_TITLE" : "Register",
@@ -29,7 +33,7 @@
     "FIRST_NAME":"First Name",
     "LAST_NAME":"Last Name",
     "EMAIL":"Email",
-    "PHONE":"Phone",
+    "PHONE":"Your mobile number",
     "EMAIL_TOOLTIP":"You will receive offers and gifts on this email.",
     "MOBILE_TOOLTIP" :"You will receive OTP on this mobile number.",
     "TOP_TEXT" : "Get upto ₹200 on Succesful Registration",
@@ -38,19 +42,19 @@
     "ORDER_NOW": "Order Now"
   },
   "MAIN_PAGE":{
-    "CAROUSAL_MSG_1": "<br><span>Stuck in Traffic – <b>Everyday</b> ?</span><br> <span><h1 class='head1'>Zataakse</h1></span><span>is for you ...<br><br/>Order Food & Beverages  and have them delivered at a pit-stop on your route</span>",
-    "CAROUSAL_MSG_2": "<br><span>If this is your <b>daily view ...</b><br/><span><h1 class='head1'>Zataakse</h1></span><span>is to rescue ...</span><br/><br/><span>Order that <strong>sandwich..</strong> or <strong>juice..</strong> or <strong>coffee..</strong> that you always wanted to try</span>",
-    "CAROUSAL_MSG_3": "<br><span>Within <b>10-15 minutes </b>on your <b>route</b> at</span><br><span><h1 class='head1'>Zataakse</h1></span><span>Pit-Stop ... </span><br/><br/><span>Have your favourites delivered to your <b> vehicle</b> and <b>keep moving</b></span>",
-    "CAROUSAL_MSG_4": "<br><span>Get Coupons worth Upto</span><br/><h3 class='head1'>₹200/-</h3><span>On Successful Registration</span>",
+    "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span>Order food, beverages, groceries from merchants on your route and have them delivered in your car/vehicle</span>",
+    "CAROUSAL_MSG_2": "<h1 class='head1 logo'>Zataakse</h1><br /><span>Order food, beverages, groceries from merchants near by and have them delivered at your address</span>",
+    "CAROUSAL_MSG_3": "<h1 class='head1 logo'>Zataakse</h1><br /><span>Place your order before you reach the merchant establishment to avoid queue</span>",
+    "CAROUSAL_MSG_4": "<h1 class='head1 logo'>Zataakse</h1><br /><span>Order essential goods from nearby shop during lockdown to avoid queue and maintain social distancing</span>",
     "CAROUSAL_MSG_5": "<br><span>Rs. 50/- On Registration <br> Rs. 50/- On per successful referral </span>",
     "EXCITING_LAUNCH_OFFER":"Exciting Launch Offers",
     "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
     "OFFER_NEAR_ME":"Seems you have disabled location for Zataakse, please allow location permissionto use Zataakse",
-    "NEED_LOCATION_FOR_OFFER": "Zataakse requires access to your location information to find best food options for you. Please select Accept when prompted for sharing location.",
+    "NEED_LOCATION_FOR_OFFER": "Zataakse requires access to your location information to find best options for you. <br>Please select <b>Accept</b> when prompted for sharing location.",
     "TERMS": "Terms & Conditions",
     "ENABLE": "Steps to enable location",
-    "SELECT_LANGUAGE":"Choose you language",
-    "GET_STARTED": "Get Started"
+    "SELECT_LANGUAGE":"Language / भाषा",
+    "GET_STARTED": "Next"
   },
   "SNACK_PAGE":{
     "QUESTION_1":{
@@ -102,7 +106,12 @@
     "SERVICE_SUSPENDED" : "Hi, due to COVID19 our services are temporarilly suspended, however you can order essentials goods from your near by shops",
     "SAY_THE_PRODUCT_NAME" : "Say the product names with the quantities in 1 minute",
     "WRITE_PRODUCT_AND_QUANTITY": "Write the products name and quantities and take a photo",
-    "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel for new entry"
+    "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel for new entry",
+    "PRESS_THE_GREEN_BTN": "Press this green button to start recording your order in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>. Check sample order",
+    "PRESS_THE_GREEN_BTN_PIC": "Press this green button to click a picture of your order list in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>",
+    "CANCEL_TO_RECORD": "Cancel to record your order again",
+    "CANCEL_TO_SCAN": "Cancel to click image again",
+    "SUBMIT_OR_CANCEL_ENTRY": "Submit or Cancel for new entry"
 
   }
 }

@@ -1,34 +1,22 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-} from "@angular/core";
-import { Location } from "@angular/common";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CustomerStateService } from "../../customer-state.service";
-import { OrderService } from "../../order.service";
-import { CustomerService } from "../../customer.service";
-import { ECustomerServiceType } from "src/app/shared/constants/constants";
-import {
-  ZATAAKSE_JWT_TOKEN,
-  ZATAAKSE_PREF_LANG,
-  LOCAL_STORAGE_FINGERPRINT,
-} from "../../../shared/constants/constants";
-import { ISampleFile } from "../../../shared/models/common-model";
-import { MatSnackBar } from "@angular/material";
-import { NgxImageCompressService, DOC_ORIENTATION } from "ngx-image-compress";
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerStateService } from '../../customer-state.service';
+import { OrderService } from '../../order.service';
+import { CustomerService } from '../../customer.service'
+import { ECustomerServiceType } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG, LOCAL_STORAGE_FINGERPRINT } from '../../../shared/constants/constants'
+import { ISampleFile } from '../../../shared/models/common-model';
+import { NgxImageCompressService, DOC_ORIENTATION } from 'ngx-image-compress';
 
 declare var MediaRecorder: any;
 @Component({
-  selector: "app-record",
-  templateUrl: "./record.component.html",
-  styleUrls: ["./record.component.scss"],
+  selector: 'app-record',
+  templateUrl: './record.component.html',
+  styleUrls: ['./record.component.scss']
 })
 export class RecordComponent implements OnInit, OnDestroy {
-  @ViewChild("recordedPlayer", { static: false }) recordedPlayer: ElementRef;
-  selectedImage: File;
+  @ViewChild('recordedPlayer', {static: false}) recordedPlayer: ElementRef;
   uploadedImg: any = null;
   mediaRecorder = null;
   hasRecorded = false;
@@ -41,11 +29,13 @@ export class RecordComponent implements OnInit, OnDestroy {
   audioChunks: any;
   audio: string;
   image: string;
-  imageFile: File;
-  position: { lat: number; lng: number };
+  position: {lat: number; lng: number };
   recordingRemaining = 0;
   recordingIntervalRef: any;
   imagePreview: any;
+  imageFile:any;
+  photo: string;
+
 
   constructor(
     private location: Location,
@@ -54,40 +44,40 @@ export class RecordComponent implements OnInit, OnDestroy {
     private router: Router,
     private orderService: OrderService,
     private customerService: CustomerService,
-    private snackBar: MatSnackBar,
     private imageCompress: NgxImageCompressService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe(params => {
       if (!params.id) {
-        this.router.navigate(["customer"]);
+        this.router.navigate(['customer']);
       }
       this.businessId = params.id;
       this.businessName = params.name;
       this.position = {
         lat: params.lat,
-        lng: params.lng,
-      };
+        lng: params.lng
+      }
+      this.photo = params.photo;
     });
 
-    if (localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)) {
-      this.customerService
-        .getSampleFile(
-          localStorage.getItem(LOCAL_STORAGE_FINGERPRINT),
-          this.position,
-          localStorage.getItem(ZATAAKSE_PREF_LANG)
-        )
-        .subscribe((res: ISampleFile) => {
-          console.log(res);
-          if (res && res.data) {
-            (this.audio = res.data.audio), (this.image = res.data.image);
-            console.log(this.audio, this.image);
+    if(localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)) {
+      this.customerService.getSampleFile(
+        localStorage.getItem(LOCAL_STORAGE_FINGERPRINT),
+        this.position,
+        localStorage.getItem(ZATAAKSE_PREF_LANG)).
+        subscribe((res: ISampleFile) => {
+          console.log(res)
+          if(res && res.data) {
+            this.audio = res.data.audio,
+            this.image = res.data.image
+            console.log(this.audio, this.image)
           }
-        });
+      });
     } else {
-      this.router.navigate(["/login-signup"]);
+      this.router.navigate(['/login-signup']);
     }
+
   }
 
   ngOnDestroy(): void {
@@ -101,69 +91,61 @@ export class RecordComponent implements OnInit, OnDestroy {
       clearInterval(this.recordingIntervalRef);
     } else {
       // start recording
-      navigator.mediaDevices
-        .getUserMedia({ audio: true, video: false })
-        .then((stream) => {
-          this.hasRecordingStarted = true;
-          this.mediaRecorder = new MediaRecorder(stream, {
-            mimeType: "audio/webm",
-          });
-          this.mediaRecorder.start();
-          this.recordingRemaining = 60;
-          this.recordingIntervalRef = setInterval(() => {
-            this.recordingRemaining -= 1;
-            if (this.recordingRemaining < 1) {
-              // clear interval and stop recording
-              if (this.mediaRecorder.state !== "inactive") {
-                this.mediaRecorder.stop();
-              }
-              clearInterval(this.recordingIntervalRef);
+     navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(stream => {
+        this.hasRecordingStarted = true;
+        this.mediaRecorder = new MediaRecorder(stream, {mimeType: 'audio/webm'});
+        this.mediaRecorder.start();
+        this.recordingRemaining = 60;
+        this.recordingIntervalRef = setInterval(() => {
+          this.recordingRemaining -= 1;
+          if (this.recordingRemaining < 1) {
+            // clear interval and stop recording
+            if (this.mediaRecorder.state !== 'inactive') {
+              this.mediaRecorder.stop();
             }
-          }, 1000);
+            clearInterval(this.recordingIntervalRef);
+          }
+        }, 1000);
 
-          const audioChunks = [];
-          this.mediaRecorder.addEventListener("dataavailable", (event) => {
-            audioChunks.push(event.data);
-          });
-
-          this.mediaRecorder.addEventListener(
-            "stop",
-            () => {
-              stream.getTracks().forEach((t) => t.stop());
-              this.audioChunks = audioChunks;
-              this.audioUrl = URL.createObjectURL(new Blob(audioChunks));
-              this.recordedAudio = new Audio(this.audioUrl);
-              // TODO: This recorded audio can be sent to backend
-              this.hasRecorded = true;
-              this.previewMode = true;
-              setTimeout(() => {
-                this.recordedPlayer.nativeElement.src = this.audioUrl;
-              }, 100);
-            },
-            { once: true }
-          );
+        const audioChunks = [];
+        this.mediaRecorder.addEventListener('dataavailable', event => {
+          audioChunks.push(event.data);
         });
+
+        this.mediaRecorder.addEventListener('stop', () => {
+          stream.getTracks().forEach(t => t.stop());
+          this.audioChunks = audioChunks;
+          this.audioUrl = URL.createObjectURL(new Blob(audioChunks));
+          this.recordedAudio = new Audio(this.audioUrl);
+          // TODO: This recorded audio can be sent to backend
+          this.hasRecorded = true;
+          this.previewMode = true;
+          setTimeout(() => {
+            this.recordedPlayer.nativeElement.src = this.audioUrl;
+          }, 100);
+        }, {once: true});
+      });
     }
+
   }
 
   onSaveClick() {
-    this.customerStateService.updateCurrentService(
-      ECustomerServiceType.Essential
-    );
+    this.customerStateService.updateCurrentService(ECustomerServiceType.Essential);
     // Set data to be used in cart-view page
     let recordingFile;
     if (this.hasRecorded) {
-      const recording = new Blob(this.audioChunks, { type: "audio" });
-      recordingFile = new File([recording], "test.wav", { type: "audio/wav" });
+      const recording = new Blob(this.audioChunks, {type: 'audio'});
+      recordingFile = new File([recording],'test.wav',{type:'audio/wav'});
     }
 
     this.customerStateService.currentEssentialServiceData = {
       displayName: this.businessName,
       id: this.businessId,
-      file: this.hasRecorded ? recordingFile : this.uploadedImg, // TODO: Attach file
-      isRecording: this.hasRecorded,
+      file: this.hasRecorded ?  recordingFile : this.uploadedImg, // TODO: Attach file
+      isRecording: this.hasRecorded
     };
-    this.router.navigate(["customer/cart-view"]);
+    this.router.navigate(['customer/cart-view']);
   }
 
   onRecordingClear() {
@@ -182,7 +164,6 @@ export class RecordComponent implements OnInit, OnDestroy {
     } else {
       this.cancelPhoto();
     }
-
     this.resetState();
   }
 
@@ -192,7 +173,7 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.hasRecordingStarted = false;
     this.mediaRecorder = null;
     this.uploadedImg = null;
-    this.selectedImage = null;
+    this.imagePreview = null;
   }
 
   cancelPhoto() {
@@ -215,29 +196,27 @@ export class RecordComponent implements OnInit, OnDestroy {
       reader.readAsDataURL(this.imageFile);
     }
   }
-
+  
   compressFile(image, fileName) {
-    this.imageCompress
-      .compressFile(image, DOC_ORIENTATION.NotDefined, 50, 50)
+    this.imageCompress.compressFile(image, DOC_ORIENTATION.NotDefined, 100, 20)
       .then((result) => {
         // create file from byte
         // call method that creates a blob from dataUri
         const imageBlob = this.dataURItoBlob(result.split(',')[1]);
-        const imageFile = new File([imageBlob], fileName, {
-          type: 'image/jpeg',
-        });
+        const imageFile = new File([imageBlob], fileName, {type: 'image/jpeg'});
         this.uploadedImg = imageFile;
+        console.log(imageFile)
       });
   }
-
-  dataURItoBlob(dataURI) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
+  
+    dataURItoBlob(dataURI) {
+      const byteString = window.atob(dataURI);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: 'image' });
+      return blob;
     }
-    const blob = new Blob([int8Array], { type: 'image/jpeg' });
-    return blob;
-  }
 }

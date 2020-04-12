@@ -7,25 +7,25 @@
     </button>
   </div>
   <mat-card matRipple class="slider-content-container mat-elevation-z8" (swipe)="onSwipe($event)">
-    <div  class="img-container" [ngClass]="{ selected: 0 == selectedIndex }">
+    <div class="img-container" [ngClass]="{ selected: 0 == selectedIndex }">
       <img [src]="data[0].img" alt="{{ data[0].alt }}" />
       <div class="text-content">
         <div class="head4" [innerHTML]="data[0].text | translate"></div>
       </div>
     </div>
-    <div  class="img-container" [ngClass]="{ selected: 1 == selectedIndex }">
+    <div class="img-container" [ngClass]="{ selected: 1 == selectedIndex }">
       <img [src]="data[1].img" alt="{{ data[1].alt }}" />
       <div class="text-content">
         <div class="head4" [innerHTML]="data[1].text | translate"></div>
       </div>
     </div>
-    <div  class="img-container" [ngClass]="{ selected: 2 == selectedIndex }">
+    <div class="img-container" [ngClass]="{ selected: 2 == selectedIndex }">
       <img [src]="data[2].img" alt="{{ data[2].alt }}" />
       <div class="text-content">
         <div class="head4" [innerHTML]="data[2].text | translate"></div>
       </div>
     </div>
-    <div  class="img-container" [ngClass]="{ selected: 3 == selectedIndex }">
+    <div class="img-container" [ngClass]="{ selected: 3 == selectedIndex }">
       <img class="gift" [src]="'assets/img/core/gift.png'" alt="{{ data[3].alt }}" />
       <div class="text-content">
         <div class="head4" [innerHTML]="data[3].text | translate"></div>
@@ -46,14 +46,18 @@
 
 
 <div *ngIf="canShowLanguagePanel" class="language-container">
-<div class="language-content" fxLayout="column" fxLayoutAlign="space-between none">
-  <h3>{{'MAIN_PAGE.SELECT_LANGUAGE'| translate}}</h3>
-  <mat-select #lanSelector appearance="standard" placeholder="Select Language" (selectionChange)="onLanguageChange($event.value)">
-    <mat-option value="en">English</mat-option>
-    <mat-option value="hi">Hindi</mat-option>
-    <mat-option value="bn">Bengali</mat-option>
-  </mat-select>
-  <button mat-raised-button (click)="onLanguageSelected(lanSelector.value)">{{'MAIN_PAGE.GET_STARTED' | translate}}</button>
-</div>
+  <div class="language-content" fxLayout="column" fxLayoutAlign="space-between none">
+    <h3 class="lang-text">{{'MAIN_PAGE.SELECT_LANGUAGE'| translate}}</h3>
+
+    <mat-select #lanSelector placeholder="Select Language" (selectionChange)="onLanguageChange($event.value)">
+      <mat-option value="en">English - अंग्रेज़ी</mat-option>
+      <mat-option value="hi">Hindi - हिन्दी</mat-option>
+      <mat-option value="mr">Marathi - मराठी</mat-option>
+      <mat-option value="bn">Bengali - বাংলা</mat-option>
+    </mat-select>
+    <br>
+    <br>
+    <button mat-button (click)="onLanguageSelected(lanSelector.value)">{{'MAIN_PAGE.GET_STARTED' | translate}}</button>
+  </div>
 
 </div>

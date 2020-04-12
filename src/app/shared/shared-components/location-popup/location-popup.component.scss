@@ -1,9 +1,13 @@
 .location-popup-content-area{
   display: flex;
   flex-flow: column;
-  padding: 10px;
+  justify-content: center;
+  img {
+    margin: auto;
+  }
   .content{
-    padding: 13px;
+    padding: 10px;
+    line-height: 150%;
     text-align: center;
   }
 }
