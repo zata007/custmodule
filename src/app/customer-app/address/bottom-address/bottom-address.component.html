@@ -17,10 +17,10 @@
       <input matInput placeholder="{{'ADD_ADDRESS.ADDRESS_LINE_2'|translate}} ({{'OPTIONAL'|translate}})" (blur)="validate()" formControlName="addrLine2">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Locality" (blur)="validate()" formControlName="locality" required>
+      <input matInput placeholder="{{'ADD_ADDRESS.LOCALITY'|translate}}" (blur)="validate()" formControlName="locality" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Landmark" (blur)="validate()" formControlName="landmark" required>
+      <input matInput placeholder="{{'ADD_ADDRESS.LANDMARK'|translate}}" (blur)="validate()" formControlName="landmark" required>
     </mat-form-field>
     <label class="bold">{{'ADD_ADDRESS.LOCATION_TYPE'|translate}}</label>
     <mat-radio-group aria-label="Location Type" (blur)="validate()" formControlName="addrType">

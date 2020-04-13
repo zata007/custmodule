@@ -31,7 +31,6 @@
   "TOTAL_AMMOUNT": "Total Amount",
   "CHECK_CURRENT_STATUS": "Check current Status",
   "VOICE_ORDER": "Voice Order",
-<<<<<<< HEAD
   "SHOP": "Shop",
   "RESTAURANT": "Restaurant",
   "NAME": "Name",
@@ -47,10 +46,6 @@
   "SELECT": "Select",
   "TYPE": "Type",
   "TOTAL": "Total",
-=======
-
-
->>>>>>> 665a0bb6793badf0f03d527d6bf4455c8efccd56
   "LANDING_PAGE":{
     "TAG_LINE" : "Zataakse...",
     "REGISTRATION_TITLE" : "Register",
@@ -202,6 +197,8 @@
     "ENTER_LOCATION_DETAILS": "Enter location details",
     "ADDRESS_LINE_1": "Address Line 1",
     "ADDRESS_LINE_2": "Address Line 2",
+    "LOCALITY": "Locality",
+    "LANDMARK": "Landmark",
     "LOCATION_TYPE": "Location Type",
     "RESIDENTIAL": "Residential",
     "WORK":"Work",
