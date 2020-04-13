@@ -1,15 +1,7 @@
 <app-splash-screen></app-splash-screen>
 
 <div class="zataakse-slider-container">
-  <div class="skip" fxLayout="row" fxLayoutColumn="space-between center">
-    <div class="lang-selection">
-      <mat-select #lanSelector placeholder="Select Language" (selectionChange)="onLanguageChange($event.value)">
-        <mat-option value="en">English - अंग्रेज़ी</mat-option>
-        <mat-option value="hi">Hindi - हिन्दी</mat-option>
-        <mat-option value="mr">Marathi - मराठी</mat-option>
-        <mat-option value="bn">Bengali - বাংলা</mat-option>
-      </mat-select>
-    </div>
+  <div class="skip" fxLayout="row" fxLayoutAlign="flex-end center">
     <button class="head4 order-btn" mat-button (click)="onSubmitButtonClick()">
       {{'LANDING_PAGE.ORDER_NOW'|translate}}
       <mat-icon color="primary">arrow_forward</mat-icon>

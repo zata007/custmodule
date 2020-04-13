@@ -266,9 +266,13 @@ export class EssentialsComponent implements OnInit {
     .subscribe((res: IResponseLocationServed) => {
       this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
       if (res.data && res.data.isLocationServed) {
-          this.snackbar.open('Select the particular store', 'Close', {
-            duration: 5000,
+        this.translateService.get('CLOSE').subscribe(( close: string ) => {
+          this.translateService.get('ESSENTIAL_SERVICE.SELECT_STORE').subscribe(( msg: string ) => {
+            this.snackbar.open(msg, close, {
+              duration: 5000,
+            });
           });
+        });
         } else {
           setTimeout(()=> {
             this.bottomSheet.open(NotServicebleComponent, {
