@@ -51,6 +51,7 @@ export class SignupComponent implements OnInit {
 
     setTimeout(() => {
       this.registrationForm.valueChanges.subscribe((_) => {
+        console.log(this.isAgreed);
 
         // TODO: remove once store is functional
         this.dataChange.emit(this.registrationForm.value);
