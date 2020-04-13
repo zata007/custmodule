@@ -22,17 +22,17 @@ import { IResponseLocationServed } from '../shared/models/common-model';
 export class LandingPageComponent implements OnInit, OnDestroy {
   @Input() data = [
     {
-      img: 'assets/img/core/slider2.png',
+      img: 'assets/img/core/slider3.png',
       alt: '',
       text: 'MAIN_PAGE.CAROUSAL_MSG_1'
     },
     {
-      img: 'assets/img/core/slider1.png',
+      img: 'assets/img/core/slider2.png',
       alt: '',
       text: 'MAIN_PAGE.CAROUSAL_MSG_2'
     },
     {
-      img: 'assets/img/core/slider3.png',
+      img: 'assets/img/core/slider1.png',
       alt: '',
       text: 'MAIN_PAGE.CAROUSAL_MSG_3'
     },
@@ -70,7 +70,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     }
     this.sliderIntervalRef = setInterval(() => {
       this.selected((this.selectedIndex + 1) % this.data.length);
-    }, 2500);
+    }, 10000);
   }
 
   ngOnDestroy() {

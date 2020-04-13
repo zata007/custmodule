@@ -1,4 +1,5 @@
 {
+  
   "NEXT":"Next",
   "OKAY": "Okay",
   "RESEND_OTP":"Resend OTP",
@@ -30,6 +31,7 @@
   "TOTAL_AMMOUNT": "Total Amount",
   "CHECK_CURRENT_STATUS": "Check current Status",
   "VOICE_ORDER": "Voice Order",
+<<<<<<< HEAD
   "SHOP": "Shop",
   "RESTAURANT": "Restaurant",
   "NAME": "Name",
@@ -45,6 +47,10 @@
   "SELECT": "Select",
   "TYPE": "Type",
   "TOTAL": "Total",
+=======
+
+
+>>>>>>> 665a0bb6793badf0f03d527d6bf4455c8efccd56
   "LANDING_PAGE":{
     "TAG_LINE" : "Zataakse...",
     "REGISTRATION_TITLE" : "Register",
@@ -60,21 +66,23 @@
     "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
     "ORDER_NOW": "Order Now"
   },
+
   "MAIN_PAGE":{
-    "CAROUSAL_MSG_1": "<div class='head1 logo'>Zataakse</div><br /><span class=\"txt-msg\">Order food, beverages, groceries from merchants on your route and have them delivered in your car/vehicle</span>",
-    "CAROUSAL_MSG_2": "<div class='head1 logo'>Zataakse</div><br /><span class=\"txt-msg\">Order food, beverages, groceries from merchants near by and have them delivered at your address</span>",
-    "CAROUSAL_MSG_3": "<div class='head1 logo'>Zataakse</div><br /><span class=\"txt-msg\">Place your order before you reach the merchant establishment to avoid queue</span>",
-    "CAROUSAL_MSG_4": "<div class='head1 logo'>Zataakse</div><br /><span class=\"txt-msg\">Order essential goods from nearby shop during lockdown to avoid queue and maintain social distancing</span>",
+    "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Takeaway</b><br /><br />Order food, beverages, groceries from merchants <b>on your route</b> and have them <b>delivered in your car / vehicle</b></span>",
+    "CAROUSAL_MSG_2": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Delivery</b><br /><br />Order food, beverages, groceries from merchants <b>near by</b> and have them <b>delivered at your address</b></span>",
+    "CAROUSAL_MSG_3": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Order Ahead</b><br /><br /><b>Order ahead</b> before you reach the restaurant, fast food joint or store to <b>avoid queue and your order shall be ready when you reach</b></span>",
+    "CAROUSAL_MSG_4": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Essential Goods</b><br /><br /><b>Order essential goods</b> from nearby shop during lockdown to <b>avoid queue and maintain social distancing</b></span>",
     "CAROUSAL_MSG_5": "<br><span>Rs. 50/- On Registration <br> Rs. 50/- On per successful referral </span>",
     "EXCITING_LAUNCH_OFFER":"Exciting Launch Offers",
     "PRE_ORDER_TAKEAWAY":"pre-order & takeaway",
-    "OFFER_NEAR_ME":"Seems you have disabled location for Zataakse, please allow location permissionto use Zataakse",
-    "NEED_LOCATION_FOR_OFFER": "Zataakse requires access to your location information to find best options for you. <br>Please select <b>Accept</b> when prompted for sharing location.",
+    "OFFER_NEAR_ME":"You have disabled location for Zataakse, please allow location permission for Zataakse",
+    "NEED_LOCATION_FOR_OFFER": "Zataakse requires access to your location information to find best options for you. <br><br>Please select <b>Allow</b> when prompted for sharing location.<br>",
     "TERMS": "Terms & Conditions",
     "ENABLE": "Steps to enable location",
     "SELECT_LANGUAGE":"Language / भाषा",
     "GET_STARTED": "Next"
   },
+
   "SNACK_PAGE":{
     "QUESTION_1":{
       "LABEL":"How do you commute everyday ?",
@@ -116,6 +124,7 @@
       "LABEL_D":"Mughlai",
       "LABEL_E":"Street food / Local cuisine"
     },
+
     "PLEASE_ENTER_OTP":"Please Enter the OTP <br>received on {{userMobileNumber}}",
     "CONGRATS_REGISTRATION":"Congrats!! Registration Successful",
     "EMAILED_COUPAN_CODE": "Rs. 50/- Coupoun code has emailed<br>to your email address !"
@@ -133,6 +142,7 @@
     "PRIVACY": "Privacy Policy",
     "TERMS": "Terms & Condition"
   },
+
   "ESSENTIAL_SERVICE":{
     "SERVICE_SUSPENDED_1" : "Zataakse regular services has been suspended due to lockdown.",
     "SERVICE_SUSPENDED_2": "You can order essentials goods from merchants near you, by recording a voice message or clicking picture of item list. Check samples.",

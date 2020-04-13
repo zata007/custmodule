@@ -1,18 +1,13 @@
 <mat-sidenav-container class="sidenav-container" (backdropClick)="drawer.toggle()">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport="false"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="'over'"
-  >
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'over'">
     <mat-toolbar matRipple>
       <!-- <img src="../../../assets/icons/120.png" class="photo" /> -->
       <div>Zataakse</div>
     </mat-toolbar>
 
     <mat-divider></mat-divider>
-    
+
     <mat-nav-list class="main-list">
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Profile')"> <mat-icon>account_circle</mat-icon>{{'MENU.PROFILE'|translate}}</a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderList')"> <mat-icon>history</mat-icon>{{'MENU.ORDER_HISTORY'|translate}}</a>
@@ -32,9 +27,12 @@
     </mat-nav-list> -->
 
   </mat-sidenav>
+
+
   <mat-sidenav-content class="nav-top">
     <mat-toolbar color="none" *ngIf="currentPage === 'main'; else other">
-      <button mat-icon-button color="dark" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button mat-icon-button color="dark" type="button" aria-label="Toggle sidenav" mat-icon-button
+        (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <!-- <div class="button b2" id="button-10">
@@ -45,26 +43,43 @@
         <div class="layer"></div>
       </div> -->
       <div class="menu mat-elevation-z3">
+<<<<<<< HEAD
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer' || router.url=='/customer/take-away'}" (click)="onNavigate('take-away')">{{'MENU.TAKEAWAY'|translate}}</button>
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/delivery'}" (click)="onNavigate('delivery')">{{'MENU.DELIVERY'|translate}}</button>
         <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}" (click)="onNavigate('order-ahead')">{{'MENU.ORDER_AHEAD'|translate}}</button>
+=======
+        <button class="ham-list" matRipple
+          [ngClass]="{'active bold': router.url=='/customer' || router.url=='/customer/take-away'}"
+          (click)="onNavigate('take-away')">Takeaway</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/delivery'}"
+          (click)="onNavigate('delivery')">Delivery</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}"
+          (click)="onNavigate('order-ahead')">Order Ahead</button>
+>>>>>>> 665a0bb6793badf0f03d527d6bf4455c8efccd56
       </div>
-      <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"  (click)="onCartClick()">
+
+      <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0" (click)="onCartClick()">
         <!-- <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon> -->
         <mat-icon color="dark" (click)="onSideNavClick('Language')">language</mat-icon>
       </button>
+
     </mat-toolbar>
+
+
     <ng-template #other>
       <mat-toolbar>
         <button type="button" mat-icon-button color="dark" (click)="onBackClick()">
           <mat-icon aria-label="notification icon">keyboard_backspace</mat-icon>
         </button>
-        <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"   (click)="onCartClick()">
-          <mat-icon aria-label="notification icon" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0">shopping_cart</mat-icon>
+        <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0" (click)="onCartClick()">
+          <mat-icon aria-label="notification icon" [matBadge]="cartCount" matBadgeColor="warn"
+            matBadgePosition="above after" [matBadgeHidden]="cartCount == 0">shopping_cart</mat-icon>
         </button>
       </mat-toolbar>
     </ng-template>
 
     <ng-content></ng-content>
+
   </mat-sidenav-content>
+  
 </mat-sidenav-container>
