@@ -23,8 +23,8 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.registrationForm = new FormGroup({
       // firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      // email: new FormControl(''),
+      // lastName: new FormControl(''),
+      email: new FormControl(''),
       referalCode: new FormControl(''),
       mobileNumber: new FormControl('', Validators.pattern('^[0-9]{10}$')),
     });

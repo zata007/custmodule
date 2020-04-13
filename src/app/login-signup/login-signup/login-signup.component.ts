@@ -111,7 +111,7 @@ export class LoginSignupComponent implements OnInit {
      // TODO: Send register data.
     const params = this.commonService.getPlatformParams();
     const { latitude, longitude} = this.commonService.getRequestEssentialParams();
-    this.dataService.registerLogin({
+    const data = {
       ...this.commonService.getRequestEssentialParams(),
       data: {
         indMobileNum: type === 'register' ? this.signupData.mobileNumber : this.loginMobNumber,
@@ -127,7 +127,11 @@ export class LoginSignupComponent implements OnInit {
         longitude,
 
       }
-    }).subscribe((res: IResponseLoginSignup) => {
+    };
+    if(this.signupData.email) {
+      data.data['indEmail'] = this.signupData.email;
+    }
+    this.dataService.registerLogin(data).subscribe((res: IResponseLoginSignup) => {
       this.userByMobile = res.data;
       this.openVerifyOTP();
     }, error => {
