@@ -6,7 +6,7 @@
   <ng-container *ngIf="isOtp">
     <mat-form-field class="input-container" appearance="outline">
       <mat-label>{{'LOGIN_SIGNUP.OTP'|translate}}</mat-label>
-      <input matInput [(ngModel)]="otp" placeholder="Enter OTP" />
+      <input matInput [(ngModel)]="otp" placeholder="{{'LOGIN_SIGNUP.ENTER_OTP'|translate}}" />
     </mat-form-field>
     <div class="actions">
       <button mat-raised-button color="primary" class="action-btn-started" (click)="verifyOtp()">{{'PROCEED'|translate}}</button>

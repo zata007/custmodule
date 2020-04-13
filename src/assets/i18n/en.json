@@ -187,7 +187,8 @@
     "OTP": "OTP",
     "NOT_REGISTERED_TEXT": "Looks like you are not registered with Zataakse. Proceed with registration",
     "ALREADY_REGISTERED_TEXT": "Looks like you are already registered with Zataakse. Proceed with login",
-    "SIGNUP_TEXT": "Let's Get Started"
+    "SIGNUP_TEXT": "Let's Get Started",
+    "ENTER_OTP": "Enter OTP"
   },
   "ADD_ADDRESS": {
     "PROVIDE_DELIVERY": "Provide your delivery location",
