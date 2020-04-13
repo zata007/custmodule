@@ -451,6 +451,13 @@ export interface IOrderData {
   };
 }
 
+export interface IUploadImage {
+  imageType: string;
+  id: string;
+  imageName: string;
+  image: File;
+}
+
 export interface IUpdateProfiledata {
   indFirstName: string;
   indLastName: string;

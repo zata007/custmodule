@@ -42,7 +42,7 @@
       <mat-radio-button color="primary" value="female" checked="{{profile.indDetail.basic.indGender == 'female'}}">{{'PROFILE.FEMALE'|translate}}</mat-radio-button>
       <mat-radio-button color="primary" value="transgender" checked="{{profile.indDetail.basic.indGender == 'transgender'}}">{{'PROFILE.TRANSGENDER'|translate}}</mat-radio-button>
     </mat-radio-group>
-    <label id="food" color="primary">{{'PROFILE.FOOD_PREFRENCE'|translate}}</label>
+    <label id="food" color="primary">{{'PROFILE.FOOD_PREFERENCE'|translate}}</label>
     <mat-radio-group aria-labelledby="Food" fxLayout="row" fxLayoutAlign="flex-start" formControlName='indFoodPref' (change)="foodchange()">
       <mat-radio-button color="accent" value="v" checked="{{profile.indDetail.basic.indFoodPref == 'v'}}">{{'PROFILE.VEGETARIAN'|translate}}</mat-radio-button>
       <mat-radio-button color="primary" value="nv" checked="{{profile.indDetail.basic.indFoodPref == 'nv'}}">{{'PROFILE.NON_VEGETARIAN'|translate}}</mat-radio-button>

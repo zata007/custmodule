@@ -21,7 +21,8 @@ import {
   IVehicleData,
   IProfileData,
   IReqAddressData,
-  IRequestPlaceOrderForEssential
+  IRequestPlaceOrderForEssential,
+  IUploadImage
 } from '../models/common-model';
 import {
   Observable
@@ -282,6 +283,16 @@ export class DataService {
     };
     const d = this.getFormData(data, null, null);
     return this.putMethod(url, options, d) as any;
+  }
+
+  uploadImage(data: IUploadImage) {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/uploadImage`;
+    const options = {
+      headers: {
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      }
+    };
+    return this.putMethod(url, options, data) as any;
   }
 
   addCart(fingerprint: string, data: IOrderData, position: {

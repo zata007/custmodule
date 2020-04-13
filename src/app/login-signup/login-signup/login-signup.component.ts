@@ -128,7 +128,7 @@ export class LoginSignupComponent implements OnInit {
 
       }
     };
-    if(this.signupData.email) {
+    if(type==='register' && this.signupData.email) {
       data.data['indEmail'] = this.signupData.email;
     }
     this.dataService.registerLogin(data).subscribe((res: IResponseLoginSignup) => {
