@@ -205,7 +205,8 @@
     "WORK":"Work",
     "Other": "Other",
     "SAVE_ADDRESS": "Save Address",
-    "SUCCESSFULLY_SAVED":"Successfully saved"
+    "SUCCESSFULLY_SAVED":"Successfully saved",
+    "SET_LOCATION": "Set your location"
   },
   "ADD_VEHICLE": {
     "ADD_NEW_VEHICLE": "Add a new vehicle",

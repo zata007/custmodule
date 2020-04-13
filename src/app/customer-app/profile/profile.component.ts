@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onBackClick() {
-    this.location.back();
+    this.router.navigate(['customer']);
   }
 
   addNewAddress() {

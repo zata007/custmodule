@@ -42,7 +42,7 @@
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 8.svg" alt="">
-      <div class="head4">{{(basic.indFoodPref ? basic.indFoodPref == 'v' ? 'PROFILE.VEGETARIAN': 'PROFILE.NON_VEGETARIAN' : 'PROFILE.FOOD_PREFERENCE')|translate}}</div>
+      <div class="head4">{{(basic.indFoodPref ? (basic.indFoodPref == 'v' ? 'PROFILE.VEGETARIAN': 'PROFILE.NON_VEGETARIAN') : 'PROFILE.FOOD_PREFERENCE')|translate}}</div>
     </div>
   </mat-card>
 
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
-        <button mat-button color="primary" (click)="editVehicle(vehicleItem)">{{'EDIT|translate'}}</button>
+        <button mat-button color="primary" (click)="editVehicle(vehicleItem)">{{'EDIT'|translate}}</button>
         <!-- <button mat-button color="primary">DELETE</button> -->
       </div>
       <mat-divider [inset]="true"></mat-divider>
