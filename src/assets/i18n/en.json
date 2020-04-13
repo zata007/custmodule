@@ -46,6 +46,8 @@
   "SELECT": "Select",
   "TYPE": "Type",
   "TOTAL": "Total",
+
+
   "LANDING_PAGE":{
     "TAG_LINE" : "Zataakse...",
     "REGISTRATION_TITLE" : "Register",
@@ -61,6 +63,7 @@
     "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
     "ORDER_NOW": "Order Now"
   },
+
 
   "MAIN_PAGE":{
     "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Takeaway</b><br /><br />Order food, beverages, groceries from merchants <b>on your route</b> and have them <b>delivered in your car / vehicle</b></span>",
@@ -124,6 +127,8 @@
     "CONGRATS_REGISTRATION":"Congrats!! Registration Successful",
     "EMAILED_COUPAN_CODE": "Rs. 50/- Coupoun code has emailed<br>to your email address !"
   },
+
+  
   "MENU": {
     "TAKEAWAY": "Takeaway",
     "DELIVERY": "Delivery",
@@ -139,19 +144,21 @@
   },
 
   "ESSENTIAL_SERVICE":{
-    "SERVICE_SUSPENDED_1" : "Zataakse regular services has been suspended due to lockdown.",
+    "SERVICE_SUSPENDED_1" : "Zataakse regular services have been suspended due to lockdown",
     "SERVICE_SUSPENDED_2": "You can order essentials goods from merchants near you, by recording a voice message or clicking picture of item list. Check samples.",
-    "SAY_THE_PRODUCT_NAME" : "Say the product names with the quantities in 1 minute",
-    "WRITE_PRODUCT_AND_QUANTITY": "Write the products name and quantities and take a photo",
-    "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel for new entry",
-    "PRESS_THE_GREEN_BTN": "Press this green button to start recording your order in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>. Check sample order",
+    "SAY_THE_PRODUCT_NAME" : "Record your order within 1 minute.",
+    "WRITE_PRODUCT_AND_QUANTITY": "Take picture of your order list",
+    "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel",
+    "PRESS_THE_GREEN_BTN": "Press this green button to start recording your order in the format <b>Brand</b> - <b>Item</b> - <b>Quantity</b>. Check sample order",
     "PRESS_THE_GREEN_BTN_PIC": "Press this green button to click a picture of your order list in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>",
     "CANCEL_TO_RECORD": "Cancel to record your order again",
     "CANCEL_TO_SCAN": "Cancel to click image again",
-    "SUBMIT_OR_CANCEL_ENTRY": "Submit or Cancel for new entry",
-    "SELECT_STORE": "Select the particular store",
+    "SUBMIT_OR_CANCEL_ENTRY": "Submit or Cancel",
+    "SELECT_STORE": "Select a particular store in your vicinity by clicking on the red spots",
     "MODAL_TEXT": "We will reach out to you once we launch in your locality"
   },
+
+
   "NOT_SERVICEBLE": {
     "RECOMMEND_MERCH": "Recommend a Merchant",
     "RECOMMEND_TEXT": "You may refer merchants at your location by providing their business name and mobile number",
