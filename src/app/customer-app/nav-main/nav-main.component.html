@@ -14,16 +14,16 @@
     <mat-divider></mat-divider>
     
     <mat-nav-list class="main-list">
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Profile')"> <mat-icon>account_circle</mat-icon>My Profile </a>
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderList')"> <mat-icon>history</mat-icon>Order History</a>
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderStatus')"> <mat-icon>shopping_cart</mat-icon>Check Order Status</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Profile')"> <mat-icon>account_circle</mat-icon>{{'MENU.PROFILE'|translate}}</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderList')"> <mat-icon>history</mat-icon>{{'MENU.ORDER_HISTORY'|translate}}</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('OrderStatus')"> <mat-icon>shopping_cart</mat-icon>{{'MENU.ORDER_STATUS'|translate}}</a>
       <!-- <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>share</mat-icon>Refer </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Care')"> <mat-icon>record_voice_over</mat-icon>Customer Care </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>settings</mat-icon>Settings </a> -->
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Language')"> <mat-icon>language</mat-icon>Language</a>
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{isLoggedIn? 'Logout' : 'Login'}} </a>
-      <a class="ham-menu" mat-list-item href="#"><mat-icon>security</mat-icon>Privacy Policy</a>
-      <a class="ham-menu" mat-list-item href="#"><mat-icon>ac_unit</mat-icon>Terms & Conditions</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Language')"> <mat-icon>language</mat-icon>{{'MENU.LANGUAGE'|translate}}</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{(isLoggedIn? 'MENU.LOGOUT' : 'MENU.LOGIN')|translate}} </a>
+      <a class="ham-menu" mat-list-item href="#"><mat-icon>security</mat-icon>{{'MENU.PRIVACY'|translate}}</a>
+      <a class="ham-menu" mat-list-item href="#"><mat-icon>ac_unit</mat-icon>{{'MENU.TERMS'|translate}}</a>
     </mat-nav-list>
 
     <!-- <mat-nav-list class="rule-list">
@@ -45,9 +45,9 @@
         <div class="layer"></div>
       </div> -->
       <div class="menu mat-elevation-z3">
-        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer' || router.url=='/customer/take-away'}" (click)="onNavigate('take-away')">Takeaway</button>
-        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/delivery'}" (click)="onNavigate('delivery')">Delivery</button>
-        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}" (click)="onNavigate('order-ahead')">Order Ahead</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer' || router.url=='/customer/take-away'}" (click)="onNavigate('take-away')">{{'MENU.TAKEAWAY'|translate}}</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/delivery'}" (click)="onNavigate('delivery')">{{'MENU.DELIVERY'|translate}}</button>
+        <button class="ham-list" matRipple [ngClass]="{'active bold': router.url=='/customer/order-ahead'}" (click)="onNavigate('order-ahead')">{{'MENU.ORDER_AHEAD'|translate}}</button>
       </div>
       <button type="button" mat-icon-button color="dark" [disabled]="cartCount == 0"  (click)="onCartClick()">
         <!-- <mat-icon aria-label="Shopping cart" [matBadge]="cartCount" matBadgeColor="warn" matBadgePosition="above after" [matBadgeHidden]="cartCount == 0"  >shopping_cart</mat-icon> -->

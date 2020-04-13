@@ -127,7 +127,9 @@ export class CustomerStateService {
       tolerance: 1000,
     };
 
-    this.socket.emit('checkLocationOnEdge', data, (e)=>{console.log(e)});
+    this.socket.emit('checkLocationOnEdge', data, (e)=>{
+      // console.log(e)
+    });
   }
 
   getPolyLines(data: Array<google.maps.DirectionsRoute>) {

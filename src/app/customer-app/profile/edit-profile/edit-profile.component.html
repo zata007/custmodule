@@ -10,20 +10,20 @@
     </div>
     <div>
       <input type='file' (change)="onSelectFile($event)" #fileInput hidden>
-      <button mat-stroked-button color="primary" class="head4" (click)="fileInput.click()">CHANGE PHOTO</button>
+      <button mat-stroked-button color="primary" class="head4" (click)="fileInput.click()">{{'PROFILE.CHANGE_PHOTO'|translate}}</button>
     </div>
   </div>
   <mat-card class="profile-detail" [formGroup]="profileForm">
     <mat-form-field class="example-full-width">
-      <mat-label>First Name</mat-label>
-      <input matInput placeholder="Jhon" value="{{profile.indDetail.basic.indFirstName ? profile.indDetail.basic.indFirstName :null}}" formControlName='indFirstName' (change)="firstNameChange()">
+      <mat-label>{{'PROFILE.FIRST_NAME'|translate}}</mat-label>
+      <input matInput value="{{profile.indDetail.basic.indFirstName ? profile.indDetail.basic.indFirstName :null}}" formControlName='indFirstName' (change)="firstNameChange()">
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="Doe" value="{{profile.indDetail.basic.indLastName ? profile.indDetail.basic.indLastName :null}}" formControlName='indLastName' (change)="lastNameChange()">
+      <mat-label>{{'PROFILE.LAST_NAME'|translate}}</mat-label>
+      <input matInput value="{{profile.indDetail.basic.indLastName ? profile.indDetail.basic.indLastName :null}}" formControlName='indLastName' (change)="lastNameChange()">
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
+      <mat-label>{{'EMAIL'|translate}}</mat-label>
       <input matInput type="email" placeholder="mail@example.com" value="{{profile.indDetail.roles[0].indEmail ? profile.indDetail.roles[0].indEmail :null}}" formControlName='indEmail' (change)="emailChange()">
       <!-- <mat-error *ngIf="email.errors.email && !email.errors.required">
         Please enter a valid email address
@@ -33,31 +33,31 @@
       </mat-error> -->
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <mat-label>Date of Birth</mat-label>
+      <mat-label>{{'PROFILE.DOB'|translate}}</mat-label>
       <input matInput type="date" value="{{profile.indDetail.basic.indDob ? profile.indDetail.basic.indDob : null}}" formControlName='indDob' (change)="dobChange()">
     </mat-form-field>
-    <label id="gender" color="primary">Gender</label>
+    <label id="gender" color="primary">{{'PROFILE.GENDER'|translate}}</label>
     <mat-radio-group aria-labelledby="Gender" fxLayout="row" fxLayoutAlign="flex-start" formControlName='indGender' (change)="genderChange()">
-      <mat-radio-button color="primary" value="male" checked="{{profile.indDetail.basic.indGender == 'male'}}">Male</mat-radio-button>
-      <mat-radio-button color="primary" value="female" checked="{{profile.indDetail.basic.indGender == 'female'}}">Female</mat-radio-button>
-      <mat-radio-button color="primary" value="transgender" checked="{{profile.indDetail.basic.indGender == 'transgender'}}">Transgender</mat-radio-button>
+      <mat-radio-button color="primary" value="male" checked="{{profile.indDetail.basic.indGender == 'male'}}">{{'PROFILE.MALE'|translate}}</mat-radio-button>
+      <mat-radio-button color="primary" value="female" checked="{{profile.indDetail.basic.indGender == 'female'}}">{{'PROFILE.FEMALE'|translate}}</mat-radio-button>
+      <mat-radio-button color="primary" value="transgender" checked="{{profile.indDetail.basic.indGender == 'transgender'}}">{{'PROFILE.TRANSGENDER'|translate}}</mat-radio-button>
     </mat-radio-group>
-    <label id="food" color="primary">Food Preference</label>
+    <label id="food" color="primary">{{'PROFILE.FOOD_PREFRENCE'|translate}}</label>
     <mat-radio-group aria-labelledby="Food" fxLayout="row" fxLayoutAlign="flex-start" formControlName='indFoodPref' (change)="foodchange()">
-      <mat-radio-button color="accent" value="v" checked="{{profile.indDetail.basic.indFoodPref == 'v'}}">Vegetarian</mat-radio-button>
-      <mat-radio-button color="primary" value="nv" checked="{{profile.indDetail.basic.indFoodPref == 'nv'}}">Non-vegetarian</mat-radio-button>
+      <mat-radio-button color="accent" value="v" checked="{{profile.indDetail.basic.indFoodPref == 'v'}}">{{'PROFILE.VEGETARIAN'|translate}}</mat-radio-button>
+      <mat-radio-button color="primary" value="nv" checked="{{profile.indDetail.basic.indFoodPref == 'nv'}}">{{'PROFILE.NON_VEGETARIAN'|translate}}</mat-radio-button>
     </mat-radio-group>
     <mat-form-field>
-      <mat-label>Language Preferences</mat-label>
+      <mat-label>{{'PROFILE.LANG_PREFERENCE'|translate}}</mat-label>
       <mat-select formControlName='indLanPref' [value]="profile.indDetail.basic.indLanPref" (change)="langChange()">
         <mat-option *ngFor="let lang of langs" value="lang.value">
-          {{lang.viewValue}}
+          {{(lang.viewValue)|translate}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card>
   <div class="buttons" fxLayout="row" fxLayoutAlign="space-around">
-      <button mat-raised-button color="primary" (click)="onSubmit()">SUBMIT</button>
-      <button mat-button (click)="onBackClick()">CANCEL</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">{{'SUBMIT'|translate}}</button>
+      <button mat-button (click)="onBackClick()">{{'CANCEL'|translate}}</button>
   </div>
 </div>

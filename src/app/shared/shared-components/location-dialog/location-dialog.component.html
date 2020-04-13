@@ -6,7 +6,7 @@
   </div>
   <div *ngFor="let browser of selectedBrowser" class="browser-content">
     <!--browser name will change when other browser detects -->
-    <h3>Step: {{ browser.step }}</h3>
+    <div class="head3">Step: {{ browser.step }}</div>
     <img src="{{ browser.image }}" height="120px" alt="" />
     <p>{{ browser.text }}</p>
   </div>

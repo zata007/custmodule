@@ -6,6 +6,7 @@ import { ZATAAKSE_PROFILE_DATA } from '../../../shared/constants/constants';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { DataService } from '../../../shared/services/data.service'
 import { MatSnackBar } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-profile',
@@ -16,11 +17,11 @@ export class EditProfileComponent implements OnInit {
   profile : IProfileData;
   image: any;
   langs: Array<{value: String; viewValue: String}> = [
-    {value: 'en', viewValue: 'English'},
-    {value: 'hn', viewValue: 'Hindi'},
-    {value: 'bn', viewValue: 'Bengali'},
-    {value: 'mr', viewValue: 'Marathi'},
-    {value: 'gu', viewValue: 'Bengali'}
+    {value: 'en', viewValue: 'ENGLISH'},
+    {value: 'hn', viewValue: 'HINDI'},
+    {value: 'bn', viewValue: 'BENGALI'},
+    {value: 'mr', viewValue: 'MARATHI'},
+    {value: 'gu', viewValue: 'GUJRATI'}
   ]
   profileForm: FormGroup;
   updateProfile: any = [];
@@ -30,7 +31,8 @@ export class EditProfileComponent implements OnInit {
     private location: Location,
     private dataService: DataService,
     public router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -124,7 +126,9 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit() {
     this.dataService.updateProfile(this.updateProfile).subscribe((data) => {
-      this.snackbar.open('Saved Successfully');
+      this.translateService.get('ADD_ADDRESS.SUCCESSFULLY_SAVED').subscribe((res: string) => {
+        this.snackbar.open(res);
+      });
       this.router.navigate(['customer/profile']);
     }, (err)=>{
       this.snackbar.open(err.error.message);

@@ -176,7 +176,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
               }
             });
           }
-          console.log(error);
+          // console.log(error);
         }
       );
     }

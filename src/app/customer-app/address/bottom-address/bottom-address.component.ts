@@ -6,6 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { DataService } from '../../../shared/services/data.service';
 import { IReqAddressData, IAddressData } from 'src/app/shared/models/common-model';
 import { BottomSheetDismissMode } from 'src/app/shared/constants/constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-bottom-address',
@@ -22,7 +23,8 @@ export class BottomAddressComponent implements OnInit {
     private bottomSheetRef: MatBottomSheetRef<BottomAddressComponent>,
     private dataService: DataService,
     private router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -78,7 +80,9 @@ export class BottomAddressComponent implements OnInit {
     this.dataService.manageAddress(formvalues).subscribe((data: any) => {
         this.bottomSheetRef.dismiss({actionType: BottomSheetDismissMode.DataUpdated , closeData: data.data});
         this.router.navigate(['customer/profile']);
-        this.snackbar.open('Successfully saved');
+        this.translateService.get('ADD_ADDRESS.SUCCESSFULLY_SAVED').subscribe((res: string) => {
+          this.snackbar.open(res);
+        });
       }, (err)=>{
         this.snackbar.open(err.error.message);
       });

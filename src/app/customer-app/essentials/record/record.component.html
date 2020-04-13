@@ -6,7 +6,7 @@
 </mat-toolbar>
 
 <div class="recorder-container">
-  <div *ngIf="!previewMode && !hasRecorded" class="store image-taken" fxLayout="column" fxLayoutAlign="center center">
+  <div *ngIf="!previewMode && !hasRecorded" class="store" fxLayout="column" fxLayoutAlign="center center">
     <img [src]="photo" alt="">
   </div>
   <mat-card *ngIf="!hasRecorded && !previewMode" class="audio"  fxLayout="column" fxLayoutAlign="center center">

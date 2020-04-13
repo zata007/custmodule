@@ -38,7 +38,7 @@ export class OrderStatusComponent implements OnInit {
 
     this.customerService.getTransactionHistory(localStorage.getItem(ZATAAKSE_JWT_TOKEN), "1").subscribe((data: any) => {
       this.listItems = data.data.data;
-      console.log(this.listItems);
+      // console.log(this.listItems);
     });
   }
 

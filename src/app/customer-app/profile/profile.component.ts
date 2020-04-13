@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
         this.address =  data.data.indDetail.roles[0].indAddr;
         this.vehicle = data.data.indDetail.roles[0].indVehicles;
         this.notification = data.data.indDetail.roles[0].deviceId.indPushNotify;
-        console.log(this.data)
+        // console.log(this.data);
       }, (err) => {
         // TODO: Handle error for invalid/expired token
         localStorage.removeItem(ZATAAKSE_JWT_TOKEN);

@@ -40,7 +40,7 @@ export class FoodsLandingItemsComponent implements OnInit {
   ngOnInit(): void {}
 
   public onIndexChange(index: number) {
-    console.log(index);
+    // console.log(index);
     this.slideChange.emit(this.data[index]);
   }
 

@@ -1,9 +1,9 @@
 <div class="bottom-address-container">
-  <div class="head4 bold">Add your vehicle</div>
+  <div class="head4 bold">{{'ADD_VEHICLE.ADD_NEW_VEHICLE'|translate}}</div>
   <mat-divider></mat-divider>
   <div class="input-area" fxLayout="column" [formGroup]="vehicleForm" >
     <mat-form-field>
-      <mat-label>Vehicle Type</mat-label>
+      <mat-label>{{'ADD_VEHICLE.VEHICLE_TYPE'|translate}}</mat-label>
       <mat-select formControlName="vehType" required>
         <mat-option *ngFor="let type of vehicleType" [value]="type">
           {{type}}
@@ -11,20 +11,20 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Vehicle Brand" (blur)="validate()" formControlName="vehbrand" required>
+      <input matInput placeholder="{{'ADD_VEHICLE.BRAND_PLACEHOLDER'|translate}}" (blur)="validate()" formControlName="vehbrand" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Vehicle Model" (blur)="validate()" formControlName="vehModel" required>
+      <input matInput placeholder="{{'ADD_VEHICLE.MODEL_PLACEHOLDER'|translate}}" (blur)="validate()" formControlName="vehModel" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Vehicle Number" (blur)="validate()" formControlName="vehNum" required>
+      <input matInput placeholder="{{'ADD_VEHICLE.NUMBER_PLACEHOLDER'|translate}}" (blur)="validate()" formControlName="vehNum" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Vehicle color" (blur)="validate()" formControlName="vehColor" required>
+      <input matInput placeholder="{{'ADD_VEHICLE.COLOR_PLACEHOLDER'|translate}}" (blur)="validate()" formControlName="vehColor" required>
     </mat-form-field>
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="center">
-    <button class="confirm-button" mat-raised-button color="primary" (click)="saveVehicle()">SAVE VEHICLE</button>
+    <button class="confirm-button" mat-raised-button color="primary" (click)="saveVehicle()">{{'ADD_VEHICLE.SAVE_VEHICLE'|translate}}</button>
   </div>
 </div>

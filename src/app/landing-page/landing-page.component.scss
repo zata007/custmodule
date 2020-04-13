@@ -185,8 +185,9 @@
     // margin: auto 15px;
     max-width: 280px;
 
-    .lang-text {
+    .head3.lang-text {
       margin-bottom: 20px;
+      color: #ffffff;
     }
 
     .mat-select-value {
@@ -226,4 +227,9 @@
       color: #ffffff;
     }
   }
+}
+
+
+.txt-msg {
+  line-height: 1.5em;
 }

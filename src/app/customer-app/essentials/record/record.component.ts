@@ -67,11 +67,11 @@ export class RecordComponent implements OnInit, OnDestroy {
         this.position,
         localStorage.getItem(ZATAAKSE_PREF_LANG)).
         subscribe((res: ISampleFile) => {
-          console.log(res)
+          // console.log(res);
           if(res && res.data) {
             this.audio = res.data.audio,
             this.image = res.data.image
-            console.log(this.audio, this.image)
+            // console.log(this.audio, this.image);
           }
       });
     } else {
@@ -205,7 +205,7 @@ export class RecordComponent implements OnInit, OnDestroy {
         const imageBlob = this.dataURItoBlob(result.split(',')[1]);
         const imageFile = new File([imageBlob], fileName, {type: 'image/jpeg'});
         this.uploadedImg = imageFile;
-        console.log(imageFile)
+        // console.log(imageFile);
       });
   }
   

@@ -28,9 +28,9 @@ export class NgrxRouterStoreModule {
 
   constructor(@Self() @Optional() router: Router) {
     if (router) {
-      console.log('All good, NgrxRouterStoreModule');
+      // console.log('All good, NgrxRouterStoreModule');
     } else {
-      console.error('NgrxRouterStoreModule must be imported in the same same level as RouterModule');
+      // console.error('NgrxRouterStoreModule must be imported in the same same level as RouterModule');
     }
   }
 

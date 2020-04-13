@@ -36,7 +36,7 @@ export class RestaurantListComponent implements OnInit {
 
   onRestaurantClick(item: IRestaurantData) {
     // TODO: Goto page.
-    console.log(item, this.openedFrom);
+    // console.log(item, this.openedFrom);
     const data: IRequestGetSkuData = {
       businessLocId: item.businessLocId,
       flag: 1,
@@ -57,10 +57,10 @@ export class RestaurantListComponent implements OnInit {
         break;
     }
 
-    console.log(data);
+    // console.log(data);
     this.dataService.getSku(data).subscribe((res: IResponseGetSkuData) => {
       // openType = foodList, restaurantList
-      console.log(res);
+      // console.log(res);
       if (res.data && res.data.skuData) {
         this.bottomSheetRef.dismiss();
         this.customerStateService.setCurrentPage('pitstop-view');

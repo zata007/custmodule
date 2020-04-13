@@ -55,7 +55,7 @@
 
 <div *ngIf="canShowLanguagePanel" class="language-container">
   <div class="language-content" fxLayout="column" fxLayoutAlign="space-between none">
-    <h3 class="lang-text">{{'MAIN_PAGE.SELECT_LANGUAGE'| translate}}</h3>
+    <div class="head3 lang-text">{{'MAIN_PAGE.SELECT_LANGUAGE'| translate}}</div>
 
     <mat-select #lanSelector placeholder="Select Language" (selectionChange)="onLanguageChange($event.value)">
       <mat-option value="en">English - अंग्रेज़ी</mat-option>

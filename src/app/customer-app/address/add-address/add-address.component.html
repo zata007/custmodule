@@ -20,7 +20,7 @@
       </div>
       <ng-template #customContent>
         <div style="border-radius: 10px">
-          Provide your delivery location
+          {{'ADD_ADDRESS.PROVIDE_DELIVERY'|translate}}
         </div>
       </ng-template>
       <ng-template #counter> </ng-template>
@@ -56,19 +56,19 @@
 </div>
 <div class="location-confirm">
   <div class="head3 bold">
-    Select delivery location
+    {{'ADD_ADDRESS.SELECT_DELIVERY'|translate}}
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="location" fxLayout="column" fxLayoutAlign="space-around">
-      <div class="caption">Your Location</div>
+      <div class="caption">{{'ADD_ADDRESS.YOUR_LOCATION'|translate}}</div>
       <div *ngIf="address" class="para bold">{{address.formattedAddress}}</div>
     </div>
     <!-- <button mat-stroked-button color="primary">CHANGE</button> -->
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="center">
-    <button class="confirm-button" mat-raised-button color="primary" (click)="openBottomSheet()">CONFIRM LOCATION AND PROCEED</button>
+    <button class="confirm-button" mat-raised-button color="primary" (click)="openBottomSheet()">{{'ADD_ADDRESS.CONFIRM_LOCATION'|translate}}</button>
   </div>
 </div>
 

@@ -6,6 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { IVehicleData } from '../../../shared/models/common-model';
 import { DataService } from '../../../shared/services/data.service';
 import { MatSnackBar } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-bottom-vehicle',
@@ -24,7 +25,8 @@ export class BottomVehicleComponent implements OnInit {
     private dataService: DataService,
     private bottomSheetRef: MatBottomSheetRef<BottomVehicleComponent>,
     private router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -54,7 +56,9 @@ export class BottomVehicleComponent implements OnInit {
   saveVehicle() {
     this.dataService.manageVehicle(this.vehicleForm.value).subscribe((data) => {
       this.bottomSheetRef.dismiss(data.data.indVehicles);
-      this.snackbar.open('Saved successfully');
+      this.translateService.get('ADD_ADDRESS.SUCCESSFULLY_SAVED').subscribe((res: string)=>{
+        this.snackbar.open(res);
+      });
     }, (err)=>{
       this.snackbar.open(err.error.message);
     });

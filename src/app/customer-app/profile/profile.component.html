@@ -13,42 +13,42 @@
         {{ basic.indFirstName }}
       </div>
       <div class="head4 phone">{{ mobile }}</div>
-      <button mat-stroked-button color="primary" class="head4" (click)="onNavigate()">EDIT</button>
+      <button mat-stroked-button color="primary" class="head4" (click)="onNavigate()">{{'EDIT'|translate}}</button>
     </div>
   </div>
   <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="head3 bold">Accounts</div>
+    <div class="head3 bold">{{'PROFILE.ACCOUNT'|translate}}</div>
   </div>
   <mat-card fxLayout="column" class="mat-elevation-z4">
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 4.svg" alt="">
-      <div class="head4">{{ basic.indFirstName ? basic.indFirstName+" "+basic.indLastName : "Name" }}</div>
+      <div class="head4">{{ basic.indFirstName ? basic.indFirstName+" "+basic.indLastName : 'NAME'|translate }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 5.svg" alt="">
-      <div class="head4">{{ mobile ? mobile: "Your Mobile Number" }}</div>
+      <div class="head4">{{ mobile ? mobile: 'PROFILE.MOBILE_PLACEHOLDER'|translate }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 6.svg" alt="">
-      <div class="head4">{{ email ? email : "Your Email" }}</div>
+      <div class="head4">{{ email ? email : 'PROFILE.EMAIL_PLACEHOLDER'|translate }}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 7.svg" alt="">
-      <div class="head4">{{basic.indGender ? basic.indGender : "Gender"}}</div>
+      <div class="head4">{{basic.indGender ? basic.indGender : 'PROFILE.GENDER'|translate}}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="profile-item" fxLayout="row" fxLayoutAlign="start center">
       <img src="../../../assets/img/core/Mask Group 8.svg" alt="">
-      <div class="head4">{{basic.indFoodPref ? basic.indFoodPref == 'v' ? "Vegetarian": "Non-vegetarian" : "Your Food Preference"}}</div>
+      <div class="head4">{{(basic.indFoodPref ? basic.indFoodPref == 'v' ? 'PROFILE.VEGETARIAN': 'PROFILE.NON_VEGETARIAN' : 'PROFILE.FOOD_PREFERENCE')|translate}}</div>
     </div>
   </mat-card>
 
   <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="head3 bold">Address</div>
-    <button mat-stroked-button color="primary" (click)="addNewAddress()">Add New</button>
+    <div class="head3 bold">{{'ADDRESS'|translate}}</div>
+    <button mat-stroked-button color="primary" (click)="addNewAddress()">{{'ADD'|translate}}</button>
   </div>
   <mat-card fxLayout="column" class="mat-elevation-z4">
     <div *ngFor="let addressItem of address" fxLayout="column" class="address-item">
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
-        <button mat-button color="primary" (click)="editAddress(addressItem)">EDIT</button>
+        <button mat-button color="primary" (click)="editAddress(addressItem)">{{'EDIT'|translate}}</button>
         <!-- <button mat-button color="primary">DELETE</button> -->
       </div>
       <mat-divider [inset]="true"></mat-divider>
@@ -68,8 +68,8 @@
   </mat-card>
 
   <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="head3 bold">Vehicle</div>
-    <button mat-stroked-button color="primary" (click)="addNewVehicle()">Add New</button>
+    <div class="head3 bold">{{'VEHICLE'|translate}}</div>
+    <button mat-stroked-button color="primary" (click)="addNewVehicle()">{{'ADD'|translate}}</button>
   </div>
   <mat-card fxLayout="column" class="mat-elevation-z4">
     <div *ngFor="let vehicleItem of vehicle" fxLayout="column" class="address-item">
@@ -81,27 +81,27 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-around" class="address-operation">
-        <button mat-button color="primary" (click)="editVehicle(vehicleItem)">EDIT</button>
+        <button mat-button color="primary" (click)="editVehicle(vehicleItem)">{{'EDIT|translate'}}</button>
         <!-- <button mat-button color="primary">DELETE</button> -->
       </div>
       <mat-divider [inset]="true"></mat-divider>
     </div>
   </mat-card>
 
-  <div class="head3 bold header">Others</div>
+  <div class="head3 bold header">{{'PROFILE.OTHERS'|translate}}</div>
   <mat-card fxLayout="column" class="mat-elevation-z4">
     <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="head4">Language preferences</div>
+      <div class="head4">{{'PROFILE.LANG_PREFRENCE'|translate}}</div>
       <div class="head4">{{basic.indLanPref ? basic.indLanPref: null}}</div>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="head4">App Notification</div>
+      <div class="head4">{{'PROFILE.APP_NOTIFICATION'|translate}}</div>
       <mat-slide-toggle color="primary" checked="{{notification}}"></mat-slide-toggle>
     </div>
     <mat-divider [inset]="true"></mat-divider>
     <div class="others-item" fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="head4">Location Tracking</div>
+      <div class="head4">{{'PROFILE.LOC_TRACK'|translate}}</div>
       <mat-slide-toggle color="primary"></mat-slide-toggle>
     </div>
   </mat-card>

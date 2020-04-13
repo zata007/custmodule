@@ -72,10 +72,10 @@ export class SigninOtpComponent implements OnInit {
 
   getHeaderText(): string {
     if (this.isNotRegistered) {
-      return 'You are not registered';
+      return 'LOGIN_SIGNUP.NOT_REGISTERED';
     } else if (this.isAlreadyRegistered) {
-      return 'Already Registered';
+      return 'LOGIN_SIGNUP.ALREADY_REGISTERED';
     }
-    return 'Verify OTP';
+    return 'LOGIN_SIGNUP.VERIFY_OTP';
   }
 }

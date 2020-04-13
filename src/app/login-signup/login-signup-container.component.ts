@@ -25,13 +25,13 @@ export class LoginSignupContainerComponent implements OnInit {
             }).subscribe((res: IResponsePlatformParams) => {
               // TODO: Save Params
               this.commonService.setPlatformParams(res.data);
-              console.log(res);
+              // console.log(res);
             });
         },
         error => {
           // User blocked location
           // LocationPopupComponent
-          console.log(error);
+          // console.log(error);
         }
       );
     }

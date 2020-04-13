@@ -14,6 +14,7 @@ import { IRequestGetRestaurantData, IResponseGetRestaurantData, IProfileData, IR
 import { DataService } from 'src/app/shared/services/data.service';
 import { ZATAAKSE_PREF_LANG } from 'src/app/shared/constants/constants';
 import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Marker {
   lat: number;
@@ -78,6 +79,7 @@ export class EssentialsComponent implements OnInit {
     private dataService: DataService,
     private bottomSheet: MatBottomSheet,
     private snackbar: MatSnackBar,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -107,30 +109,33 @@ export class EssentialsComponent implements OnInit {
       .subscribe((res: IResponseLocationServed) => {
         this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
         if (res.data && res.data.isLocationServed) {
-            this.snackbar.open('Select the particular store', 'Close', {
-              duration: 5000,
-            });
-          } else {
-            setTimeout(()=> {
-              this.bottomSheet.open(NotServicebleComponent, {
-                data: {
-                  location: this.searchElementRefFrom.nativeElement.value,
-                  name: "shop"
-                }
+          this.translateService.get('CLOSE').subscribe(( close: string ) => {
+            this.translateService.get('ESSENTIAL_SERVICE.SELECT_STORE').subscribe(( msg: string ) => {
+              this.snackbar.open(msg, close, {
+                duration: 5000,
               });
-            }, 2000)
-          }
-        },
-        err => {
-          // TODO: Handle Error.
+            });
+          });
+        } else {
+          setTimeout(()=> {
+            this.bottomSheet.open(NotServicebleComponent, {
+              data: {
+                location: this.searchElementRefFrom.nativeElement.value,
+                name: "shop"
+              }
+            });
+          }, 2000)
         }
-      );
+      },
+      err => {
+        // TODO: Handle Error.
+      });
 
         },
         error => {
           // User blocked location
           // LocationPopupComponent
-          console.log(error);
+          // console.log(error);
         }
       );
     }

@@ -4,7 +4,7 @@
       <img src="assets/img/core/form details.png" alt="" />
     </div>
     <div class="header">
-      <h3>Help us<br />To serve you</h3>
+      <div class="head3">Help us<br />To serve you</div>
     </div>
     <div class="question-set">
       <ng-container [ngSwitch]="selectedPanel">
@@ -69,8 +69,8 @@
 
   <mat-card matRipple *ngIf="selectedPanel === 'lastQuestion'" class="slider-content-container mat-elevation-z8">
     <div class="header">
-      <h3>Let's Verify<br />The OTP</h3>
-      <h4>Please fill out the OTP recieved</h4>
+      <div class="head3">Let's Verify<br />The OTP</div>
+      <div class="head4">Please fill out the OTP recieved</div>
     </div>
     <ng-container #lastQuestion>
       <div>

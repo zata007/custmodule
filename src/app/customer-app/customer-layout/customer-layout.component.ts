@@ -57,7 +57,7 @@ export class CustomerLayoutComponent implements OnInit {
         error => {
           // User blocked location
           // LocationPopupComponent
-          console.log(error);
+          // console.log(error);
         }
       );
     }

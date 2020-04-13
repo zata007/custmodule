@@ -14,7 +14,7 @@ export class GeoLocationService {
           observer.next(pos);
         },
         (err) => {
-          console.log('Position is not available', err);
+          // console.log('Position is not available', err);
           return;
         },
         {

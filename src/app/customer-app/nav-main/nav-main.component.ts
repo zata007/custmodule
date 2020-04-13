@@ -36,7 +36,7 @@ export class NavMainComponent implements OnInit, OnDestroy {
   ) {}
 
   get isLoggedIn() {
-    return true;
+    return localStorage.getItem(ZATAAKSE_JWT_TOKEN)?true:false;
   }
   currentPage = 'main';
   headerChangeSubscription: Subscription;

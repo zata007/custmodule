@@ -52,10 +52,10 @@ export class RestaurantsListComponent implements OnInit {
         break;
     }
 
-    console.log(data);
+    // console.log(data);
     this.dataService.getSku(data).subscribe((res: IResponseGetSkuData) => {
       // openType = foodList, restaurantList
-      console.log(res);
+      // console.log(res);
       if (res.data && res.data.skuData) {
         this.customerStateService.setCurrentPage('pitstop-view');
         this.router.navigate([`customer/pitstop/${EListPageViewType.FoodList}`]).then(r => {
