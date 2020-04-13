@@ -8,6 +8,7 @@ import { ELoginSignup } from '../models';
 import { DataService } from 'src/app/shared/services/data.service';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from 'src/app/shared/constants/constants';
 import { CustomerService } from 'src/app/customer-app/customer.service';
+import { CustomerStateService } from 'src/app/customer-app/customer-state.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -31,7 +32,8 @@ export class LoginSignupComponent implements OnInit {
     private dataService: DataService,
     private customerService: CustomerService,
     private snackbar: MatSnackBar,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private customerStateService: CustomerStateService,
   ) {}
 
   ngOnInit() {}
@@ -74,7 +76,11 @@ export class LoginSignupComponent implements OnInit {
         // this.store.dispatch(new SignIn(data));
         // this.cookieService.setUserData(data);
         // if navigated from cart then navigate back to cart-view page
-        this.router.navigate(['customer']);
+        if(this.customerStateService.currentEssentialServiceData) {
+          this.router.navigate(['customer/cart-view']);
+        } else {
+          this.router.navigate(['customer']);
+        }
       }, (err) => {
         this.translateService.get('LOGIN_SIGNUP.CHECK_OTP').subscribe((res: string) => {
           this.snackbar.open(res);
