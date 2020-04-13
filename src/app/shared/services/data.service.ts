@@ -292,7 +292,8 @@ export class DataService {
         authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
       }
     };
-    return this.putMethod(url, options, data) as any;
+    const d = this.getFormData(data, null, null);
+    return this.putMethod(url, options, d) as any;
   }
 
   addCart(fingerprint: string, data: IOrderData, position: {
