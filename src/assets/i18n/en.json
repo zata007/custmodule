@@ -149,7 +149,8 @@
     "CANCEL_TO_RECORD": "Cancel to record your order again",
     "CANCEL_TO_SCAN": "Cancel to click image again",
     "SUBMIT_OR_CANCEL_ENTRY": "Submit or Cancel for new entry",
-    "SELECT_STORE": "SELECT THE PARTICULAR STORE"
+    "SELECT_STORE": "Select the particular store",
+    "MODAL_TEXT": "We will reach out to you once we launch in your locality"
   },
   "NOT_SERVICEBLE": {
     "RECOMMEND_MERCH": "Recommend a Merchant",

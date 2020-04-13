@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PreRegisterComponent } from './pre-register/pre-register.component';
 import { HttpClient } from '@angular/common/http';
 import { createTranslateLoader } from '../models/common-model';
+import { TextDialogComponent } from './text-dialog/text-dialog.component';
 
 
 
@@ -20,7 +21,8 @@ import { createTranslateLoader } from '../models/common-model';
     LocationPopupComponent,
     LocationDialogComponent,
     NotServicebleComponent,
-    PreRegisterComponent
+    PreRegisterComponent,
+    TextDialogComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,7 @@ import { createTranslateLoader } from '../models/common-model';
       isolate: false
   })
   ],
-  entryComponents: [LocationPopupComponent, LocationDialogComponent, NotServicebleComponent, PreRegisterComponent],
+  entryComponents: [LocationPopupComponent, LocationDialogComponent, NotServicebleComponent, PreRegisterComponent, TextDialogComponent],
   exports: [SplashScreenComponent, NotServicebleComponent]
 })
 export class SharedComponentsModule { }

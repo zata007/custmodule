@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
-import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatSnackBar } from '@angular/material';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatSnackBar, MatDialog } from '@angular/material';
 import { PreRegisterComponent } from '../pre-register/pre-register.component';
 import { DataService } from '../../services/data.service';
 import { CommonService } from '../../services/common.service';
+import { TranslateService } from '@ngx-translate/core';
+import { TextDialogComponent } from '../text-dialog/text-dialog.component';
 
 @Component({
   selector: 'app-not-serviceble',
@@ -27,6 +29,8 @@ export class NotServicebleComponent implements OnInit {
     private dataService: DataService,
     private commonService: CommonService,
     private snackbar: MatSnackBar,
+    private dialog: MatDialog,
+    private translateService: TranslateService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {
     this.location = data.location;
@@ -60,7 +64,11 @@ export class NotServicebleComponent implements OnInit {
       restName: this.restaurantData.name,
     }}).subscribe((res:any) => {
       this.closePage();
-      this.snackbar.open(res.message);
+      this.translateService.get('ESSENTIAL_SERVICE.MODAL_TEXT').subscribe((res:string)=>{
+        this.dialog.open(TextDialogComponent, {
+          data: res,
+        });
+      });
     }, (err) => {
       this.snackbar.open(err.error.message);
     });

@@ -10,9 +10,8 @@
     <img [src]="photo" alt="">
   </div>
   <mat-card *ngIf="!hasRecorded && !previewMode" class="audio"  fxLayout="column" fxLayoutAlign="center center">
-    <div class="head4">{{"VOICE_ORDER"| translate}}</div>
-    <div class="head4">This is wrong. add correct text</div>
-    <div class="head4">{{"ESSENTIAL_SERVICE.PRESS_THE_GREEN_BTN"| translate}}</div>
+    <div class="head4 bold">{{"VOICE_ORDER"| translate}}</div>
+    <div class="head4" [innerHTML]="'ESSENTIAL_SERVICE.PRESS_THE_GREEN_BTN'| translate"></div>
     
     <div class="image {{hasRecordingStarted ? 'clicked' : null }}" (click)="onMicClick()" fxLayout="row" fxLayoutAlign="center center">
       <img src="{{hasRecordingStarted ?'../../../../assets/icons/stop.svg':'../../../../assets/icons/play.svg'}}" alt="">
