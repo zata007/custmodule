@@ -45,22 +45,26 @@
   "SELECT": "Select",
   "TYPE": "Type",
   "TOTAL": "Total",
-  "LANDING_PAGE": {
-    "TAG_LINE": "Zataakse...",
-    "REGISTRATION_TITLE": "Register",
-    "AGREEMENT_TEXT": "I agree to ",
-    "FIRST_NAME": "First Name",
-    "LAST_NAME": "Last Name",
-    "EMAIL": "Email",
-    "PHONE": "Your mobile number",
-    "EMAIL_TOOLTIP": "You will receive offers and gifts on this email.",
-    "MOBILE_TOOLTIP": "You will receive OTP on this mobile number.",
-    "TOP_TEXT": "Get upto ₹200 on Succesful Registration",
-    "REFERAL_CODE": "Referal Code (Optional)",
-    "TOOLTIP_COMPLETE_ALL_FIELDS": "Please complete all the required fields",
+
+
+  "LANDING_PAGE":{
+    "TAG_LINE" : "Zataakse...",
+    "REGISTRATION_TITLE" : "Register",
+    "AGREEMENT_TEXT" : "I agree to ",
+    "FIRST_NAME":"First Name",
+    "LAST_NAME":"Last Name",
+    "EMAIL":"Email",
+    "PHONE":"Your mobile number",
+    "EMAIL_TOOLTIP":"You will receive offers and gifts on this email.",
+    "MOBILE_TOOLTIP" :"You will receive OTP on this mobile number.",
+    "TOP_TEXT" : "Get upto ₹200 on Succesful Registration",
+    "REFERAL_CODE":"Referal Code (Optional)",
+    "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
     "ORDER_NOW": "Order Now"
   },
-  "MAIN_PAGE": {
+
+
+  "MAIN_PAGE":{
     "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Takeaway</b><br /><br />Order food, beverages, groceries from merchants <b>on your route</b> and have them <b>delivered in your car / vehicle</b></span>",
     "CAROUSAL_MSG_2": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Delivery</b><br /><br />Order food, beverages, groceries from merchants <b>near by</b> and have them <b>delivered at your address</b></span>",
     "CAROUSAL_MSG_3": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Order Ahead</b><br /><br /><b>Order ahead</b> before you reach the restaurant, fast food joint or store to <b>avoid queue and your order shall be ready when you reach</b></span>",
@@ -122,6 +126,8 @@
     "CONGRATS_REGISTRATION": "Congrats!! Registration Successful",
     "EMAILED_COUPAN_CODE": "Rs. 50/- Coupoun code has emailed<br>to your email address !"
   },
+
+  
   "MENU": {
     "TAKEAWAY": "Takeaway",
     "DELIVERY": "Delivery",
@@ -135,20 +141,23 @@
     "PRIVACY": "Privacy Policy",
     "TERMS": "Terms & Condition"
   },
-  "ESSENTIAL_SERVICE": {
-    "CANCEL_TO_RECORD": "Cancel to record your order again",
-    "CANCEL_TO_SCAN": "Cancel to click image again",
-    "MODAL_TEXT": "We will reach out to you once we launch in your locality",
+
+  "ESSENTIAL_SERVICE":{
+    "SERVICE_SUSPENDED_1" : "Zataakse regular services have been suspended due to lockdown",
+    "SERVICE_SUSPENDED_2": "You can order essentials goods from merchants near you, by recording a voice message or clicking picture of item list. Check samples.",
+    "SAY_THE_PRODUCT_NAME" : "Record your order within 1 minute.",
+    "WRITE_PRODUCT_AND_QUANTITY": "Take picture of your order list",
+    "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel",
     "PRESS_THE_GREEN_BTN": "Press this green button to start recording your order in the format <b>Brand</b> - <b>Item</b> - <b>Quantity</b>. Check sample order",
     "PRESS_THE_GREEN_BTN_PIC": "Press this green button to click a picture of your order list in the format <b>Brand</b>-<b>Item</b>-<b>Quantity</b>",
-    "SAY_THE_PRODUCT_NAME": "Record your order within 1 minute.",
-    "SELECT_STORE": "Select a particular store in your vicinity by clicking on the red spots",
-    "SERVICE_SUSPENDED_1": "Zataakse regular services have been suspended due to lockdown",
-    "SERVICE_SUSPENDED_2": "You can order essentials goods from merchants near you, by recording a voice message or clicking picture of item list. Check samples.",
+    "CANCEL_TO_RECORD": "Cancel to record your order again",
+    "CANCEL_TO_SCAN": "Cancel to click image again",
     "SUBMIT_OR_CANCEL_ENTRY": "Submit or Cancel",
-    "SUBMIT_OR_CANCEL_FOR_NEW_ENTRY": "Submit or Cancel",
-    "WRITE_PRODUCT_AND_QUANTITY": "Take picture of your order list"
+    "SELECT_STORE": "Select a particular store in your vicinity by clicking on the red spots",
+    "MODAL_TEXT": "We will reach out to you once we launch in your locality"
   },
+
+
   "NOT_SERVICEBLE": {
     "RECOMMEND_MERCH": "Recommend a Merchant",
     "RECOMMEND_TEXT": "You may refer merchants at your location by providing their business name and mobile number",
