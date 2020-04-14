@@ -44,7 +44,7 @@ export class OrderStatusComponent implements OnInit {
 
   onBackClick() {
     this.customerStateService.setCurrentPage('main');
-    this.location.back();
+    this.router.navigate(['customer']);
   }
 
   goOrderDetail(id) {

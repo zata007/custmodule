@@ -23,7 +23,7 @@
       <input matInput value="{{profile.indDetail.basic.indLastName ? profile.indDetail.basic.indLastName :null}}" formControlName='indLastName' (change)="lastNameChange()">
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <mat-label>{{'EMAIL'|translate}}</mat-label>
+      <mat-label>{{'LANDING_PAGE.EMAIL'|translate}}</mat-label>
       <input matInput type="email" placeholder="mail@example.com" value="{{profile.indDetail.roles[0].indEmail ? profile.indDetail.roles[0].indEmail :null}}" formControlName='indEmail' (change)="emailChange()">
       <!-- <mat-error *ngIf="email.errors.email && !email.errors.required">
         Please enter a valid email address

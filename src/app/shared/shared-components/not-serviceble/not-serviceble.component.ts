@@ -66,7 +66,10 @@ export class NotServicebleComponent implements OnInit {
       this.closePage();
       this.translateService.get('ESSENTIAL_SERVICE.MODAL_TEXT').subscribe((res:string)=>{
         this.dialog.open(TextDialogComponent, {
-          data: res,
+          data: {
+            from: 'not-serviceble',
+            msg: res
+          }
         });
       });
     }, (err) => {

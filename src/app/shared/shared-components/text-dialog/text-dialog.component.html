@@ -1,1 +1,4 @@
-<div class="head3">{{data}}</div>
+<div mat-dialog-content class="head3">{{data.msg}}</div>
+<div *ngIf="data.from == 'order-cart'" mat-dialog-actions>
+  <button mat-stroked-button color="primary" (click)="onNoClick()">Okay</button>
+</div>

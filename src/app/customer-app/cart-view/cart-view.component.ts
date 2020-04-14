@@ -14,6 +14,8 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { BottomVehicleComponent } from '../vehicle/bottom-vehicle/bottom-vehicle.component';
 import {FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { TextDialogComponent } from 'src/app/shared/shared-components/text-dialog/text-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cart-view',
@@ -59,6 +61,7 @@ export class CartViewComponent implements OnInit {
     private commonService: CommonService,
     public customerStateService: CustomerStateService,
     private snackbar: MatSnackBar,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -256,14 +259,19 @@ export class CartViewComponent implements OnInit {
           localStorageData['serviceType'] = this.customerStateService.currentServiceSelected;
           localStorage.setItem(ZATAAKSE_SELECTED_SERVICE, JSON.stringify(localStorageData));
           this.customerStateService.setOrderId(res.data.orderId);
-          this.snackbar.open('Order placed', 'success', {
-            duration: 4000,
-          });
+          this.translateService.get('CART.ORDER_SUCCESS_DIALOG').subscribe((res: string) => {
+            this.dialog.open(TextDialogComponent, {
+              data: {
+                from: 'order-cart',
+                msg: res
+              }
+            });
+          })
           const navigationExtras: NavigationExtras = {
             queryParams: {
                 comingFromCart: true,
             }
-        };
+          };
           this.router.navigate(['/customer/order-detail'], navigationExtras);
         }, (errorPlaceOrder) => {
           if (errorPlaceOrder.statusCode !== 400) {

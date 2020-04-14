@@ -16,4 +16,8 @@ export class TextDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
