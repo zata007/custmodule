@@ -45,8 +45,7 @@
   "SELECT": "Select",
   "TYPE": "Type",
   "TOTAL": "Total",
-
-
+  "DELIVERY_TIME": "Delivery Time",
   "LANDING_PAGE":{
     "TAG_LINE" : "Zataakse...",
     "REGISTRATION_TITLE" : "Register",
@@ -62,8 +61,6 @@
     "TOOLTIP_COMPLETE_ALL_FIELDS":"Please complete all the required fields",
     "ORDER_NOW": "Order Now"
   },
-
-
   "MAIN_PAGE":{
     "CAROUSAL_MSG_1": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Takeaway</b><br /><br />Order food, beverages, groceries from merchants <b>on your route</b> and have them <b>delivered in your car / vehicle</b></span>",
     "CAROUSAL_MSG_2": "<h1 class='head1 logo'>Zataakse</h1><br /><span><b>Delivery</b><br /><br />Order food, beverages, groceries from merchants <b>near by</b> and have them <b>delivered at your address</b></span>",
@@ -79,7 +76,6 @@
     "SELECT_LANGUAGE": "Language / भाषा",
     "GET_STARTED": "Next"
   },
-
   "SNACK_PAGE": {
     "QUESTION_1": {
       "LABEL": "How do you commute everyday ?",
@@ -121,13 +117,10 @@
       "LABEL_D": "Mughlai",
       "LABEL_E": "Street food / Local cuisine"
     },
-
     "PLEASE_ENTER_OTP": "Please Enter the OTP <br>received on {{userMobileNumber}}",
     "CONGRATS_REGISTRATION": "Congrats!! Registration Successful",
     "EMAILED_COUPAN_CODE": "Rs. 50/- Coupoun code has emailed<br>to your email address !"
-  },
-
-  
+  },  
   "MENU": {
     "TAKEAWAY": "Takeaway",
     "DELIVERY": "Delivery",
@@ -141,7 +134,6 @@
     "PRIVACY": "Privacy Policy",
     "TERMS": "Terms & Condition"
   },
-
   "ESSENTIAL_SERVICE":{
     "SERVICE_SUSPENDED_1" : "Zataakse regular services have been suspended due to lockdown",
     "SERVICE_SUSPENDED_2": "You can order essentials goods from merchants near you, by recording a voice message or clicking picture of item list. Check samples.",
@@ -156,8 +148,6 @@
     "SELECT_STORE": "Select a particular store in your vicinity by clicking on the red spots",
     "MODAL_TEXT": "We will reach out to you once we launch in your locality"
   },
-
-
   "NOT_SERVICEBLE": {
     "RECOMMEND_MERCH": "Recommend a Merchant",
     "RECOMMEND_TEXT": "You may refer merchants at your location by providing their business name and mobile number",

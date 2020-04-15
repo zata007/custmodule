@@ -53,7 +53,11 @@
         <div class="head4 bold">{{"PAYMENT_SUM"| translate}}</div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="para">{{"TOTAL_AMMOUNT"| translate}}</div>
-            <div class="para">{{data.totalPrice}}</div>
+            <div class="para">{{data.totalPrice? '₹':''}}{{data.totalPrice}}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="para">{{"DELIVERY_TIME"| translate}}</div>
+          <div class="para">{{data.deliveryTime|date:'d-M-y h:mm a'}}</div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="para">{{"PAYMENT_METHOD"| translate}}</div>

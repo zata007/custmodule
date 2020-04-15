@@ -52,7 +52,9 @@ import { OrderDetailComponent } from './order-list/order-detail/order-detail.com
 import { OrderStatusComponent } from './order-status/order-status.component';
 import { LanguageComponent } from './language/language.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { createTranslateLoader } from '../shared/models/common-model';
 
 @NgModule({
   declarations: [
@@ -117,7 +119,14 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterModule.forChild(CustomerAppRoutes),
     SwiperModule,
     FlexLayoutModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      },
+      isolate: false
+    }),
   ],
   bootstrap: [CustomerLayoutComponent],
   providers: [CustomerService, OrderService, NgxImageCompressService],

@@ -10,7 +10,7 @@ export class TextDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<TextDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string,
+    @Inject(MAT_DIALOG_DATA) public data: {from: string, msg: string},
   ) { }
 
   ngOnInit() {

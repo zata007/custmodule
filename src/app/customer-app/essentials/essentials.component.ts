@@ -155,7 +155,7 @@ export class EssentialsComponent implements OnInit {
 
     this.customerStateService.setCurrentPage('main');
     // set google maps defaults
-    this.zoom = 13;
+    this.zoom = 16;
 
     // create search FormControl
     this.searchControl = new FormControl();

@@ -159,7 +159,8 @@
       <div class="head4 bold" (click)="onSubmitClick()" fxLayout="row" fxLayoutAlign="center center">{{(this.hasAuthToken ?'CART.PLACE_ORDER':'CART.LOGIN_SIGNUP')|translate}}</div>
     </div>
     <div *ngIf="customerStateService.currentServiceSelected == ECustomerServiceType.Essential" fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button color="primary" (click)="onSubmitClick()" style="width: 90%">{{'CART.PLACE_ORDER'|translate}}</button>
+      <button *ngIf="!loading" mat-raised-button color="primary" (click)="onSubmitClick()" style="width: 90%">{{'CART.PLACE_ORDER'|translate}}</button>
+      <button *ngIf="loading" mat-raised-button disabled style="width: 90%">Sending Order...</button>
     </div>
   </div>
 </div>

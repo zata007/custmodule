@@ -50,6 +50,7 @@ export class CartViewComponent implements OnInit {
   windowObjectReference: Window = null;
   currentEssentialServiceData: IEssentialProductData;
   essentialPaymentMode = 'Cash On Delivery';
+  loading: boolean = false;
 
   constructor(
     private location: Location,
@@ -154,6 +155,7 @@ export class CartViewComponent implements OnInit {
 
   onSubmitClick() {
     if (this.hasAuthToken) {
+      this.loading = true;
       // TODO place order.
       const data: IRequestPlaceOrder = {
         orderData: this.orderService.cart.map(i => {
@@ -281,6 +283,7 @@ export class CartViewComponent implements OnInit {
             //this.router.navigate(['login-signup']);
           }
           this.snackbar.open(errorPlaceOrder.error.message);
+          this.loading = false;
         });
       }
 

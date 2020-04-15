@@ -19,7 +19,7 @@ export class LanguageComponent implements OnInit {
   profileForm: FormGroup;
   langs: Array<{value: String; viewValue: String}> = [
     {value: 'en', viewValue: 'English'},
-    {value: 'hn', viewValue: 'Hindi'},
+    {value: 'hi', viewValue: 'Hindi'},
     {value: 'bn', viewValue: 'Bengali'},
     {value: 'mr', viewValue: 'Marathi'},
     {value: 'gu', viewValue: 'Bengali'}
