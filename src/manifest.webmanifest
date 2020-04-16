@@ -1,8 +1,7 @@
 {
-  "name": "ZataakSe....",
-  "short_name": "Zataakse",
-  "theme_color": "#ff150021",
-  "background_color":  "#ff1500",
+  "name": "Zataakse",
+  "theme_color": "#dc0000",
+  "background_color":  "#dc0000",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
