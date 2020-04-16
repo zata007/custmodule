@@ -138,6 +138,13 @@ export class EssentialsComponent implements OnInit {
           // console.log(error);
         }
       );
+    } else {
+      this.dataService.getPlatformParams({
+        ...this.commonService.getRequestEssentialParams()
+      }).subscribe((res: IResponsePlatformParams) => {
+        // TODO: Save Params
+        this.commonService.setPlatformParams(res.data);
+      });
     }
 
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
