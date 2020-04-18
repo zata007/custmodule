@@ -28,10 +28,13 @@ export class SplashScreenComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.pwaService.checkForUpdate()
-          .subscribe(result => {
-              this.show = result;
-              this.cdr.detectChanges();
-          });
+    if (navigator.userAgent.includes('Chrome')) {
+      this.show = false;
+    }
+    this.pwaService.checkForUpdate()
+        .subscribe(result => {
+            this.show = result;
+            this.cdr.detectChanges();
+        });
   }
 }
