@@ -169,10 +169,12 @@ export interface IResponseGetRestaurantData {
 export interface IBusinessLocData {
   _id: string;
   businessLocationsId: string;
+  businessLocType: string;
   blPitstops: boolean;
   blOrderAhead: boolean;
   blDelivery: boolean;
   blDineIn: boolean;
+  blAddr: IAddressData;
   images: {
     imageName: string;
     original: string;

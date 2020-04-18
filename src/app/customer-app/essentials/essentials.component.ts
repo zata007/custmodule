@@ -31,6 +31,8 @@ interface EssentialMarker {
   draggable?: boolean;
   id: string;
   photo?: string;
+  type?: string;
+  locality?: string;
 }
 
 @Component({
@@ -178,6 +180,8 @@ export class EssentialsComponent implements OnInit {
           id: i._id,
           name: i.displayName,
           photo: i.images[0].thumbnail,
+          type: i.businessLocType,
+          locality: i.blAddr.locality
         };
         this.markers.push(cardLocation);
       });
