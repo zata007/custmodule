@@ -13,6 +13,7 @@ import { MatBottomSheet } from '@angular/material';
 import { CartNotEmptyComponent } from 'src/app/shared/shared-components/cart-not-empty/cart-not-empty.component';
 import { Location } from '@angular/common';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PROFILE_DATA } from '../../shared/constants/constants'
+import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
 
 
 @Component({
@@ -95,12 +96,19 @@ export class NavMainComponent implements OnInit, OnDestroy {
       case 'OrderList':
         this.router.navigate(['/customer/order-history']);
         break;
-        case 'OrderStatus':
-          this.router.navigate(['/customer/order-status']);
-          break;
-        case 'Language':
-          this.router.navigate(['/customer/language']);
-          break;
+      case 'OrderStatus':
+        this.router.navigate(['/customer/order-status']);
+        break;
+      case 'Language':
+        this.router.navigate(['/customer/language']);
+        break;
+      case 'MerchRecommend':
+        this.bottomSheet.open(NotServicebleComponent, {
+          data: {
+            name: "Merch"
+          }
+        });
+        break;
       default:
         break;
     }

@@ -37,7 +37,11 @@ export class NotServicebleComponent implements OnInit {
     this.name = data.name
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.name == "Merch") {
+      this.isSubmitRequestVisible = true;
+    }
+  }
 
   requestService() {
     this.isSubmitRequestVisible = !this.isSubmitRequestVisible;
