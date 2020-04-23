@@ -75,8 +75,8 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
       10 * 60 * 1000);
   }
 
-  goToFile() {
-    window.open(this.data.file);
+  goToFile(url) {
+    window.open(url);
   }
 
   checkOrderStatus() {	
