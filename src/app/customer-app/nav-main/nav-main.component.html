@@ -17,9 +17,9 @@
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Care')"> <mat-icon>record_voice_over</mat-icon>Customer Care </a>
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('')"> <mat-icon>settings</mat-icon>Settings </a> -->
       <a class="ham-menu" mat-list-item (click)="onSideNavClick('Language')"> <mat-icon>language</mat-icon>{{'MENU.LANGUAGE'|translate}}</a>
-      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{(isLoggedIn? 'MENU.LOGOUT' : 'MENU.LOGIN')|translate}} </a>
       <a class="ham-menu" mat-list-item href="#"><mat-icon>security</mat-icon>{{'MENU.PRIVACY'|translate}}</a>
       <a class="ham-menu" mat-list-item href="#"><mat-icon>ac_unit</mat-icon>{{'MENU.TERMS'|translate}}</a>
+      <a class="ham-menu" mat-list-item (click)="onSideNavClick('Logout')"> <mat-icon>{{isLoggedIn?'power_settings_new':'exit_to_app'}}</mat-icon>{{(isLoggedIn? 'MENU.LOGOUT' : 'MENU.LOGIN')|translate}}</a>
     </mat-nav-list>
 
     <!-- <mat-nav-list class="rule-list">

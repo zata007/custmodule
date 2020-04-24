@@ -164,7 +164,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           this.commonService.setUserLocation(latitude, longitude);
-          this.router.navigate(['customer']);
         },
         error => {
           // User blocked location
@@ -179,6 +178,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
           // console.log(error);
         }
       );
-    }
+    }    
+    this.router.navigate(['customer']);
   }
 }

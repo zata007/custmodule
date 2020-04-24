@@ -12,7 +12,7 @@
               <div class="para bold order-id">{{item.orderId}}</div>
               <div class="para">{{item.orderStatus}}</div>
             </div>
-              <div class="para">{{item.orderDateTime.split("T", 1)}}</div>
+              <div class="para">{{item.orderDateTime|date:'d MMMM yyy'}}</div>
           </div>
           <!-- <div *ngFor="let orderItem of item.orderData" class="helping" fxLayout="row"><p class="bold">{{orderItem.businessLocId.businessLocName}}:&nbsp;</p> <p>{{orderItem.skuId ? orderItem.skuId.skuName.en : null}}</p></div> -->
           <div class="para" fxLayout="row" fxLayout="row" fxLayoutAlign="space-between">

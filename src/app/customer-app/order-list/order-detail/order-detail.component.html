@@ -4,11 +4,11 @@
     </button>
 </mat-toolbar>
 <div *ngIf="data" class="order-detail-container" fxLayout="column">
-    <div class="head3 bold">{{data.orderId}}</div>
+    <div class="head3 bold order-id">{{data.orderId}}</div>
     <div fxLayout="row" fxLayoutAlign="space-between flex-start">
         <div class="item" fxLayout="column">
             <div class="head4 bold">{{"ORDER_DATE_TIME"| translate}}</div>
-            <div class="head4">{{data.orderDateTime.split("T", 1)}}</div>
+            <div class="head4">{{data.orderDateTime|date:'d MMMM y'}}</div>
         </div>
         <div class="item" fxLayout="column">
             <div class="head4 bold">{{"ORDER_TYPE"| translate}}</div>
@@ -58,7 +58,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div class="para">{{"DELIVERY_TIME"| translate}}</div>
-          <div class="para">{{data.deliveryTime|date:'d-M-y h:mm a'}}</div>
+          <div class="para">{{data.deliveryTime|date:'d MMM y, h:mm a'}}</div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="para">{{"PAYMENT_METHOD"| translate}}</div>
