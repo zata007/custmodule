@@ -18,6 +18,12 @@ export class CustomerLayoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.dataService.getPlatformParams({
+      ...this.commonService.getRequestEssentialParams()
+    }).subscribe((res: IResponsePlatformParams) => {
+      // TODO: Save Params
+      this.commonService.setPlatformParams(res.data);
+    });
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -27,32 +33,34 @@ export class CustomerLayoutComponent implements OnInit {
           // Get Platform params
           // TODO: GET /params/getPlatformParams
           this.dataService.getPlatformParams({
-              ...this.commonService.getRequestEssentialParams()
-            }).subscribe((res: IResponsePlatformParams) => {
-              // TODO: Save Params
-              this.commonService.setPlatformParams(res.data);
-            });
+            ...this.commonService.getRequestEssentialParams()
+          }).subscribe((res: IResponsePlatformParams) => {
+            // TODO: Save Params
+            this.commonService.setPlatformParams(res.data);
+          });
           // Get current location's restaurant info.
-          this.customerStateService.setFromLocation({ lat: latitude, lng: longitude }, true);
+          this.customerStateService.setFromLocation({
+            lat: latitude,
+            lng: longitude
+          }, true);
           this.dataService.checkZataakseServiceAvailable({
-        fingerprint: this.commonService.fingerPrint,
-        lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
-        latitude,
-        longitude
-      })
-      .subscribe((res: IResponseLocationServed) => {
-        this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
-        if (res.data && res.data.isLocationServed) {
-            // TODO: DO Nothing
-          } else {
-            // TODO: Show popup for no service
-          }
-        },
-        err => {
-          // TODO: Handle Error.
-        }
-      );
-
+              fingerprint: this.commonService.fingerPrint,
+              lan: localStorage.getItem(ZATAAKSE_PREF_LANG),
+              latitude,
+              longitude
+            })
+            .subscribe((res: IResponseLocationServed) => {
+                this.customerStateService.setCurrentLocationRestaurantData(res.data.businessLocData);
+                if (res.data && res.data.isLocationServed) {
+                  // TODO: DO Nothing
+                } else {
+                  // TODO: Show popup for no service
+                }
+              },
+              err => {
+                // TODO: Handle Error.
+              }
+            );
         },
         error => {
           // User blocked location
@@ -60,13 +68,6 @@ export class CustomerLayoutComponent implements OnInit {
           // console.log(error);
         }
       );
-    } else {
-      this.dataService.getPlatformParams({
-        ...this.commonService.getRequestEssentialParams()
-      }).subscribe((res: IResponsePlatformParams) => {
-        // TODO: Save Params
-        this.commonService.setPlatformParams(res.data);
-      });
-    }
+    } else {}
   }
 }

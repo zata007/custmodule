@@ -12,6 +12,12 @@ export class LoginSignupContainerComponent implements OnInit {
   constructor(private translate: TranslateService, private dataService: DataService, private commonService: CommonService) { }
 
   ngOnInit() {
+    this.dataService.getPlatformParams({
+      ...this.commonService.getRequestEssentialParams()
+    }).subscribe((res: IResponsePlatformParams) => {
+      // TODO: Save Params
+      this.commonService.setPlatformParams(res.data);
+    });
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -35,12 +41,6 @@ export class LoginSignupContainerComponent implements OnInit {
         }
       );
     } else {
-      this.dataService.getPlatformParams({
-        ...this.commonService.getRequestEssentialParams()
-      }).subscribe((res: IResponsePlatformParams) => {
-        // TODO: Save Params
-        this.commonService.setPlatformParams(res.data);
-      });
     }
    }
 }

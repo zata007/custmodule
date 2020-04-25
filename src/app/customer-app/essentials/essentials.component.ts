@@ -86,6 +86,12 @@ export class EssentialsComponent implements OnInit {
 
   ngOnInit() {
     // Patch map data,
+    this.dataService.getPlatformParams({
+      ...this.commonService.getRequestEssentialParams()
+    }).subscribe((res: IResponsePlatformParams) => {
+      // TODO: Save Params
+      this.commonService.setPlatformParams(res.data);
+    });
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -141,12 +147,6 @@ export class EssentialsComponent implements OnInit {
         }
       );
     } else {
-      this.dataService.getPlatformParams({
-        ...this.commonService.getRequestEssentialParams()
-      }).subscribe((res: IResponsePlatformParams) => {
-        // TODO: Save Params
-        this.commonService.setPlatformParams(res.data);
-      });
     }
 
     this.customerStateService.locationSelectionCompleted$.subscribe((hasCompleted) => {
