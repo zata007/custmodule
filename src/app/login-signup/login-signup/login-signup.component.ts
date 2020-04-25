@@ -131,7 +131,7 @@ export class LoginSignupComponent implements OnInit {
     if(type==='register' && this.signupData.email) {
       data.data['indEmail'] = this.signupData.email;
     }
-    if(this.signupData.terms) {
+    if(type === 'login' || this.signupData.terms) {
       this.dataService.registerLogin(data).subscribe((res: IResponseLoginSignup) => {
         this.userByMobile = res.data;
         this.openVerifyOTP();
