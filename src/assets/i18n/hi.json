@@ -187,7 +187,8 @@
     "NOT_REGISTERED_TEXT": "आपका पंजीकरण नहीं है । पंजीकरण करे । ",
     "ALREADY_REGISTERED_TEXT": "आपका पंजीकरण पूर्ण है । लॉगिन करे",
     "SIGNUP_TEXT": "शुरू करे ",
-    "ENTER_OTP": "OTP दे"
+    "ENTER_OTP": "OTP दे",
+    "CHECK_TERMS": "कृपया हमारे नियमों और शर्तों से सहमत हों"
   },
   "ADD_ADDRESS": {
     "PROVIDE_DELIVERY": "अपना वितरण / डिलीवरी स्थान प्रदान करें",

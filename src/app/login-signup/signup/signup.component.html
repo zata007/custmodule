@@ -32,7 +32,7 @@
       </mat-form-field>
     </div>
     <div>
-        <mat-checkbox class="example-margin" [(ngModel)]="isAgreed" [ngModelOptions]="{standalone: true}" >{{ 'LANDING_PAGE.AGREEMENT_TEXT' | translate }}</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="terms">{{ 'LANDING_PAGE.AGREEMENT_TEXT' | translate }}</mat-checkbox>
         <a style="padding-left: 5px; vertical-align: bottom;" href="javascript:void(0);" (click)="gotoTerms()">{{ 'TERMS' | translate }}</a>
       </div>
     <!-- <mat-checkbox [(ngModel)]="isAgreed">I agree to the terms and conditions</mat-checkbox> -->

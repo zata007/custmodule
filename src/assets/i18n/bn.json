@@ -191,7 +191,8 @@
     "NOT_REGISTERED_TEXT": "আপনি Zataakse তে নিবন্ধভুক্ত নন। নিবন্ধকরণের সাথে এগিয়ে যান",
     "ALREADY_REGISTERED_TEXT": "আপনি ইতিমধ্যে Zataakse তে নিবন্ধিত হয়েছেন। লগইন সহ এগিয়ে যান",
     "SIGNUP_TEXT": "চল শুরু করি",
-    "ENTER_OTP": "ওটিপি দিন"
+    "ENTER_OTP": "ওটিপি দিন",
+    "CHECK_TERMS": "দয়া করে আমাদের শর্তাবলী সম্মত হন"
   },
   "ADD_ADDRESS": {
     "PROVIDE_DELIVERY": "আপনার বিতরণ অবস্থান সরবরাহ করুন",

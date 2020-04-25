@@ -131,21 +131,27 @@ export class LoginSignupComponent implements OnInit {
     if(type==='register' && this.signupData.email) {
       data.data['indEmail'] = this.signupData.email;
     }
-    this.dataService.registerLogin(data).subscribe((res: IResponseLoginSignup) => {
-      this.userByMobile = res.data;
-      this.openVerifyOTP();
-    }, error => {
-      if (error.error.statusCode === 400) {
-        this.bottomSheet.open(SigninOtpComponent, {
-          data: {
-            isNotRegistered: true,
-            onProceed: (typeInfo) => this.onProceedFromBottomSheet(typeInfo)
-          }
-        });
-      } else if (error.error) {
-        this.snack.open(error.error.message);
-      }
-    });
+    if(this.signupData.terms) {
+      this.dataService.registerLogin(data).subscribe((res: IResponseLoginSignup) => {
+        this.userByMobile = res.data;
+        this.openVerifyOTP();
+      }, error => {
+        if (error.error.statusCode === 400) {
+          this.bottomSheet.open(SigninOtpComponent, {
+            data: {
+              isNotRegistered: true,
+              onProceed: (typeInfo) => this.onProceedFromBottomSheet(typeInfo)
+            }
+          });
+        } else if (error.error) {
+          this.snack.open(error.error.message);
+        }
+      });
+    } else {
+      this.translateService.get('LOGIN_SIGNUP.CHECK_TERMS').subscribe((res: string) => {
+        this.snackbar.open(res);
+      })
+    }
   }
 
   onProceedFromBottomSheet(type: number) {

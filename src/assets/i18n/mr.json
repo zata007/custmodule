@@ -187,7 +187,8 @@
     "NOT_REGISTERED_TEXT": "आपले रेजिस्ट्रेशन नाही. रेजिस्ट्रेशन करा.",
     "ALREADY_REGISTERED_TEXT": "आपले रेजिस्ट्रेशन पूर्ण आहे. लॉगिन करा.",
     "SIGNUP_TEXT": "चला सुरू करुया",
-    "ENTER_OTP": "OTP द्या"
+    "ENTER_OTP": "OTP द्या",
+    "CHECK_TERMS": "कृपया आमच्या अटी व शर्तींशी सहमत व्हा"
   },
   "ADD_ADDRESS": {
     "PROVIDE_DELIVERY": "आपले वितरण / डिलीवरी स्थान प्रदान करा",
