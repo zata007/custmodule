@@ -8,6 +8,7 @@ import { ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG, LOCAL_STORAGE_FINGERPRINT } from '../../../shared/constants/constants'
 import { ISampleFile } from '../../../shared/models/common-model';
 import { NgxImageCompressService, DOC_ORIENTATION } from 'ngx-image-compress';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 declare var MediaRecorder: any;
 @Component({
@@ -26,6 +27,8 @@ export class RecordComponent implements OnInit, OnDestroy {
   audioUrl: string;
   businessId: any;
   businessName: any;
+  type: any;
+  locality: any;
   audioChunks: any;
   audio: string;
   image: string;
@@ -34,7 +37,21 @@ export class RecordComponent implements OnInit, OnDestroy {
   recordingIntervalRef: any;
   imagePreview: any;
   imageFile:any;
-  photo: string;
+  photo: string[];
+  config: SwiperConfigInterface = {
+    direction: 'horizontal',
+    slidesPerView: 1.25,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: false,
+    pagination: false,
+    zoom: {
+      maxRatio: 3,
+      minRatio: 1,
+      toggle: true,
+    },
+  }
 
 
   constructor(
@@ -54,11 +71,13 @@ export class RecordComponent implements OnInit, OnDestroy {
       }
       this.businessId = params.id;
       this.businessName = params.name;
+      this.type = params.type;
+      this.locality = params.locality;
       this.position = {
         lat: params.lat,
         lng: params.lng
       }
-      this.photo = params.photo;
+      this.photo = params.photo.split(',');
     });
 
     if(localStorage.getItem(LOCAL_STORAGE_FINGERPRINT)) {
@@ -67,11 +86,9 @@ export class RecordComponent implements OnInit, OnDestroy {
         this.position,
         localStorage.getItem(ZATAAKSE_PREF_LANG)).
         subscribe((res: ISampleFile) => {
-          // console.log(res);
           if(res && res.data) {
             this.audio = res.data.audio,
             this.image = res.data.image
-            // console.log(this.audio, this.image);
           }
       });
     } else {
@@ -141,6 +158,8 @@ export class RecordComponent implements OnInit, OnDestroy {
 
     this.customerStateService.currentEssentialServiceData = {
       displayName: this.businessName,
+      type: this.type,
+      locality: this.locality,
       id: this.businessId,
       file: this.hasRecorded ?  recordingFile : this.uploadedImg, // TODO: Attach file
       isRecording: this.hasRecorded
@@ -205,7 +224,6 @@ export class RecordComponent implements OnInit, OnDestroy {
         const imageBlob = this.dataURItoBlob(result.split(',')[1]);
         const imageFile = new File([imageBlob], fileName, {type: 'image/jpeg'});
         this.uploadedImg = imageFile;
-        console.log(imageFile);
       }
     );
   }

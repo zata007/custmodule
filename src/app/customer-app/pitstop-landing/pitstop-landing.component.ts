@@ -28,7 +28,6 @@ export class PitstopLandingComponent implements OnInit {
     private commonService: CommonService
     ) {
     // this.customerStateService.currentSkuData$.subscribe(data => {
-    //   console.log(data);
     //   this.foods = data.skuData;
     //   this.resName = data.resName;
     // });

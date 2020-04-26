@@ -229,7 +229,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   //         ...this.customerStateService.getLocationData()
   //       }).subscribe((data: any) => {
   //         const pitstops: Array<any> = data.data;
-  //         console.log(pitstops);
 
   //         // check if pitstop is on the edge.
   //         // TODO: Remove !
@@ -426,7 +425,6 @@ export class MapVehicleComponent implements OnInit, OnDestroy {
   //     if (result) {
   //       this.router.navigate(['customer/delivery']);
   //     }
-  //     console.log('The dialog was closed', result);
   //   });
   // }
 

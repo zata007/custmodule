@@ -329,7 +329,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 //       if (status === google.maps.GeocoderStatus.OK) {
 //         const result = results[0];
 //         if (result != null) {
-//           console.log(result);
 //           callback(result);
 //           // this.address = rsltAdrComponent[resultLength - 8].short_name;
 //         } else {
@@ -382,7 +381,6 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy {
 //       if (result) {
 //         this.goToRestaurant();
 //       }
-//       console.log('The dialog was closed', result);
 //     });
 //   }
 

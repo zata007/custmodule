@@ -591,6 +591,8 @@ export interface IResponseAddCart {
 
 export interface IEssentialProductData {
   displayName: string;
+  type: string;
+  locality: string;
   isRecording: boolean;
   file: any;
   id: string;

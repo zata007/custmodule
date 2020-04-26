@@ -39,7 +39,6 @@ export class LoginSignupComponent implements OnInit {
   ngOnInit() {}
 
   onLoginNumberUpdate(mobNumber: number) {
-    // console.log(mobNumber);
     this.loginMobNumber = mobNumber;
   }
 
@@ -140,6 +139,7 @@ export class LoginSignupComponent implements OnInit {
           this.bottomSheet.open(SigninOtpComponent, {
             data: {
               isNotRegistered: true,
+              errMessage: error.error.message,
               onProceed: (typeInfo) => this.onProceedFromBottomSheet(typeInfo)
             }
           });

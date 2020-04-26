@@ -128,7 +128,6 @@ export class CustomerStateService {
     };
 
     this.socket.emit('checkLocationOnEdge', data, (e)=>{
-      // console.log(e)
     });
   }
 

@@ -282,7 +282,6 @@ export class OrderAheadComponent implements OnInit {
 //         const result = results[0];
 //         const rsltAdrComponent = result.address_components;
 //         if (result != null) {
-//           console.log(result);
 //           callback(result);
 //           // this.address = rsltAdrComponent[resultLength - 8].short_name;
 //         } else {
@@ -335,7 +334,6 @@ export class OrderAheadComponent implements OnInit {
 //       if (result) {
 //         this.goToRestaurant();
 //       }
-//       console.log('The dialog was closed', result);
 //     });
 //   }
 

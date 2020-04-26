@@ -175,7 +175,8 @@
     "BILL_DETAILS": "Bill details",
     "PLACE_ORDER": "Place Order",
     "LOGIN_SIGNUP": "Login/Signup And Continue",
-    "ORDER_SUCCESS_DIALOG": "Order Placed Successfully. You can check your order status from the menu"
+    "ORDER_SUCCESS_DIALOG": "Order Placed Successfully. You can check your order status from the menu",
+    "TYPE": "Store Type"
   },
   "LOGIN_SIGNUP": {
     "CHECK_OTP": "Check OTP again",

@@ -33,7 +33,6 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
     this.customerService.getTransactionHistory(localStorage.getItem(ZATAAKSE_JWT_TOKEN), '1', this.customerStateservice.getOrderId())
     .subscribe((data: any) => {
       this.data = data.data.data[0];
-      // console.log(this.data);
     });
 
     this.route.queryParams.subscribe(params => {
@@ -69,7 +68,6 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
       this.customerService.getTransactionHistory(localStorage.getItem(ZATAAKSE_JWT_TOKEN), '1', this.customerStateservice.getOrderId())
       .subscribe((data: any) => {
         this.data = data.data.data[0];
-        // console.log(this.data);
       });
      },
       10 * 60 * 1000);

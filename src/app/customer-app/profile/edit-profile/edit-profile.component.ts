@@ -154,7 +154,6 @@ export class EditProfileComponent implements OnInit {
           imageName: this.selectedImage.name,
           image: this.uploadedImg
         };
-        console.log(imageData.image)
         this.dataService.uploadImage(imageData).subscribe(data => {});
       }
       this.translateService.get('ADD_ADDRESS.SUCCESSFULLY_SAVED').subscribe((res: string) => {

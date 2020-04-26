@@ -32,7 +32,6 @@ export class PrelaunchGuard implements CanActivate {
     //       }
     //     });
     // } catch (error) {
-    //   console.log(error);
     //   return Promise.resolve(false);
     // }
   }

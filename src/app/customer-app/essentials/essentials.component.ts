@@ -143,7 +143,6 @@ export class EssentialsComponent implements OnInit {
         error => {
           // User blocked location
           // LocationPopupComponent
-          // console.log(error);
         }
       );
     } else {
@@ -174,12 +173,16 @@ export class EssentialsComponent implements OnInit {
     this.curLocResDataSubscription =  this.customerStateService.currenLocationRestaurantData$.subscribe(resData => {
       this.markers = [];
       resData.filter(i => i.blOrderAhead).forEach((i) => {
+        let image = [];
+        i.images.forEach(original => {
+          image = [...image, original.original]
+        })
         const cardLocation: EssentialMarker = {
           lat: i.businessLocationCoord[1],
           lng: i.businessLocationCoord[0],
           id: i._id,
           name: i.displayName,
-          photo: i.images[0].thumbnail,
+          photo: image.toString(),
           type: i.businessLocType,
           locality: i.blAddr.locality
         };
@@ -247,6 +250,8 @@ export class EssentialsComponent implements OnInit {
       queryParams: {
           id: data.id,
           name: data.name,
+          type: data.type,
+          locality: data.locality,
           lat: data.lat,
           lng: data.lng,
           photo: data.photo

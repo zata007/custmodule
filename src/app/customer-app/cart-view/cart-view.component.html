@@ -117,6 +117,15 @@
             <div class="head4 bold">{{currentEssentialServiceData.displayName}}</div>
             <!-- <div mat-button color="primary" class="head2 primary-color">Add New</div> -->
           </div>
+          <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
+            <div class="head4">{{'CART.TYPE'|translate}}</div>
+            <div class="head4 bold">{{currentEssentialServiceData.type}}</div>
+          </div>
+          <div class="address-head" fxLayout="row" fxLayoutAlign="space-between">
+            <div class="head4">{{'ADD_ADDRESS.LOCALITY'|translate}}</div>
+            <div class="head4 bold">{{currentEssentialServiceData.locality}}</div>
+            <!-- <div mat-button color="primary" class="head2 primary-color">Add New</div> -->
+          </div>
           <div *ngIf="currentEssentialServiceData" class="address-box mat-elevation-z4" fxLayout="row"
             fxLayoutAlign="space-between center">
             <div class="address-detail" fxLayout="column">

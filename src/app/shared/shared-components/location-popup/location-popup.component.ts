@@ -30,7 +30,6 @@ export class LocationPopupComponent implements OnInit {
 
     dialogRef.afterDismissed().subscribe((result) => {
       // Navigate to page
-      // console.log('The dialog was closed', result);
     });
   }
 

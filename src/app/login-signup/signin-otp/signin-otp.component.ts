@@ -6,6 +6,7 @@ import { CommonService } from 'src/app/shared/services/common.service';
 
 export interface ISigninOtpComponentData {
   isNotRegistered: boolean;
+  errMessage: string;
   isFailed: boolean;
   isAlreadyRegistered: boolean;
   isOtp: boolean;
@@ -22,6 +23,7 @@ export class SigninOtpComponent implements OnInit {
   otp = null;
   isFailed = false;
   isNotRegistered = false;
+  errMessage: string = '';
   isAlreadyRegistered = false;
   isOtp = false;
   constructor(
@@ -32,6 +34,7 @@ export class SigninOtpComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: ISigninOtpComponentData
   ) {
     this.isNotRegistered = data.isNotRegistered;
+    this.errMessage = data.errMessage;
     this.isFailed = data.isFailed;
     this.isAlreadyRegistered = data.isAlreadyRegistered;
     this.isOtp = data.isOtp;

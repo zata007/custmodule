@@ -91,7 +91,6 @@ export class CartViewComponent implements OnInit {
       this.hasAuthToken = !!localStorage.getItem(ZATAAKSE_JWT_TOKEN);
       this.handleAddressVehicleViewData();
     }, (err)=>{
-      // console.log(err);
     });
   }
 
@@ -239,7 +238,6 @@ export class CartViewComponent implements OnInit {
 
             this.hasAuthToken = false;
             localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
-            // console.log(errorPlaceOrder);
             this.router.navigate(['login-signup']);
           }
           this.snackbar.open(errorPlaceOrder.error.message);
@@ -279,7 +277,6 @@ export class CartViewComponent implements OnInit {
           if (errorPlaceOrder.statusCode !== 400) {
             this.hasAuthToken = false;
            // localStorage.removeItem(ZATAAKSE_JWT_TOKEN);
-            // console.log(errorPlaceOrder);
             //this.router.navigate(['login-signup']);
           }
           this.snackbar.open(errorPlaceOrder.error.message);
