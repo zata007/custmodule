@@ -55,6 +55,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { createTranslateLoader } from '../shared/models/common-model';
+import { SliderComponent } from './essentials/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { createTranslateLoader } from '../shared/models/common-model';
     OrderDetailComponent,
     OrderStatusComponent,
     LanguageComponent,
+    SliderComponent,
   ],
   entryComponents: [
     BillDetailComponent,
@@ -105,7 +107,8 @@ import { createTranslateLoader } from '../shared/models/common-model';
     AddVehicleComponent,
     AddressListComponent,
     VehicleListComponent,
-    EssentialDialogComponent
+    EssentialDialogComponent,
+    SliderComponent
   ],
   imports: [
     CommonModule,

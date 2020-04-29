@@ -46,7 +46,8 @@
   "SELECT": "निवडा",
   "TYPE": "प्रकार",
   "TOTAL": "एकूण",
-  "DELIVERY_TIME": "वितरण वेळ",  
+  "DELIVERY_TIME": "वितरण वेळ",
+  "ENTER_LOCATION": "आपले स्थान प्रविष्ट करा",
   "LANDING_PAGE":{
     "TAG_LINE" : "झटाकसे",
     "REGISTRATION_TITLE" : "रजिस्टर",

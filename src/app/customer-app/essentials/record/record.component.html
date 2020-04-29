@@ -6,7 +6,7 @@
 </mat-toolbar>
 <div class="recorder-container">
   <div *ngIf="!previewMode && !hasRecorded" class="store">
-    <swiper class="swiper-container" [config]="config">
+    <swiper class="swiper-container" [config]="config" (click)="openSliderDialog()">
       <div *ngFor="let photoSrc of photo" class="swiper-slide">
           <div class="swiper-zoom-container">
             <img [src]="photoSrc" alt="">
@@ -14,7 +14,7 @@
       </div>
     </swiper>
   </div>
-  <mat-tab-group *ngIf="!previewMode && !hasRecorded">
+  <mat-tab-group mat-stretch-tabs *ngIf="!previewMode && !hasRecorded">
     <mat-tab label="{{'VOICE_ORDER'| translate}}">
       <div class="audio" fxLayout="column" fxLayoutAlign="center center">
         <div class="head4" [innerHTML]="'ESSENTIAL_SERVICE.PRESS_THE_GREEN_BTN'| translate"></div>

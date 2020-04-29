@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  API_Endpoint: 'https://s.z07.xyz',
-  SOCKET_API_Endpoint: 'https://s.z07.xyz',
-  referralURL: 'https://s.z07.xyz/#/pre-launch/main/',
+  API_Endpoint: 'https://s.z007.xyz',
+  SOCKET_API_Endpoint: 'https://s.z007.xyz',
+  referralURL: 'https://s.z007.xyz/#/pre-launch/main/',
   mapApiKey: 'AIzaSyB9rjY3fL8F0OUcy1ubyFnAVl96FhbadVY',
   paymentUrl: 'http://localhost',
   pushNotifyKeys: {

@@ -9,6 +9,8 @@ import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG, LOCAL_STORAGE_FINGERPRINT } fro
 import { ISampleFile } from '../../../shared/models/common-model';
 import { NgxImageCompressService, DOC_ORIENTATION } from 'ngx-image-compress';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { MatDialog } from '@angular/material';
+import { SliderComponent } from '../slider/slider.component';
 
 declare var MediaRecorder: any;
 @Component({
@@ -40,19 +42,14 @@ export class RecordComponent implements OnInit, OnDestroy {
   photo: string[];
   config: SwiperConfigInterface = {
     direction: 'horizontal',
-    slidesPerView: 1.25,
+    slidesPerView: 1,
     keyboard: true,
     mousewheel: true,
     scrollbar: false,
     navigation: false,
     pagination: false,
-    zoom: {
-      maxRatio: 3,
-      minRatio: 1,
-      toggle: true,
-    },
+    zoom: false,
   }
-
 
   constructor(
     private location: Location,
@@ -61,7 +58,8 @@ export class RecordComponent implements OnInit, OnDestroy {
     private router: Router,
     private orderService: OrderService,
     private customerService: CustomerService,
-    private imageCompress: NgxImageCompressService
+    private imageCompress: NgxImageCompressService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -93,6 +91,10 @@ export class RecordComponent implements OnInit, OnDestroy {
       });
     } else {
       this.router.navigate(['/login-signup']);
+    }
+
+    if(this.photo.length != 1) {
+      this.config.slidesPerView = 1.25;
     }
 
   }
@@ -237,5 +239,13 @@ export class RecordComponent implements OnInit, OnDestroy {
     }
     const blob = new Blob([int8Array], { type: 'image' });
     return blob;
+  }
+
+  openSliderDialog() {
+    this.dialog.open(SliderComponent, {
+      data: this.photo,
+      width: '90%',
+      height: '90%'
+    });
   }
 }

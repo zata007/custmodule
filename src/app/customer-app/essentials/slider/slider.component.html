@@ -1,0 +1,9 @@
+<div class="slider" fxLayout="row" fxLayoutAlign="center center">
+  <swiper class="swiper-container" [config]="config">
+    <div *ngFor="let photoSrc of data" class="swiper-slide">
+      <div class="swiper-zoom-container">
+        <img [src]="photoSrc" alt="">
+      </div>
+    </div>
+  </swiper>
+</div>

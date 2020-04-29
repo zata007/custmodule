@@ -165,19 +165,20 @@ export class LandingPageComponent implements OnInit, OnDestroy {
           const longitude = position.coords.longitude;
           this.commonService.setUserLocation(latitude, longitude);
         },
-        error => {
-          // User blocked location
-          // LocationPopupComponent
-          if (error.code === 1) {
-            this.bottomsheet.open(LocationPopupComponent, {
-              data: {
-                isLocationNotAllowed: true
-              }
-            });
-          }
-        }
+        // error => {
+        //   // User blocked location
+        //   // LocationPopupComponent
+        //   if (error.code === 1) {
+        //     this.bottomsheet.open(LocationPopupComponent, {
+        //       data: {
+        //         isLocationNotAllowed: true
+        //       }
+        //     });
+        //   }
+        // }
       );
-    }    
+    }
+    this.bottomsheet.dismiss;
     this.router.navigate(['customer']);
   }
 }
