@@ -68,7 +68,10 @@ export class SigninOtpComponent implements OnInit {
       pRelationId: params.interfaceData[0].pRelationId,
       userId : this.data.userId
     },
-      essentialParams.fingerprint).subscribe((d: any) => {
+      essentialParams.fingerprint,
+      essentialParams.latitude,
+      essentialParams.longitude
+      ).subscribe((d: any) => {
       this.matSnackBar.open(d.message, '', {duration: 2000});
     });
   }

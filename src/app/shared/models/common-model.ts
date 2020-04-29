@@ -107,6 +107,7 @@ export interface IRequestRegister {
   pInterface: string;
   indCountryCode: string;
   indMobileNum: string;
+  indEmail?: string;
   indEmailNotify ?: boolean;
   indMobileNotify ?: boolean;
   indPushNotify ?: boolean;
@@ -274,6 +275,7 @@ export interface IResponseGetSkuData {
 
 export interface ILoginSignupData {
   userId: string;
+  pInterface: string;
   indLanPref: string;
   indFingerPrint: string;
   pRoleId: string;
@@ -284,10 +286,14 @@ export interface IRequestVerifyOtp {
   userId: string;
   pRoleId: string;
   pRelationId: string;
+  pInterface: string;
   mobileOTP: number;
   fingerprint: string;
   lan: string;
+  latitude: number;
+  longitude: number;
 }
+
 export interface IRequestPlaceOrder {
   orderType: string;
   orderData: [
@@ -453,7 +459,7 @@ export interface IOrderData {
   };
 }
 
-export interface IUploadImage {
+export interface IaddEditImage {
   imageType: string;
   id: string;
   imageName: string;

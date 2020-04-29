@@ -22,7 +22,7 @@ import {
   IProfileData,
   IReqAddressData,
   IRequestPlaceOrderForEssential,
-  IUploadImage
+  IaddEditImage
 } from '../models/common-model';
 import {
   Observable
@@ -206,6 +206,8 @@ export class DataService {
         ...this.getOptions(),
         fingerprint: data.fingerprint,
         lan: data.lan,
+        latitude: data.data.latitude.toString(),
+        longitude: data.data.longitude.toString()
       }
     };
 
@@ -240,11 +242,15 @@ export class DataService {
       headers: {
         ...this.getOptions(),
         fingerprint: data.fingerprint,
-        lan: data.lan
+        lan: data.lan,
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString()
       },
     };
     delete data.fingerprint;
     delete data.lan;
+    delete data.latitude,
+    delete data.longitude
     return this.putMethod(url, options, data);
   }
 
@@ -285,8 +291,8 @@ export class DataService {
     return this.putMethod(url, options, d) as any;
   }
 
-  uploadImage(data: IUploadImage) {
-    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/uploadImage`;
+  addEditImage(data: IaddEditImage) {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/addEditImage`;
     const options = {
       headers: {
         authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
@@ -343,16 +349,20 @@ export class DataService {
   resendOTP(userData: {
     userId: string,
     pRoleId: string,
-    pRelationId: string
+    pRelationId: string,
   },
-    fingerprint: string) {
+    fingerprint: string,
+    latitude: number,
+    longitude: number) {
     // return this.httpClient.put(`${environment.API_Endpoint}/${API_ENDPOINTS.OA}/${lng}/resendOTP/${userId}`, undefined);
     const url = `${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/${API_ENDPOINTS.USER}/resendOTP`;
     const options = {
       headers: {
         ...this.getOptions(),
         lan: localStorage.getItem(ZATAAKSE_PREF_LANG) || 'en',
-        fingerprint
+        fingerprint,
+        latitude: latitude.toString(),
+        longitude: longitude.toString()
       },
     };
     return this.putMethod(url, options, userData) as any;

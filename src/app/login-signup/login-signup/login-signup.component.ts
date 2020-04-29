@@ -53,14 +53,17 @@ export class LoginSignupComponent implements OnInit {
   }
 
   verifyLoginOtp(otp: number) {
-    const {fingerprint, lan} = this.commonService.getRequestEssentialParams();
+    const {fingerprint, lan, latitude, longitude} = this.commonService.getRequestEssentialParams();
     const data: IRequestVerifyOtp =  {
       userId: this.userByMobile.userId,
       mobileOTP: otp,
+      pInterface: this.userByMobile.pInterface,
       pRoleId: this.userByMobile.pRoleId,
       pRelationId: this.userByMobile.pRelationId,
       fingerprint,
-      lan
+      lan,
+      latitude,
+      longitude
     };
     this.dataService.verifyOtp(data).subscribe(
       (resVerifyOTP) => {
@@ -122,9 +125,8 @@ export class LoginSignupComponent implements OnInit {
         indEmailNotify: true,
         indMobileNotify: true,
         indPushNotify: true,
-        latitude,
-        longitude,
-
+        latitude: latitude,
+        longitude: longitude
       }
     };
     if(type==='register' && this.signupData.email) {

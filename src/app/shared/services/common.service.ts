@@ -17,8 +17,8 @@ export class CommonService {
   fingerPrintData = null;
   platformParams = null;
   userLocation = {
-    latitude: 0,
-    longitude: 0,
+    latitude: 1.1,
+    longitude: 1.1,
   };
 
 
