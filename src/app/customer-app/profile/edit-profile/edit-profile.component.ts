@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { IProfileData, IUpdateProfiledata, IaddEditImage } from '../../../shared/models/common-model';
+import { IProfileData, IUpdateProfiledata, IaddEditImage, IUploadImagedata } from '../../../shared/models/common-model';
 import { ZATAAKSE_PROFILE_DATA } from '../../../shared/constants/constants';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms';
 import { DataService } from '../../../shared/services/data.service'
@@ -26,7 +26,7 @@ export class EditProfileComponent implements OnInit {
     {value: 'gu', viewValue: 'LANGUAGE.GUJRATI'}
   ]
   profileForm: FormGroup;
-  updateProfile: any = [];
+  updateProfile: any = null;
   selectedImage: File;
 
   constructor(
@@ -146,23 +146,34 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.dataService.updateProfile(this.updateProfile).subscribe((res) => {
-      if(this.uploadedImg && this.selectedImage.name) {
-        const imageData: IaddEditImage = {
-          id: JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)).indDetail._id,
-          imageType: 'up',
-          imageName: this.selectedImage.name,
-          image: this.uploadedImg
-        };
-        this.dataService.addEditImage(imageData).subscribe(data => {});
-      }
-      this.translateService.get('ADD_ADDRESS.SUCCESSFULLY_SAVED').subscribe((res: string) => {
-        this.snackbar.open(res);
+    if(this.uploadedImg && this.selectedImage.name) {
+      const imageData: IUploadImagedata = {
+        id: JSON.parse(localStorage.getItem(ZATAAKSE_PROFILE_DATA)).indDetail._id,
+        imageType: 'up',
+        imageName: this.selectedImage.name,
+        image: this.uploadedImg
+      };
+      this.dataService.uploadImage(imageData).subscribe((res) => {
+        this.translateService.get('ADD_ADDRESS.SUCCESSFULLY_SAVED').subscribe((res: string) => {
+          this.snackbar.open(res);
+        });
+        this.router.navigate(['customer/profile']);
+      }, (err)=>{
+        this.snackbar.open(err.error.message);
       });
+    }
+    if(this.updateProfile) {
+      this.dataService.updateProfile(this.updateProfile).subscribe((res) => {
+        this.translateService.get('ADD_ADDRESS.SUCCESSFULLY_SAVED').subscribe((res: string) => {
+          this.snackbar.open(res);
+        });
+        this.router.navigate(['customer/profile']);
+      }, (err)=>{
+        this.snackbar.open(err.error.message);
+      });
+    } else {
       this.router.navigate(['customer/profile']);
-    }, (err)=>{
-      this.snackbar.open(err.error.message);
-    });
+    }
   }
 
 }

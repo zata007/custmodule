@@ -205,7 +205,7 @@
     "LOCATION_TYPE": "स्थान प्रकार",
     "RESIDENTIAL": "निवासी",
     "WORK":"कार्यालय",
-    "Other": "अन्य",
+    "OTHER": "अन्य",
     "SAVE_ADDRESS": "पता ठेवा",
     "SUCCESSFULLY_SAVED":"यशस्वीरित्या नोंद",
     "SET_LOCATION": "लोकेशन सेट करा"

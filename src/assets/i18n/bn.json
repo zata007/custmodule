@@ -209,7 +209,7 @@
     "LOCATION_TYPE": "অবস্থানের ধরণ",
     "RESIDENTIAL": "আবাসিক",
     "WORK":"কাজ",
-    "Other": "অন্য",
+    "OTHER": "অন্য",
     "SAVE_ADDRESS": "ঠিকানা সংরক্ষণ করুন",
     "SUCCESSFULLY_SAVED":"সফলভাবে সংরক্ষিত",
     "SET_LOCATION": "আপনার অবস্থান নির্ধারন করুন"

@@ -4,19 +4,20 @@
     </button>
 </mat-toolbar>
 <div *ngIf="data" class="order-detail-container" fxLayout="column">
-    <div class="head3 bold order-id">{{data.orderId}}</div>
-    <div fxLayout="row" fxLayoutAlign="space-between flex-start">
-        <div class="item" fxLayout="column">
-            <div class="head4 bold">{{"ORDER_DATE_TIME"| translate}}</div>
-            <div class="head4">{{data.orderDateTime|date:'d MMMM y'}}</div>
-        </div>
-        <div class="item" fxLayout="column">
-            <div class="head4 bold">{{"ORDER_TYPE"| translate}}</div>
-            <div class="head4">{{data.orderType}}</div>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="stepper" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-card>
+      <div class="head3 bold order-id">{{data.orderId}}</div>
+      <div fxLayout="row" fxLayoutAlign="space-between flex-start">
+          <div class="item" fxLayout="column">
+              <div class="head4 bold">{{"ORDER_DATE_TIME"| translate}}</div>
+              <div class="head4">{{data.orderDateTime|date:'d MMMM y'}}</div>
+          </div>
+          <div class="item" fxLayout="column">
+              <div class="head4 bold">{{"ORDER_TYPE"| translate}}</div>
+              <div class="head4">{{data.orderType}}</div>
+          </div>
+      </div>
+    </mat-card>
+    <mat-card class="stepper" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="head3 bold">{{"ORDER_STATUS"| translate}}</div>
         <div class="head3">{{data.orderStatus}}</div>
         <div *ngIf="canShowTimer" class="waiting-status">{{ (timer/60).toFixed()  + 'min'}}</div>
@@ -38,19 +39,18 @@
               <p>You're welcome.</p>
             </mat-step>
         </mat-horizontal-stepper> -->
-    </div>
-    <mat-divider></mat-divider>
-    <div class="merch" *ngIf="data.businessLocId">
+    </mat-card>
+    <mat-card class="merch" *ngIf="data.businessLocId">
         <div class="head4 bold">{{"MERCHANT_DETAILS"| translate}}</div>
         <div class="head4">{{data.businessLocId.businessLocName}}</div>
-    </div>
-    <mat-divider *ngIf="data.businessLocId"></mat-divider>
+    </mat-card>
+
     <div class="file" fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="data.file || data.blReceipt.thumbnail">
         <button *ngIf="data.file" mat-stroked-button color="primary" (click)="goToFile(data.file)">{{"OPEN_ATTACH_FILE"| translate}}</button>
         <button *ngIf="data.blReceipt.thumbnail" mat-stroked-button color="primary" (click)="goToFile(data.blReceipt.original)">{{"OPEN_RECEIPT"| translate}}</button>
     </div>
-    <mat-divider *ngIf="data.file"></mat-divider>
-    <div class="payment" fxLayout="column">
+
+    <mat-card class="payment" fxLayout="column">
         <div class="head4 bold">{{"PAYMENT_SUM"| translate}}</div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="para">{{"TOTAL_AMMOUNT"| translate}}</div>
@@ -64,7 +64,7 @@
             <div class="para">{{"PAYMENT_METHOD"| translate}}</div>
             <div class="para">{{data.paymentMode}}</div>
         </div>
-    </div>
+      </mat-card>
 
     <div *ngIf="data.orderStatus == 'Pending' ? true : false">
       <div class="status-btn" fxLayout="row" fxLayoutAlign="center center">

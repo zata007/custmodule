@@ -60,7 +60,7 @@ export class CommonService {
 
   getRequestEssentialParams() {
     return {
-      fingerprint: this.fingerPrint,
+      fingerprint: this.fingerPrint || 'gyegduueeeeggduyegduyegduyegu',
       lan: localStorage.getItem(ZATAAKSE_PREF_LANG) || 'en',
       latitude: this.userLocation.latitude,
       longitude: this.userLocation.longitude,

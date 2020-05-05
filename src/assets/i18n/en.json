@@ -205,7 +205,7 @@
     "LOCATION_TYPE": "Location Type",
     "RESIDENTIAL": "Residential",
     "WORK": "Work",
-    "Other": "Other",
+    "OTHER": "Other",
     "SAVE_ADDRESS": "Save Address",
     "SUCCESSFULLY_SAVED": "Successfully saved",
     "SET_LOCATION": "Set your location"

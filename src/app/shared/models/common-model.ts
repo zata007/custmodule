@@ -473,16 +473,17 @@ export interface IUpdateProfiledata {
   indGender: string;
   indFoodPref: string;
   indLanPref: string;
-  indPic: {
-      picId: string;
-      imageName: string;
-      image: File;
-      tags: string[];
-    }[];
   indEmail: string;
   indPushNotify: boolean;
   indPwd: string;
 }
+
+ export interface IUploadImagedata {
+  id: string;
+  imageName: string;
+  image: File;
+  imageType: string;
+ }
 
 export interface ICartItemInfo {
   businessLocId: string;

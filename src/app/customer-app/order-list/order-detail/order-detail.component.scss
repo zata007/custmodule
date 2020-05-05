@@ -1,5 +1,5 @@
 .order-detail-container {
-    padding: 10px 16px 20px;
+    padding: 0px 16px 20px;
     overflow-y: scroll;
     height: 100%;
     .order-id {
@@ -13,6 +13,9 @@
         button {
             width: 100%;
         }
+    }
+    mat-card {
+        margin: 5px 0px;
     }
 }
 

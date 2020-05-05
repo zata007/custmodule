@@ -22,7 +22,8 @@ import {
   IProfileData,
   IReqAddressData,
   IRequestPlaceOrderForEssential,
-  IaddEditImage
+  IaddEditImage,
+  IUploadImagedata
 } from '../models/common-model';
 import {
   Observable
@@ -288,6 +289,17 @@ export class DataService {
       }
     };
     const d = this.getFormData(data, null, null);
+    return this.putMethod(url, options, data) as any;
+  }
+
+  uploadImage(data: IUploadImagedata): Observable<IProfileData> {
+    const url = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/uploadImage`;
+    const options = {
+      headers: {
+        authorization: localStorage.getItem(ZATAAKSE_JWT_TOKEN)
+      }
+    };
+    const d = this.getFormData(data, null, null);
     return this.putMethod(url, options, d) as any;
   }
 
@@ -399,5 +411,24 @@ export class DataService {
     }
 
     return fd;
+  }
+
+  checkInternet(data: {
+    fingerprint: string
+    lan: string
+    latitude: number
+    longitude: number
+  }): Observable<any> {
+    const options: any = {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        fingerprint: data.fingerprint,
+        lan: data.lan,
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString() // 22.484977, 88.384863
+      },
+    };
+    return this.httpClient.get(`${environment.API_Endpoint}/${API_ENDPOINTS.ACCSSS}/checkInternet`, options);
   }
 }

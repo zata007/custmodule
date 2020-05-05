@@ -205,7 +205,7 @@
     "LOCATION_TYPE": "स्थान का प्रकार",
     "RESIDENTIAL": "आवासीय",
     "WORK": "कार्यालय",
-    "Other": "अन्य",
+    "OTHER": "अन्य",
     "SAVE_ADDRESS": "पता सहेजें",
     "SUCCESSFULLY_SAVED": "सफलतापूर्वक संचित है",
     "SET_LOCATION": "अपना स्थान तय करे"
