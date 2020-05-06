@@ -67,6 +67,8 @@ export class EssentialsComponent implements OnInit {
   lat: number;
   curLocResDataSubscription: any;
   previousInfoWindow: any;
+  canShowPitstops: boolean = false;
+  selectedIndex = 0;
 
   constructor(
     private location: Location,
@@ -188,6 +190,7 @@ export class EssentialsComponent implements OnInit {
         };
         this.markers.push(cardLocation);
       });
+      this.canShowPitstops = true;
     });
     this.customerStateService.setCurrentPage('main');
   }
@@ -260,12 +263,21 @@ export class EssentialsComponent implements OnInit {
     this.router.navigate(['customer/essentials/record'], navigationExtras);
   }
 
-  clickedEssentialMarker(id: string, infowindow: any) {
+  gotoPitstop() {
+    const pitStopData = this.markers[this.selectedIndex];
+    if (!pitStopData) {
+      return;
+    }
+    this.clickedOnEssentialWindow(pitStopData);
+  }
+
+  clickedEssentialMarker(id: string, infowindow: any, index: number) {
     this.selectedEssentialStore = id;
     if (this.previousInfoWindow) {
       this.previousInfoWindow.close();
-  }
+    }
     this.previousInfoWindow = infowindow;
+    this.selectedIndex = index;
   }
 
   onSlideChange(value: Marker) {

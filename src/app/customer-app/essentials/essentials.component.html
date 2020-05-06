@@ -32,7 +32,7 @@
         [iconUrl]="'assets/icons/pin-start.svg'" [animation]="'BOUNCE'">
       </agm-marker>
 
-      <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedEssentialMarker(m.id, infowindow)"
+      <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedEssentialMarker(m.id, infowindow, i)"
         [latitude]="m.lat" [longitude]="m.lng" [markerDraggable]="m.draggable" [iconUrl]="'assets/icons/marker.gif'">
         <agm-info-window #infowindow [disableAutoPan]="false">
           <strong style="cursor: pointer;" (click)="clickedOnEssentialWindow(m)">{{m.name}}<br />{{m.type}}<br />{{m.locality}}</strong>
@@ -42,6 +42,16 @@
         [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.markerUrl">
       </agm-marker>
     </agm-map>
+  </div>
+
+  <div class="swiper-parent-container">
+    <card-slider
+      *ngIf="canShowPitstops"
+      [data]="markers"
+      (slideChange)="onSlideChange($event)"
+      [selectedIndex]="selectedIndex"
+      (itemClicked)="gotoPitstop()">
+    </card-slider>
   </div>
 </div>
 

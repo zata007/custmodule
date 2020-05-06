@@ -17,12 +17,13 @@ import { Marker } from '@agm/core/services/google-maps-types';
 export class CardSliderComponent implements OnInit {
   @Output() slideChange = new EventEmitter(null);
   @Output() itemClicked = new EventEmitter(null);
-  @Input() data = [];
+  @Input() data: any= [];
   @Input() selectedIndex = 0;
   public config: SwiperConfigInterface = {
-    slidesPerView: 'auto',
+    direction: 'horizontal',
+    slidesPerView: 1,
     centeredSlides: true,
-    spaceBetween: 20,
+    spaceBetween: 10
   };
 
   @ViewChild(SwiperComponent, {static: false}) componentRef: SwiperComponent;
