@@ -2,14 +2,15 @@
   <div fxLayout="column" class="restaurant-item-container">
     <ng-container *ngIf="restaurantLists && restaurantLists.length; else noData">
       <div *ngFor="let item of restaurantLists" fxLayout="row" fxLayoutAlign="start center" (click)="onRestaurantClick(item)" class="restaurant-item">
-        <img class="thumb mat-elevation-z4" src="https://www.ahstatic.com/photos/5555_rsr001_01_p_1024x768.jpg" alt="" />
+        <img class="thumb mat-elevation-z4" src="{{item.photo ? item.photo.split(',')[0] : 'https://www.ahstatic.com/photos/5555_rsr001_01_p_1024x768.jpg'}}" alt="" />
         <div fxLayout="column" fxLayoutAlign="center start" class="details mat-elevation-z4">
-          <div class="head4 restaurant-name">{{item.displayName}}</div>
+          <div class="head4 restaurant-name">{{item.name}}</div>
+          <div *ngIf="item.type" class="head5 restaurant">{{item.type}}</div>
           <div class="restaurant para">{{item.locality}}</div>
-          <div class="distance">{{(item.distance).toFixed(2)}} kms</div>
+          <div *ngIf="item.type=='Restaurant' && item.distance" class="distance">{{(item.distance).toFixed(2)}} kms</div>
           <br />
-          <mat-divider></mat-divider>
-          <div fxLayout="row" fxLayoutAlign="space-around center" class="other-info">
+          <mat-divider *ngIf="item.type=='Restaurant'"></mat-divider>
+          <div *ngIf="item.type=='Restaurant'" fxLayout="row" fxLayoutAlign="space-around center" class="other-info">
             <div fxLayout="row" fxLayoutAlign="flex-end center" class="caption rate"><img src="../../../assets/icons/star.svg" alt=""> {{item.avgRating}}</div>
             <div>•</div>
             <div fxLayout="row" fxLayoutAlign="flex-start center" class="caption"><img src="../../../assets/icons/rupee.svg" alt=""> 300 for Two</div>

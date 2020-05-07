@@ -22,7 +22,8 @@
       <button mat-raised-button color="primary" (click)="onOnboardingCompletion()">{{"OKAY" | translate}}</button>
     </ng-template>
   </div>
-  <div class="map-area">
+
+  <div *ngIf="showMap" class="map-area">
     <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoomControl]="false" [streetViewControl]="false"
       (mapReady)="mapReady($event)" [zoom]="zoom" [clickableIcons]="false" [styles]="mapStyles">
 
@@ -44,15 +45,14 @@
     </agm-map>
   </div>
 
-  <div class="swiper-parent-container">
-    <card-slider
-      *ngIf="canShowPitstops"
-      [data]="markers"
-      (slideChange)="onSlideChange($event)"
-      [selectedIndex]="selectedIndex"
-      (itemClicked)="gotoPitstop()">
-    </card-slider>
+  <div *ngIf="!showMap" class="list-view">
+    <restaurants-list [restaurantLists]="markers"></restaurants-list>
   </div>
+
+  <div *ngIf='markers.length!=0' fxLayout="row" fxLayoutAlign="center center" class="swiper-parent-container">
+    <button mat-raised-button color="primary" (click)="toggleMapView()">{{(!showMap?'ESSENTIAL_SERVICE.MAP':'ESSENTIAL_SERVICE.LIST')|translate}}</button>
+  </div>
+
 </div>
 
 <!-- <div class="swiper-parent-container" fxLayout="row" fxLayoutAlign="center center">

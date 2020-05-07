@@ -12,7 +12,7 @@ import { MAP_STYLES } from '../map-vehicle/map-consts';
 import { DialogPreOrderComponent } from 'src/app/shared/shared-components/dialog-pre-order/dialog-pre-order.component';
 import { IRequestGetRestaurantData, IResponseGetRestaurantData, IProfileData, IResponsePlatformParams, IResponseLocationServed } from 'src/app/shared/models/common-model';
 import { DataService } from 'src/app/shared/services/data.service';
-import { ZATAAKSE_PREF_LANG } from 'src/app/shared/constants/constants';
+import { ZATAAKSE_PREF_LANG, ECustomerServiceType } from 'src/app/shared/constants/constants';
 import { NotServicebleComponent } from 'src/app/shared/shared-components/not-serviceble/not-serviceble.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -69,6 +69,8 @@ export class EssentialsComponent implements OnInit {
   previousInfoWindow: any;
   canShowPitstops: boolean = false;
   selectedIndex = 0;
+  showMap: boolean = true;
+  showList: boolean = false;
 
   constructor(
     private location: Location,
@@ -88,6 +90,7 @@ export class EssentialsComponent implements OnInit {
 
   ngOnInit() {
     // Patch map data,
+    this.customerStateService.updateCurrentService(ECustomerServiceType.Essential);
     this.dataService.getPlatformParams({
       ...this.commonService.getRequestEssentialParams()
     }).subscribe((res: IResponsePlatformParams) => {
@@ -190,7 +193,6 @@ export class EssentialsComponent implements OnInit {
         };
         this.markers.push(cardLocation);
       });
-      this.canShowPitstops = true;
     });
     this.customerStateService.setCurrentPage('main');
   }
@@ -261,14 +263,6 @@ export class EssentialsComponent implements OnInit {
       }
   };
     this.router.navigate(['customer/essentials/record'], navigationExtras);
-  }
-
-  gotoPitstop() {
-    const pitStopData = this.markers[this.selectedIndex];
-    if (!pitStopData) {
-      return;
-    }
-    this.clickedOnEssentialWindow(pitStopData);
   }
 
   clickedEssentialMarker(id: string, infowindow: any, index: number) {
@@ -492,6 +486,10 @@ export class EssentialsComponent implements OnInit {
 
   onBackClick() {
     this.location.back();
+  }
+
+  toggleMapView() {
+    this.showMap = !this.showMap;
   }
 
 }

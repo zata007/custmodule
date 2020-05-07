@@ -148,7 +148,9 @@
     "CANCEL_TO_SCAN": "Cancel to click image again",
     "SUBMIT_OR_CANCEL_ENTRY": "Submit or Cancel",
     "SELECT_STORE": "Select a particular store in your vicinity by clicking on the red spots",
-    "MODAL_TEXT": "We will reach out to you once we launch in your locality"
+    "MODAL_TEXT": "We will reach out to you once we launch in your locality",
+    "MAP": "Map",
+    "LIST": "List"
   },
   "NOT_SERVICEBLE": {
     "RECOMMEND_MERCH": "Recommend a Merchant",
