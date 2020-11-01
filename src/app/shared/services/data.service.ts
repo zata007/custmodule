@@ -278,6 +278,7 @@ export class DataService {
     formData.append('orderType', data.orderType);
     formData.append('businessLocId', data.businessLocId);
     formData.append('paymentMode', data.paymentMode);
+    formData.append('orderMode', data.orderMode);
     return this.putMethod(url, options, formData) as any;
   }
 

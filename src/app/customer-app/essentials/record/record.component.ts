@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerStateService } from '../../customer-state.service';
 import { OrderService } from '../../order.service';
 import { CustomerService } from '../../customer.service'
-import { ECustomerServiceType } from 'src/app/shared/constants/constants';
+import { ECustomerServiceType, EssentialOrderMode } from 'src/app/shared/constants/constants';
 import { ZATAAKSE_JWT_TOKEN, ZATAAKSE_PREF_LANG, LOCAL_STORAGE_FINGERPRINT } from '../../../shared/constants/constants'
 import { ISampleFile } from '../../../shared/models/common-model';
 import { NgxImageCompressService, DOC_ORIENTATION } from 'ngx-image-compress';
@@ -164,7 +164,8 @@ export class RecordComponent implements OnInit, OnDestroy {
       locality: this.locality,
       id: this.businessId,
       file: this.hasRecorded ?  recordingFile : this.uploadedImg, // TODO: Attach file
-      isRecording: this.hasRecorded
+      isRecording: this.hasRecorded,
+      orderMode: this.hasRecorded ? EssentialOrderMode.VOICE : EssentialOrderMode.PICTURE
     };
     this.router.navigate(['customer/cart-view']);
   }

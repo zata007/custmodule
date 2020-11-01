@@ -249,6 +249,7 @@ export class CartViewComponent implements OnInit {
           file: this.currentEssentialServiceData.file,
           orderType: 'order-ahead',
           paymentMode: this.essentialPaymentMode,
+          orderMode: this.currentEssentialServiceData.orderMode
         };
         this.dataService.placeOrderForEssential(essentialData).subscribe(res => {
           this.commonService.paymentInformation = res;

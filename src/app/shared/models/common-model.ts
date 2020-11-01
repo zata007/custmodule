@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { EssentialOrderMode } from '../constants/constants';
 
 export interface ISignUpData {
   fullName: string;
@@ -311,6 +312,7 @@ export interface IRequestPlaceOrder {
 }
 export interface IRequestPlaceOrderForEssential {
   orderType: string;
+  orderMode: EssentialOrderMode;
   businessLocId: string;
   file: File;
   time?: number;
@@ -603,6 +605,7 @@ export interface IEssentialProductData {
   isRecording: boolean;
   file: any;
   id: string;
+  orderMode: EssentialOrderMode
 }
 
 export interface ISampleFile {

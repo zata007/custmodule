@@ -46,3 +46,8 @@ export enum BottomSheetDismissMode {
   Close,
   DataUpdated
 }
+
+export enum EssentialOrderMode {
+  VOICE = 'voice',
+  PICTURE = 'picture'
+}
