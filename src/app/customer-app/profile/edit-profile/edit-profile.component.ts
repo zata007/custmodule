@@ -31,7 +31,6 @@ export class EditProfileComponent implements OnInit {
     { value: "en", viewValue: "LANGUAGE.ENGLISH" },
     { value: "hn", viewValue: "LANGUAGE.HINDI" },
     { value: "bn", viewValue: "LANGUAGE.BENGALI" },
-    { value: "mr", viewValue: "LANGUAGE.MARATHI" },
     { value: "gu", viewValue: "LANGUAGE.GUJRATI" },
   ];
   profileForm: FormGroup;
