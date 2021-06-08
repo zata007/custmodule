@@ -130,8 +130,11 @@ export class EssentialsComponent implements OnInit {
             })
             .subscribe(
               (res: IResponseLocationServed) => {
+                let tempData = res.data.businessLocData.filter((e) =>
+                  e.businessLocationCoord.includes(88.386537)
+                );
                 this.customerStateService.setCurrentLocationRestaurantData(
-                  res.data.businessLocData
+                  tempData
                 );
                 if (res.data && res.data.isLocationServed) {
                   this.translateService
@@ -217,8 +220,9 @@ export class EssentialsComponent implements OnInit {
                 lng: i.businessLocationCoord[0],
                 id: i._id,
                 name: i.displayName,
-                photo: i.images[0].thumbnail,
+                photo: null,
               };
+              // TODO: Don't use null for photo
               this.markers.push(cardLocation);
             });
         }

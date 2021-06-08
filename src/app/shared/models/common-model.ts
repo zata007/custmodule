@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from "@angular/common/http";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 export interface ISignUpData {
   fullName: string;
@@ -25,7 +25,7 @@ export interface Marker {
 
 export interface ILoginData {
   lanPreference: string;
-  fingurePrint ?: string;
+  fingurePrint?: string;
   mobileNumber: string;
 }
 
@@ -41,8 +41,9 @@ export interface IUserDetails {
   email: string;
   fullName: string;
   isVerified: boolean;
-  locationLongLat ?: {
-    type: string; coordinates: number[]
+  locationLongLat?: {
+    type: string;
+    coordinates: number[];
   };
   mobileNumber: string;
   referralCode: string;
@@ -88,12 +89,12 @@ export interface IAddressTypesData {
 }
 
 export interface IPlatformParams {
-  rolesData: Array < IRolesData > ;
-  relationsData: Array < IRelationsData > ;
-  languageData: Array < ILanguageData > ;
-  interfaceData: Array < IInterfaceData > ;
+  rolesData: Array<IRolesData>;
+  relationsData: Array<IRelationsData>;
+  languageData: Array<ILanguageData>;
+  interfaceData: Array<IInterfaceData>;
   designationsData: IDesignationsData;
-  addressTypesData: Array < IAddressTypesData > ;
+  addressTypesData: Array<IAddressTypesData>;
 }
 export interface IResponsePlatformParams {
   message: string;
@@ -107,12 +108,12 @@ export interface IRequestRegister {
   pInterface: string;
   indCountryCode: string;
   indMobileNum: string;
-  indEmailNotify ?: boolean;
-  indMobileNotify ?: boolean;
-  indPushNotify ?: boolean;
-  latitude ?: number;
-  longitude ?: number;
-  indPwd ?: string;
+  indEmailNotify?: boolean;
+  indMobileNotify?: boolean;
+  indPushNotify?: boolean;
+  latitude?: number;
+  longitude?: number;
+  indPwd?: string;
 }
 
 export interface IRequestMainParams {
@@ -127,7 +128,7 @@ export interface IRequestGetRestaurantData extends IRequestMainParams {
   isDelivery: boolean;
   pitstopLatitude: number;
   pitstopLongitude: number;
-  page ?: number;
+  page?: number;
 }
 
 export interface IRestaurantData {
@@ -138,19 +139,23 @@ export interface IRestaurantData {
   longLat: number[];
   avgRating: number;
   images: {
-    _id: string,
-    original: string,
+    _id: string;
+    original: string;
     thumbnail: string;
   }[];
-  blWorkingHrs: [{
-    _id: string;
-    day: number;
-    time: [{
+  blWorkingHrs: [
+    {
       _id: string;
-      startTime: number;
-      endTime: number;
-    }]
-  }];
+      day: number;
+      time: [
+        {
+          _id: string;
+          startTime: number;
+          endTime: number;
+        }
+      ];
+    }
+  ];
   distance: number;
 }
 
@@ -180,9 +185,9 @@ export interface IBusinessLocData {
     _id: string;
     updatedAt: string;
     createdAt: string;
-  }[]
+  }[];
   blDeliveryRadius: number;
-  businessLocationCoord: Array < number > ;
+  businessLocationCoord: Array<number>;
   distance: number;
   coDoingBusinessAs: string;
   displayName: string;
@@ -194,17 +199,16 @@ export interface IResponseLocationServed {
     isLocationServed: boolean;
     isLocationKnown: boolean;
     currentLocationDetails: string;
-    businessLocData: Array < IBusinessLocData >
+    businessLocData: Array<IBusinessLocData>;
   };
-
 }
 
 export interface IRequestGetSkuData extends IRequestMainParams {
   pageNum: number;
   flag: number;
-  pitstopLatitude ?: string;
-  pitstopLongitude ?: string;
-  businessLocId ?: string;
+  pitstopLatitude?: string;
+  pitstopLongitude?: string;
+  businessLocId?: string;
 }
 
 export interface IMenuData {
@@ -243,7 +247,7 @@ export interface IMenuData {
   type: string;
   skuNutrition: string;
   skuCustom: string[];
-  skuCombo ?: {
+  skuCombo?: {
     skuType: string;
     skuSubType: string;
     skuName: string;
@@ -285,14 +289,16 @@ export interface IRequestVerifyOtp {
   mobileOTP: number;
   fingerprint: string;
   lan: string;
+  pInterface: string;
 }
 export interface IRequestPlaceOrder {
   orderType: string;
+  orderMode: "voice" | "picture";
   orderData: [
     {
       businessLocId: string;
       skuId: string;
-      qty: number
+      qty: number;
     }
   ];
   addressId?: string;
@@ -303,6 +309,7 @@ export interface IRequestPlaceOrder {
 }
 export interface IRequestPlaceOrderForEssential {
   orderType: string;
+  orderMode: "voice" | "picture";
   businessLocId: string;
   file: File;
   time?: number;
@@ -312,7 +319,7 @@ export interface IRequestPlaceOrderForEssential {
 export interface IResponsePlaceOrder {
   message: string;
   data: {
-    msg: string,
+    msg: string;
     billdeskUrl: string;
   };
 }
@@ -324,23 +331,25 @@ export interface IResponseVerifyOtp {
       _id: string;
       indCountryCode: string;
       indMobileNum: string;
-      roles: [{
-        indEmailNotify: boolean;
-        indMobileNotify: boolean;
-        _id: string;
-        deviceId: {
-          indCurrLocLongLat: {
-            type: string;
-            coordinates: number[]
+      roles: [
+        {
+          indEmailNotify: boolean;
+          indMobileNotify: boolean;
+          _id: string;
+          deviceId: {
+            indCurrLocLongLat: {
+              type: string;
+              coordinates: number[];
+            };
+            indPushNotify: boolean;
+            indFingerPrint: string;
           };
-          indPushNotify: boolean;
-          indFingerPrint: string
-        };
-        indMobileNum: string
-      }];
+          indMobileNum: string;
+        }
+      ];
       uniqueId: string;
       accessToken: string;
-    }
+    };
   };
 }
 
@@ -362,15 +371,15 @@ export interface IProfileData {
       pRoleId: string;
       pRoleAuthority: number;
       pRelationId: string;
-      pRelationAuthority: number,
+      pRelationAuthority: number;
       deviceId: {
         indCurrLocLongLat: {
           type: string;
           coordinates: number[];
-        },
+        };
         indPushNotify: boolean;
         indFingerPrint: string;
-      },
+      };
       indMobileNum: string;
       indAddr: IAddressData[];
       indVehicles: IVehicleData[];
@@ -385,12 +394,14 @@ export interface IProfileData {
       indGender: string;
       indFoodPref: string;
       indLanPref: string;
-      indPic: [{
-        imageName: string;
-        original: string;
-        thumbnail: string;
-        tags: [];
-      }];
+      indPic: [
+        {
+          imageName: string;
+          original: string;
+          thumbnail: string;
+          tags: [];
+        }
+      ];
     };
   };
 }
@@ -465,12 +476,6 @@ export interface IUpdateProfiledata {
   indGender: string;
   indFoodPref: string;
   indLanPref: string;
-  indPic: {
-      picId: string;
-      imageName: string;
-      image: File;
-      tags: string[];
-    }[];
   indEmail: string;
   indPushNotify: boolean;
   indPwd: string;
@@ -493,7 +498,7 @@ export interface ICartItemInfo {
 
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 export interface ICartViewData {
   orderData: ICartItemInfo[];
@@ -595,9 +600,9 @@ export interface IEssentialProductData {
 }
 
 export interface ISampleFile {
-  message: string,
+  message: string;
   data: {
-    audio: string,
-    image: string
-  }
+    audio: string;
+    image: string;
+  };
 }

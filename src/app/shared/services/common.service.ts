@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
-import { IUserDetails, IPlatformParams, IResponsePlaceOrder } from '../models/common-model';
-import { BehaviorSubject } from 'rxjs';
-import { ZATAAKSE_PREF_LANG } from '../constants/constants';
+import { Injectable } from "@angular/core";
+import {
+  IUserDetails,
+  IPlatformParams,
+  IResponsePlaceOrder,
+} from "../models/common-model";
+import { BehaviorSubject } from "rxjs";
+import { ZATAAKSE_PREF_LANG } from "../constants/constants";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class CommonService {
   // Move this to store
   loadingData$ = new BehaviorSubject<boolean>(false);
 
+  orderMode: "voice" | "picture";
   isUserConnectedSubject = new BehaviorSubject(true);
   isUserConnected$ = this.isUserConnectedSubject.asObservable();
   userDetails: IUserDetails = null;
@@ -21,7 +26,6 @@ export class CommonService {
     longitude: 77.008171,
   };
 
-
   setUserConnectedStatus(value: boolean) {
     this.isUserConnectedSubject.next(value);
   }
@@ -29,7 +33,7 @@ export class CommonService {
   setUserLocation(lat: number, lng: number) {
     this.userLocation = {
       latitude: lat,
-      longitude: lng
+      longitude: lng,
     };
   }
 
@@ -40,7 +44,6 @@ export class CommonService {
   setPlatformParams(data: IPlatformParams) {
     this.platformParams = data;
   }
-
 
   getPlatformParams(): IPlatformParams {
     return this.platformParams;
@@ -61,7 +64,7 @@ export class CommonService {
   getRequestEssentialParams() {
     return {
       fingerprint: this.fingerPrint,
-      lan: localStorage.getItem(ZATAAKSE_PREF_LANG) || 'en',
+      lan: localStorage.getItem(ZATAAKSE_PREF_LANG) || "en",
       latitude: this.userLocation.latitude,
       longitude: this.userLocation.longitude,
     };

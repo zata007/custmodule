@@ -3,44 +3,44 @@ import {
   OnInit,
   ViewEncapsulation,
   Input,
-  OnDestroy
-} from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
-import { MatSnackBar, MatBottomSheet } from '@angular/material';
-import { LocationPopupComponent } from '../shared/shared-components/location-popup/location-popup.component';
-import { DataService } from '../shared/services/data.service';
-import { CommonService } from '../shared/services/common.service';
-import { ZATAAKSE_PREF_LANG } from '../shared/constants/constants';
-import { IResponseLocationServed } from '../shared/models/common-model';
+  OnDestroy,
+} from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { Router } from "@angular/router";
+import { MatSnackBar, MatBottomSheet } from "@angular/material";
+import { LocationPopupComponent } from "../shared/shared-components/location-popup/location-popup.component";
+import { DataService } from "../shared/services/data.service";
+import { CommonService } from "../shared/services/common.service";
+import { ZATAAKSE_PREF_LANG } from "../shared/constants/constants";
+import { IResponseLocationServed } from "../shared/models/common-model";
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-landing-page",
+  templateUrl: "./landing-page.component.html",
+  styleUrls: ["./landing-page.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LandingPageComponent implements OnInit, OnDestroy {
   @Input() data = [
     {
-      img: 'assets/img/core/slider3.png',
-      alt: '',
-      text: 'MAIN_PAGE.CAROUSAL_MSG_1'
+      img: "assets/img/core/slider3.png",
+      alt: "",
+      text: "MAIN_PAGE.CAROUSAL_MSG_1",
     },
     {
-      img: 'assets/img/core/slider2.png',
-      alt: '',
-      text: 'MAIN_PAGE.CAROUSAL_MSG_2'
+      img: "assets/img/core/slider2.png",
+      alt: "",
+      text: "MAIN_PAGE.CAROUSAL_MSG_2",
     },
     {
-      img: 'assets/img/core/slider1.png',
-      alt: '',
-      text: 'MAIN_PAGE.CAROUSAL_MSG_3'
+      img: "assets/img/core/slider1.png",
+      alt: "",
+      text: "MAIN_PAGE.CAROUSAL_MSG_3",
     },
     {
-      img: 'assets/img/core/slider3.png',
-      alt: '',
-      text: 'MAIN_PAGE.CAROUSAL_MSG_4'
-    }
+      img: "assets/img/core/slider3.png",
+      alt: "",
+      text: "MAIN_PAGE.CAROUSAL_MSG_4",
+    },
   ];
   transform: number;
   selectedIndex = 0;
@@ -94,7 +94,9 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.dataService
       .checkServiceAvailable({
         fingerprint: this.commonService.fingerPrint,
-        lan: val
+        lan: val,
+        latitude: this.commonService.getRequestEssentialParams().latitude,
+        longitude: this.commonService.getRequestEssentialParams().longitude,
       })
       .subscribe((res: any) => {
         // {
@@ -126,15 +128,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   onSwipe(evt) {
     const x =
-      Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left') : '';
-    const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? 'down' : 'up') : '';
-    if (y.includes('up')) {
+      Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? "right" : "left") : "";
+    const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? "down" : "up") : "";
+    if (y.includes("up")) {
       const index = (this.selectedIndex + 1) % this.data.length;
       this.selected(index);
       return;
     }
 
-    if (y.includes('down')) {
+    if (y.includes("down")) {
       const index =
         this.selectedIndex <= 0
           ? this.data.length - 1
@@ -147,8 +149,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   onSubmitButtonClick() {
     const disRef = this.bottomsheet.open(LocationPopupComponent, {
       data: {
-        isLocationNotAllowed: false
-      }
+        isLocationNotAllowed: false,
+      },
     });
     disRef.afterDismissed().subscribe(() => {
       this.setCurrentLocation();
@@ -158,22 +160,22 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   setCurrentLocation() {
     // this.canShowLocationPopup = false;
     // TODO: setup loader
-    if ('geolocation' in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
-        position => {
+        (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
           this.commonService.setUserLocation(latitude, longitude);
-          this.router.navigate(['customer']);
+          this.router.navigate(["customer"]);
         },
-        error => {
+        (error) => {
           // User blocked location
           // LocationPopupComponent
           if (error.code === 1) {
             this.bottomsheet.open(LocationPopupComponent, {
               data: {
-                isLocationNotAllowed: true
-              }
+                isLocationNotAllowed: true,
+              },
             });
           }
           // console.log(error);
