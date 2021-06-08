@@ -1,27 +1,36 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { CookieService } from '../shared/services/cookie.service';
-import { API_ENDPOINTS, ZATAAKSE_JWT_TOKEN } from '../shared/constants/constants';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { CookieService } from "../shared/services/cookie.service";
+import {
+  API_ENDPOINTS,
+  ZATAAKSE_JWT_TOKEN,
+} from "../shared/constants/constants";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: "root" })
 export class CustomerService {
   locationData = {
     latitude: 0,
     longitude: 0,
   };
 
-  selectedPlaces: { from: google.maps.places.PlaceResult; to: google.maps.places.PlaceResult } = {
+  selectedPlaces: {
+    from: google.maps.places.PlaceResult;
+    to: google.maps.places.PlaceResult;
+  } = {
     from: null,
     to: null,
   };
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   getOptions() {
     return {
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
     };
   }
@@ -34,7 +43,7 @@ export class CustomerService {
 
   getMethod(url: string, params: any) {
     const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/${url}`;
-    return this.httpClient.get(getUrl , params);
+    return this.httpClient.get(getUrl, params);
   }
 
   setLocationData(lat: number, long: number) {
@@ -51,30 +60,30 @@ export class CustomerService {
   }
 
   getPitstops(requestData: {
-    fingerprint: string,
-    lan: string,
-    latitude: number,
-    longitude: number,
-    sourcePoint: Array<number>,
-    destnationPoint: Array<number>,
+    fingerprint: string;
+    lan: string;
+    latitude: number;
+    longitude: number;
+    sourcePoint: Array<number>;
+    destnationPoint: Array<number>;
   }) {
     const data = {
       sourcePoint: [72.870403, 19.130181], // lng, lon
-      destnationPoint: [72.870403, 19.130181]
+      destnationPoint: [72.870403, 19.130181],
     };
     const params = new HttpParams()
-      .set('sourcePoint', JSON.stringify(requestData.sourcePoint))
-      .set('destnationPoint', JSON.stringify(requestData.destnationPoint));
+      .set("sourcePoint", JSON.stringify(requestData.sourcePoint))
+      .set("destnationPoint", JSON.stringify(requestData.destnationPoint));
 
     //http://52.66.208.60:8000/user/findPitstops
     const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/findPitstops`;
     const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
+      "Content-Type": "application/json",
+      Accept: "application/json",
       fingerprint: requestData.fingerprint,
       lan: requestData.lan,
       latitude: requestData.latitude.toString(),
-      longitude: requestData.longitude.toString()
+      longitude: requestData.longitude.toString(),
     };
     return this.httpClient.get(getUrl, { headers, params });
   }
@@ -86,39 +95,47 @@ export class CustomerService {
         return { price: i.price, itemName: i.name };
       }),
     };
-    return this.postMethod('placeAnOrder', resData);
+    return this.postMethod("placeAnOrder", resData);
   }
 
-  getProfile( token: string ) {
+  getProfile(token: string) {
     const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getProfile`;
     const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      authorization: token.toString()
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      authorization: token.toString(),
     };
     return this.httpClient.get(getUrl, { headers });
   }
 
-  getTransactionHistory(token: string, pageNum:string, orderId?: string) {
+  getTransactionHistory(token: string, pageNum: string, orderId?: string) {
     const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getTransactionHistory`;
+    console.log(token);
+
     const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      authorization: token.toString()
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      authorization: token.toString(),
     };
-    const params = orderId ? new HttpParams().set('pageNum', pageNum).set('orderId', orderId) : new HttpParams().set('pageNum', pageNum);
+    const params = orderId
+      ? new HttpParams().set("pageNum", pageNum).set("orderId", orderId)
+      : new HttpParams().set("pageNum", pageNum);
     return this.httpClient.get(getUrl, { headers, params });
   }
 
-  getSampleFile(token: string, location: {lat: number, lng: number}, lan: string) {
+  getSampleFile(
+    token: string,
+    location: { lat: number; lng: number },
+    lan: string
+  ) {
     const getUrl = `${environment.API_Endpoint}/${API_ENDPOINTS.USER}/getSampleFile`;
     const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
+      "Content-Type": "application/json",
+      Accept: "application/json",
       fingerprint: token.toString(),
       latitude: location.lat.toString(),
       longitude: location.lng.toString(),
-      lan: lan
+      lan: lan,
     };
     return this.httpClient.get(getUrl, { headers });
   }
